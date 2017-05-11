@@ -53,7 +53,7 @@
     <div class="form-group">
 
         <%--项目状态：--%>
-        <label for="projectState">项目状态：</label>
+        <label for="projectStatus">项目状态：</label>
         <select name="projectStatus" id="projectStatus" class="form-control">
             <option value="">所有</option>
             <option value="0">开发中</option>
@@ -101,7 +101,7 @@
             pageSize:10,
            // paginationLoop: false,
             pageList: [10, 25, 50, 100],
-            sidePagination: 'client',
+            sidePagination: 'server',
             silentSort: false,
             smartDisplay: false,
             escape: true,
@@ -117,8 +117,8 @@
                 {field: 'phone', title: '负责人电话',align:'center'},
                 {field: 'QQ', title: '负责人QQ',align:'center'},
                 {field: 'email', title: '负责人邮箱',align:'center'},
-                {field: 'status', title: '项目状态',align:'center'},
                 {field: 'operateTime', title: '最后操作时间',align:'center'},
+                {field: 'projectStatus', title: '项目状态',align:'center'},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false},
                 {field: 'projectInfo', title: '项目信息', align: 'center', formatter: 'projectInfoFormatter', events: 'projectInfoEvents', clickToSelect: false},
                 {field: 'modleList', title: '模块列表', align: 'center', formatter: 'modleListFormatter', events: 'modleListEvents', clickToSelect: false},

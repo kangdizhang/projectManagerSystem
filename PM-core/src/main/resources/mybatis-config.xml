@@ -16,6 +16,9 @@
 		<typeAlias type="com.ectrip.model.OptEnvironment" alias="OptEnvironment"/>
 		<typeAlias type="com.ectrip.vo.OptRecordAndEnvVO" alias="OptRecordAndEnvVO"/>
 		<typeAlias type="com.ectrip.model.OptRecord" alias="OptRecord"/>
+		<typeAlias type="com.ectrip.model.Modle" alias="Modle"/>
+		<typeAlias type="com.ectrip.model.ProjectInfo" alias="ProjectInfo"/>
+		<typeAlias type="com.ectrip.model.Version" alias="Version"/>
 		<typeAlias type="com.ectrip.model.Project" alias="Project"/>
 	</typeAliases>
 	<!--分页插件和数据库方言-->

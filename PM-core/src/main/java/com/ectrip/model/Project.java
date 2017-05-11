@@ -13,6 +13,7 @@ public class Project {
     private String QQ;//负责人QQ
     private String email;//负责人邮箱
     private String operateTime;//操作时间
+    private Integer status;//项目状态
 
     public Integer getId() {
         return id;
@@ -68,6 +69,14 @@ public class Project {
 
     public void setOperateTime(String operateTime) {
         this.operateTime = operateTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Project() {

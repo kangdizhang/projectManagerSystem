@@ -144,8 +144,21 @@
     }
 
     function operateFormatter(value, row, index) {
+        var projectStatus = '';
+        if(row.projectStatus == '开发中'){
+            projectStatus = '0';
+        }else if(row.projectStatus == '升级中'){
+            projectStatus = '1';
+        }else{
+            projectStatus = '2';
+        }
         return [
-            '<a href="${bathPath}/addProject.jsp" data-toggle="tooltip" title="Edit">修改</a>　'
+            '<a href="${bathPath}/addProject.jsp?projectName='+row.projectName+'' +
+            '&projectLeader='+row.projectLeader+
+            '&phone='+row.phone+
+            '&QQ='+row.QQ+
+            '&email='+row.email+
+            '&projectStatus='+projectStatus+'" data-toggle="tooltip" title="Edit">修改</a> '
         ].join('');
     }
 

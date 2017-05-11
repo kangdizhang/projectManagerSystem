@@ -34,7 +34,7 @@
     <div class="dl-main-nav">
         <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
         <ul id="J_Nav"  class="nav-list ks-clear">
-            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">项目管理系统</div></li>
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>
             <%--<li class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li>--%>
         </ul>
     </div>
@@ -50,8 +50,8 @@
 <%--左侧菜单--%>
 <script>
     BUI.use('common/main',function(){
-        var config = [{id:'manage',menu:[{text:'项目管理',
-                                        items:[{id:'monitor',text:'所有项目  ',href:'optManage/optRecordPage'}/*,{id:'sql-monitor',text:'sql监控  ',href:'druid/index.html'}*/]
+        var config = [{id:'manage',menu:[{text:'系统管理',
+                                        items:[{id:'monitor',text:'项目管理  ',href:'${basePath}/projectList.jsp'}/*,{id:'sql-monitor',text:'sql监控  ',href:'druid/index.html'}*/]
         }]}];
         new PageUtil.MainPage({
             modulesConfig : config

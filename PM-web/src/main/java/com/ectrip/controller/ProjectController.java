@@ -59,4 +59,10 @@ public class ProjectController extends BaseController {
         mav.setViewName("addProjectSuccess");
         return mav;
     }
+
+    @RequestMapping(value = "/editProject",method = RequestMethod.GET)
+    public Object editProject(Integer id){
+        System.out.println(id);
+        return null;
+    }
 }

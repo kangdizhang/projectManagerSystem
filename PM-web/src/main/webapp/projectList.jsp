@@ -153,7 +153,8 @@
             projectStatus = '2';
         }
         return [
-            '<a href="${bathPath}/addProject.jsp?projectName='+row.projectName+'' +
+            '<a href="${bathPath}/addProject.jsp?id='+row.id+
+            'projectName='+row.projectName +
             '&projectLeader='+row.projectLeader+
             '&phone='+row.phone+
             '&QQ='+row.QQ+

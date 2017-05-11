@@ -50,6 +50,7 @@
 </head>
 <body>
 <form action="/project/saveProject" method="get">
+    <input type="hidden" name="id" value="${param.id}">
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
@@ -73,10 +74,10 @@
         <tr>
             <td class="tableleft">项目状态</td>
             <td>
-                <input type="text" id="projectStatus" value="${param.projectStatus}">
+                <input type="hidden" id="projectStatus" value="${param.projectStatus}">
                 <input type="radio" name="projectStatus" value="0"/> 开发中
                 <input type="radio" name="projectStatus" value="1"/> 升级中
-                <input type="radio" name="projectStatus" value="2"/> 完成中
+                <input type="radio" name="projectStatus" value="2"/> 已完成
             </td>
         </tr>
         <tr>

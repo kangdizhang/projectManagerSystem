@@ -24,7 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao projectDao;
 
     @Override
-    public void saveProject(String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, Integer projectStatus) {
+    public void saveProject(String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, String projectStatus) {
         Project project = new Project();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         project.setProjectName(projectName);
@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public PageInfo<Project> findProjectListPage(Integer pageNo, Integer pageSize, Integer projectStatus, String projectName, String projectLeader) {
+    public PageInfo<Project> findProjectListPage(Integer pageNo, Integer pageSize, String projectStatus, String projectName, String projectLeader) {
         List<Project> list = projectDao.findProjectListPage(pageNo,pageSize,projectStatus,projectName,projectLeader);
         logger.info("查询数据:{}",list.toString());
         return new PageInfo<>(list);

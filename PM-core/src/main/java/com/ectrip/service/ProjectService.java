@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ProjectService {
 
-    void saveProject(String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, Integer projectStatus);
+    void saveProject(String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, String projectStatus);
 
     /**
      * 按条件查询操作记录和环境
@@ -22,5 +22,5 @@ public interface ProjectService {
      * @param pageSize 页面大小
      * @return
      */
-    PageInfo<Project> findProjectListPage(Integer pageNo, Integer pageSize, Integer projectStatus, String projectName, String projectLeader);
+    PageInfo<Project> findProjectListPage(Integer pageNo, Integer pageSize, String projectStatus, String projectName, String projectLeader);
 }

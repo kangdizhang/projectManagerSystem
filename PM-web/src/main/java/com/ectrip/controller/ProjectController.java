@@ -33,7 +33,7 @@ public class ProjectController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public Object list(Integer offset,Integer limit,Integer projectStatus,String projectName,String projectLeader) {
+    public Object list(Integer offset,Integer limit,String projectStatus,String projectName,String projectLeader) {
         int pageNo = 1;
         if(offset != null) {
             pageNo = (offset/limit+1);
@@ -53,7 +53,7 @@ public class ProjectController extends BaseController {
     }
 
     @RequestMapping(value = "/saveProject",method = RequestMethod.GET)
-    public ModelAndView saveProject(String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, Integer projectStatus){
+    public ModelAndView saveProject(String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, String projectStatus){
         projectService.saveProject(projectName, projectLeader, phone, QQ, email, operateTime, projectStatus);
         ModelAndView mav = getModelAndView();
         mav.setViewName("addProjectSuccess");

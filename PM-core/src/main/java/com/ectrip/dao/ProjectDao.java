@@ -13,5 +13,5 @@ public interface ProjectDao {
 
     void save(Project project);
 
-    List<Project> findProjectListPage(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,@Param("projectStatus") Integer projectStatus, @Param("projectName") String projectName, @Param("projectLeader") String projectLeader);
+    List<Project> findProjectListPage(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,@Param("projectStatus") String projectStatus, @Param("projectName") String projectName, @Param("projectLeader") String projectLeader);
 }

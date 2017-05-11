@@ -60,14 +60,15 @@
         QQ,
         EMAIL,
         OPERATE_TIME,
-        PROJECT_STATUS
+        (CASE WHEN PROJECT_STATUS='0' THEN '开发中'
+        WHEN PROJECT_STATUS='1' THEN '升级中'
+        ELSE '已完成'
+        END) as PROJECT_STATUS
         FROM PROJECT
-        WHERE
-        <choose>
-            <when test="projectStatus!=null and projectStatus!=''">
-            PROJECT_STATUS = #{projectStatus}</when>
-            <otherwise>PROJECT_STATUS IN (0,1,2)</otherwise>
-        </choose>
+        WHERE 1=1
+        <if test="projectStatus!=null and projectStatus!=''">
+            AND PROJECT_STATUS = #{projectStatus}
+        </if>
         <if test="projectName!=null and projectName!=''">
             AND PROJECT_NAME LIKE CONCAT('%', #{projectName}, '%')
         </if>

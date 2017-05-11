@@ -1,7 +1,5 @@
 package com.ectrip.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by huangxinguang on 2017/4/19 下午3:32.

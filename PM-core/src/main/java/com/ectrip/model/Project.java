@@ -13,7 +13,15 @@ public class Project {
     private String QQ;//负责人QQ
     private String email;//负责人邮箱
     private String operateTime;//操作时间
-    private Integer status;//项目状态
+    private Integer projectStatus;//项目状态 0(开发中)/1(升级中)/2(已完成)
+
+    public Integer getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(Integer projectStatus) {
+        this.projectStatus = projectStatus;
+    }
 
     public Integer getId() {
         return id;
@@ -71,18 +79,10 @@ public class Project {
         this.operateTime = operateTime;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Project() {
     }
 
-    public Project(Integer id, String projectName, String projectLeader, String phone, String QQ, String email, String operateTime) {
+    public Project(Integer id, String projectName, String projectLeader, String phone, String QQ, String email, String operateTime,Integer projectStatus) {
         this.id = id;
         this.projectName = projectName;
         this.projectLeader = projectLeader;
@@ -90,5 +90,6 @@ public class Project {
         this.QQ = QQ;
         this.email = email;
         this.operateTime = operateTime;
+        this.projectStatus = projectStatus;
     }
 }

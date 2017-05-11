@@ -54,7 +54,7 @@
 
         <%--项目状态：--%>
         <label for="projectState">项目状态：</label>
-        <select name="projectState" id="projectState" class="form-control">
+        <select name="projectStatus" id="projectStatus" class="form-control">
             <option value="">所有</option>
             <option value="0">开发中</option>
             <option value="1">升级中</option>
@@ -81,7 +81,7 @@
         $table.bootstrapTable({
             //method:"get",
             //url: '${basePath}/optManage/findOptRecordList',
-            url:'${basePath}/data.json',
+            url:'${basePath}/project/list',
             queryParams:oTableInit.queryParams,
             striped: true,
             search: false,
@@ -130,6 +130,7 @@
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
+            projectStatus: $("#projectStatus").val(),
             projectName: $("#projectName").val(),
             projectLeader: $("#projectLeader").val()
         };

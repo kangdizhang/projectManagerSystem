@@ -49,7 +49,7 @@
     </style>
 </head>
 <body>
-<form action="index.html" method="post">
+<form action="/project/saveProject" method="get">
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
@@ -73,9 +73,9 @@
         <tr>
             <td class="tableleft">项目状态</td>
             <td>
-                <input type="radio" name="projectState" value="0" checked/> 开发中
-                <input type="radio" name="projectState" value="1"/> 升级中
-                <input type="radio" name="projectState" value="2"/> 完成中
+                <input type="radio" name="projectStatus" value="0" checked/> 开发中
+                <input type="radio" name="projectStatus" value="1"/> 升级中
+                <input type="radio" name="projectStatus" value="2"/> 完成中
             </td>
         </tr>
         <tr>

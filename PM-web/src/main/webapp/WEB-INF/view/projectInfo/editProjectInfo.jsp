@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>新建项目</title>
+    <title>项目配置信息</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css"/>
@@ -46,35 +46,38 @@
 <body>
 <form action="/project/saveProject" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="hidden" id="projectStatus" value="${param.projectStatus}">
         <input type="hidden" name="id" value="${param.id}">
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
-            <td><input type="text" name="projectName" value="${param.projectName}"/></td>
+            <td>${param.projectName}</td>
         </tr>
         <tr>
-            <td class="tableleft">项目负责人</td>
-            <td><input type="text" name="projectLeader" value="${param.projectLeader}"/></td>
+            <td class="tableleft">服务器IP</td>
+            <td><input type="text" name="serverIp" value="${param.serverIp}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">负责人电话</td>
-            <td><input type="text" name="phone" value="${param.phone}"/></td>
+            <td class="tableleft">数据库IP</td>
+            <td><input type="text" name="dbServerIp" value="${param.dbServerIp}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">负责人QQ</td>
-            <td><input type="text" name="qq" value="${param.qq}"/></td>
+            <td class="tableleft">数据库用户名</td>
+            <td><input type="text" name="dbUserId" value="${param.dbUserId}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">负责人邮箱</td>
-            <td><input type="text" name="email" value="${param.email}"/></td>
+            <td class="tableleft">数据库密码</td>
+            <td><input type="text" name="dbPwd" value="${param.dbPwd}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">项目状态</td>
-            <td>
-                <input type="radio" name="projectStatus" value="0"/> 开发中
-                <input type="radio" name="projectStatus" value="1"/> 升级中
-                <input type="radio" name="projectStatus" value="2"/> 完成中
-            </td>
+            <td class="tableleft">数据库端口号</td>
+            <td><input type="text" name="dbPort" value="${param.dbPort}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">域名</td>
+            <td><input type="text" name="hostName" value="${param.hostName}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">ssh信息</td>
+            <td><input type="text" name="email" value="${param.ssh}"/></td>
         </tr>
         <c:choose>
             <c:when test="${msg!=null}">
@@ -97,31 +100,4 @@
     </table>
 </form>
 </body>
-<script>
-    $(function () {
-        var projectStatus = $('#projectStatus').val();
-        if (projectStatus == '0') {
-            $("input[name='projectStatus'][value='0']").attr("checked", true);
-        } else if (projectStatus == '1') {
-            $("input[name='projectStatus'][value='1']").attr("checked", true);
-        } else {
-            $("input[name='projectStatus'][value='2']").attr("checked", true);
-        }
-    })
-
-    //    function submitForm() {
-    //        $.ajax({
-    //            type: 'GET',
-    //            url: '/project/saveProject',
-    //            data: $('form').serialize(),
-    //            dataType: 'json',
-    //            success: function (data) {
-    //                alert('1');
-    //            },
-    //            error:function (data) {
-    //                alert('2');
-    //            }
-    //        });
-    //    }
-</script>
 </html>

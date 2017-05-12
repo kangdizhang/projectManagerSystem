@@ -1,9 +1,8 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2017/5/10 0010
-  Time: 下午 2:40
+  Date: 2017/5/12 0012
+  Time: 上午 11:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>项目信息</title>
+    <title>项目配置信息</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css" />
@@ -50,54 +49,48 @@
     </style>
 </head>
 <body>
-<form action="/project/saveProject" method="get">
-    <table class="table table-bordered table-hover definewidth m10">
-        <tr>
-            <td width="10%" class="tableleft">项目名称</td>
-            <td>${param.projectName}</td>
-        </tr>
-        <tr>
-            <td class="tableleft">项目负责人</td>
-            <td>${param.projectLeader}</td>
-        </tr>
-        <tr>
-            <td class="tableleft">负责人电话</td>
-            <td>${param.phone}</td>
-        </tr>
-        <tr>
-            <td class="tableleft">负责人QQ</td>
-            <td>${param.qq}</td>
-        </tr>
-        <tr>
-            <td class="tableleft">负责人邮箱</td>
-            <td>${param.email}</td>
-        </tr>
-        <tr>
-            <td class="tableleft">项目状态</td>
-            <td>
-                ${param.projectStatus}
-            </td>
-        </tr>
-        <tr>
-            <td class="tableleft"></td>
-            <td>
-                <a class="btn btn-success" href="${basePath}/projectList">返回列表</a>
-                <%--<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>--%>
-            </td>
-        </tr>
-    </table>
-</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <input type="hidden" name="id" value="${id}">
+    <tr>
+        <td width="10%" class="tableleft">项目名称</td>
+        <td>${projectName}</td>
+    </tr>
+    <tr>
+        <td class="tableleft">服务器IP</td>
+        <td>${serverIp}</td>
+    </tr>
+    <tr>
+        <td class="tableleft">数据库IP</td>
+        <td>${dbServerIp}</td>
+    </tr>
+    <tr>
+        <td class="tableleft">数据库用户名</td>
+        <td>${dbUserId}</td>
+    </tr>
+    <tr>
+        <td class="tableleft">数据库密码</td>
+        <td>${dbPwd}</td>
+    </tr>
+    <tr>
+        <td class="tableleft">数据库端口号</td>
+        <td>${dbPort}</td>
+    </tr>
+    <tr>
+        <td class="tableleft">域名</td>
+        <td>${email}</td>
+    </tr>
+    <tr>
+        <td class="tableleft">ssh信息</td>
+        <td>${ssh}</td>
+    </tr>
+    <tr>
+        <td class="tableleft"></td>
+        <td>
+            <button type="button" onclick="window.location.href='${bathPath}/editProjectInfo'" class="btn btn-primary">编辑</button>
+            &nbsp;&nbsp;
+            <a class="btn btn-success" href="${bathPath}/projectList">返回列表</a>
+        </td>
+    </tr>
+</table>
 </body>
-<script>
-    $(function () {
-        var projectStatus = $('#projectStatus').val();
-        if(projectStatus=='0'){
-            $("input[name='projectStatus'][value='0']").attr("checked",true);
-        }else if(projectStatus=='1'){
-            $("input[name='projectStatus'][value='1']").attr("checked",true);
-        }else{
-            $("input[name='projectStatus'][value='2']").attr("checked",true);
-        }
-    })
-</script>
 </html>

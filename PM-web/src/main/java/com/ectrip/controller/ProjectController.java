@@ -53,8 +53,8 @@ public class ProjectController extends BaseController {
     }
 
     @RequestMapping(value = "/saveProject",method = RequestMethod.GET)
-    public ModelAndView saveProject(String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, String projectStatus){
-        projectService.saveProject(projectName, projectLeader, phone, QQ, email, operateTime, projectStatus);
+    public ModelAndView saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, String projectStatus){
+        projectService.saveProject(id,projectName, projectLeader, phone, QQ, email, operateTime, projectStatus);
         ModelAndView mav = getModelAndView();
         mav.setViewName("addProjectSuccess");
         return mav;

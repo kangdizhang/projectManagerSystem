@@ -10,7 +10,7 @@ public class Project {
     private String projectName;//项目名称
     private String projectLeader;//项目负责人
     private String phone;//负责人电话
-    private String QQ;//负责人QQ
+    private String qq;//负责人QQ
     private String email;//负责人邮箱
     private String operateTime;//操作时间
     private String projectStatus;//项目状态 0(开发中)/1(升级中)/2(已完成)
@@ -55,12 +55,12 @@ public class Project {
         this.phone = phone;
     }
 
-    public String getQQ() {
-        return QQ;
+    public String getQq() {
+        return qq;
     }
 
-    public void setQQ(String QQ) {
-        this.QQ = QQ;
+    public void setQq(String qq) {
+        this.qq = qq;
     }
 
     public String getEmail() {
@@ -87,7 +87,7 @@ public class Project {
         this.projectName = projectName;
         this.projectLeader = projectLeader;
         this.phone = phone;
-        this.QQ = QQ;
+        this.qq = QQ;
         this.email = email;
         this.operateTime = operateTime;
         this.projectStatus = projectStatus;

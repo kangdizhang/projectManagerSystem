@@ -7,7 +7,7 @@
         <result column="PROJECT_NAME" property="projectName"/>
         <result column="PROJECT_LEADER" property="projectLeader"/>
         <result column="PHONE" property="phone"/>
-        <result column="QQ" property="QQ"/>
+        <result column="QQ" property="qq"/>
         <result column="EMAIL" property="email"/>
         <result column="OPERATE_TIME" property="operateTime"/>
         <result column="PROJECT_STATUS" property="projectStatus"/>
@@ -50,6 +50,18 @@
         <include refid="FieldValue"></include>
         )
     </insert>
+
+    <update id="updateProject">
+        update <include refid="tableName"></include>
+        set PROJECT_NAME = #{projectName},
+        PROJECT_LEADER = #{projectLeader},
+        PHONE = #{phone},
+        QQ = #{QQ},
+        EMAIL = #{email},
+        OPERATE_TIME = #{operateTime},
+        PROJECT_STATUS = #{projectStatus}
+        where ID = #{id}
+    </update>
 
     <select id="findProjectListPage" resultMap="baseResultMap">
         SELECT

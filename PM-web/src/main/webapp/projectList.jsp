@@ -115,7 +115,7 @@
                 {field: 'projectName', title: '项目名称',align:'center'},
                 {field: 'projectLeader', title: '项目负责人',align:'center'},
                 {field: 'phone', title: '负责人电话',align:'center'},
-                {field: 'QQ', title: '负责人QQ',align:'center'},
+                {field: 'qq', title: '负责人QQ',align:'center'},
                 {field: 'email', title: '负责人邮箱',align:'center'},
                 {field: 'operateTime', title: '最后操作时间',align:'center'},
                 {field: 'projectStatus', title: '项目状态',align:'center'},
@@ -159,6 +159,7 @@
             '&phone='+row.phone+
             '&QQ='+row.QQ+
             '&email='+row.email+
+            '&id='+row.id+
             '&projectStatus='+projectStatus+'" data-toggle="tooltip" title="Edit">修改</a> '
         ].join('');
     }

@@ -45,6 +45,24 @@
 
   <!-- 配置web-inf下页面直接访问 -->
   <servlet>
+    <servlet-name>projectInfoList</servlet-name>
+    <jsp-file>/WEB-INF/view/projectInfo/projectInfoList.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>projectInfoList</servlet-name>
+    <url-pattern>/projectInfoList</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>editProjectInfo</servlet-name>
+    <jsp-file>/WEB-INF/view/projectInfo/editProjectInfo.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editProjectInfo</servlet-name>
+    <url-pattern>/editProjectInfo</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>projectList</servlet-name>
     <jsp-file>/WEB-INF/view/project/projectList.jsp</jsp-file>
   </servlet>
@@ -52,6 +70,7 @@
     <servlet-name>projectList</servlet-name>
     <url-pattern>/projectList</url-pattern>
   </servlet-mapping>
+
 
   <servlet>
     <servlet-name>viewProject</servlet-name>

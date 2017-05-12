@@ -51,7 +51,11 @@
 <script>
     BUI.use('common/main',function(){
         var config = [{id:'manage',menu:[{text:'系统管理',
-                                        items:[{id:'monitor',text:'项目管理  ',href:'${basePath}/projectList'}/*,{id:'sql-monitor',text:'sql监控  ',href:'druid/index.html'}*/]
+                                        items:[
+                                            {id:'monitor',text:'项目管理  ',href:'${basePath}/projectList'},
+                                            {id:'monitor',text:'配置信息  ',href:'${basePath}/projectInfoList'}
+                                            /*,{id:'sql-monitor',text:'sql监控  ',href:'druid/index.html'}*/
+                                        ]
         }]}];
         new PageUtil.MainPage({
             modulesConfig : config

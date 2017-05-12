@@ -115,12 +115,12 @@
                 {field: 'projectName', title: '项目名称',align:'center'},
                 {field: 'projectLeader', title: '项目负责人',align:'center'},
                 {field: 'phone', title: '负责人电话',align:'center'},
-                {field: 'QQ', title: '负责人QQ',align:'center'},
+                {field: 'qq', title: '负责人QQ',align:'center'},
                 {field: 'email', title: '负责人邮箱',align:'center'},
                 {field: 'operateTime', title: '最后操作时间',align:'center'},
                 {field: 'projectStatus', title: '项目状态',align:'center'},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false},
-                {field: 'projectInfo', title: '项目信息', align: 'center', formatter: 'projectInfoFormatter', events: 'projectInfoEvents', clickToSelect: false},
+                {field: 'projectInfo', title: '基础信息', align: 'center', formatter: 'projectInfoFormatter', events: 'projectInfoEvents', clickToSelect: false},
                 {field: 'modleList', title: '模块列表', align: 'center', formatter: 'modleListFormatter', events: 'modleListEvents', clickToSelect: false},
                 {field: 'demandList', title: '需求列表', align: 'center', formatter: 'demandListFormatter', events: 'demandListEvents', clickToSelect: false}
             ]
@@ -154,30 +154,38 @@
         }
         return [
             '<a href="${bathPath}/addProject?id='+row.id+
-            'projectName='+row.projectName +
+            '&projectName='+row.projectName +
             '&projectLeader='+row.projectLeader+
             '&phone='+row.phone+
-            '&QQ='+row.QQ+
+            '&qq='+row.qq+
             '&email='+row.email+
+            '&id='+row.id+
             '&projectStatus='+projectStatus+'" data-toggle="tooltip" title="Edit">修改</a> '
         ].join('');
     }
 
     function projectInfoFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/addProject" data-toggle="tooltip" title="Edit">查看</a>　'
+            '<a href="${bathPath}/viewProject?id='+row.id+
+            '&projectName='+row.projectName +
+            '&projectLeader='+row.projectLeader+
+            '&phone='+row.phone+
+            '&qq='+row.qq+
+            '&email='+row.email+
+            '&id='+row.id+
+            '&projectStatus='+row.projectStatus+'" data-toggle="tooltip" title="View">查看</a>　'
         ].join('');
     }
 
     function modleListFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/addProject.jsp" data-toggle="tooltip" title="Edit">查看</a>　'
+            '<a href="${bathPath}/addProject" data-toggle="tooltip" title="Edit">查看</a>　'
         ].join('');
     }
 
     function demandListFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/addProject.jsp" data-toggle="tooltip" title="Edit">查看</a>　'
+            '<a href="${bathPath}/addProject" data-toggle="tooltip" title="Edit">查看</a>　'
         ].join('');
     }
 

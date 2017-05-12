@@ -54,6 +54,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>viewProject</servlet-name>
+    <jsp-file>/WEB-INF/view/project/viewProject.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewProject</servlet-name>
+    <url-pattern>/viewProject</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
     <servlet-name>addProject</servlet-name>
     <jsp-file>/WEB-INF/view/project/addProject.jsp</jsp-file>
   </servlet>

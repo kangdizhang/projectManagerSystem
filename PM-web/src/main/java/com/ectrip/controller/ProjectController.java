@@ -1,11 +1,13 @@
 package com.ectrip.controller;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.ectrip.common.base.BaseController;
 import com.ectrip.model.Project;
 import com.ectrip.service.ProjectService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +29,7 @@ public class ProjectController extends BaseController {
     @RequestMapping(value = "/projectPage",method = RequestMethod.GET)
     public ModelAndView optRecordPage() {
         ModelAndView mav = getModelAndView();
-        mav.setViewName("projectList");
+        mav.setViewName("project/projectList");
         return mav;
     }
 
@@ -48,21 +50,40 @@ public class ProjectController extends BaseController {
     @RequestMapping(value = "/addProject",method = RequestMethod.GET)
     public ModelAndView addProject() {
         ModelAndView mav = getModelAndView();
-        mav.setViewName("addProject");
+        mav.setViewName("project/addProject");
         return mav;
     }
 
     @RequestMapping(value = "/saveProject",method = RequestMethod.GET)
     public ModelAndView saveProject(Integer id,String projectName, String projectLeader, String phone, String qq, String email, String projectStatus){
-        projectService.saveProject(id,projectName, projectLeader, phone, qq, email, projectStatus);
         ModelAndView mav = getModelAndView();
-        mav.setViewName("addProjectSuccess");
-        return mav;
-    }
+        if(StringUtils.isEmpty(projectName)){
+            mav.addObject("msg","项目名称不能为空");
+            mav.setViewName("project/addProject");
+            return mav;
+        }
+        if(StringUtils.isEmpty(projectLeader)){
+            mav.addObject("msg","项目负责人不能为空");
+            mav.setViewName("project/addProject");
+            return mav;
+        }
+        if(StringUtils.isEmpty(phone)){
+            mav.addObject("msg","负责人电话不能为空");
+            mav.setViewName("project/addProject");
+            return mav;
+        }
+        if(StringUtils.isEmpty(email)){
+            mav.addObject("msg","负责人邮箱不能为空");
+            mav.setViewName("project/addProject");
+            return mav;
+        }
 
-    @RequestMapping(value = "/editProject",method = RequestMethod.GET)
-    public Object editProject(Integer id){
-        System.out.println(id);
-        return null;
+        try{
+        projectService.saveProject(id,projectName, projectLeader, phone, qq, email, projectStatus);
+            mav.setViewName("project/projectList");
+        }catch (Exception e){
+            mav.setViewName("project/addProject");
+        }
+        return mav;
     }
 }

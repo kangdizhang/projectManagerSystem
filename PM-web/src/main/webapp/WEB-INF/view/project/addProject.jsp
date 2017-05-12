@@ -1,24 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2017/5/10 0010
-  Time: 下午 2:40
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>新建项目</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="${basePath}/Css/style.css" />
-    <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="${basePath}/Css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-table.min.css"/>
     <script type="text/javascript" src="${basePath}/Js/jquery.js"></script>
     <script type="text/javascript" src="${basePath}/Js/bootstrap.js"></script>
     <script type="text/javascript" src="${basePath}/Js/ckform.js"></script>
@@ -32,6 +26,7 @@
         body {
             padding-bottom: 40px;
         }
+
         .sidebar-nav {
             padding: 9px 0;
         }
@@ -49,7 +44,7 @@
     </style>
 </head>
 <body>
-<form action="/project/saveProject" method="get">
+<form action="/project/saveProject" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
         <input type="hidden" id="projectStatus" value="${param.projectStatus}">
         <input type="hidden" name="id" value="${param.id}">
@@ -63,15 +58,26 @@
         </tr>
         <tr>
             <td class="tableleft">负责人电话</td>
-            <td><input type="text" name="phone"  value="${param.phone}"/></td>
+            <td><input type="text" name="phone" value="${param.phone}"/></td>
         </tr>
         <tr>
             <td class="tableleft">负责人QQ</td>
-            <td><input type="text" name="qq"  value="${param.qq}"/></td>
-        </tr><tr>
-            <td class="tableleft">负责人邮箱</td>
-            <td><input type="text" name="email"  value="${param.email}"/></td>
+            <td><input type="text" name="qq" value="${param.qq}"/></td>
         </tr>
+        <tr>
+            <td class="tableleft">负责人邮箱</td>
+            <td><input type="text" name="email" value="${param.email}"/></td>
+        </tr>
+        <c:choose>
+            <c:when test="${msg!=null}">
+                <tr>
+                    <td class="tableleft">提示信息</td>
+                    <td>
+                        <p style="color: crimson">${msg}</p>
+                    </td>
+                </tr>
+            </c:when>
+        </c:choose>
         <tr>
             <td class="tableleft">项目状态</td>
             <td>
@@ -83,9 +89,9 @@
         <tr>
             <td class="tableleft"></td>
             <td>
-                <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;
+                <button type="submit" onclick="submitForm()" class="btn btn-primary">保存</button>
+                &nbsp;&nbsp;
                 <a class="btn btn-success" href="/projectList.jsp">返回列表</a>
-                <%--<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>--%>
             </td>
         </tr>
     </table>
@@ -94,13 +100,28 @@
 <script>
     $(function () {
         var projectStatus = $('#projectStatus').val();
-        if(projectStatus=='0'){
-            $("input[name='projectStatus'][value='0']").attr("checked",true);
-        }else if(projectStatus=='1'){
-            $("input[name='projectStatus'][value='1']").attr("checked",true);
-        }else{
-            $("input[name='projectStatus'][value='2']").attr("checked",true);
+        if (projectStatus == '0') {
+            $("input[name='projectStatus'][value='0']").attr("checked", true);
+        } else if (projectStatus == '1') {
+            $("input[name='projectStatus'][value='1']").attr("checked", true);
+        } else {
+            $("input[name='projectStatus'][value='2']").attr("checked", true);
         }
     })
+
+    //    function submitForm() {
+    //        $.ajax({
+    //            type: 'GET',
+    //            url: '/project/saveProject',
+    //            data: $('form').serialize(),
+    //            dataType: 'json',
+    //            success: function (data) {
+    //                alert('1');
+    //            },
+    //            error:function (data) {
+    //                alert('2');
+    //            }
+    //        });
+    //    }
 </script>
 </html>

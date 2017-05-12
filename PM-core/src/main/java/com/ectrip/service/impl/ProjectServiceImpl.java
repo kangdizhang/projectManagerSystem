@@ -24,7 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao projectDao;
 
     @Override
-    public void saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, String projectStatus) {
+    public void saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email,  String projectStatus) {
         Project project = new Project();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         project.setProjectName(projectName);
@@ -32,7 +32,6 @@ public class ProjectServiceImpl implements ProjectService {
         project.setPhone(phone);
         project.setQq(QQ);
         project.setEmail(email);
-        project.setOperateTime(operateTime);
         project.setProjectStatus(projectStatus);
         project.setOperateTime(sdf.format(new Date()));
         logger.info("保存数据:{}",project.toString());

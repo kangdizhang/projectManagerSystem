@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -51,39 +52,35 @@
 <body>
 <form action="/project/saveProject" method="get">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="hidden" id="projectStatus" value="${param.projectStatus}">
-        <input type="hidden" name="id" value="${param.id}">
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
-            <td><input type="text" name="projectName" value="${param.projectName}"/></td>
+            <td>${param.projectName}</td>
         </tr>
         <tr>
             <td class="tableleft">项目负责人</td>
-            <td><input type="text" name="projectLeader" value="${param.projectLeader}"/></td>
+            <td>${param.projectLeader}</td>
         </tr>
         <tr>
             <td class="tableleft">负责人电话</td>
-            <td><input type="text" name="phone"  value="${param.phone}"/></td>
+            <td>${param.phone}</td>
         </tr>
         <tr>
             <td class="tableleft">负责人QQ</td>
-            <td><input type="text" name="qq"  value="${param.qq}"/></td>
-        </tr><tr>
+            <td>${param.qq}</td>
+        </tr>
+        <tr>
             <td class="tableleft">负责人邮箱</td>
-            <td><input type="text" name="email"  value="${param.email}"/></td>
+            <td>${param.email}</td>
         </tr>
         <tr>
             <td class="tableleft">项目状态</td>
             <td>
-                <input type="radio" name="projectStatus" value="0"/> 开发中
-                <input type="radio" name="projectStatus" value="1"/> 升级中
-                <input type="radio" name="projectStatus" value="2"/> 完成中
+                ${param.projectStatus}
             </td>
         </tr>
         <tr>
             <td class="tableleft"></td>
             <td>
-                <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;
                 <a class="btn btn-success" href="/projectList.jsp">返回列表</a>
                 <%--<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>--%>
             </td>

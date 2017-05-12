@@ -56,7 +56,7 @@
         set PROJECT_NAME = #{projectName},
         PROJECT_LEADER = #{projectLeader},
         PHONE = #{phone},
-        QQ = #{QQ},
+        QQ = #{qq},
         EMAIL = #{email},
         OPERATE_TIME = #{operateTime},
         PROJECT_STATUS = #{projectStatus}

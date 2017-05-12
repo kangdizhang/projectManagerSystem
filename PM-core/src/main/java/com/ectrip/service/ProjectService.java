@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ProjectService {
 
-    void saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String operateTime, String projectStatus);
+    void saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String projectStatus);
 
     /**
      * 按条件查询操作记录和环境

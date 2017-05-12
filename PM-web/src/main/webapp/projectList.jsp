@@ -154,10 +154,10 @@
         }
         return [
             '<a href="${bathPath}/addProject.jsp?id='+row.id+
-            'projectName='+row.projectName +
+            '&projectName='+row.projectName +
             '&projectLeader='+row.projectLeader+
             '&phone='+row.phone+
-            '&QQ='+row.QQ+
+            '&qq='+row.qq+
             '&email='+row.email+
             '&id='+row.id+
             '&projectStatus='+projectStatus+'" data-toggle="tooltip" title="Edit">修改</a> '
@@ -166,7 +166,14 @@
 
     function projectInfoFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/addProject.jsp" data-toggle="tooltip" title="Edit">查看</a>　'
+            '<a href="${bathPath}/viewProject.jsp?id='+row.id+
+            '&projectName='+row.projectName +
+            '&projectLeader='+row.projectLeader+
+            '&phone='+row.phone+
+            '&qq='+row.qq+
+            '&email='+row.email+
+            '&id='+row.id+
+            '&projectStatus='+row.projectStatus+'" data-toggle="tooltip" title="View">查看</a>　'
         ].join('');
     }
 

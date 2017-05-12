@@ -43,6 +43,25 @@
     <url-pattern>/druid/*</url-pattern>
   </servlet-mapping>
 
+  <!-- 配置web-inf下页面直接访问 -->
+  <servlet>
+    <servlet-name>projectList</servlet-name>
+    <jsp-file>/WEB-INF/view/project/projectList.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>projectList</servlet-name>
+    <url-pattern>/projectList</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>addProject</servlet-name>
+    <jsp-file>/WEB-INF/view/project/addProject.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addProject</servlet-name>
+    <url-pattern>/addProject</url-pattern>
+  </servlet-mapping>
+
   <!--配置spring启动文件-->
   <context-param>
     <param-name>contextConfigLocation</param-name>

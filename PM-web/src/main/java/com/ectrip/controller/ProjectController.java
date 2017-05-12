@@ -82,6 +82,7 @@ public class ProjectController extends BaseController {
         projectService.saveProject(id,projectName, projectLeader, phone, qq, email, projectStatus);
             mav.setViewName("project/projectList");
         }catch (Exception e){
+            e.printStackTrace();
             mav.setViewName("project/addProject");
         }
         return mav;

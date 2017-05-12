@@ -67,7 +67,7 @@
         <%--项目负责人：--%>
         <input type="text" name="projectLeader" id="projectLeader"class="abc input-default" placeholder="这里输入项目负责人">&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="window.location.href='${bathPath}/addProject.jsp'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="window.location.href='${bathPath}/addProject'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>

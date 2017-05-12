@@ -91,7 +91,7 @@
             <td>
                 <button type="submit" onclick="submitForm()" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;
-                <a class="btn btn-success" href="/projectList.jsp">返回列表</a>
+                <a class="btn btn-success" href="/projectList">返回列表</a>
             </td>
         </tr>
     </table>

@@ -82,12 +82,12 @@ public class Project {
     public Project() {
     }
 
-    public Project(Integer id, String projectName, String projectLeader, String phone, String QQ, String email, String operateTime,String projectStatus) {
+    public Project(Integer id, String projectName, String projectLeader, String phone, String qq, String email, String operateTime,String projectStatus) {
         this.id = id;
         this.projectName = projectName;
         this.projectLeader = projectLeader;
         this.phone = phone;
-        this.qq = QQ;
+        this.qq = qq;
         this.email = email;
         this.operateTime = operateTime;
         this.projectStatus = projectStatus;

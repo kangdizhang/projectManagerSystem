@@ -71,17 +71,6 @@
     <url-pattern>/projectList</url-pattern>
   </servlet-mapping>
 
-
-  <servlet>
-    <servlet-name>viewProject</servlet-name>
-    <jsp-file>/WEB-INF/view/project/viewProject.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>viewProject</servlet-name>
-    <url-pattern>/viewProject</url-pattern>
-  </servlet-mapping>
-
-
   <servlet>
     <servlet-name>addProject</servlet-name>
     <jsp-file>/WEB-INF/view/project/addProject.jsp</jsp-file>
@@ -89,6 +78,15 @@
   <servlet-mapping>
     <servlet-name>addProject</servlet-name>
     <url-pattern>/addProject</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>addProjectInfo</servlet-name>
+    <jsp-file>/WEB-INF/view/projectInfo/editProjectInfo.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addProjectInfo</servlet-name>
+    <url-pattern>/addProjectInfo</url-pattern>
   </servlet-mapping>
 
   <!--配置spring启动文件-->

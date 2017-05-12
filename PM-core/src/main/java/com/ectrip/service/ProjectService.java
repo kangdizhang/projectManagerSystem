@@ -1,7 +1,9 @@
 package com.ectrip.service;
 
 import com.ectrip.model.Project;
+import com.ectrip.model.ProjectInfo;
 import com.ectrip.vo.OptRecordAndEnvVO;
+import com.ectrip.vo.ProjectInfoVO;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 public interface ProjectService {
 
     void saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String projectStatus);
-
+    void saveProjectInfo(Integer id,Integer projectId, String serverIp, String dbServerIp, String dbUserId, String dbPwd, Integer dbPort, String hostName,String SSH);
+    Project queryProject(Integer projectId);
+    ProjectInfo queryProjectInfo(Integer projectId);
     /**
      * 按条件查询操作记录和环境
      *
@@ -23,4 +27,8 @@ public interface ProjectService {
      * @return
      */
     PageInfo<Project> findProjectListPage(Integer pageNo, Integer pageSize, String projectStatus, String projectName, String projectLeader);
+
+    PageInfo<ProjectInfoVO> findProjectInfoListPage(Integer pageNo, Integer pageSize, String projectName);
+
+
 }

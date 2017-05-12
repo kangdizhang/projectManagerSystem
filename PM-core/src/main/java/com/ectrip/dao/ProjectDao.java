@@ -2,6 +2,7 @@ package com.ectrip.dao;
 
 import com.ectrip.model.OptRecord;
 import com.ectrip.model.Project;
+import com.ectrip.vo.ProjectInfoVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
  * Created by 23626 on 2017/5/11.
  */
 public interface ProjectDao {
+
+    Project findProject(@Param("projectId") Integer projectId);
 
     void save(Project project);
 

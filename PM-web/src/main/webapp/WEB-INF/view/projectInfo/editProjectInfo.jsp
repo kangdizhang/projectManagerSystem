@@ -47,9 +47,26 @@
 <form action="/projectInfo/saveProjectInfo" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
         <input type="hidden" name="id" value="${param.id}">
+        <c:choose>
+            <c:when test="${project==null}">
+                <input type="hidden" name="projectId" value="${param.projectId}">
+            </c:when>
+            <c:otherwise>
+                <input type="hidden" name="projectId" value="${project.id}">
+            </c:otherwise>
+        </c:choose>
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
-            <td>${param.projectName}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${project==null}">
+                        ${param.projectName}
+                    </c:when>
+                    <c:otherwise>
+                        ${project.projectName}
+                    </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
         <tr>
             <td class="tableleft">服务器IP</td>
@@ -61,7 +78,7 @@
         </tr>
         <tr>
             <td class="tableleft">数据库用户名</td>
-            <td><input type="text" name="dbUserId" value="${param.dbUserId}"/></td>
+            <td><input type="text" name="dbUser" value="${param.dbUser}"/></td>
         </tr>
         <tr>
             <td class="tableleft">数据库密码</td>
@@ -77,7 +94,7 @@
         </tr>
         <tr>
             <td class="tableleft">ssh信息</td>
-            <td><input type="text" name="email" value="${param.ssh}"/></td>
+            <td><input type="text" name="ssh" value="${param.ssh}"/></td>
         </tr>
         <c:choose>
             <c:when test="${msg!=null}">
@@ -92,7 +109,7 @@
         <tr>
             <td class="tableleft"></td>
             <td>
-                <button type="submit" onclick="submitForm()" class="btn btn-primary">保存</button>
+                <button type="submit" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;
                 <a class="btn btn-success" href="${bathPath}/projectList">返回列表</a>
             </td>
@@ -100,4 +117,7 @@
     </table>
 </form>
 </body>
+<script>
+
+</script>
 </html>

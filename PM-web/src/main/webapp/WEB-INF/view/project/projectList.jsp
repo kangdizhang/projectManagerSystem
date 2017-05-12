@@ -170,7 +170,7 @@
 
     function projectInfoFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/viewProjectInfo?id='+row.id+'" data-toggle="tooltip" title="View">查看</a>'
+            '<a href="${bathPath}/projectInfo/viewProjectInfo?id='+row.id+'&projectName='+row.projectName+'" data-toggle="tooltip" title="View">查看</a>'
         ].join('');
     }
 

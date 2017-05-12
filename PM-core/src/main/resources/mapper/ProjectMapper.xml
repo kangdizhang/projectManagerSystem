@@ -42,6 +42,11 @@
 		#{projectStatus}
 	</sql>
 
+    <select id="findProject" resultMap="baseResultMap">
+        SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+        WHERE ID = #{projectId}
+    </select>
+
     <!-- 新增-->
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into <include refid="tableName"></include>(

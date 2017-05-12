@@ -26,13 +26,6 @@ public class ProjectController extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping(value = "/projectPage",method = RequestMethod.GET)
-    public ModelAndView optRecordPage() {
-        ModelAndView mav = getModelAndView();
-        mav.setViewName("project/projectList");
-        return mav;
-    }
-
     @ResponseBody
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public Object list(Integer offset,Integer limit,String projectStatus,String projectName,String projectLeader) {
@@ -45,13 +38,6 @@ public class ProjectController extends BaseController {
         result.put("rows",pageInfo.getList());
         result.put("total",pageInfo.getTotal());
         return result;
-    }
-
-    @RequestMapping(value = "/addProject",method = RequestMethod.GET)
-    public ModelAndView addProject() {
-        ModelAndView mav = getModelAndView();
-        mav.setViewName("project/addProject");
-        return mav;
     }
 
     @RequestMapping(value = "/saveProject",method = RequestMethod.GET)

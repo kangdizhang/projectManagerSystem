@@ -43,7 +43,25 @@
     <url-pattern>/druid/*</url-pattern>
   </servlet-mapping>
 
-  <!-- 配置web-inf下页面直接访问 -->
+  <!-- 配置web-inf下页面跳转访问 -->
+  <servlet>
+    <servlet-name>editModlePrototype</servlet-name>
+    <jsp-file>/WEB-INF/view/modle/editModlePrototype.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editModlePrototype</servlet-name>
+    <url-pattern>/editModlePrototype</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>modlePrototypeList</servlet-name>
+    <jsp-file>/WEB-INF/view/modle/modlePrototypeList.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>modlePrototypeList</servlet-name>
+    <url-pattern>/modlePrototypeList</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <servlet-name>projectInfoList</servlet-name>
     <jsp-file>/WEB-INF/view/projectInfo/projectInfoList.jsp</jsp-file>

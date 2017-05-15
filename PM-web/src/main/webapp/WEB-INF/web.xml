@@ -45,6 +45,24 @@
 
   <!-- 配置web-inf下页面跳转访问 -->
   <servlet>
+    <servlet-name>editModle</servlet-name>
+    <jsp-file>/WEB-INF/view/modle/editModle.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editModle</servlet-name>
+    <url-pattern>/editModle</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>modleList</servlet-name>
+    <jsp-file>/WEB-INF/view/modle/modleList.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>modleList</servlet-name>
+    <url-pattern>/modleList</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>editModlePrototype</servlet-name>
     <jsp-file>/WEB-INF/view/modle/editModlePrototype.jsp</jsp-file>
   </servlet>

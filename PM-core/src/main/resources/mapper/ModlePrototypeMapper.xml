@@ -33,11 +33,16 @@
 	<!-- 主键查询-->
 	<select id="findModlePrototype" resultMap="modlePrototypeResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE ID={id}
+		WHERE ID=#{id}
+	</select>
+
+	<!-- 列表查询-->
+	<select id="queryModlePrototype" resultMap="modlePrototypeResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
 	</select>
 
 	<!-- 条件查询-->
-	<select id="queryModlePrototype" resultMap="modlePrototypeResultMap">
+	<select id="findModlePrototypeListPage" resultMap="modlePrototypeResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
 		WHERE 1=1
 		<if test="modlePrototypeName!=null and modlePrototypeName!=''">

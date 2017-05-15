@@ -51,9 +51,9 @@
     </style>
 </head>
 <body>
-<form action="/projectInfo/saveProjectInfo" method="get" name="form">
+<form action="/modlePrototype/saveProjectInfo" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="hidden" name="id" value="${param.id}">
+        <input type="text" name="id" value="${param.id}">
         <tr>
             <td class="tableleft">模块原型名称</td>
             <td><input type="text" name="modlePrototypeName" value="${param.modlePrototypeName}"/></td>
@@ -75,7 +75,7 @@
         <tr>
             <td class="tableleft"></td>
             <td>
-                <button type="submit" onclick="submitForm()" class="btn btn-primary">保存</button>
+                <button type="submit" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;
                 <a class="btn btn-success" href="${bathPath}/modlePrototypeList">返回列表</a>
             </td>

@@ -89,14 +89,14 @@
     <url-pattern>/projectList</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <servlet-name>addProject</servlet-name>
-    <jsp-file>/WEB-INF/view/project/addProject.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>addProject</servlet-name>
-    <url-pattern>/addProject</url-pattern>
-  </servlet-mapping>
+  <!--<servlet>-->
+    <!--<servlet-name>addProject</servlet-name>-->
+    <!--<jsp-file>/WEB-INF/view/project/addProject.jsp</jsp-file>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>addProject</servlet-name>-->
+    <!--<url-pattern>/addProject</url-pattern>-->
+  <!--</servlet-mapping>-->
 
   <servlet>
     <servlet-name>addProjectInfo</servlet-name>

@@ -1,8 +1,9 @@
 package com.ectrip.controller;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.ectrip.common.base.BaseController;
+import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Project;
+import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ProjectService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +27,9 @@ public class ProjectController extends BaseController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private ModlePrototypeService modlePrototypeService;
 
     @ResponseBody
     @RequestMapping(value = "/list",method = RequestMethod.GET)
@@ -71,6 +76,18 @@ public class ProjectController extends BaseController {
             e.printStackTrace();
             mav.setViewName("project/addProject");
         }
+        return mav;
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "/addProject", method = RequestMethod.GET)
+    public Object modlePrototypeList() {
+        ModelAndView mav = getModelAndView();
+        List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();
+        mav.addObject("rows", list);
+        mav.setViewName("project/addProject");
         return mav;
     }
 }

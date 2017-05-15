@@ -53,7 +53,7 @@
     <div class="form-group">
 
         <%--模块名称：--%>
-        <input type="text" name="projectName" id="projectName"class="abc input-default" placeholder="这里输入模块名称">
+        <input type="text" name="modlePrototypeName" id="modlePrototypeName"class="abc input-default" placeholder="这里输入模块名称">
         &nbsp;&nbsp;&nbsp;&nbsp;
 
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
@@ -73,7 +73,7 @@
         $table.bootstrapTable({
             //method:"get",
             //url: '${basePath}/optManage/findOptRecordList',
-            url:'${basePath}/project/list',
+            url:'${basePath}/modlePrototype/list',
             queryParams:oTableInit.queryParams,
             striped: true,
             search: false,

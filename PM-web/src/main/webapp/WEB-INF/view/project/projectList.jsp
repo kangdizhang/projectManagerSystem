@@ -158,13 +158,14 @@
             projectStatus = '2';
         }
         return [
-            '<a href="${bathPath}/editProject?id='+row.id+
-            '&projectName='+row.projectName +
-            '&projectLeader='+row.projectLeader+
-            '&phone='+row.phone+
-            '&qq='+row.qq+
-            '&email='+row.email+
-            '&projectStatus='+projectStatus+'" data-toggle="tooltip" title="Edit">修改</a> '
+            '<a href="${bathPath}/project/addProject?id='+row.id+
+//            '&projectName='+row.projectName +
+//            '&projectLeader='+row.projectLeader+
+//            '&phone='+row.phone+
+//            '&qq='+row.qq+
+//            '&email='+row.email+
+//            '&projectStatus='+projectStatus+'' +
+            '" data-toggle="tooltip" title="Edit">修改</a> '
         ].join('');
     }
 

@@ -79,14 +79,14 @@ public class ProjectController extends BaseController {
         return mav;
     }
 
-
-
     @ResponseBody
     @RequestMapping(value = "/addProject", method = RequestMethod.GET)
-    public Object modlePrototypeList() {
+    public Object modlePrototypeList(Integer id) {
         ModelAndView mav = getModelAndView();
         List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();
+        Project project = projectService.queryProject(id);
         mav.addObject("rows", list);
+        mav.addObject("project",project);
         mav.setViewName("project/addProject");
         return mav;
     }

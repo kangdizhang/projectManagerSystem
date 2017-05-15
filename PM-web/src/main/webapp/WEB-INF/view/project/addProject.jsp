@@ -53,6 +53,15 @@
             <td><input type="text" name="projectName" value="${project.projectName}"/></td>
         </tr>
         <tr>
+            <td width="10%" class="tableleft">模块选择</td>
+            <td>
+                <c:forEach items="${list}" var="modlePrototype">
+                    <label class='checkbox inline'><input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                </c:forEach>
+            </td>
+        </tr>
+        <tr>
             <td class="tableleft">项目负责人</td>
             <td><input type="text" name="projectLeader" value="${project.projectLeader}"/></td>
         </tr>

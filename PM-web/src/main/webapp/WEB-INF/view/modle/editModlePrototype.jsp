@@ -53,13 +53,13 @@
 <body>
 <form action="/modlePrototype/saveProjectInfo" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="text" name="id" value="${param.id}">
+        <input type="hidden" name="id" value="${param.id}">
         <tr>
-            <td class="tableleft">模块原型名称</td>
+            <td width="10%" class="tableleft">模块原型名称</td>
             <td><input type="text" name="modlePrototypeName" value="${param.modlePrototypeName}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">模块原型描述</td>
+            <td width="10%" class="tableleft">模块原型描述</td>
             <td><input type="text" name="modlePrototypeDescribe" value="${param.modlePrototypeDescribe}"/></td>
         </tr>
         <c:choose>

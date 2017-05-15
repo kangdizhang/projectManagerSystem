@@ -85,8 +85,8 @@ public class ProjectController extends BaseController {
         ModelAndView mav = getModelAndView();
         List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();
         Project project = projectService.queryProject(id);
-        mav.addObject("rows", list);
         mav.addObject("project",project);
+        mav.addObject("list", list);
         mav.setViewName("project/addProject");
         return mav;
     }

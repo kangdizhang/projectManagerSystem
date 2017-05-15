@@ -72,7 +72,7 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/addProject'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="window.location.href='${bathPath}/project/addProject'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -158,7 +158,7 @@
             projectStatus = '2';
         }
         return [
-            '<a href="${bathPath}/addProject?id='+row.id+
+            '<a href="${bathPath}/editProject?id='+row.id+
             '&projectName='+row.projectName +
             '&projectLeader='+row.projectLeader+
             '&phone='+row.phone+

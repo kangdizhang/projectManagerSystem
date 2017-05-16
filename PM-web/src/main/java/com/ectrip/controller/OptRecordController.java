@@ -30,7 +30,7 @@ public class OptRecordController extends BaseController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/doOperate",method = RequestMethod.GET)
+    @RequestMapping(value = "/doOperate",method = {RequestMethod.GET,RequestMethod.POST})
     public Object doOperate(HttpServletRequest request,String remoteUser,String remoteIp,String sessionId,String userAgent, String reqUrl,
                                         String reqAction,String reqParams,String sceneNo,String userId,String sysCode,String channelCode,String optBrief,String optDesc) {
         try {
@@ -45,7 +45,7 @@ public class OptRecordController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/optRecordPage",method = RequestMethod.GET)
+    @RequestMapping(value = "/optRecordPage",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView optRecordPage() {
         ModelAndView mav = getModelAndView();
         mav.setViewName("record/optList");
@@ -59,7 +59,7 @@ public class OptRecordController extends BaseController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public Object list(Integer offset,Integer limit) {
         int pageNo = 1;
         if(offset != null) {

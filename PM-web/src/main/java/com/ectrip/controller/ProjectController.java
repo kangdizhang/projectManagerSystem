@@ -32,7 +32,7 @@ public class ProjectController extends BaseController {
     private ModlePrototypeService modlePrototypeService;
 
     @ResponseBody
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public Object list(Integer offset,Integer limit,String projectStatus,String projectName,String projectLeader) {
         int pageNo = 1;
         if(offset != null) {
@@ -45,7 +45,7 @@ public class ProjectController extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = "/saveProject",method = RequestMethod.GET)
+    @RequestMapping(value = "/saveProject",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView saveProject(Integer id,String projectName, String projectLeader, String phone, String qq, String email, String projectStatus){
         ModelAndView mav = getModelAndView();
         if(StringUtils.isEmpty(projectName)){
@@ -80,7 +80,7 @@ public class ProjectController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/addProject", method = RequestMethod.GET)
+    @RequestMapping(value = "/addProject", method = {RequestMethod.GET,RequestMethod.POST})
     public Object modlePrototypeList(Integer id) {
         ModelAndView mav = getModelAndView();
         List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();

@@ -13,7 +13,7 @@ public class Version {
     private String upTime;//升级时间
     private Integer versionId;//升级前的版本ID
     private Integer demandId;//升级对应的需求ID
-    private Integer versionState;//版本状态，0：升级完成，1：升级中
+    private Integer versionState;//版本状态，0：升级中，1：已完成
 
     public Integer getId() {
         return id;

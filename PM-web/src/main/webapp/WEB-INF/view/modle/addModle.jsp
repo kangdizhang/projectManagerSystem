@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2017/5/15 0015
-  Time: 下午 3:23
+  Time: 下午 3:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>修改项目模块</title>
+    <title>新增项目模块</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css"/>
@@ -51,36 +51,46 @@
     </style>
 </head>
 <body>
-<form action="/modle/saveModle" method="get" name="form">
+<form action="/modle/saveModle" method="post" name="form">
+    <input type="hidden" name="projectId" value="${param.projectId}">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="hidden" name="id" value="${param.id}">
-        <input type="hidden" name="projectId" value="${param.projectId}">
-        <tr>
-            <td width="10%" class="tableleft">模块原型名称</td>
-            <td><input type="text" name="modlePrototypeName" value="${param.modlePrototypeName}"/></td>
-        </tr>
-        <tr>
-            <td width="10%" class="tableleft">模块原型描述</td>
-            <td><input type="text" name="modlePrototypeDescribe" value="${param.modlePrototypeDescribe}"/></td>
-        </tr>
         <c:choose>
             <c:when test="${msg!=null}">
                 <tr>
-                    <td class="tableleft">提示信息</td>
+                    <td width="10%" class="tableleft">提示信息</td>
                     <td>
                         <p style="color: crimson">${msg}</p>
                     </td>
                 </tr>
+                <tr>
+                    <td class="tableleft"></td>
+                    <td>
+                        <a class="btn btn-success" href="${bathPath}/editModlePrototype">添加模块原型</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-success" href="${bathPath}/modleList?projectId=${param.projectId}">返回列表</a>
+                    </td>
+                </tr>
             </c:when>
+            <c:otherwise>
+                <tr>
+                    <td width="10%" class="tableleft">模块选择</td>
+                    <td>
+                        <c:forEach items="${list}" var="modlePrototype">
+                            <label class='checkbox inline'><input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </c:forEach>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableleft"></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-success" href="${bathPath}/modleList?projectId=${param.projectId}">返回列表</a>
+                    </td>
+                </tr>
+            </c:otherwise>
         </c:choose>
-        <tr>
-            <td class="tableleft"></td>
-            <td>
-                <button type="submit" class="btn btn-primary">保存</button>
-                &nbsp;&nbsp;
-                <a class="btn btn-success" href="${bathPath}/modleList?projectId=${param.projectId}">返回列表</a>
-            </td>
-        </tr>
     </table>
 </form>
 </body>

@@ -10,7 +10,7 @@ public class Modle {
     private Integer projectId;//项目表主键
     private String modleName;//模块名称
     private String modleDescribe;//模块描述
-    private String modleState;//模块状态，1：修改完，0：修改中
+    private String modleState;//模块状态，0：开发中，1：已完成
 
     public Integer getId() {
         return id;

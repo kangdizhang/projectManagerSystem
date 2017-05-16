@@ -27,7 +27,7 @@ public class ModlePrototypeController extends BaseController {
     private ModlePrototypeService modlePrototypeService;
 
     @ResponseBody
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = {RequestMethod.GET,RequestMethod.POST})
     public Object list(Integer offset, Integer limit, String modlePrototypeName) {
         int pageNo = 1;
         if (offset != null) {
@@ -40,7 +40,7 @@ public class ModlePrototypeController extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = "/saveProjectInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveProjectInfo", method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView saveProject(Integer id, String modlePrototypeName, String modlePrototypeDescribe) {
         ModelAndView mav = getModelAndView();
         if (id != null) {

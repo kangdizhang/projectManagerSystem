@@ -27,7 +27,7 @@ public class ProjectInfoController extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping(value = "/viewProjectInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/viewProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView viewProjectInfo(Integer id){
         ModelAndView mav = getModelAndView();
         ProjectInfo projectInfo = projectService.queryProjectInfo(id);
@@ -39,7 +39,7 @@ public class ProjectInfoController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public Object list(Integer offset,Integer limit,String projectName) {
         int pageNo = 1;
         if(offset != null) {
@@ -52,7 +52,7 @@ public class ProjectInfoController extends BaseController {
         return result;
     }
 
-    @RequestMapping(value = "/saveProjectInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/saveProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView saveProject(Integer id,Integer projectId,String serverIp, String dbServerIp, String dbUser, String dbPwd, Integer dbPort, String hostName,String ssh){
         ModelAndView mav = getModelAndView();
         Project project = projectService.queryProject(projectId);

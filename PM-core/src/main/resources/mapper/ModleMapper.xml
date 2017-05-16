@@ -40,9 +40,23 @@
 	</select>
 
 	<!-- 条件查询-->
+	<select id="queryModleList" resultMap="modleResultMap">
+		SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,
+		(CASE WHEN MODLE_STATE='0' THEN '开发中'
+		ELSE '已完成'
+		END) as MODLE_STATE
+		FROM <include refid="tableName"></include>
+		WHERE PROJECT_ID=#{projectId}
+	</select>
+
+	<!-- 条件查询-->
 	<select id="queryModle" resultMap="modleResultMap">
-		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE PROJECT_ID={projectId}
+		SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,
+		(CASE WHEN MODLE_STATE='0' THEN '开发中'
+		ELSE '已完成'
+		END) as MODLE_STATE
+		FROM <include refid="tableName"></include>
+		WHERE PROJECT_ID=#{projectId}
 		<if test="modleName!=null and modleName!=''">
 			AND MODLE_NAME LIKE CONCAT('%', #{modleName}, '%')
 		</if>

@@ -63,7 +63,7 @@
         </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
         <%--模块名称：--%>
-        <input type="text" name="modlePrototypeName" id="modlePrototypeName"class="abc input-default" placeholder="这里输入模块名称">
+        <input type="text" name="modleName" id="modleName"class="abc input-default" placeholder="这里输入模块名称">
         &nbsp;&nbsp;&nbsp;&nbsp;
 
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
@@ -125,6 +125,7 @@
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
+            projectId:${param.projectId},
             modleName: $("#modleName").val(),
             modleState:$("#modleState").val()
         };

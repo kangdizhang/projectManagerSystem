@@ -53,13 +53,24 @@
             <td><input type="text" name="projectName" value="${project.projectName}"/></td>
         </tr>
         <tr>
-            <td width="10%" class="tableleft">模块选择</td>
-            <td>
-                <c:forEach items="${list}" var="modlePrototype">
-                    <label class='checkbox inline'><input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}</label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                </c:forEach>
-            </td>
+            <td width="10%" class="tableleft">项目模块</td>
+            <c:choose>
+                <c:when test="${project.id != null}">
+                    <td>
+                        <c:forEach items="${list}" var="modle">
+                            <p>${modle.modleName}</p>
+                        </c:forEach>
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td>
+                        <c:forEach items="${list}" var="modlePrototype">
+                            <label class='checkbox inline'><input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </c:forEach>
+                    </td>
+                </c:otherwise>
+            </c:choose>
         </tr>
         <tr>
             <td class="tableleft">项目负责人</td>
@@ -82,7 +93,7 @@
             <td>
                 <input type="radio" name="projectStatus" value="0"/> 开发中
                 <input type="radio" name="projectStatus" value="1"/> 升级中
-                <input type="radio" name="projectStatus" value="2"/> 完成中
+                <input type="radio" name="projectStatus" value="2"/> 已完成
             </td>
         </tr>
         <c:choose>

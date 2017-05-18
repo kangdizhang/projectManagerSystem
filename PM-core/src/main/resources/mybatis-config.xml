@@ -20,6 +20,8 @@
 		<typeAlias type="com.ectrip.model.ModlePrototype" alias="ModlePrototype"/>
 		<typeAlias type="com.ectrip.model.ProjectInfo" alias="ProjectInfo"/>
 		<typeAlias type="com.ectrip.model.Version" alias="Version"/>
+		<typeAlias type="com.ectrip.model.Demand" alias="Demand"/>
+		<typeAlias type="com.ectrip.model.ModleDemand" alias="ModleDemand"/>
 		<typeAlias type="com.ectrip.model.Project" alias="Project"/>
 		<typeAlias type="com.ectrip.vo.ProjectInfoVO" alias="ProjectInfoVO"/>
 	</typeAliases>

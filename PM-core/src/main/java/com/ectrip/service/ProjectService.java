@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ProjectService {
 
-    void saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String projectStatus);
+    void saveProject(String[] a,Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String projectStatus);
     void saveProjectInfo(Integer id,Integer projectId, String serverIp, String dbServerIp, String dbUserId, String dbPwd, Integer dbPort, String hostName,String SSH);
     Project queryProject(Integer projectId);
     ProjectInfo queryProjectInfo(Integer projectId);

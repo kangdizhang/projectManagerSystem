@@ -1,9 +1,11 @@
 package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
+import com.ectrip.model.Modle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Project;
 import com.ectrip.service.ModlePrototypeService;
+import com.ectrip.service.ModleService;
 import com.ectrip.service.ProjectService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +30,9 @@ public class ProjectController extends BaseController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private ModleService modleService;
 
     @Autowired
     private ModlePrototypeService modlePrototypeService;
@@ -46,7 +52,7 @@ public class ProjectController extends BaseController {
     }
 
     @RequestMapping(value = "/saveProject",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveProject(Integer id,String projectName, String projectLeader, String phone, String qq, String email, String projectStatus){
+    public ModelAndView saveProject(Integer id, String projectName,String projectLeader, String phone, String qq, String email, String projectStatus){
         ModelAndView mav = getModelAndView();
         if(StringUtils.isEmpty(projectName)){
             mav.addObject("msg","项目名称不能为空");
@@ -69,8 +75,10 @@ public class ProjectController extends BaseController {
             return mav;
         }
 
+        String[] a = getRequest().getParameterValues("mpid");
+
         try{
-        projectService.saveProject(id,projectName, projectLeader, phone, qq, email, projectStatus);
+            projectService.saveProject(a,id,projectName, projectLeader, phone, qq, email, projectStatus);
             mav.setViewName("project/projectList");
         }catch (Exception e){
             e.printStackTrace();
@@ -83,10 +91,16 @@ public class ProjectController extends BaseController {
     @RequestMapping(value = "/addProject", method = {RequestMethod.GET,RequestMethod.POST})
     public Object modlePrototypeList(Integer id) {
         ModelAndView mav = getModelAndView();
-        List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();
+        if (id != null){
+            List<Modle> list = modleService.queryModleList(null,null,id,null,null).getList();
+            mav.addObject("list", list);
+        }else {
+            List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();
+            mav.addObject("list", list);
+        }
         Project project = projectService.queryProject(id);
         mav.addObject("project",project);
-        mav.addObject("list", list);
+
         mav.setViewName("project/addProject");
         return mav;
     }

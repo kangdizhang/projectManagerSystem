@@ -81,6 +81,16 @@
                         </c:forEach>
                     </td>
                 </tr>
+                <c:choose>
+                    <c:when test="${mesg!=null}">
+                        <tr>
+                            <td width="10%" class="tableleft">提示信息</td>
+                            <td>
+                                <p style="color: crimson">${msg}</p>
+                            </td>
+                        </tr>
+                    </c:when>
+                </c:choose>
                 <tr>
                     <td class="tableleft"></td>
                     <td>

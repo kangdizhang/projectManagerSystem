@@ -144,7 +144,10 @@
             '&modleName='+row.modleName +
             '&projectId=${param.projectId}' +
             '&modleState='+row.modleState +
-            '&modleDescribe='+row.modleDescribe+'" data-toggle="tooltip" title="Edit">修改</a> '
+            '&modleDescribe='+row.modleDescribe+'" data-toggle="tooltip" title="Edit">修改</a> ',
+            '<a href="${bathPath}/modle/deleteModle?id='+row.id+
+            '&projectId=${param.projectId}' +
+            '"data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }
 

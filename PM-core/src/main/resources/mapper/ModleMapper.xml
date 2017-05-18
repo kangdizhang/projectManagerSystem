@@ -33,10 +33,15 @@
 		#{modleState}
 	</sql>
 
+	<delete id="deleteModle" parameterType="java.lang.Integer">
+		DELETE FROM <include refid="tableName"></include>
+		WHERE ID=#{id}
+	</delete>
+
 	<!-- 主键查询-->
 	<select id="findModle" resultMap="modleResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE ID={id}
+		WHERE ID=#{id}
 	</select>
 
 	<!-- 条件查询-->

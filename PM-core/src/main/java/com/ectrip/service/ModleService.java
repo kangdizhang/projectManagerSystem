@@ -12,6 +12,12 @@ import java.util.List;
 public interface ModleService {
 
     /**
+     * 根据ID删除指定项目模块
+     * @param id
+     */
+    void deleteModle(Integer id);
+
+    /**
      * 新增项目模块
      * @param projectId
      * @param modlePrototypeId

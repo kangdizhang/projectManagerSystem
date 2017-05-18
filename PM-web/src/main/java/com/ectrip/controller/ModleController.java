@@ -45,23 +45,40 @@ public class ModleController extends BaseController {
     @RequestMapping(value = "/saveModle",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView saveModle(Integer projectId, @RequestParam("mpid")String[] a){
         ModelAndView mav = getModelAndView();
-        for (int i = 0; i < a.length; i++){
-            modleService.saveModle(projectId,Integer.parseInt(a[i]));
+        if (a != null && a.length > 0){
+            for (int i = 0; i < a.length; i++){
+                modleService.saveModle(projectId,Integer.parseInt(a[i]));
+            }
+            mav.setViewName("modle/modleList");
+            return mav;
+        } else {
+            mav.addObject("mesg","请勾选模块再提交！！！");
+            mav.setViewName("modle/addModle");
+            return mav;
         }
-        mav.setViewName("modle/modleList");
-        return mav;
     }
 
     @RequestMapping(value = "/addModle",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView addModle(Integer projectId){
         ModelAndView mav = getModelAndView();
+        mav.setViewName("modle/addModle");
         List<ModlePrototype> modlePrototypeList = modleService.findModlePrototypeList(projectId);
-        if (modlePrototypeList.isEmpty()){
-            mav.addObject("msg","模块原型已全部添加至项目模块中。如还想添加，请先添加模块到模块原型中！！！");
+        if (modlePrototypeList != null && !modlePrototypeList.isEmpty()){
+            mav.addObject("list",modlePrototypeList);
             return mav;
         }
-        mav.addObject("list",modlePrototypeList);
-        mav.setViewName("modle/addModle");
+        mav.addObject("msg","模块原型已全部添加至项目模块中。如还想添加，请先添加模块到模块原型中！！！");
+        return mav;
+    }
+
+    @RequestMapping(value = "/deleteModle",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView deleteModle(Integer id,Integer projectId){
+        ModelAndView mav = new ModelAndView();
+        modleService.deleteModle(id);
+        Map<String,Integer> map = new HashMap<String, Integer>();
+        map.put("projectId",projectId);
+        mav.addObject("param",map) ;
+        mav.setViewName("modle/modleList");
         return mav;
     }
 

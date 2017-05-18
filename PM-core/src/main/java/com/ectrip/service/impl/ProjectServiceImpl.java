@@ -1,7 +1,11 @@
 package com.ectrip.service.impl;
 
+import com.ectrip.dao.ModleDAO;
+import com.ectrip.dao.ModlePrototypeDAO;
 import com.ectrip.dao.ProjectDao;
 import com.ectrip.dao.ProjectInfoDAO;
+import com.ectrip.model.Modle;
+import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Project;
 import com.ectrip.model.ProjectInfo;
 import com.ectrip.service.ProjectService;
@@ -27,9 +31,14 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao projectDao;
     @Autowired
     private ProjectInfoDAO projectInfoDAO;
+    @Autowired
+    private ModleDAO modleDAO;
+    @Autowired
+    private ModlePrototypeDAO modlePrototypeDAO;
+
 
     @Override
-    public void saveProject(Integer id,String projectName, String projectLeader, String phone, String QQ, String email,  String projectStatus) {
+    public void saveProject(String[] a,Integer id,String projectName, String projectLeader, String phone, String QQ, String email,  String projectStatus) {
         Project project = new Project();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         project.setProjectName(projectName);
@@ -42,6 +51,17 @@ public class ProjectServiceImpl implements ProjectService {
         logger.info("保存数据:{}",project.toString());
         if(id==null){
             projectDao.save(project);
+            if (a != null && a.length > 0){
+                for (int i = 0; i < a.length; i++){
+                    ModlePrototype modlePrototype = modlePrototypeDAO.findModlePrototype(Integer.parseInt(a[i]));
+                    Modle modle = new Modle();
+                    modle.setProjectId(project.getId());
+                    modle.setModleName(modlePrototype.getModlePrototypeName());
+                    modle.setModleDescribe(modlePrototype.getModlePrototypeDescribe());
+                    modle.setModleState("0");
+                    modleDAO.saveModle(modle);
+                }
+            }
         }else{
             project.setId(id);
             projectDao.updateProject(project);

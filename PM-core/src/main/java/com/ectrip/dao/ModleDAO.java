@@ -11,6 +11,12 @@ import java.util.List;
 public interface ModleDAO {
 
     /**
+     * 根据ID删除指定项目模块
+     * @param id
+     */
+    void deleteModle(Integer id);
+
+    /**
      * 新增模块
      * @param modle
      * @return int

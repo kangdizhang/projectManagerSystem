@@ -14,7 +14,7 @@ public class Demand {
     private String exceptEndTime;//预期完成时间
     private String actualEndTime;//实际完成时间
     private String completeUserId;//完成人
-    private Integer demandStatus;//需求状态，0;已完成，1：完成中
+    private String demandStatus;//需求状态，0;完成中，1：已完成
 
     public Integer getId() {
         return id;
@@ -80,18 +80,18 @@ public class Demand {
         this.completeUserId = completeUserId;
     }
 
-    public Integer getDemandStatus() {
+    public String getDemandStatus() {
         return demandStatus;
     }
 
-    public void setDemandStatus(Integer demandStatus) {
+    public void setDemandStatus(String demandStatus) {
         this.demandStatus = demandStatus;
     }
 
     public Demand() {
     }
 
-    public Demand(Integer id, String demandName, String demandDescribe, String putTime, String putUserId, String exceptEndTime, String actualEndTime, String completeUserId, Integer demandStatus) {
+    public Demand(Integer id, String demandName, String demandDescribe, String putTime, String putUserId, String exceptEndTime, String actualEndTime, String completeUserId, String demandStatus) {
         this.id = id;
         this.demandName = demandName;
         this.demandDescribe = demandDescribe;

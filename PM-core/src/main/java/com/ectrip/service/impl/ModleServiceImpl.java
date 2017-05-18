@@ -29,6 +29,14 @@ public class ModleServiceImpl implements ModleService {
     private ModlePrototypeDAO modlePrototypeDAO;
 
     /**
+     * 根据ID删除指定项目模块
+     * @param id
+     */
+    public void deleteModle(Integer id){
+        modleDAO.deleteModle(id);
+    }
+
+    /**
      * 新增项目模块
      * @param projectId
      * @param modlePrototypeId
@@ -80,13 +88,16 @@ public class ModleServiceImpl implements ModleService {
         List<ModlePrototype> modlePrototypeList = modlePrototypeDAO.queryModlePrototype();
         Iterator<ModlePrototype> modlePrototypeIterator = modlePrototypeList.iterator();
 
-        while (modlePrototypeIterator.hasNext()){
-            ModlePrototype modlePrototype = modlePrototypeIterator.next();
-            for (Modle modle:modleList) {
-                if (modle.getModleName().equals(modlePrototype.getModlePrototypeName())){
-                    modlePrototypeIterator.remove();
+        if(modleList != null && !modleList.isEmpty()){
+            while (modlePrototypeIterator.hasNext()){
+                ModlePrototype modlePrototype = modlePrototypeIterator.next();
+                for (Modle modle:modleList) {
+                    if (modle.getModleName().equals(modlePrototype.getModlePrototypeName())){
+                        modlePrototypeIterator.remove();
+                    }
                 }
             }
+
         }
 
         return modlePrototypeList;

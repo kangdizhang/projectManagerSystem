@@ -1,74 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ectrip.dao.VersionDAO">
+<mapper namespace="com.ectrip.dao.ModleDemandDAO">
 
-	<resultMap type="Version" id="versionResultMap">
+	<resultMap type="ModleDemand" id="modleDemandResultMap">
 		<id column="ID" property="id"/>
-		<result column="VERSION" property="version"/>
 		<result column="MODLE_ID" property="modleId"/>
-		<result column="UP_USERID" property="upUserId"/>
-		<result column="UP_TIME" property="upTime"/>
-		<result column="VERSION_ID" property="versionId"/>
 		<result column="DEMAND_ID" property="demandId"/>
-		<result column="VERSION_STATE" property="versionState"/>
 	</resultMap>
 
 	<!--表名 -->
 	<sql id="tableName">
-		VERSION
+		MODLE_DEMAND
 	</sql>
 
 	<!-- 字段 -->
 	<sql id="Field">
 		ID,
-		VERSION,
 		MODLE_ID,
-		UP_USERID,
-		UP_TIME,
-		VERSION_ID,
-		DEMAND_ID,
-		VERSION_STATE
+		DEMAND_ID
 	</sql>
 
 	<!-- 字段值 -->
 	<sql id="FieldValue">
 		#{id},
-		#{version},
 		#{modleId},
-		#{upUserId},
-		#{upTime},
-		#{versionId},
-		#{demandId},
-		#{versionState}
+		#{demandId}
 	</sql>
 
 	<!-- 主键查询-->
-	<select id="findVersion" resultMap="versionResultMap">
+	<select id="findModle" resultMap="modleDemandResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
 		WHERE ID=#{id}
 	</select>
 
 	<!-- 条件查询-->
-	<select id="queryVersion" resultMap="versionResultMap">
-		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE 1=1
-		<if test="projectId!=null and projectId!=''">
-			AND PROJECT_ID=#{projectId}
-		</if>
-		<if test="modleId!=null and modleId!=''">
-			AND MODLE_ID=#{modleId}
-		</if>
-		<if test="version!=null and version!=''">
-			AND VERSION=#{version}
-		</if>
+	<select id="queryModleList" resultMap="modleDemandResultMap">
+		SELECT ID,MODLE_ID
+		FROM <include refid="tableName"></include>
+		WHERE DEMAND_ID=#{demandId}
 	</select>
 
-	<!-- 修改
-	<update id="updateVersion" parameterType="Version">
+
+	<!-- 修改-->
+	<update id="updateModle" parameterType="Modle">
 		UPDATE <include refid="tableName"></include>
 		SET PROJECT_ID=#{projectId},MODLE_NAME=#{modleName},MODLE_DESCRIBE=#{modleDescribe},MODLE_STATE=#{modleState}
 		WHERE ID=#{id}
-	</update>-->
+	</update>
 
 	<!-- 新增-->
 	<insert id="saveModle" useGeneratedKeys="true" keyProperty="id">

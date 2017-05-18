@@ -19,4 +19,10 @@ public interface ProjectDao {
     void updateProject(Project project);
 
     List<Project> findProjectListPage(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,@Param("projectStatus") String projectStatus, @Param("projectName") String projectName, @Param("projectLeader") String projectLeader);
+
+    /**
+     * 根据ID删除指定项目
+     * @param id
+     */
+    void deleteProject(@Param("id")Integer id);
 }

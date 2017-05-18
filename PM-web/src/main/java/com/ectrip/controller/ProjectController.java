@@ -104,4 +104,12 @@ public class ProjectController extends BaseController {
         mav.setViewName("project/addProject");
         return mav;
     }
+
+    @RequestMapping(value = "/deleteProject",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView deleteModle(Integer id){
+        ModelAndView mav = new ModelAndView();
+        projectService.deleteProject(id);
+        mav.setViewName("project/projectList");
+        return mav;
+    }
 }

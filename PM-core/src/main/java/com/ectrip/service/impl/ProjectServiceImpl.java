@@ -111,5 +111,10 @@ public class ProjectServiceImpl implements ProjectService {
         return new PageInfo<>(list);
     }
 
+    @Override
+    public void deleteProject(Integer id) {
+        projectDao.deleteProject(id);
+    }
+
 
 }

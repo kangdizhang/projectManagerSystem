@@ -165,7 +165,8 @@
 //            '&qq='+row.qq+
 //            '&email='+row.email+
 //            '&projectStatus='+projectStatus+'' +
-            '" data-toggle="tooltip" title="Edit">修改</a> '
+            '" data-toggle="tooltip" title="Edit">修改</a> ',
+            '<a href="${bathPath}/project/deleteProject?id='+row.id+'"data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }
 

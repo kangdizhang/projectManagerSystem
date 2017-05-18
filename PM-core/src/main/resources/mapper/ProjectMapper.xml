@@ -94,4 +94,9 @@
         </if>
         ORDER BY ID,OPERATE_TIME
     </select>
+
+    <delete id="deleteProject" parameterType="java.lang.Integer">
+        DELETE FROM <include refid="tableName"></include>
+        WHERE ID=#{id}
+    </delete>
 </mapper>

@@ -30,5 +30,9 @@ public interface ProjectService {
 
     PageInfo<ProjectInfoVO> findProjectInfoListPage(Integer pageNo, Integer pageSize, String projectName);
 
-
+    /**
+     * 根据ID删除指定项目
+     * @param id
+     */
+    void deleteProject(Integer id);
 }

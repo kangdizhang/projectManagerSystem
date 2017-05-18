@@ -43,8 +43,9 @@ public class ModleController extends BaseController {
     }
 
     @RequestMapping(value = "/saveModle",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveModle(Integer projectId, @RequestParam("mpid")String[] a){
+    public ModelAndView saveModle(Integer projectId){
         ModelAndView mav = getModelAndView();
+        String[] a = getRequest().getParameterValues("mpid");
         if (a != null && a.length > 0){
             for (int i = 0; i < a.length; i++){
                 modleService.saveModle(projectId,Integer.parseInt(a[i]));
@@ -78,6 +79,15 @@ public class ModleController extends BaseController {
         Map<String,Integer> map = new HashMap<String, Integer>();
         map.put("projectId",projectId);
         mav.addObject("param",map) ;
+        mav.setViewName("modle/modleList");
+        return mav;
+    }
+
+    @RequestMapping(value = "/updateModle",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView updateModle(Modle modle){
+        ModelAndView mav = new ModelAndView();
+        modleService.updateModle(modle);
+        mav.addObject("param",modle);
         mav.setViewName("modle/modleList");
         return mav;
     }

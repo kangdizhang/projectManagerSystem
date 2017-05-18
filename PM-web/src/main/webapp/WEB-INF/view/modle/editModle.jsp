@@ -51,17 +51,24 @@
     </style>
 </head>
 <body>
-<form action="/modle/saveModle" method="get" name="form">
+<form action="/modle/updateModle" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
         <input type="hidden" name="id" value="${param.id}">
         <input type="hidden" name="projectId" value="${param.projectId}">
         <tr>
-            <td width="10%" class="tableleft">模块原型名称</td>
-            <td><input type="text" name="modlePrototypeName" value="${param.modlePrototypeName}"/></td>
+            <td width="10%" class="tableleft">项目模块名称</td>
+            <td><input type="text" name="modleName" value="${param.modleName}"/></td>
         </tr>
         <tr>
-            <td width="10%" class="tableleft">模块原型描述</td>
-            <td><input type="text" name="modlePrototypeDescribe" value="${param.modlePrototypeDescribe}"/></td>
+            <td width="10%" class="tableleft">项目模块描述</td>
+            <td><input type="text" name="modleDescribe" value="${param.modleDescribe}"/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">项目模块状态</td>
+            <td>
+                <input type="radio" name="modleState" value="0"/> 开发中
+                <input type="radio" name="modleState" value="1"/> 已完成
+            </td>
         </tr>
         <c:choose>
             <c:when test="${msg!=null}">
@@ -84,4 +91,13 @@
     </table>
 </form>
 </body>
+<script>
+    $(function () {
+        if (${param.modleState == '开发中'}) {
+            $("input[name='modleState'][value='0']").attr("checked", true);
+        } else {
+            $("input[name='modleState'][value='1']").attr("checked", true);
+        }
+    })
+</script>
 </html>

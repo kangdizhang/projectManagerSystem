@@ -4,8 +4,9 @@
 
 	<resultMap type="Demand" id="demandResultMap">
 		<id column="ID" property="id"/>
-		<result column="DEMANDNAME" property="demandName"/>
-		<result column="DEMANDNAME_DESCRIBE" property="demandDescribe"/>
+		<result column="PROJECT_ID" property="projectId"/>
+		<result column="DEMAND_NAME" property="demandName"/>
+		<result column="DEMAND_DESCRIBE" property="demandDescribe"/>
 		<result column="PUT_TIME" property="putTime"/>
 		<result column="PUT_USERID" property="putUserId"/>
 		<result column="EXCEPT_END_TIME" property="exceptEndTime"/>
@@ -22,8 +23,9 @@
 	<!-- 字段 -->
 	<sql id="Field">
 		ID,
-		DEMANDNAME,
-		DEMANDNAME_DESCRIBE,
+		PROJECT_ID,
+		DEMAND_NAME,
+		DEMAND_DESCRIBE,
 		PUT_TIME,
 		PUT_USERID,
 		EXCEPT_END_TIME,
@@ -53,7 +55,7 @@
 
 	<!-- 条件查询-->
 	<select id="queryDemand" resultMap="demandResultMap">
-		SELECT ID,DEMANDNAME,DEMANDNAME_DESCRIBE,PUT_TIME,PUT_USERID,EXCEPT_END_TIME,ACTUAL_END_TIME,COMPLETE_USERID,
+		SELECT ID,PROJECT_ID,DEMAND_NAME,DEMAND_DESCRIBE,PUT_TIME,PUT_USERID,EXCEPT_END_TIME,ACTUAL_END_TIME,COMPLETE_USERID,
 		(CASE WHEN DEMAND_STATUS='0' THEN '开发中'
 		ELSE '已完成' END ) as DEMAND_STATUS
 		FROM <include refid="tableName"></include>

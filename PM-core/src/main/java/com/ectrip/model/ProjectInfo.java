@@ -90,16 +90,4 @@ public class ProjectInfo {
 
     public ProjectInfo() {
     }
-
-    public ProjectInfo(Integer id, Integer projectId, String serverIp, String dbServerIp, String dbUser, String dbPwd, Integer dbPort, String hostName, String ssh) {
-        this.id = id;
-        this.projectId = projectId;
-        this.serverIp = serverIp;
-        this.dbServerIp = dbServerIp;
-        this.dbUser = dbUser;
-        this.dbPwd = dbPwd;
-        this.dbPort = dbPort;
-        this.hostName = hostName;
-        this.ssh = ssh;
-    }
 }

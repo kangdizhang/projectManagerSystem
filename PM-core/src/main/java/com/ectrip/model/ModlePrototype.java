@@ -45,11 +45,4 @@ public class ModlePrototype {
 
     public ModlePrototype() {
     }
-
-    public ModlePrototype(Integer id, String modlePrototypeName, String modlePrototypeDescribe, String operateTime) {
-        this.id = id;
-        this.modlePrototypeName = modlePrototypeName;
-        this.modlePrototypeDescribe = modlePrototypeDescribe;
-        this.operateTime = operateTime;
-    }
 }

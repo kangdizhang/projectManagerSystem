@@ -5,6 +5,7 @@ import com.ectrip.dao.ModlePrototypeDAO;
 import com.ectrip.model.Modle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.service.ModleService;
+import com.ectrip.vo.ModleVO;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,8 +71,8 @@ public class ModleServiceImpl implements ModleService {
      * @param modleState
      * @return pageInfo
      */
-    public PageInfo<Modle> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName, String modleState){
-        List<Modle> list = modleDAO.queryModle(pageNo,pageSize,projectId,modleName,modleState);
+    public PageInfo<ModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName, String modleState){
+        List<ModleVO> list = modleDAO.queryModle(pageNo,pageSize,projectId,modleName,modleState);
         logger.info("查询数据:{}",list.toString());
         return new PageInfo<>(list);
     }

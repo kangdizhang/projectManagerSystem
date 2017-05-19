@@ -10,6 +10,16 @@
 		<result column="MODLE_STATE" property="modleState"/>
 	</resultMap>
 
+	<resultMap type="ModleVO" id="modleVOResultMap">
+		<id column="ID" property="id"/>
+		<result column="PROJECT_ID" property="projectId"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="MODLE_NAME" property="modleName"/>
+		<result column="MODLE_DESCRIBE" property="modleDescribe"/>
+		<result column="MODLE_STATE" property="modleState"/>
+		<result column="VERSION" property="version"/>
+	</resultMap>
+
 	<!--表名 -->
 	<sql id="tableName">
 		MODLE
@@ -45,28 +55,38 @@
 	</select>
 
 	<!-- 条件查询-->
-	<select id="queryModleList" resultMap="modleResultMap">
-		SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,
-		(CASE WHEN MODLE_STATE='0' THEN '开发中'
+	<select id="queryModleList" resultMap="modleVOResultMap">
+		<!--SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,-->
+		<!--(CASE WHEN MODLE_STATE='0' THEN '开发中'-->
+		<!--ELSE '已完成'-->
+		<!--END) as MODLE_STATE-->
+		<!--FROM <include refid="tableName"></include>-->
+		<!--WHERE PROJECT_ID=#{projectId}-->
+		SELECT M.ID as ID,M.PROJECT_ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,M.MODLE_NAME as MODLE_NAME,M.MODLE_DESCRIBE as MODLE_DESCRIBE,
+		(CASE WHEN M.MODLE_STATE='0' THEN '开发中'
 		ELSE '已完成'
-		END) as MODLE_STATE
-		FROM <include refid="tableName"></include>
-		WHERE PROJECT_ID=#{projectId}
+		END) as MODLE_STATE,
+		(SELECT V.version FROM VERSION V WHERE V.modle_id = M.id AND V.VERSION_STATE = 1) AS VERSION
+		FROM MODLE M,PROJECT P
+		WHERE M.PROJECT_ID = P.ID
+		AND M.PROJECT_ID=#{projectId}
 	</select>
 
 	<!-- 条件查询-->
-	<select id="queryModle" resultMap="modleResultMap">
-		SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,
-		(CASE WHEN MODLE_STATE='0' THEN '开发中'
+	<select id="queryModle" resultMap="modleVOResultMap">
+		SELECT M.ID as ID,M.PROJECT_ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,M.MODLE_NAME as MODLE_NAME,M.MODLE_DESCRIBE as MODLE_DESCRIBE,
+		(CASE WHEN M.MODLE_STATE='0' THEN '开发中'
 		ELSE '已完成'
-		END) as MODLE_STATE
-		FROM <include refid="tableName"></include>
-		WHERE PROJECT_ID=#{projectId}
+		END) as MODLE_STATE,
+		(SELECT V.version FROM VERSION V WHERE V.modle_id = M.id AND V.VERSION_STATE = 1) AS VERSION
+		FROM MODLE M,PROJECT P
+		WHERE M.PROJECT_ID = P.ID
+		AND M.PROJECT_ID=#{projectId}
 		<if test="modleName!=null and modleName!=''">
-			AND MODLE_NAME LIKE CONCAT('%', #{modleName}, '%')
+			AND M.MODLE_NAME LIKE CONCAT('%', #{modleName}, '%')
 		</if>
 		<if test="modleState!=null and modleState!=''">
-			AND MODLE_STATE=#{modleState}
+			AND M.MODLE_STATE=#{modleState}
 		</if>
 	</select>
 

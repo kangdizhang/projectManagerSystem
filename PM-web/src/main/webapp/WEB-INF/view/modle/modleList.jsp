@@ -114,7 +114,9 @@
             toolbar: '#toolbar',
             columns: [
                 {field: 'id', title:'编号',align:'center'},
+                {field: 'projectName', title: '项目名称',align:'center'},
                 {field: 'modleName', title: '模块名称',align:'center'},
+                {field: 'version', title: '当前版本',align:'center'},
                 {field: 'modleDescribe', title: '模块描述',align:'center'},
                 {field: 'modleState', title: '模块状态',align:'center'},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}

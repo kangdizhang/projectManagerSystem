@@ -7,6 +7,7 @@ import com.ectrip.model.Project;
 import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.ProjectService;
+import com.ectrip.vo.ModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,7 +93,7 @@ public class ProjectController extends BaseController {
     public Object modlePrototypeList(Integer id) {
         ModelAndView mav = getModelAndView();
         if (id != null){
-            List<Modle> list = modleService.queryModleList(null,null,id,null,null).getList();
+            List<ModleVO> list = modleService.queryModleList(null,null,id,null,null).getList();
             mav.addObject("list", list);
         }else {
             List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();

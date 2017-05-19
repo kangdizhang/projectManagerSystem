@@ -24,6 +24,7 @@
 		<typeAlias type="com.ectrip.model.ModleDemand" alias="ModleDemand"/>
 		<typeAlias type="com.ectrip.model.Project" alias="Project"/>
 		<typeAlias type="com.ectrip.vo.ProjectInfoVO" alias="ProjectInfoVO"/>
+		<typeAlias type="com.ectrip.vo.ModleVO" alias="ModleVO"/>
 	</typeAliases>
 	<!--分页插件和数据库方言-->
 	<plugins>

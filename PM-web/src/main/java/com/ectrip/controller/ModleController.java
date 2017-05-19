@@ -4,6 +4,7 @@ import com.ectrip.common.base.BaseController;
 import com.ectrip.model.Modle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.service.ModleService;
+import com.ectrip.vo.ModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,11 +36,17 @@ public class ModleController extends BaseController {
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
-        PageInfo<Modle> pageInfo = modleService.queryModleList(pageNo,limit,projectId,modleName,modleState);
-        Map<String,Object> result = new HashMap<String,Object>();
-        result.put("rows",pageInfo.getList());
-        result.put("total",pageInfo.getTotal());
-        return result;
+        try {
+            PageInfo<ModleVO> pageInfo = modleService.queryModleList(pageNo,limit,projectId,modleName,modleState);
+            Map<String,Object> result = new HashMap<String,Object>();
+            result.put("rows",pageInfo.getList());
+            result.put("total",pageInfo.getTotal());
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @RequestMapping(value = "/saveModle",method = {RequestMethod.GET,RequestMethod.POST})

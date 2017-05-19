@@ -1,6 +1,7 @@
 package com.ectrip.dao;
 
 import com.ectrip.model.Modle;
+import com.ectrip.vo.ModleVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public interface ModleDAO {
      * @param modleState
      * @return list
      */
-    List<Modle> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,
-                           @Param("projectId") Integer projectId,@Param("modleName") String modleName,@Param("modleState") String modleState);
+    List<ModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,
+                             @Param("projectId") Integer projectId, @Param("modleName") String modleName, @Param("modleState") String modleState);
 
 }

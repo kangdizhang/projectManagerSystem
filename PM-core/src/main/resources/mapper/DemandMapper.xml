@@ -7,9 +7,24 @@
 		<result column="PROJECT_ID" property="projectId"/>
 		<result column="DEMAND_NAME" property="demandName"/>
 		<result column="DEMAND_DESCRIBE" property="demandDescribe"/>
+		<result column="VERSION" property="version"/>
 		<result column="PUT_TIME" property="putTime"/>
 		<result column="PUT_USERID" property="putUserId"/>
+		<result column="EXCEPT_END_TIME" property="exceptEndTime"/>
+		<result column="ACTUAL_END_TIME" property="actualEndTime"/>
+		<result column="COMPLETE_USERID" property="completeUserId"/>
+		<result column="DEMAND_STATUS" property="demandStatus"/>
+	</resultMap>
+
+	<resultMap type="DemandVO" id="demandResultMap">
+		<id column="ID" property="id"/>
+		<result column="PROJECT_ID" property="projectId"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="DEMAND_NAME" property="demandName"/>
+		<result column="DEMAND_DESCRIBE" property="demandDescribe"/>
 		<result column="VERSION" property="version"/>
+		<result column="PUT_TIME" property="putTime"/>
+		<result column="PUT_USERID" property="putUserId"/>
 		<result column="EXCEPT_END_TIME" property="exceptEndTime"/>
 		<result column="ACTUAL_END_TIME" property="actualEndTime"/>
 		<result column="COMPLETE_USERID" property="completeUserId"/>
@@ -21,25 +36,30 @@
 		DEMAND
 	</sql>
 
-	<!-- 主键查询
-	<select id="findDemand" resultMap="demandResultMap">
-		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE ID=#{id}
-	</select>-->
+	<!-- 主键查询 -->
+	<select id="findDemand" resultMap="demandVOResultMap">
+		SELECT D.ID AS ID,D.PROJECT_ID AS PROJECT_ID,P.PROJECT_NAME AS PROJECT_NAME,D.DEMAND_NAME AS DEMAND_NAME,
+		D.DEMAND_DESCRIBE AS DEMAND_DESCRIBE,D.VERSION AS VERSION,D.PUT_TIME AS PUT_TIME,D.PUT_USERID AS PUT_USERID,
+		D.EXCEPT_END_TIME AS EXCEPT_END_TIME,D.ACTUAL_END_TIME AS ACTUAL_END_TIME,D.COMPLETE_USERID AS COMPLETE_USERID,
+		(CASE WHEN D.DEMAND_STATUS='0' THEN '开发中'
+		ELSE '已完成' END ) as DEMAND_STATUS
+		FROM DEMAND D,PROJECT P
+		WHERE D.PROJECT_ID=P.ID AND D.ID=#{id}
+	</select>
 
 	<!-- 条件查询-->
 	<select id="queryDemand" resultMap="demandResultMap">
-		SELECT d.ID,DEMAND_NAME,DEMAND_DESCRIBE,PUT_TIME,PUT_USERID,VERSION,EXCEPT_END_TIME,ACTUAL_END_TIME,COMPLETE_USERID,
-		(CASE WHEN DEMAND_STATUS='0' THEN '开发中'
-		ELSE '已完成' END ) as DEMAND_STATUS,
-        p.ID,p.PROJECT_NAME
-		FROM DEMAND d,PROJECT p
-		WHERE d.PROJECT_ID=p.ID AND d.PROJECT_ID=#{projectId}
+		SELECT D.ID AS ID,D.PROJECT_ID AS PROJECT_ID,P.PROJECT_NAME AS PROJECT_NAME,D.DEMAND_NAME AS DEMAND_NAME,
+		D.DEMAND_DESCRIBE AS DEMAND_DESCRIBE,D.VERSION AS VERSION,D.PUT_TIME AS PUT_TIME,D.PUT_USERID AS PUT_USERID,
+		D.EXCEPT_END_TIME AS EXCEPT_END_TIME,D.ACTUAL_END_TIME AS ACTUAL_END_TIME,D.COMPLETE_USERID AS COMPLETE_USERID,
+		(CASE WHEN D.DEMAND_STATUS='0' THEN '开发中' ELSE '已完成' END ) as DEMAND_STATUS
+		FROM DEMAND D,PROJECT P
+		WHERE D.PROJECT_ID=P.ID AND D.PROJECT_ID=#{projectId}
 		<if test="demandName!=null and demandName!=''">
-			AND d.DEMAND_NAME=#{demandName}
+			AND D.DEMAND_NAME=#{demandName}
 		</if>
 		<if test="demandStatus!=null and demandStatus!=''">
-			AND d.DEMAND_STATUS=#{demandStatus}
+			AND D.DEMAND_STATUS=#{demandStatus}
 		</if>
 	</select>
 

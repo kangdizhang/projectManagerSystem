@@ -1,6 +1,6 @@
 package com.ectrip.service.impl;
 
-import com.ectrip.dao.DemandVODAO;
+import com.ectrip.dao.DemandDAO;
 import com.ectrip.service.DemandService;
 import com.ectrip.vo.DemandVO;
 import com.github.pagehelper.PageInfo;
@@ -16,7 +16,16 @@ import java.util.List;
 public class DemandServiceImpl implements DemandService {
 
     @Autowired
-    private DemandVODAO demandDAO;
+    private DemandDAO demandDAO;
+
+    /**
+     * 主键查询
+     * @param id
+     * @return demandVO
+     */
+    public DemandVO findDemand(Integer id){
+        return demandDAO.findDemand(id);
+    }
 
     /**
      * 分页条件查询需求

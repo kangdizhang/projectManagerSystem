@@ -30,6 +30,15 @@ public class ModleServiceImpl implements ModleService {
     private ModlePrototypeDAO modlePrototypeDAO;
 
     /**
+     * 根据需求ID查询关联模块列表
+     * @param demandId
+     * @return list
+     */
+    public List<Modle> findModleList(Integer demandId){
+        return modleDAO.findModleList(demandId);
+    }
+
+    /**
      * 根据ID删除指定项目模块
      * @param id
      */

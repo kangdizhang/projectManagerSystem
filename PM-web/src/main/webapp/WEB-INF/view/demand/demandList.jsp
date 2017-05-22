@@ -123,7 +123,6 @@
                 {field: 'actualEndTime', title: '实际完成时间',align:'center'},
                 {field: 'completeUserId', title: '完成人',align:'center'},
                 {field: 'demandStatus', title: '需求状态',align:'center'},
-                {field: 'modleList', title: '涉及模块', align: 'center', formatter: 'modleList', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -145,15 +144,15 @@
         $table.bootstrapTable('refresh');
     }
 
-    function modleList(value, row, index) {
+   /* function modleList(value, row, index) {
         return [
             '<a href="${bathPath}/demand/modleList?id='+row.id+'" data-toggle="tooltip" title="Edit">查看</a> '
         ].join('');
-    }
+    }*/
 
     function operateFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/demand/editDemand?id='+row.id+
+            '<a href="${bathPath}/demand/editDemand?demandId='+row.id+
             '&projectId=${param.projectId}' +'" data-toggle="tooltip" title="Edit">修改</a> ',
             '<a href="${bathPath}/demand/deleteDemand?id='+row.id+
             '"data-toggle="tooltip" title="Del">删除</a> '

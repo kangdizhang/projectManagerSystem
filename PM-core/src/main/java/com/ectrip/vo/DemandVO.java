@@ -9,6 +9,7 @@ public class DemandVO {
     private String projectName;//项目名称
     private String demandName;//需求名称
     private String demandDescribe;//需求描述
+    private String version;//申请的版本号
     private String putTime;//提出时间
     private String putUserId;//提出人
     private String exceptEndTime;//预期完成时间
@@ -54,6 +55,14 @@ public class DemandVO {
 
     public void setDemandDescribe(String demandDescribe) {
         this.demandDescribe = demandDescribe;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getPutTime() {

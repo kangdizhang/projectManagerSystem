@@ -12,6 +12,13 @@ import java.util.List;
 public interface ModleDAO {
 
     /**
+     * 根据需求ID查询关联模块列表
+     * @param demandId
+     * @return list
+     */
+    List<Modle> findModleList(Integer demandId);
+
+    /**
      * 根据ID删除指定项目模块
      * @param id
      */

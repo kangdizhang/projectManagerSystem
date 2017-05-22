@@ -11,6 +11,13 @@ import java.util.List;
 public interface DemandService {
 
     /**
+     * 主键查询
+     * @param id
+     * @return demandVO
+     */
+    DemandVO findDemand(Integer id);
+
+    /**
      * 分页条件查询需求
      * @param pageNo
      * @param pageSize

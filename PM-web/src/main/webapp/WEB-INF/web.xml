@@ -45,6 +45,24 @@
 
   <!-- 配置web-inf下页面跳转访问 -->
   <servlet>
+    <servlet-name>addDemand</servlet-name>
+    <jsp-file>/WEB-INF/view/demand/addDemand.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addDemand</servlet-name>
+    <url-pattern>/addDemand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>demandList</servlet-name>
+    <jsp-file>/WEB-INF/view/demand/demandList.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>demandList</servlet-name>
+    <url-pattern>/demandList</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>editModle</servlet-name>
     <jsp-file>/WEB-INF/view/modle/editModle.jsp</jsp-file>
   </servlet>

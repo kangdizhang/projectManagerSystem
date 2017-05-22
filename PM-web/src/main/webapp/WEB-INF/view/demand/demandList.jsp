@@ -114,13 +114,16 @@
             toolbar: '#toolbar',
             columns: [
                 {field: 'id', title:'编号',align:'center'},
-                {field: 'demandName', title: '模块名称',align:'center'},
-                {field: 'demandDescribe', title: '模块描述',align:'center'},
-                {field: 'putUserId', title: '模块状态',align:'center'},
-                {field: 'putTime', title: '模块状态',align:'center'},
-                {field: 'exceptEndTime', title: '模块状态',align:'center'},
-                {field: 'actualEndTime', title: '模块状态',align:'center'},
-                {field: 'completeUserId', title: '模块状态',align:'center'},
+                {field: 'demandName', title: '需求名称',align:'center'},
+                {field: 'projectName', title:'所属项目',align:'center'},
+                {field: 'demandDescribe', title: '需求描述',align:'center'},
+                {field: 'putUserId', title: '提出人',align:'center'},
+                {field: 'putTime', title: '提出时间',align:'center'},
+                {field: 'exceptEndTime', title: '预期完成时间',align:'center'},
+                {field: 'actualEndTime', title: '实际完成时间',align:'center'},
+                {field: 'completeUserId', title: '完成人',align:'center'},
+                {field: 'demandStatus', title: '需求状态',align:'center'},
+                {field: 'modleList', title: '涉及模块', align: 'center', formatter: 'modleList', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -130,8 +133,8 @@
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
             projectId:${param.projectId},
-            modleName: $("#modleName").val(),
-            modleState:$("#modleState").val()
+            demandName: $("#modleName").val(),
+            demandStatus:$("#modleState").val()
         };
         return temp;
     };
@@ -142,15 +145,17 @@
         $table.bootstrapTable('refresh');
     }
 
+    function modleList(value, row, index) {
+        return [
+            '<a href="${bathPath}/demand/modleList?id='+row.id+'" data-toggle="tooltip" title="Edit">查看</a> '
+        ].join('');
+    }
+
     function operateFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/editModle?id='+row.id+
-            '&modleName='+row.modleName +
-            '&projectId=${param.projectId}' +
-            '&modleState='+row.modleState +
-            '&modleDescribe='+row.modleDescribe+'" data-toggle="tooltip" title="Edit">修改</a> ',
-            '<a href="${bathPath}/modle/deleteModle?id='+row.id+
-            '&projectId=${param.projectId}' +
+            '<a href="${bathPath}/demand/editDemand?id='+row.id+
+            '&projectId=${param.projectId}' +'" data-toggle="tooltip" title="Edit">修改</a> ',
+            '<a href="${bathPath}/demand/deleteDemand?id='+row.id+
             '"data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }

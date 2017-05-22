@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ectrip.dao.DemandDAO">
+<mapper namespace="com.ectrip.dao.DemandVODAO">
 
-	<resultMap type="Demand" id="demandResultMap">
+	<resultMap type="DemandVO" id="demandResultMap">
 		<id column="ID" property="id"/>
 		<result column="PROJECT_ID" property="projectId"/>
+		<result column="PROJECT_NAME" property="projectName"/>
 		<result column="DEMAND_NAME" property="demandName"/>
 		<result column="DEMAND_DESCRIBE" property="demandDescribe"/>
 		<result column="PUT_TIME" property="putTime"/>

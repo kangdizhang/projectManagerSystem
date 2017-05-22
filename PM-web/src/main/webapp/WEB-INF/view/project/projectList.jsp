@@ -178,13 +178,13 @@
 
     function modleListFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/modleList?projectId='+row.id+'" data-toggle="tooltip" title="Edit">查看</a>　'
+            '<a href="${bathPath}/modleList?projectId='+row.id+'" data-toggle="tooltip" title="View">查看</a>　'
         ].join('');
     }
 
     function demandListFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/addProject" data-toggle="tooltip" title="Edit">查看</a>　'
+            '<a href="${bathPath}/demandList?projectId='+row.id+'" data-toggle="tooltip" title="View">查看</a>　'
         ].join('');
     }
 

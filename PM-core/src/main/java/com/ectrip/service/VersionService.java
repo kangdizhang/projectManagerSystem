@@ -1,16 +1,13 @@
-package com.ectrip.dao;
+package com.ectrip.service;
 
 import com.ectrip.model.Version;
 import com.ectrip.vo.VersionVO;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
- * Created by Administrator on 2017/5/11 0011.
+ * Created by Administrator on 2017/5/22 0022.
  */
-public interface VersionDAO {
-
+public interface VersionService {
     /**
      * 新增版本
      * @param version
@@ -38,6 +35,5 @@ public interface VersionDAO {
      * @param versionState
      * @return list
      */
-    List<VersionVO> queryVersion(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,
-                                 @Param("modleId") Integer modleId, @Param("versionState") String versionState);
+    PageInfo<VersionVO> queryVersion(Integer pageNo, Integer pageSize, Integer modleId, String versionState);
 }

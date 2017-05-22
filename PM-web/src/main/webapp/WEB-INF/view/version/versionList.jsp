@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2017/5/15 0015
-  Time: 下午 2:43
+  Date: 2017/5/22 0022
+  Time: 上午 10:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>项目模块列表</title>
+    <title>版本列表</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css" />
@@ -50,26 +51,32 @@
 </head>
 <body>
 
-<input type="hidden" name="projectId" id="projectId" value="${param.projectId}">
-
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
-        <%--模块状态：--%>
-        <label for="modleState">模块状态：</label>
-        <select name="modleState" id="modleState" class="form-control">
-            <option value="">所有</option>
-            <option value="0">开发中</option>
-            <option value="1">已完成</option>
+        <%--模块选择：--%>
+        <label for="modleId">模块选择：</label>
+        <select name="modleId" id="modleId" class="form-control">
+            <c:forEach var="ModleVO" items="list">
+                <c:choose>
+                    <c:when test="${ModleId==ModleVO.id}">
+                        <option selected="selected" value="${ModleVO.id}">${ModleVO.modleName}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${ModleVO.id}">${ModleVO.modleName}</option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
         </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <%--模块名称：--%>
-        <input type="text" name="modleName" id="modleName"class="abc input-default" placeholder="这里输入模块名称">
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        <%--版本状态：--%>
+            <label for="versionState">版本状态：</label>
+            <select name="versionState" id="versionState" class="form-control">
+                <option value="">所有</option>
+                <option value="0" selected="selected">已停用</option>
+                <option value="1">启用中</option>
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-
-        <button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${param.projectId}'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -83,7 +90,7 @@
         $table.bootstrapTable({
             //method:"get",
             //url: '${basePath}/optManage/findOptRecordList',
-            url:'${basePath}/modle/list',
+            url:'${basePath}/version/list',
             queryParams:oTableInit.queryParams,
             striped: true,
             search: false,
@@ -114,13 +121,13 @@
             toolbar: '#toolbar',
             columns: [
                 {field: 'id', title:'编号',align:'center'},
-                {field: 'projectName', title: '项目名称',align:'center'},
+                {field: 'version', title: '版本号',align:'center'},
                 {field: 'modleName', title: '模块名称',align:'center'},
-                {field: 'version', title: '当前版本',align:'center'},
-                {field: 'verisonList', title: '历史版本', align: 'center', formatter: 'versionList', clickToSelect: false},
-                {field: 'modleDescribe', title: '模块描述',align:'center'},
-                {field: 'modleState', title: '模块状态',align:'center'},
-                {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
+                {field: 'upUserId', title: '升级人',align:'center'},
+                {field: 'upTime', title: '升级时间', align: 'center', formatter: 'versionList', clickToSelect: false},
+                {field: 'versionNum', title: '父版本号',align:'center'},
+                {field: 'demandName', title: '对应需求',align:'center'},
+                {field: 'versionState', title: '版本状态',align:'center'}
             ]
         });
     });
@@ -128,38 +135,14 @@
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            projectId:${param.projectId},
-            modleName: $("#modleName").val(),
-            modleState:$("#modleState").val()
+            modleId: $("#modleId").val(),
+            versionState:$("#versionState").val()
         };
         return temp;
     };
 
-
-
     function reloadTable() {
         $table.bootstrapTable('refresh');
-    }
-
-    function versionList(value,row,index) {
-        return [
-            '<a href="${bathPath}/version/viewVerisonList?modleId=' +row.id +
-            '&projectId=${param.projectId}' +
-            '" data-toggle="tooltip" title="View">查看</a>'
-        ].join('');
-    }
-
-    function operateFormatter(value, row, index) {
-        return [
-            '<a href="${bathPath}/editModle?id='+row.id+
-            '&modleName='+row.modleName +
-            '&projectId=${param.projectId}' +
-            '&modleState='+row.modleState +
-            '&modleDescribe='+row.modleDescribe+'" data-toggle="tooltip" title="Edit">修改</a> ',
-            '<a href="${bathPath}/modle/deleteModle?id='+row.id+
-            '&projectId=${param.projectId}' +
-            '"data-toggle="tooltip" title="Del">删除</a> '
-        ].join('');
     }
 
 </script>

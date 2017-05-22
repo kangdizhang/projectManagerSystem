@@ -45,7 +45,7 @@ public interface ModleDAO {
      * @param modleState
      * @return list
      */
-    List<ModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,
-                             @Param("projectId") Integer projectId, @Param("modleName") String modleName, @Param("modleState") String modleState);
+    List<ModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
+                             @Param("modleName") String modleName, @Param("modleState") String modleState);
 
 }

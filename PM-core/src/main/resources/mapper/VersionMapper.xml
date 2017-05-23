@@ -59,7 +59,7 @@
 	<!-- 主键查询-->
 	<select id="findVersion" resultMap="versionResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE WHERE MODLE_ID=#{modleId} AND VERSIOIN_STATE='1'
+		WHERE WHERE MODLE_ID=#{modleId} AND VERSION_STATE='1'
 	</select>
 
 	<!-- 条件查询-->
@@ -82,7 +82,7 @@
 	<update id="updateVersion">
 		UPDATE <include refid="tableName"></include>
 		SET VERSION_STATE='0'
-		WHERE MODLE_ID=#{modleId} AND VERSIOIN_STATE='1'
+		WHERE MODLE_ID=#{modleId} AND VERSION_STATE='1'
 	</update>
 
 	<!-- 新增-->

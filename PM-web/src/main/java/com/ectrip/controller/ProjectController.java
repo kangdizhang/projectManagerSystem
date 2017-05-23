@@ -27,7 +27,6 @@ import java.util.Map;
  * Created by 23626 on 2017/5/11.
  */
 @Controller
-@Transactional
 @RequestMapping(value = "/project")
 public class ProjectController extends BaseController {
 

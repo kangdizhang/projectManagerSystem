@@ -13,9 +13,9 @@ public interface DemandDAO {
 
     /**
      * 修改需求状态
-     * @param id
+     * @param demandVO
      */
-    void updateDemandState(Integer id);
+    void updateDemandState(DemandVO demandVO);
 
     /**
      * 主键查询

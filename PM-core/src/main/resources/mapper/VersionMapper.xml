@@ -79,7 +79,7 @@
 	</select>
 
 	<!-- 修改 -->
-	<update id="updateVersion" parameterType="java.lang.Integer">
+	<update id="updateVersion">
 		UPDATE <include refid="tableName"></include>
 		SET VERSION_STATE='0'
 		WHERE MODLE_ID=#{modleId} AND VERSIOIN_STATE='1'

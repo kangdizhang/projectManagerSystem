@@ -68,36 +68,31 @@ public class DemandServiceImpl implements DemandService {
      */
     @Transactional
     public void updateDemand(Integer id){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         DemandVO demandVO = demandDAO.findDemand(id);//主键查询需求
-        demandDAO.updateDemandState(id);//修改需求状态
+        demandVO.setCompleteUserId("test");
+        demandVO.setDemandStatus("1");
+        demandVO.setActualEndTime(sdf.format(new Date()));
+        demandDAO.updateDemandState(demandVO);//修改需求状态
         modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
 
         //升级版本
         List<Modle> list = modleDAO.findModleList(id);//需求关联模块列表
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateTime = sdf.format(new Date());
 
+        Version version ;
         for (Modle modle:list) {
-
-            Version version = new Version();
-
-            version.setVersion(demandVO.getVersion());
+            versionDAO.updateVersion(id);
+            version = new Version();
             version.setModleId(modle.getId());
+            version.setDemandId(id);
+            version.setUpTime(sdf.format(new Date()));
             version.setUpUserId("test");
-            version.setUpTime(dateTime);
             version.setVersionState("1");
-
-            List<VersionVO> versionVOList = versionDAO.queryVersion(null,null,modle.getId(),"1");
-            if ( versionVOList != null && !versionVOList.isEmpty()){
-                versionDAO.updateVersion(modle.getId());
-                version.setVersionId(versionVOList.get(0).getVersionId());
-            }
-
+            version.setVersion(demandVO.getVersion());
             versionDAO.saveVersion(version);
         }
     }
 
-    @Transactional
     public void saveDemand(String[] modleId, Demand demand){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         demand.setPutUserId("test");

@@ -21,7 +21,6 @@ import java.util.Map;
  * Created by 23626 on 2017/5/11.
  */
 @Controller
-@Transactional
 @RequestMapping(value = "/modlePrototype")
 public class ModlePrototypeController extends BaseController {
 

@@ -30,7 +30,6 @@ import java.util.Map;
  * Created by Administrator on 2017/5/19 0019.
  */
 @Controller
-@Transactional
 @RequestMapping(value = "/demand")
 public class DemandController extends BaseController {
 

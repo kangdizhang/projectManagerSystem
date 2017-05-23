@@ -21,14 +21,14 @@ public interface VersionDAO {
      * 更新版本
      * @param modleId
      */
-    void updateVersion(Integer modleId);
+    void updateVersion(@Param("modleId") Integer modleId);
 
     /**
      * 主键查询版本
      * @param id
      * @return version
      */
-    Version findVersion(Integer id);
+    Version findVersion(@Param("id") Integer id);
 
     /**
      * 条件查询版本列表

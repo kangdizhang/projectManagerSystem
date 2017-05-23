@@ -126,4 +126,11 @@ public class DemandServiceImpl implements DemandService {
     public List<Demand> queryDemandByVeision(String version,Integer projectId,Integer id) {
         return demandDAO.queryDemandByVeision(version,projectId,id);
     }
+
+    @Override
+    public void deleteDemand(Integer id){
+        modleDAO.updateModleState(id);
+        modleDemandDAO.deleteModle(id);
+        demandDAO.deleteDemand(id);
+    }
 }

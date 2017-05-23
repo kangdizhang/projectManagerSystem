@@ -41,4 +41,6 @@ public interface DemandDAO {
     void updateDemand(Demand demand);
 
     List<Demand> queryDemandByVeision(@Param("version")String version,@Param("projectId") Integer projectId,@Param("id") Integer id);
+
+    void deleteDemand(@Param("id")Integer id);
 }

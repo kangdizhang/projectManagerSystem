@@ -152,4 +152,13 @@ public class DemandController extends BaseController {
         mav.setViewName("demand/editDemand");
         return mav;
     }
+
+    @RequestMapping(value = "/deleteDemand",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView deleteDemand(Integer id,Integer projectId){
+        ModelAndView mav = getModelAndView();
+        demandService.deleteDemand(id);
+        mav.addObject("projectId",projectId);
+        mav.setViewName("demand/demandList");
+        return mav;
+    }
 }

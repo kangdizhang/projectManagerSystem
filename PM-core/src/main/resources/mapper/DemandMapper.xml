@@ -130,4 +130,7 @@
 		select * from <include refid="tableName"></include> where version = #{version} and PROJECT_ID = #{projectId} and ID != #{id}
 	</select>
 
+	<delete id="deleteDemand">
+		DELETE FROM <include refid="tableName"></include> WHERE ID = #{id}
+	</delete>
 </mapper>

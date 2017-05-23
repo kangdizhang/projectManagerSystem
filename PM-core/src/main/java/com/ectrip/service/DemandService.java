@@ -39,4 +39,6 @@ public interface DemandService {
     void saveDemand(String[] modleId, Demand demand);
 
     List<Demand> queryDemandByVeision(String version,Integer projectId, Integer id);
+
+    void deleteDemand(Integer id);
 }

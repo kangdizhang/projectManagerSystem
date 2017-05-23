@@ -59,7 +59,7 @@
 	<!-- 主键查询-->
 	<select id="findVersion" resultMap="versionResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE ID=#{id}
+		WHERE WHERE MODLE_ID=#{modleId} AND VERSIOIN_STATE='1'
 	</select>
 
 	<!-- 条件查询-->
@@ -79,11 +79,10 @@
 	</select>
 
 	<!-- 修改 -->
-	<update id="updateVersion" parameterType="Version">
+	<update id="updateVersion" parameterType="java.lang.Integer">
 		UPDATE <include refid="tableName"></include>
-		SET VERSION=#{version},MODLE_ID=#{modleId},UP_USERID=#{upUserId},UP_TIME=#{upTime},
-		VERSION_ID=#{versionId},DEMAND_ID=#{demandId},VERSION_STATE=#{versionState}
-		WHERE ID=#{id}
+		SET VERSION_STATE='0'
+		WHERE MODLE_ID=#{modleId} AND VERSIOIN_STATE='1'
 	</update>
 
 	<!-- 新增-->

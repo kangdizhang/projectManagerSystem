@@ -4,11 +4,14 @@ package com.ectrip.service.impl;
 import com.ectrip.dao.DemandDAO;
 import com.ectrip.dao.ModleDAO;
 import com.ectrip.dao.ModleDemandDAO;
+import com.ectrip.dao.VersionDAO;
 import com.ectrip.model.Demand;
 import com.ectrip.model.Modle;
 import com.ectrip.model.ModleDemand;
+import com.ectrip.model.Version;
 import com.ectrip.service.DemandService;
 import com.ectrip.vo.DemandVO;
+import com.ectrip.vo.VersionVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,9 @@ public class DemandServiceImpl implements DemandService {
 
     @Autowired
     private ModleDAO modleDAO;
+
+    @Autowired
+    private VersionDAO versionDAO;
 
     /**
      * 主键查询
@@ -62,12 +68,32 @@ public class DemandServiceImpl implements DemandService {
      * @param id
      */
     public void updateDemand(Integer id){
+        DemandVO demandVO = demandDAO.findDemand(id);//主键查询需求
         demandDAO.updateDemandState(id);//修改需求状态
         modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
+
         //升级版本
         List<Modle> list = modleDAO.findModleList(id);//需求关联模块列表
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateTime = sdf.format(new Date());
+
         for (Modle modle:list) {
 
+            Version version = new Version();
+
+            version.setVersion(demandVO.getVersion());
+            version.setModleId(modle.getId());
+            version.setUpUserId("test");
+            version.setUpTime(dateTime);
+            version.setVersionState("1");
+
+            List<VersionVO> versionVOList = versionDAO.queryVersion(null,null,modle.getId(),"1");
+            if ( versionVOList != null && !versionVOList.isEmpty()){
+                versionDAO.updateVersion(modle.getId());
+                version.setVersionId(versionVOList.get(0).getVersionId());
+            }
+
+            versionDAO.saveVersion(version);
         }
     }
 

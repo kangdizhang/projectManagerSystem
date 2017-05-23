@@ -13,6 +13,12 @@ import java.util.List;
 public interface DemandService {
 
     /**
+     * 修改需求状态
+     * @param id
+     */
+    public void updateDemand(Integer id);
+
+    /**
      * 主键查询
      * @param id
      * @return demandVO

@@ -36,7 +36,7 @@ public class ProjectInfoController extends BaseController {
         Project project = projectService.queryProject(id);
         mav.addObject("projectInfo",projectInfo);
         mav.addObject("project",project);
-        mav.setViewName("/projectInfo/viewProjectInfo");
+        mav.setViewName("projectInfo/viewProjectInfo");
         return mav;
     }
 

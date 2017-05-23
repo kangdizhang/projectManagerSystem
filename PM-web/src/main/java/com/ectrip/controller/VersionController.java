@@ -52,7 +52,7 @@ public class VersionController extends BaseController {
         List<ModleVO> list = modleService.queryModleList(null,null,projectId,null,null).getList();
         modelAndView.addObject("list",list);
         modelAndView.addObject("ModleId",modleId);
-        modelAndView.setViewName("/version/versionList");
+        modelAndView.setViewName("version/versionList");
         return modelAndView;
     }
 }

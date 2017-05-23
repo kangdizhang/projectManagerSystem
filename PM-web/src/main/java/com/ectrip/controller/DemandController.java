@@ -44,9 +44,11 @@ public class DemandController extends BaseController {
     private ModleService modleService;
 
     @RequestMapping(value="/completeDemand",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView completeDemand(Integer id){
+    public ModelAndView completeDemand(Integer id,Integer projectId){
         ModelAndView modelAndView = new ModelAndView();
-
+        demandService.updateDemand(id);
+        modelAndView.addObject("projectId",projectId);
+        modelAndView.setViewName("demand/demandList");
         return modelAndView;
     }
 
@@ -78,7 +80,7 @@ public class DemandController extends BaseController {
         modelAndView.addObject("demand", demandVO);
         modelAndView.addObject("projectId",projectId);
         modelAndView.addObject("demandId",demandId);
-        modelAndView.setViewName("/demand/editDemand");
+        modelAndView.setViewName("demand/editDemand");
         return modelAndView;
     }
 
@@ -87,6 +89,7 @@ public class DemandController extends BaseController {
         List<Modle> list = modleService.queryModleListByProjectId(projectId);
         ModelAndView mav = getModelAndView();
         mav.addObject("ModleVOList",list);
+        mav.addObject("projectId",projectId);
         mav.setViewName("demand/editDemand");
         return mav;
     }
@@ -116,6 +119,7 @@ public class DemandController extends BaseController {
         }catch (Exception e){
             e.printStackTrace();
         }
+        mav.addObject("projectId",projectId);
         mav.setViewName("demand/demandList");
         return mav;
     }
@@ -128,6 +132,7 @@ public class DemandController extends BaseController {
         mav.addObject("ModleVOList", modleVOList);
         DemandVO demandVO = demandService.findDemand(demandId);
         mav.addObject("demand", demand);
+        mav.addObject("projectId",projectId);
         mav.setViewName("demand/editDemand");
         return mav;
     }

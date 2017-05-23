@@ -16,7 +16,7 @@ public class Demand {
     private String exceptEndTime;//预期完成时间
     private String actualEndTime;//实际完成时间
     private String completeUserId;//完成人
-    private String demandStatus;//需求状态，0;完成中，1：已完成
+    private String demandStatus;//需求状态，0;开发中，1：已完成
 
     public Integer getId() {
         return id;

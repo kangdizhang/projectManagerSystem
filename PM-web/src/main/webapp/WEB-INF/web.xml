@@ -44,14 +44,14 @@
   </servlet-mapping>
 
   <!-- 配置web-inf下页面跳转访问 -->
-  <servlet>
-    <servlet-name>addDemand</servlet-name>
-    <jsp-file>/WEB-INF/view/demand/addDemand.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>addDemand</servlet-name>
-    <url-pattern>/addDemand</url-pattern>
-  </servlet-mapping>
+  <!--<servlet>-->
+    <!--<servlet-name>addDemand</servlet-name>-->
+    <!--<jsp-file>/WEB-INF/view/demand/addDemand.jsp</jsp-file>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>addDemand</servlet-name>-->
+    <!--<url-pattern>/addDemand</url-pattern>-->
+  <!--</servlet-mapping>-->
 
   <servlet>
     <servlet-name>demandList</servlet-name>
@@ -142,6 +142,7 @@
     <servlet-name>addProjectInfo</servlet-name>
     <url-pattern>/addProjectInfo</url-pattern>
   </servlet-mapping>
+
 
   <!--配置spring启动文件-->
   <context-param>

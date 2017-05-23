@@ -36,6 +36,36 @@
 		DEMAND
 	</sql>
 
+	<!-- 字段 -->
+	<sql id="Field">
+		ID,
+		PROJECT_ID,
+		DEMAND_NAME,
+		DEMAND_DESCRIBE,
+		VERSION,
+		PUT_TIME,
+		PUT_USERID,
+		EXCEPT_END_TIME,
+		ACTUAL_END_TIME,
+		COMPLETE_USERID,
+		DEMAND_STATUS
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id},
+		#{projectId},
+		#{demandName},
+		#{demandDescribe},
+		#{version},
+		#{putTime},
+		#{putUserId},
+		#{exceptEndTime},
+		#{actualEndTime},
+		#{completeUserId},
+		#{demandStatus}
+	</sql>
+
 	<!-- 主键查询 -->
 	<select id="findDemand" resultMap="demandVOResultMap">
 		SELECT D.ID AS ID,D.PROJECT_ID AS PROJECT_ID,P.PROJECT_NAME AS PROJECT_NAME,D.DEMAND_NAME AS DEMAND_NAME,
@@ -63,20 +93,30 @@
 		</if>
 	</select>
 
-	<!-- 修改
-	<update id="updateVersion" parameterType="Version">
+	<!-- 修改-->
+	<update id="updateDemand" parameterType="Version">
 		UPDATE <include refid="tableName"></include>
-		SET PROJECT_ID=#{projectId},MODLE_NAME=#{modleName},MODLE_DESCRIBE=#{modleDescribe},MODLE_STATE=#{modleState}
+		SET
+		PROJECT_ID = #{projectId},
+		DEMAND_NAME = #{demandName},,
+		DEMAND_DESCRIBE = #{demandDescribe},
+		VERSION = #{version},
+		PUT_TIME = #{putTime},
+		PUT_USERID = #{putUserId},
+		EXCEPT_END_TIME =#{exceptEndTime},
+		ACTUAL_END_TIME = #{actualEndTime},
+		COMPLETE_USERID = #{completeUserId},
+		DEMAND_STATUS #{demandStatus}
 		WHERE ID=#{id}
-	</update>-->
+	</update>
 
-	<!-- 新增
-	<insert id="saveModle" useGeneratedKeys="true" keyProperty="id">
+	<!-- 新增-->
+	<insert id="saveDemand" useGeneratedKeys="true" keyProperty="id">
 		insert into <include refid="tableName"></include>(
-			<include refid="Field"></include>
+		<include refid="Field"></include>
 		) values (
-			<include refid="FieldValue"></include>
+		<include refid="FieldValue"></include>
 		)
-	</insert>-->
+	</insert>
 
 </mapper>

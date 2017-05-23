@@ -1,5 +1,6 @@
 package com.ectrip.service;
 
+import com.ectrip.model.Demand;
 import com.ectrip.model.Modle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.vo.ModleVO;
@@ -58,4 +59,5 @@ public interface ModleService {
      */
     public List<ModlePrototype> findModlePrototypeList(Integer projectId);
 
+    List<Modle> queryModleListByProjectId(Integer projectId);
 }

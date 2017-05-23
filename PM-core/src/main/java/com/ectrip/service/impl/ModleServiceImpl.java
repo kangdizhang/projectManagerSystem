@@ -2,6 +2,7 @@ package com.ectrip.service.impl;
 
 import com.ectrip.dao.ModleDAO;
 import com.ectrip.dao.ModlePrototypeDAO;
+import com.ectrip.model.Demand;
 import com.ectrip.model.Modle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.service.ModleService;
@@ -113,4 +114,8 @@ public class ModleServiceImpl implements ModleService {
         return modlePrototypeList;
     }
 
+    @Override
+    public List<Modle> queryModleListByProjectId(Integer projectId) {
+        return modleDAO.queryModleListByProjectId(projectId);
+    }
 }

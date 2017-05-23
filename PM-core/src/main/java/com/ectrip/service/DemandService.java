@@ -1,5 +1,6 @@
 package com.ectrip.service;
 
+import com.ectrip.model.Demand;
 import com.ectrip.vo.DemandVO;
 import com.github.pagehelper.PageInfo;
 
@@ -27,4 +28,6 @@ public interface DemandService {
      * @return
      */
     PageInfo<DemandVO> queryDemand(Integer pageNo, Integer pageSize, Integer projectId, String demandName, String demandStatus);
+
+    void saveDemand(String[] modleId, Demand demand);
 }

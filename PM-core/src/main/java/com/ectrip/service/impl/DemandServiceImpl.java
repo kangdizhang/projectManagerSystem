@@ -1,12 +1,16 @@
 package com.ectrip.service.impl;
 
+
 import com.ectrip.dao.DemandDAO;
+import com.ectrip.model.Demand;
 import com.ectrip.service.DemandService;
 import com.ectrip.vo.DemandVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,5 +43,18 @@ public class DemandServiceImpl implements DemandService {
     public PageInfo<DemandVO> queryDemand(Integer pageNo, Integer pageSize, Integer projectId, String demandName, String demandStatus){
         List<DemandVO> list = demandDAO.queryDemand(pageNo,pageSize,projectId,demandName,demandStatus);
         return new PageInfo<DemandVO>(list);
+    }
+
+    public void saveDemand(String[] modleId, Demand demand){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        demand.setPutTime(sdf.format(new Date()));
+        demand.setPutUserId("test");
+        if(demand.getId()==null){
+            demand.setDemandStatus("0");
+            demandDAO.saveDemand(demand);
+        }else{
+            demandDAO.updateDemand(demand);
+        }
     }
 }

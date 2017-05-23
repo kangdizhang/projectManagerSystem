@@ -4,6 +4,11 @@ import com.ectrip.common.base.BaseController;
 import com.ectrip.model.Modle;
 import com.ectrip.service.DemandService;
 import com.ectrip.service.ModleService;
+import com.ectrip.model.Demand;
+import com.ectrip.model.Modle;
+import com.ectrip.service.DemandService;
+import com.ectrip.service.ModleService;
+import com.ectrip.service.ProjectService;
 import com.ectrip.vo.DemandVO;
 import com.ectrip.vo.ModleVO;
 import com.github.pagehelper.PageInfo;
@@ -28,6 +33,9 @@ public class DemandController extends BaseController {
     private DemandService demandService;
 
     @Autowired
+    private ProjectService projectService;
+
+    @Autowired
     private ModleService modleService;
 
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
@@ -44,18 +52,42 @@ public class DemandController extends BaseController {
     }
 
     @RequestMapping(value = "/editDemand",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView modleList(Integer projectId,Integer demandId){
+    public ModelAndView modleList(Integer projectId,Integer demandId) {
         ModelAndView modelAndView = new ModelAndView();
         List<Modle> list = modleService.findModleList(demandId);
-        modelAndView.addObject("list",list);
+        modelAndView.addObject("list", list);
 
-        List<ModleVO> modleVOList = modleService.queryModleList(null,null,projectId,null,null).getList();
-        modelAndView.addObject("ModleVOList",modleVOList);
+        List<ModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null, null).getList();
+        modelAndView.addObject("ModleVOList", modleVOList);
 
         DemandVO demandVO = demandService.findDemand(demandId);
-        modelAndView.addObject("demand",demandVO);
+        modelAndView.addObject("demand", demandVO);
 
         modelAndView.setViewName("/demand/editDemand");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/addDemand",method = {RequestMethod.GET})
+    public ModelAndView addDemand(Integer projectId){
+        List<Modle> list = modleService.queryModleListByProjectId(projectId);
+        ModelAndView mav = getModelAndView();
+        mav.addObject("ModleVOList",list);
+        mav.setViewName("demand/editDemand");
+        return mav;
+    }
+
+
+    @RequestMapping(value = "/saveDemand",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView saveDemand(Demand demand){
+        String[] modleId = getRequest().getParameterValues("mdid");
+        ModelAndView mav = getModelAndView();
+        try {
+            demandService.saveDemand(modleId,demand);
+            mav.setViewName("demand/demandList");
+            return mav;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

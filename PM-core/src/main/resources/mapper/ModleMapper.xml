@@ -54,6 +54,11 @@
 		WHERE ID=#{id}
 	</select>
 
+	<select id="queryModleListByProjectId" resultMap="modleResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+		WHERE PROJECT_ID = #{projectId}
+	</select>
+
 	<!-- 条件查询-->
 	<select id="queryModleList" resultMap="modleVOResultMap">
 		<!--SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,-->

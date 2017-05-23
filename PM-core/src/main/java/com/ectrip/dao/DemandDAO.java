@@ -1,5 +1,6 @@
 package com.ectrip.dao;
 
+import com.ectrip.model.Demand;
 import com.ectrip.vo.DemandVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +29,8 @@ public interface DemandDAO {
      */
     List<DemandVO> queryDemand(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
                                @Param("demandName") String demandName, @Param("demandStatus") String demandStatus);
+
+    void saveDemand(Demand demand);
+
+    void updateDemand(Demand demand);
 }

@@ -24,7 +24,6 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/5/19 0019.
  */
-@Transactional
 @Service
 public class DemandServiceImpl implements DemandService {
 
@@ -67,6 +66,7 @@ public class DemandServiceImpl implements DemandService {
      * 修改需求状态
      * @param id
      */
+    @Transactional
     public void updateDemand(Integer id){
         DemandVO demandVO = demandDAO.findDemand(id);//主键查询需求
         demandDAO.updateDemandState(id);//修改需求状态
@@ -97,6 +97,7 @@ public class DemandServiceImpl implements DemandService {
         }
     }
 
+    @Transactional
     public void saveDemand(String[] modleId, Demand demand){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         demand.setPutUserId("test");

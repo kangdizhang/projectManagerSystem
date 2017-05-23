@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
+    @Transactional
     public void saveProject(String[] a,Integer id,String projectName, String projectLeader, String phone, String QQ, String email,  String projectStatus) {
         Project project = new Project();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

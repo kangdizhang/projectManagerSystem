@@ -16,9 +16,9 @@ public interface VersionService {
 
     /**
      * 更新版本
-     * @param version
+     * @param modleId
      */
-    void updateVersion(Version version);
+    void updateVersion(Integer modleId);
 
     /**
      * 主键查询版本

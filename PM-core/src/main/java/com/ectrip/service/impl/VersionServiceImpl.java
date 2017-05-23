@@ -28,10 +28,10 @@ public class VersionServiceImpl implements VersionService {
 
     /**
      * 更新版本
-     * @param version
+     * @param modleId
      */
-    public void updateVersion(Version version){
-        versionDAO.updateVersion(version);
+    public void updateVersion(Integer modleId){
+        versionDAO.updateVersion(modleId);
     }
 
     /**

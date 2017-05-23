@@ -54,6 +54,8 @@
 <form action="/demand/saveDemand" method="post" name="form">
     <input type="hidden" name="projectId" value="${param.projectId}">
     <input type="hidden" name="id" value="${demand.id}">
+    <input type="hidden" name="demandStatus" value="${demand.demandStatus}">
+    <input type="hidden" name="version" value="${demand.version}">
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
             <td class="tableleft">关联模块选择</td>

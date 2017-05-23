@@ -49,7 +49,7 @@
 	</update>
 
 	<delete id="deleteModle">
-		DELETE <include refid="tableName"></include> WHERE DEMAND_ID = #{demandId}
+		DELETE FROM <include refid="tableName"></include> WHERE DEMAND_ID = #{demandId}
 	</delete>
 
 	<!-- 新增-->

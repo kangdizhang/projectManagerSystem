@@ -14,6 +14,7 @@ import com.ectrip.vo.ModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,7 @@ import java.util.Map;
  * Created by Administrator on 2017/5/19 0019.
  */
 @Controller
+@Transactional
 @RequestMapping(value = "/demand")
 public class DemandController extends BaseController {
 
@@ -78,11 +80,15 @@ public class DemandController extends BaseController {
         return mav;
     }
 
-
     @RequestMapping(value = "/saveDemand",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView saveDemand(Demand demand){
         String[] modleId = getRequest().getParameterValues("mdid");
         ModelAndView mav = getModelAndView();
+        if(modleId == null || modleId.length ==0){
+            mav.addObject("errorMsg","请选择模块不能为空");
+            mav.setViewName("demand/addDemand");
+            return null;
+        }
         try {
             demandService.saveDemand(modleId,demand);
             mav.setViewName("demand/demandList");

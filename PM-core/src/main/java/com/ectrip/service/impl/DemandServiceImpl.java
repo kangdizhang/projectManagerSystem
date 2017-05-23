@@ -10,6 +10,7 @@ import com.ectrip.vo.DemandVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/5/19 0019.
  */
+@Transactional
 @Service
 public class DemandServiceImpl implements DemandService {
 
@@ -49,12 +51,12 @@ public class DemandServiceImpl implements DemandService {
         return new PageInfo<DemandVO>(list);
     }
 
+
     public void saveDemand(String[] modleId, Demand demand){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        demand.setPutTime(sdf.format(new Date()));
         demand.setPutUserId("test");
         if(demand.getId()==null){
+            demand.setPutTime(sdf.format(new Date()));
             demand.setDemandStatus("0");
             demandDAO.saveDemand(demand);
             ModleDemand modleDemand;

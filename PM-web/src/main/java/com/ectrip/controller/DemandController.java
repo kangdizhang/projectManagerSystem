@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class DemandController extends BaseController {
     @Autowired
     private ModleService modleService;
 
+    @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public Object demandList(Integer offset,Integer limit,Integer projectId,String demandName,String demandStatus){
         int pageNo = 1;

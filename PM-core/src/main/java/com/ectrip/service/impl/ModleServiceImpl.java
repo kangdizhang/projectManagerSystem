@@ -59,7 +59,7 @@ public class ModleServiceImpl implements ModleService {
         modle.setModleName(modlePrototype.getModlePrototypeName());
         modle.setProjectId(projectId);
         modle.setModleDescribe(modlePrototype.getModlePrototypeDescribe());
-        modle.setModleState("0");
+        modle.setModleState("1");
         return modleDAO.saveModle(modle);
     }
 

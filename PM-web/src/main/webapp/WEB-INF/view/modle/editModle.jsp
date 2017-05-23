@@ -63,7 +63,7 @@
             <td width="10%" class="tableleft">项目模块描述</td>
             <td><input type="text" name="modleDescribe" value="${param.modleDescribe}"/></td>
         </tr>
-        <tr>
+        <tr style="display: none">
             <td width="10%" class="tableleft">项目模块状态</td>
             <td>
                 <input type="radio" name="modleState" value="0"/> 开发中

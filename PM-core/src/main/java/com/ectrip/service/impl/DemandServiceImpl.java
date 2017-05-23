@@ -2,6 +2,7 @@ package com.ectrip.service.impl;
 
 
 import com.ectrip.dao.DemandDAO;
+import com.ectrip.dao.ModleDAO;
 import com.ectrip.dao.ModleDemandDAO;
 import com.ectrip.model.Demand;
 import com.ectrip.model.ModleDemand;
@@ -28,6 +29,10 @@ public class DemandServiceImpl implements DemandService {
 
     @Autowired
     private ModleDemandDAO modleDemandDAO;
+
+    @Autowired
+    private ModleDAO modleDao;
+
     /**
      * 主键查询
      * @param id
@@ -65,6 +70,7 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
                 modleDemandDAO.saveModle(modleDemand);
+                modleDao.updateModleDev(Integer.valueOf(modleId[i]));
             }
         }else{
             demandDAO.updateDemand(demand);
@@ -75,7 +81,13 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
                 modleDemandDAO.saveModle(modleDemand);
+                modleDao.updateModleDev(Integer.valueOf(modleId[i]));
             }
         }
+    }
+
+    @Override
+    public List<Demand> queryDemandByVeision(String version,Integer projectId,Integer id) {
+        return demandDAO.queryDemandByVeision(version,projectId,id);
     }
 }

@@ -3,6 +3,7 @@ package com.ectrip.service;
 import com.ectrip.model.Demand;
 import com.ectrip.vo.DemandVO;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface DemandService {
     PageInfo<DemandVO> queryDemand(Integer pageNo, Integer pageSize, Integer projectId, String demandName, String demandStatus);
 
     void saveDemand(String[] modleId, Demand demand);
+
+    List<Demand> queryDemandByVeision(String version,Integer projectId, Integer id);
 }

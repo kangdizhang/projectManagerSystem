@@ -27,8 +27,6 @@
     <script type="text/javascript" src="${basePath}/Js/bootstrap-table-zh-CN.min.js"></script>
     <script type="text/javascript" src="${basePath}/Js/common.js"></script>
     <script type="text/javascript" src="${basePath}/Js/common.js"></script>
-
-
     <style type="text/css">
         body {
             padding-bottom: 40px;
@@ -46,13 +44,17 @@
                 padding-right: 5px;
             }
         }
-
-
     </style>
 </head>
 <body>
 <form action="/demand/saveDemand" method="post" name="form">
-    <input type="hidden" name="projectId" value="${param.projectId}">
+        <c:if test="${projectId==null}">
+            <input type="hidden" name="projectId" value="${param.projectId}">
+        </c:if>
+        <c:if test="${projectId!=null}">
+            <input type="hidden" name="projectId" value="${projectId}">
+            <input type="hidden" name="demandId" value="${demandId}">
+        </c:if>
     <input type="hidden" name="id" value="${demand.id}">
     <input type="hidden" name="demandStatus" value="${demand.demandStatus}">
     <input type="hidden" name="version" value="${demand.version}">
@@ -96,7 +98,7 @@
                 </c:when>
                 <c:otherwise>
                     <td>
-                        <input type="text" name="version" value="${demand.version}">
+                        <input type="text" name="version" value="${demand.version}"><span style="color: RED">*</span>
                     </td>
                 </c:otherwise>
             </c:choose>
@@ -104,7 +106,7 @@
         <tr>
             <td width="10%" class="tableleft">需求名称</td>
             <td>
-                <input type="text" name="demandName" value="${demand.demandName}">
+                <input type="text" name="demandName" value="${demand.demandName}"><span style="color: RED">*</span>
             </td>
         </tr>
         <c:if test="${demand.putUserId!=null}">
@@ -128,13 +130,13 @@
         <tr>
             <td width="10%" class="tableleft">需求描述</td>
             <td>
-                <input type="text" name="demandDescribe" value="${demand.demandDescribe}">
+                <input type="text" name="demandDescribe" value="${demand.demandDescribe}"><span style="color: RED">*</span>
             </td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">预期完成时间</td>
             <td>
-                <input type="text" name="exceptEndTime" value="${demand.exceptEndTime}">
+                <input type="text" name="exceptEndTime" value="${demand.exceptEndTime}"><span style="color: RED">*</span>
             </td>
         </tr>
         <c:if test="${demand.actualEndTime!=null}">
@@ -151,6 +153,12 @@
                 <td>
                         ${demand.completeUserId}
                 </td>
+            </tr>
+        </c:if>
+        <c:if test="${errorMsg!=null}">
+            <tr>
+                <td width="10%" class="tableleft">错误信息</td>
+                <td><span style="color: red">${errorMsg}</span></td>
             </tr>
         </c:if>
         <tr>

@@ -60,6 +60,7 @@
         SELECT <include refid="Field"></include> FROM
         <include refid="tableName"></include>
         WHERE PROJECT_ID = #{projectId}
+        and MODLE_STATE = '1'
     </select>
 
     <!-- 条件查询-->
@@ -128,5 +129,11 @@
     <insert id="saveModleDemand" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO MODLE_DEMAND(ID,MODLE_ID,DEMAND_ID) VALUES(#{id},#{modleId},#{demandId})
 	</insert>
+
+    <update id="updateModleDev">
+        UPDATE <include refid="tableName"></include>
+        SET MODLE_STATE = '0'
+        WHERE ID=#{id}
+    </update>
 
 </mapper>

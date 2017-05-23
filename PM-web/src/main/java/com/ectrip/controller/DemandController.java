@@ -15,6 +15,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,7 +68,8 @@ public class DemandController extends BaseController {
 
         DemandVO demandVO = demandService.findDemand(demandId);
         modelAndView.addObject("demand", demandVO);
-
+        modelAndView.addObject("projectId",projectId);
+        modelAndView.addObject("demandId",demandId);
         modelAndView.setViewName("/demand/editDemand");
         return modelAndView;
     }
@@ -81,21 +84,43 @@ public class DemandController extends BaseController {
     }
 
     @RequestMapping(value = "/saveDemand",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveDemand(Demand demand){
+    public ModelAndView saveDemand(Demand demand,Integer projectId,Integer demandId){
         String[] modleId = getRequest().getParameterValues("mdid");
         ModelAndView mav = getModelAndView();
         if(modleId == null || modleId.length ==0){
-            mav.addObject("errorMsg","请选择模块不能为空");
-            mav.setViewName("demand/addDemand");
-            return null;
+            return errorInfo(projectId,demandId,"请选择系统模块",mav,demand);
+        }
+        if(StringUtils.isEmpty(demand.getVersion())){
+            return errorInfo(projectId,demandId,"版本号不能为空",mav,demand);
+        }
+        if(StringUtils.isEmpty(demand.getDemandName())){
+            return errorInfo(projectId,demandId,"需求描述不能为空",mav,demand);
+        }
+        if(StringUtils.isEmpty(demand.getExceptEndTime())){
+            return errorInfo(projectId,demandId,"预期完成时间不能为空",mav,demand);
+        }
+        List list = demandService.queryDemandByVeision(demand.getVersion(),projectId,demand.getId());
+        if(!CollectionUtils.isEmpty(list)){
+            return errorInfo(projectId,demandId,"版本号重复",mav,demand);
         }
         try {
             demandService.saveDemand(modleId,demand);
-            mav.setViewName("demand/demandList");
-            return mav;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        mav.setViewName("demand/demandList");
+        return mav;
+    }
+
+    public ModelAndView errorInfo(Integer projectId,Integer demandId,String errorMsg,ModelAndView mav,Demand demand){
+        mav.addObject("errorMsg",errorMsg);
+        List<Modle> list = modleService.findModleList(demandId);
+        mav.addObject("list", list);
+        List<ModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null, null).getList();
+        mav.addObject("ModleVOList", modleVOList);
+        DemandVO demandVO = demandService.findDemand(demandId);
+        mav.addObject("demand", demand);
+        mav.setViewName("demand/editDemand");
+        return mav;
     }
 }

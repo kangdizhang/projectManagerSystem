@@ -5,6 +5,7 @@ import com.ectrip.dao.DemandDAO;
 import com.ectrip.dao.ModleDAO;
 import com.ectrip.dao.ModleDemandDAO;
 import com.ectrip.model.Demand;
+import com.ectrip.model.Modle;
 import com.ectrip.model.ModleDemand;
 import com.ectrip.service.DemandService;
 import com.ectrip.vo.DemandVO;
@@ -31,7 +32,7 @@ public class DemandServiceImpl implements DemandService {
     private ModleDemandDAO modleDemandDAO;
 
     @Autowired
-    private ModleDAO modleDao;
+    private ModleDAO modleDAO;
 
     /**
      * 主键查询
@@ -56,6 +57,19 @@ public class DemandServiceImpl implements DemandService {
         return new PageInfo<DemandVO>(list);
     }
 
+    /**
+     * 修改需求状态
+     * @param id
+     */
+    public void updateDemand(Integer id){
+        demandDAO.updateDemandState(id);//修改需求状态
+        modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
+        //升级版本
+        List<Modle> list = modleDAO.findModleList(id);//需求关联模块列表
+        for (Modle modle:list) {
+
+        }
+    }
 
     public void saveDemand(String[] modleId, Demand demand){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -70,7 +84,7 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
                 modleDemandDAO.saveModle(modleDemand);
-                modleDao.updateModleDev(Integer.valueOf(modleId[i]));
+                modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
             }
         }else{
             demandDAO.updateDemand(demand);
@@ -81,7 +95,7 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
                 modleDemandDAO.saveModle(modleDemand);
-                modleDao.updateModleDev(Integer.valueOf(modleId[i]));
+                modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
             }
         }
     }

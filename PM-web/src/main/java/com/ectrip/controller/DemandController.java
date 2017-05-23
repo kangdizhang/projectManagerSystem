@@ -43,6 +43,13 @@ public class DemandController extends BaseController {
     @Autowired
     private ModleService modleService;
 
+    @RequestMapping(value="/completeDemand",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView completeDemand(Integer id){
+        ModelAndView modelAndView = new ModelAndView();
+
+        return modelAndView;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public Object demandList(Integer offset,Integer limit,Integer projectId,String demandName,String demandStatus){
@@ -60,10 +67,11 @@ public class DemandController extends BaseController {
     @RequestMapping(value = "/editDemand",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView modleList(Integer projectId,Integer demandId) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Modle> list = modleService.findModleList(demandId);
+        List<Modle> list = modleService.findModleList(demandId);//需求关联模块列表
         modelAndView.addObject("list", list);
 
-        List<ModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null, null).getList();
+        //项目模块列表
+        List<ModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null, "1").getList();
         modelAndView.addObject("ModleVOList", modleVOList);
 
         DemandVO demandVO = demandService.findDemand(demandId);

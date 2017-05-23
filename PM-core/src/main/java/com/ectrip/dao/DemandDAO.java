@@ -12,6 +12,12 @@ import java.util.List;
 public interface DemandDAO {
 
     /**
+     * 修改需求状态
+     * @param id
+     */
+    void updateDemandState(Integer id);
+
+    /**
      * 主键查询
      * @param id
      * @return demandVO

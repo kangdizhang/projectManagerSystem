@@ -65,18 +65,12 @@
                 <c:choose>
                     <c:when test="${list!=null}">
                         <c:forEach items="${ModleVOList}" var="modleVO">
-                            <c:set var="flag" value="false"></c:set>
-                            <c:forEach items="${list}" var="modle">
-                                <c:if test="${modle.id==modleVO.id}">
-                                    <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.id}' checked="checked" />${modleVO.modleName}</label>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <c:set var="flag" value="true"></c:set>
-                                </c:if>
-                            </c:forEach>
-                            <c:if test="${flag!=true}">
-                                <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.id}' />${modleVO.modleName}</label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                            </c:if>
+                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.id}' />${modleVO.modleName}</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </c:forEach>
+                        <c:forEach items="${list}" var="modle">
+                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modle.id}' checked="checked" />${modle.modleName}</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
@@ -122,7 +116,7 @@
             <tr>
                 <td width="10%" class="tableleft">提出时间</td>
                 <td>
-                        ${demand.putTime}
+                    ${demand.putTime}
                     <input type="hidden" name="putTime" value="${demand.putTime}">
                 </td>
             </tr>
@@ -143,7 +137,7 @@
             <tr>
                 <td width="10%" class="tableleft">实际完成时间</td>
                 <td>
-                    ${demand.actualEndTime}
+                   ${demand.actualEndTime}
                 </td>
             </tr>
         </c:if>
@@ -151,7 +145,7 @@
             <tr>
                 <td width="10%" class="tableleft">完成人</td>
                 <td>
-                        ${demand.completeUserId}
+                   ${demand.completeUserId}
                 </td>
             </tr>
         </c:if>

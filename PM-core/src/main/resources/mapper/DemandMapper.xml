@@ -66,6 +66,12 @@
 		#{demandStatus}
 	</sql>
 
+	<!-- 修改状态 -->
+	<update id="updateDemandState" parameterType="java.lang.Integer">
+		UPDATE <include refid="tableName"></include>
+		SET DEMAND_STATUS='1' WHERE ID=#{id}
+	</update>
+
 	<!-- 主键查询 -->
 	<select id="findDemand" resultMap="demandVOResultMap">
 		SELECT D.ID AS ID,D.PROJECT_ID AS PROJECT_ID,P.PROJECT_NAME AS PROJECT_NAME,D.DEMAND_NAME AS DEMAND_NAME,

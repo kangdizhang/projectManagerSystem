@@ -63,8 +63,15 @@
         and MODLE_STATE = '1'
     </select>
 
+    <!-- 修改指定需求关联模块未完成状态为已完成 -->
+    <update id="updateModleState" parameterType="java.lang.Integer">
+        UPDATE <include refid="Field"></include>
+        SET MODLE_STATE='1'
+        WHERE MODLE_STATE='0' AND ID IN(SELECT MODLE_ID FROM MODLE_DEMAND WHERE DEMAND_ID=#{demandId})
+    </update>
+
     <!-- 条件查询-->
-    <select id="queryModleList" resultMap="modleVOResultMap">
+    <select id="queryModleList" resultMap="modleResultMap">
         <!--SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,-->
         <!--(CASE WHEN MODLE_STATE='0' THEN '开发中'-->
         <!--ELSE '已完成'-->

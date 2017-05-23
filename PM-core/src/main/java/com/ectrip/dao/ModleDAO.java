@@ -13,6 +13,12 @@ import java.util.List;
 public interface ModleDAO {
 
     /**
+     * 修改指定需求关联模块未完成状态为已完成
+     * @param demandId
+     */
+    void updateModleState(Integer demandId);
+
+    /**
      * 根据需求ID查询关联模块列表
      * @param demandId
      * @return list

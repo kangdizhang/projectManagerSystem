@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,11 +69,27 @@ public class DemandController extends BaseController {
     @RequestMapping(value = "/editDemand",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView modleList(Integer projectId,Integer demandId) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Modle> list = modleService.findModleList(demandId);//需求关联模块列表
+
+        //需求关联模块列表
+        List<Modle> list = modleService.findModleList(demandId);
         modelAndView.addObject("list", list);
 
         //项目模块列表
         List<ModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null, "1").getList();
+
+        //去重
+        Iterator<ModleVO> modleVOIterator = modleVOList.iterator();
+        if(list != null && !list.isEmpty()){
+            while (modleVOIterator.hasNext()){
+                ModleVO modleVO = modleVOIterator.next();
+                for (Modle modle:list) {
+                    if (modle.getId()==modleVO.getId()){
+                        modleVOIterator.remove();
+                    }
+                }
+            }
+        }
+
         modelAndView.addObject("ModleVOList", modleVOList);
 
         DemandVO demandVO = demandService.findDemand(demandId);

@@ -53,6 +53,7 @@
 <body>
 <form action="/demand/saveDemand" method="post" name="form">
     <input type="hidden" name="projectId" value="${param.projectId}">
+    <input type="hidden" name="id" value="${demand.id}">
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
             <td class="tableleft">关联模块选择</td>
@@ -100,6 +101,7 @@
                 <td width="10%" class="tableleft">提出人</td>
                 <td>
                         ${demand.putUserId}
+                    <input type="hidden" name="putUserId" value="${demand.putUserId}">
                 </td>
             </tr>
         </c:if>
@@ -108,6 +110,7 @@
                 <td width="10%" class="tableleft">提出时间</td>
                 <td>
                         ${demand.putTime}
+                    <input type="hidden" name="putTime" value="${demand.putTime}">
                 </td>
             </tr>
         </c:if>

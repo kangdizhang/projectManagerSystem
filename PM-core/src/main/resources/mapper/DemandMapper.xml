@@ -78,7 +78,7 @@
 	</select>
 
 	<!-- 条件查询-->
-	<select id="queryDemand" resultMap="demandResultMap">
+	<select id="queryDemand" resultMap="demandVOResultMap">
 		SELECT D.ID AS ID,D.PROJECT_ID AS PROJECT_ID,P.PROJECT_NAME AS PROJECT_NAME,D.DEMAND_NAME AS DEMAND_NAME,
 		D.DEMAND_DESCRIBE AS DEMAND_DESCRIBE,D.VERSION AS VERSION,D.PUT_TIME AS PUT_TIME,D.PUT_USERID AS PUT_USERID,
 		D.EXCEPT_END_TIME AS EXCEPT_END_TIME,D.ACTUAL_END_TIME AS ACTUAL_END_TIME,D.COMPLETE_USERID AS COMPLETE_USERID,
@@ -94,7 +94,7 @@
 	</select>
 
 	<!-- 修改-->
-	<update id="updateDemand" parameterType="Version">
+	<update id="updateDemand">
 		UPDATE <include refid="tableName"></include>
 		SET
 		PROJECT_ID = #{projectId},

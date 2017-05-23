@@ -48,6 +48,10 @@
 		WHERE ID=#{id}
 	</update>
 
+	<delete id="deleteModle">
+		DELETE <include refid="tableName"></include> WHERE DEMAND_ID = #{demandId}
+	</delete>
+
 	<!-- 新增-->
 	<insert id="saveModle" useGeneratedKeys="true" keyProperty="id">
 		insert into <include refid="tableName"></include>(

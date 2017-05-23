@@ -1,6 +1,7 @@
 package com.ectrip.dao;
 
 import com.ectrip.model.Modle;
+import com.ectrip.model.ModleDemand;
 import com.ectrip.vo.ModleVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -56,5 +57,4 @@ public interface ModleDAO {
                              @Param("modleName") String modleName, @Param("modleState") String modleState);
 
     List<Modle> queryModleListByProjectId(@Param("projectId") Integer projectId);
-
 }

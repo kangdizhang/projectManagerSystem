@@ -2,7 +2,9 @@ package com.ectrip.service.impl;
 
 
 import com.ectrip.dao.DemandDAO;
+import com.ectrip.dao.ModleDemandDAO;
 import com.ectrip.model.Demand;
+import com.ectrip.model.ModleDemand;
 import com.ectrip.service.DemandService;
 import com.ectrip.vo.DemandVO;
 import com.github.pagehelper.PageInfo;
@@ -22,6 +24,8 @@ public class DemandServiceImpl implements DemandService {
     @Autowired
     private DemandDAO demandDAO;
 
+    @Autowired
+    private ModleDemandDAO modleDemandDAO;
     /**
      * 主键查询
      * @param id
@@ -46,15 +50,30 @@ public class DemandServiceImpl implements DemandService {
     }
 
     public void saveDemand(String[] modleId, Demand demand){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         demand.setPutTime(sdf.format(new Date()));
         demand.setPutUserId("test");
         if(demand.getId()==null){
             demand.setDemandStatus("0");
             demandDAO.saveDemand(demand);
+            ModleDemand modleDemand;
+            for (int i = 0; i < modleId.length; i++) {
+                modleDemand = new ModleDemand();
+                modleDemand.setDemandId(demand.getId());
+                modleDemand.setModleId(Integer.valueOf(modleId[i]));
+                modleDemandDAO.saveModle(modleDemand);
+            }
         }else{
             demandDAO.updateDemand(demand);
+            modleDemandDAO.deleteModle(demand.getId());
+            ModleDemand modleDemand;
+            for (int i = 0; i < modleId.length; i++) {
+                modleDemand = new ModleDemand();
+                modleDemand.setDemandId(demand.getId());
+                modleDemand.setModleId(Integer.valueOf(modleId[i]));
+                modleDemandDAO.saveModle(modleDemand);
+            }
         }
     }
 }

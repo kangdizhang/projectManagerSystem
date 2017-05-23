@@ -81,7 +81,7 @@ public class DemandServiceImpl implements DemandService {
 
         Version version ;
         for (Modle modle:list) {
-            versionDAO.updateVersion(id);
+            versionDAO.updateVersion(modle.getId());
             version = new Version();
             version.setModleId(modle.getId());
             version.setDemandId(id);

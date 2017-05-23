@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -111,6 +112,14 @@ public class DemandServiceImpl implements DemandService {
         }else{
             demandDAO.updateDemand(demand);
             modleDemandDAO.deleteModle(demand.getId());
+
+            List<Modle> modleList = modleDAO.findModleList(demand.getId());
+            if (!CollectionUtils.isEmpty(modleList)){
+                for (Modle modle:modleList) {
+                    modleDAO.updateModleDev(modle.getId());
+                }
+            }
+
             ModleDemand modleDemand;
             for (int i = 0; i < modleId.length; i++) {
                 modleDemand = new ModleDemand();

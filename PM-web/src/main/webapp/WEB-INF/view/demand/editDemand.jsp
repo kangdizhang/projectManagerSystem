@@ -86,9 +86,18 @@
         </tr>
         <tr>
             <td width="10%" class="tableleft">版本号</td>
-            <td>
-                <input type="text" name="version" value="${demand.version}">
-            </td>
+            <c:choose>
+                <c:when test="${demand.version!=null}">
+                    <td>
+                        ${demand.version}
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td>
+                        <input type="text" name="version" value="${demand.version}">
+                    </td>
+                </c:otherwise>
+            </c:choose>
         </tr>
         <tr>
             <td width="10%" class="tableleft">需求名称</td>

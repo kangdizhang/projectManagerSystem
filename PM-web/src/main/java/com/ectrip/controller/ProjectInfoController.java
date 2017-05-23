@@ -8,6 +8,7 @@ import com.ectrip.vo.ProjectInfoVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import java.util.Map;
  * Created by 23626 on 2017/5/11.
  */
 @Controller
+@Transactional
 @RequestMapping(value = "/projectInfo")
 public class ProjectInfoController extends BaseController {
 

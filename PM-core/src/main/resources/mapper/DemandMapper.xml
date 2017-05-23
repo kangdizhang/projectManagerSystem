@@ -98,7 +98,7 @@
 		UPDATE <include refid="tableName"></include>
 		SET
 		PROJECT_ID = #{projectId},
-		DEMAND_NAME = #{demandName},,
+		DEMAND_NAME = #{demandName},
 		DEMAND_DESCRIBE = #{demandDescribe},
 		VERSION = #{version},
 		PUT_TIME = #{putTime},
@@ -106,7 +106,7 @@
 		EXCEPT_END_TIME =#{exceptEndTime},
 		ACTUAL_END_TIME = #{actualEndTime},
 		COMPLETE_USERID = #{completeUserId},
-		DEMAND_STATUS #{demandStatus}
+		DEMAND_STATUS = #{demandStatus}
 		WHERE ID=#{id}
 	</update>
 

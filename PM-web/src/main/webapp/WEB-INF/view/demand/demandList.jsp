@@ -123,6 +123,7 @@
                 {field: 'actualEndTime', title: '实际完成时间',align:'center'},
                 {field: 'completeUserId', title: '完成人',align:'center'},
                 {field: 'demandStatus', title: '需求状态',align:'center'},
+                {field: 'complete', title: '完成', align: 'center', formatter: 'completeFormatter', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -144,11 +145,11 @@
         $table.bootstrapTable('refresh');
     }
 
-   /* function modleList(value, row, index) {
+   function completeFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/demand/modleList?id='+row.id+'" data-toggle="tooltip" title="Edit">查看</a> '
+            '<a href="${bathPath}/demand/completeDemand?id='+row.id+'" data-toggle="tooltip" title="Complete">完成</a> '
         ].join('');
-    }*/
+    }
 
     function operateFormatter(value, row, index) {
         return [

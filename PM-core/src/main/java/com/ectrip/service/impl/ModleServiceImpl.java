@@ -108,7 +108,6 @@ public class ModleServiceImpl implements ModleService {
                     }
                 }
             }
-
         }
 
         return modlePrototypeList;

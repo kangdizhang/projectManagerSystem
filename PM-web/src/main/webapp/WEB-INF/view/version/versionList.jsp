@@ -56,13 +56,13 @@
         <%--模块选择：--%>
         <label for="modleId">模块选择：</label>
         <select name="modleId" id="modleId" class="form-control">
-            <c:forEach var="ModleVO" items="list">
+            <c:forEach var="modleVO" items="${list}">
                 <c:choose>
-                    <c:when test="${ModleId==ModleVO.id}">
-                        <option selected="selected" value="${ModleVO.id}">${ModleVO.modleName}</option>
+                    <c:when test="${modleVO.id!=ModleId}">
+                        <option value="${modleVO.id}">${modleVO.modleName}</option>
                     </c:when>
                     <c:otherwise>
-                        <option value="${ModleVO.id}">${ModleVO.modleName}</option>
+                        <option selected="selected" value="${modleVO.id}">${modleVO.modleName}</option>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>

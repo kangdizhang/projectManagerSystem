@@ -16,7 +16,7 @@
 		<result column="DEMAND_STATUS" property="demandStatus"/>
 	</resultMap>
 
-	<resultMap type="DemandVO" id="demandResultMap">
+	<resultMap type="DemandVO" id="demandVOResultMap">
 		<id column="ID" property="id"/>
 		<result column="PROJECT_ID" property="projectId"/>
 		<result column="PROJECT_NAME" property="projectName"/>

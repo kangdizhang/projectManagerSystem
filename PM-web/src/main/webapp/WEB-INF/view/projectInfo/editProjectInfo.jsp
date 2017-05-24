@@ -57,7 +57,7 @@
         </c:choose>
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
-            <td>
+            <td width="35%">
                 <c:choose>
                     <c:when test="${project==null}">
                         ${param.projectName}
@@ -69,50 +69,48 @@
             </td>
         </tr>
         <tr>
-            <td class="tableleft">服务器IP</td>
-            <td><input type="text" name="serverIp" value="${param.serverIp}"/></td>
-        </tr>
-        <tr>
-            <td class="tableleft">数据库IP</td>
+            <td width="10%" class="tableleft">服务器IP</td>
+            <td width="35%"><input type="text" name="serverIp" value="${param.serverIp}"/></td>
+            <td width="10%" class="tableleft">数据库IP</td>
             <td><input type="text" name="dbServerIp" value="${param.dbServerIp}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">数据库用户名</td>
-            <td><input type="text" name="dbUser" value="${param.dbUser}"/></td>
-        </tr>
-        <tr>
-            <td class="tableleft">数据库密码</td>
+            <td width="10%" class="tableleft">数据库用户名</td>
+            <td width="35%"><input type="text" name="dbUser" value="${param.dbUser}"/></td>
+            <td width="10%" class="tableleft">数据库密码</td>
             <td><input type="text" name="dbPwd" value="${param.dbPwd}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">数据库端口号</td>
-            <td><input type="text" name="dbPort" value="${param.dbPort}"/></td>
-        </tr>
-        <tr>
-            <td class="tableleft">域名</td>
+            <td width="10%" class="tableleft">数据库端口号</td>
+            <td width="35%"><input type="text" name="dbPort" value="${param.dbPort}"/></td>
+            <td width="10%" class="tableleft">域名</td>
             <td><input type="text" name="hostName" value="${param.hostName}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">ssh信息</td>
-            <td><input type="text" name="ssh" value="${param.ssh}"/></td>
-        </tr>
-        <c:choose>
-            <c:when test="${msg!=null}">
-                <tr>
-                    <td class="tableleft">提示信息</td>
+            <td width="10%" class="tableleft">ssh信息</td>
+            <td width="35%"><input type="text" name="ssh" value="${param.ssh}"/></td>
+            <c:choose>
+                <c:when test="${msg!=null}">
+                    <td width="10%" class="tableleft">提示信息</td>
                     <td>
                         <p style="color: crimson">${msg}</p>
                     </td>
-                </tr>
-            </c:when>
-        </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <td width="10%"></td>
+                    <td></td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
         <tr>
-            <td class="tableleft"></td>
-            <td>
+            <td width="10%" class="tableleft">操作</td>
+            <td width="35%">
                 <button type="submit" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;
                 <a class="btn btn-success" href="${bathPath}/projectList">返回列表</a>
             </td>
+            <td width="10%"></td>
+            <td></td>
         </tr>
     </table>
 </form>

@@ -3,12 +3,11 @@ package com.ectrip.controller;
 import com.ectrip.common.base.BaseController;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.VersionService;
-import com.ectrip.vo.ModleVO;
+import com.ectrip.vo.ProjectModleVO;
 import com.ectrip.vo.VersionVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +47,7 @@ public class VersionController extends BaseController {
     @RequestMapping(value = "/viewVerisonList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView viewVerisonList(Integer modleId,Integer projectId){
         ModelAndView modelAndView = new ModelAndView();
-        List<ModleVO> list = modleService.queryModleList(null,null,projectId,null,null).getList();
+        List<ProjectModleVO> list = modleService.queryModleList(null,null,projectId,null,null).getList();
         modelAndView.addObject("list",list);
         modelAndView.addObject("ModleId",modleId);
         modelAndView.setViewName("version/versionList");

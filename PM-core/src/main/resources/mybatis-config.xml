@@ -16,7 +16,7 @@
 		<typeAlias type="com.ectrip.model.OptEnvironment" alias="OptEnvironment"/>
 		<typeAlias type="com.ectrip.vo.OptRecordAndEnvVO" alias="OptRecordAndEnvVO"/>
 		<typeAlias type="com.ectrip.model.OptRecord" alias="OptRecord"/>
-		<typeAlias type="com.ectrip.model.Modle" alias="Modle"/>
+		<typeAlias type="com.ectrip.model.ProjectModle" alias="ProjectModle"/>
 		<typeAlias type="com.ectrip.model.ModlePrototype" alias="ModlePrototype"/>
 		<typeAlias type="com.ectrip.model.ProjectInfo" alias="ProjectInfo"/>
 		<typeAlias type="com.ectrip.model.Version" alias="Version"/>
@@ -25,8 +25,8 @@
 		<typeAlias type="com.ectrip.vo.DemandVO" alias="DemandVO"/>
 		<typeAlias type="com.ectrip.model.ModleDemand" alias="ModleDemand"/>
 		<typeAlias type="com.ectrip.model.Project" alias="Project"/>
-		<typeAlias type="com.ectrip.vo.ProjectInfoVO" alias="ProjectInfoVO"/>
-		<typeAlias type="com.ectrip.vo.ModleVO" alias="ModleVO"/>
+		<typeAlias type="com.ectrip.vo.ProjectInfoVO" alias="Projec0.InfoVO"/>
+		<typeAlias type="com.ectrip.vo.ProjectModleVO" alias="ProjectModleVO"/>
 		<typeAlias type="com.ectrip.vo.VersionVO" alias="VersionVO"/>
 	</typeAliases>
 	<!--分页插件和数据库方言-->

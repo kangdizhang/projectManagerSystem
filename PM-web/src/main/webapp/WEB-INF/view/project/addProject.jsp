@@ -63,8 +63,9 @@
                 <c:otherwise>
                     <td>
                         <c:forEach items="${list}" var="modlePrototype">
-                            <label class='checkbox inline'><input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}</label>
-                            &nbsp;&nbsp;
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
+                            </label>
                         </c:forEach>
                     </td>
                 </c:otherwise>
@@ -97,9 +98,9 @@
             <td width="35%"><input type="text" name="email" value="${project.email}"/><span style="color: #a9302a">*</span></td>
             <td width="10%" class="tableleft">项目状态</td>
             <td>
-                <input type="radio" name="projectStatus" value="0"/> 开发中
-                <input type="radio" name="projectStatus" value="1"/> 升级中
-                <input type="radio" name="projectStatus" value="2"/> 已完成
+                <input type="radio" name="projectStatus" value="0"/> 开发中&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="projectStatus" value="1"/> 升级中&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="projectStatus" value="2"/> 已完成&nbsp;&nbsp;&nbsp;&nbsp;
             </td>
         </tr>
         <tr></tr>

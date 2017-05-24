@@ -1,19 +1,17 @@
 package com.ectrip.service.impl;
 
-import com.ectrip.dao.ModleDAO;
+import com.ectrip.dao.ProjectModleDAO;
 import com.ectrip.dao.ModlePrototypeDAO;
-import com.ectrip.model.Demand;
-import com.ectrip.model.Modle;
+import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.service.ModleService;
-import com.ectrip.vo.ModleVO;
+import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class ModleServiceImpl implements ModleService {
     private Logger logger = LoggerFactory.getLogger(ModleServiceImpl.class);
 
     @Autowired
-    private ModleDAO modleDAO;
+    private ProjectModleDAO modleDAO;
 
     @Autowired
     private ModlePrototypeDAO modlePrototypeDAO;
@@ -35,7 +33,7 @@ public class ModleServiceImpl implements ModleService {
      * @param demandId
      * @return list
      */
-    public List<Modle> findModleList(Integer demandId){
+    public List<ProjectModle> findModleList(Integer demandId){
         return modleDAO.findModleList(demandId);
     }
 
@@ -55,7 +53,7 @@ public class ModleServiceImpl implements ModleService {
      */
     public int saveModle(Integer projectId,Integer modlePrototypeId){
         ModlePrototype modlePrototype = modlePrototypeDAO.findModlePrototype(modlePrototypeId);
-        Modle modle = new Modle();
+        ProjectModle modle = new ProjectModle();
         modle.setModleName(modlePrototype.getModlePrototypeName());
         modle.setProjectId(projectId);
         modle.setModleDescribe(modlePrototype.getModlePrototypeDescribe());
@@ -68,7 +66,7 @@ public class ModleServiceImpl implements ModleService {
      * @param modle
      * @return int
      */
-    public int updateModle(Modle modle){
+    public int updateModle(ProjectModle modle){
         return modleDAO.updateModle(modle);
     }
 
@@ -81,8 +79,8 @@ public class ModleServiceImpl implements ModleService {
      * @param modleState
      * @return pageInfo
      */
-    public PageInfo<ModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName, String modleState){
-        List<ModleVO> list = modleDAO.queryModle(pageNo,pageSize,projectId,modleName,modleState);
+    public PageInfo<ProjectModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName, String modleState){
+        List<ProjectModleVO> list = modleDAO.queryModle(pageNo,pageSize,projectId,modleName,modleState);
         logger.info("查询数据:{}",list.toString());
         return new PageInfo<>(list);
     }
@@ -94,7 +92,7 @@ public class ModleServiceImpl implements ModleService {
      */
     public List<ModlePrototype> findModlePrototypeList(Integer projectId){
 
-        List<Modle> modleList = modleDAO.queryModleList(projectId);
+        List<ProjectModle> modleList = modleDAO.queryModleList(projectId);
 
         List<ModlePrototype> modlePrototypeList = modlePrototypeDAO.queryModlePrototype();
         Iterator<ModlePrototype> modlePrototypeIterator = modlePrototypeList.iterator();
@@ -102,7 +100,7 @@ public class ModleServiceImpl implements ModleService {
         if(modleList != null && !modleList.isEmpty()){
             while (modlePrototypeIterator.hasNext()){
                 ModlePrototype modlePrototype = modlePrototypeIterator.next();
-                for (Modle modle:modleList) {
+                for (ProjectModle modle:modleList) {
                     if (modle.getModleName().equals(modlePrototype.getModlePrototypeName())){
                         modlePrototypeIterator.remove();
                     }
@@ -114,7 +112,7 @@ public class ModleServiceImpl implements ModleService {
     }
 
     @Override
-    public List<Modle> queryModleListByProjectId(Integer projectId) {
+    public List<ProjectModle> queryModleListByProjectId(Integer projectId) {
         return modleDAO.queryModleListByProjectId(projectId);
     }
 }

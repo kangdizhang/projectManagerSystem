@@ -1,9 +1,8 @@
 package com.ectrip.service;
 
-import com.ectrip.model.Demand;
-import com.ectrip.model.Modle;
+import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
-import com.ectrip.vo.ModleVO;
+import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface ModleService {
      * @param demandId
      * @return list
      */
-    List<Modle> findModleList(Integer demandId);
+    List<ProjectModle> findModleList(Integer demandId);
 
     /**
      * 根据ID删除指定项目模块
@@ -39,7 +38,7 @@ public interface ModleService {
      * @param modle
      * @return int
      */
-    int updateModle(Modle modle);
+    int updateModle(ProjectModle modle);
 
     /**
      * 项目模块分页条件查询
@@ -50,7 +49,7 @@ public interface ModleService {
      * @param modleState
      * @return pageInfo
      */
-    public PageInfo<ModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName, String modleState);
+    public PageInfo<ProjectModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName, String modleState);
 
     /**
      * 获取未选中的模块原型列表
@@ -59,5 +58,5 @@ public interface ModleService {
      */
     public List<ModlePrototype> findModlePrototypeList(Integer projectId);
 
-    List<Modle> queryModleListByProjectId(Integer projectId);
+    List<ProjectModle> queryModleListByProjectId(Integer projectId);
 }

@@ -9,7 +9,6 @@ public class ModlePrototype {
     private Integer id;//自增主键
     private String modlePrototypeName;//模块原型名称
     private String modlePrototypeDescribe;//模块原型描述
-    private String operateTime;//操作时间
 
     public Integer getId() {
         return id;
@@ -33,14 +32,6 @@ public class ModlePrototype {
 
     public void setModlePrototypeDescribe(String modlePrototypeDescribe) {
         this.modlePrototypeDescribe = modlePrototypeDescribe;
-    }
-
-    public String getOperateTime() {
-        return operateTime;
-    }
-
-    public void setOperateTime(String operateTime) {
-        this.operateTime = operateTime;
     }
 
     public ModlePrototype() {

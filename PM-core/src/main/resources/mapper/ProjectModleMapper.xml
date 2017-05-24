@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ectrip.dao.ModleDAO">
+<mapper namespace="com.ectrip.dao.ProjectModleDAO">
 
-    <resultMap type="Modle" id="modleResultMap">
+    <resultMap type="ProjectModle" id="projectModleResultMap">
         <id column="ID" property="id"/>
         <result column="PROJECT_ID" property="projectId"/>
         <result column="MODLE_NAME" property="modleName"/>
@@ -10,7 +10,7 @@
         <result column="MODLE_STATE" property="modleState"/>
     </resultMap>
 
-    <resultMap type="ModleVO" id="modleVOResultMap">
+    <resultMap type="ProjectModleVO" id="projectModleVOResultMap">
         <id column="ID" property="id"/>
         <result column="PROJECT_ID" property="projectId"/>
         <result column="PROJECT_NAME" property="projectName"/>
@@ -50,13 +50,13 @@
     </delete>
 
     <!-- 主键查询-->
-    <select id="findModle" resultMap="modleResultMap">
+    <select id="findModle" resultMap="projectModleResultMap">
         SELECT <include refid="Field"></include> FROM
         <include refid="tableName"></include>
         WHERE ID=#{id}
     </select>
 
-    <select id="queryModleListByProjectId" resultMap="modleResultMap">
+    <select id="queryModleListByProjectId" resultMap="projectModleResultMap">
         SELECT <include refid="Field"></include> FROM
         <include refid="tableName"></include>
         WHERE PROJECT_ID = #{projectId}
@@ -71,7 +71,7 @@
     </update>
 
     <!-- 条件查询-->
-    <select id="queryModleList" resultMap="modleResultMap">
+    <select id="queryModleList" resultMap="projectModleResultMap">
         <!--SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,-->
         <!--(CASE WHEN MODLE_STATE='0' THEN '开发中'-->
         <!--ELSE '已完成'-->
@@ -90,7 +90,7 @@
     </select>
 
     <!-- 根据需求ID查询关联模块列表 -->
-    <select id="findModleList" resultMap="modleResultMap">
+    <select id="findModleList" resultMap="projectModleResultMap">
 		SELECT M.ID AS ID,M.PROJECT_ID AS PROJECT_ID,M.MODLE_NAME AS MODLE_NAME,M.MODLE_DESCRIBE AS MODLE_DESCRIBE,
 		M.MODLE_STATE AS MODLE_STATE
 		FROM MODLE M,MODLE_DEMAND MD
@@ -98,7 +98,7 @@
 	</select>
 
     <!-- 条件查询-->
-    <select id="queryModle" resultMap="modleVOResultMap">
+    <select id="queryModle" resultMap="projectModleVOResultMap">
         SELECT M.ID as ID,M.PROJECT_ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,M.MODLE_NAME as
         MODLE_NAME,M.MODLE_DESCRIBE as MODLE_DESCRIBE,
         (CASE WHEN M.MODLE_STATE='0' THEN '开发中'
@@ -117,7 +117,7 @@
     </select>
 
     <!-- 修改-->
-    <update id="updateModle" parameterType="Modle">
+    <update id="updateModle" parameterType="ProjectModle">
         UPDATE
         <include refid="tableName"></include>
         SET PROJECT_ID=#{projectId},MODLE_NAME=#{modleName},MODLE_DESCRIBE=#{modleDescribe},MODLE_STATE=#{modleState}

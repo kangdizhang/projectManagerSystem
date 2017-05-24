@@ -1,10 +1,10 @@
 package com.ectrip.service.impl;
 
-import com.ectrip.dao.ModleDAO;
+import com.ectrip.dao.ProjectModleDAO;
 import com.ectrip.dao.ModlePrototypeDAO;
 import com.ectrip.dao.ProjectDao;
 import com.ectrip.dao.ProjectInfoDAO;
-import com.ectrip.model.Modle;
+import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Project;
 import com.ectrip.model.ProjectInfo;
@@ -33,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectInfoDAO projectInfoDAO;
     @Autowired
-    private ModleDAO modleDAO;
+    private ProjectModleDAO modleDAO;
     @Autowired
     private ModlePrototypeDAO modlePrototypeDAO;
 
@@ -56,7 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
             if (a != null && a.length > 0){
                 for (int i = 0; i < a.length; i++){
                     ModlePrototype modlePrototype = modlePrototypeDAO.findModlePrototype(Integer.parseInt(a[i]));
-                    Modle modle = new Modle();
+                    ProjectModle modle = new ProjectModle();
                     modle.setProjectId(project.getId());
                     modle.setModleName(modlePrototype.getModlePrototypeName());
                     modle.setModleDescribe(modlePrototype.getModlePrototypeDescribe());

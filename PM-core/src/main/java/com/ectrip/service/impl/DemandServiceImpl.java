@@ -2,16 +2,15 @@ package com.ectrip.service.impl;
 
 
 import com.ectrip.dao.DemandDAO;
-import com.ectrip.dao.ModleDAO;
+import com.ectrip.dao.ProjectModleDAO;
 import com.ectrip.dao.ModleDemandDAO;
 import com.ectrip.dao.VersionDAO;
 import com.ectrip.model.Demand;
-import com.ectrip.model.Modle;
+import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModleDemand;
 import com.ectrip.model.Version;
 import com.ectrip.service.DemandService;
 import com.ectrip.vo.DemandVO;
-import com.ectrip.vo.VersionVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ public class DemandServiceImpl implements DemandService {
     private ModleDemandDAO modleDemandDAO;
 
     @Autowired
-    private ModleDAO modleDAO;
+    private ProjectModleDAO modleDAO;
 
     @Autowired
     private VersionDAO versionDAO;
@@ -78,10 +77,10 @@ public class DemandServiceImpl implements DemandService {
         modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
 
         //升级版本
-        List<Modle> list = modleDAO.findModleList(id);//需求关联模块列表
+        List<ProjectModle> list = modleDAO.findModleList(id);//需求关联模块列表
 
         Version version ;
-        for (Modle modle:list) {
+        for (ProjectModle modle:list) {
             versionDAO.updateVersion(modle.getId());
             version = new Version();
             version.setModleId(modle.getId());
@@ -113,9 +112,9 @@ public class DemandServiceImpl implements DemandService {
             demandDAO.updateDemand(demand);
             modleDemandDAO.deleteModle(demand.getId());
 
-            List<Modle> modleList = modleDAO.findModleList(demand.getId());
+            List<ProjectModle> modleList = modleDAO.findModleList(demand.getId());
             if (!CollectionUtils.isEmpty(modleList)){
-                for (Modle modle:modleList) {
+                for (ProjectModle modle:modleList) {
                     modleDAO.updateModleDev(modle.getId());
                 }
             }

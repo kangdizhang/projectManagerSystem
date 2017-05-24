@@ -1,8 +1,7 @@
 package com.ectrip.dao;
 
-import com.ectrip.model.Modle;
-import com.ectrip.model.ModleDemand;
-import com.ectrip.vo.ModleVO;
+import com.ectrip.model.ProjectModle;
+import com.ectrip.vo.ProjectModleVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/5/11 0011.
  */
-public interface ModleDAO {
+public interface ProjectModleDAO {
 
     /**
      * 修改指定需求关联模块未完成状态为已完成
@@ -23,7 +22,7 @@ public interface ModleDAO {
      * @param demandId
      * @return list
      */
-    List<Modle> findModleList(Integer demandId);
+    List<ProjectModle> findModleList(Integer demandId);
 
     /**
      * 根据ID删除指定项目模块
@@ -36,21 +35,21 @@ public interface ModleDAO {
      * @param modle
      * @return int
      */
-    int saveModle(Modle modle);
+    int saveModle(ProjectModle modle);
 
     /**
      * 更新模块
      * @param modle
      * @return int
      */
-    int updateModle(Modle modle);
+    int updateModle(ProjectModle modle);
 
     /**
      * 查找指定项目的模块列表
      * @param projectId
      * @return list
      */
-    List<Modle> queryModleList(Integer projectId);
+    List<ProjectModle> queryModleList(Integer projectId);
 
     /**
      * 条件查询
@@ -59,10 +58,10 @@ public interface ModleDAO {
      * @param modleState
      * @return list
      */
-    List<ModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
-                             @Param("modleName") String modleName, @Param("modleState") String modleState);
+    List<ProjectModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
+                                    @Param("modleName") String modleName, @Param("modleState") String modleState);
 
-    List<Modle> queryModleListByProjectId(@Param("projectId") Integer projectId);
+    List<ProjectModle> queryModleListByProjectId(@Param("projectId") Integer projectId);
 
     void updateModleDev(@Param("id")Integer id);
 }

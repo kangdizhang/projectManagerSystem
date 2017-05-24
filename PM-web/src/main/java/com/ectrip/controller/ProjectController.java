@@ -1,21 +1,18 @@
 package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
-import com.ectrip.model.Modle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Project;
 import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.ProjectService;
-import com.ectrip.vo.ModleVO;
+import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -94,7 +91,7 @@ public class ProjectController extends BaseController {
     public Object modlePrototypeList(Integer id) {
         ModelAndView mav = getModelAndView();
         if (id != null){
-            List<ModleVO> list = modleService.queryModleList(null,null,id,null,null).getList();
+            List<ProjectModleVO> list = modleService.queryModleList(null,null,id,null,null).getList();
             mav.addObject("list", list);
         }else {
             List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();

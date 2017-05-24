@@ -6,7 +6,6 @@
 		<id column="ID" property="id"/>
 		<result column="MODLE_PROTOTYPE_NAME" property="modlePrototypeName"/>
 		<result column="MODLE_PROTOTYPE_DESCRIBE" property="modlePrototypeDescribe"/>
-		<result column="OPERATE_TIME" property="operateTime"/>
 	</resultMap>
 
 	<!--表名 -->
@@ -18,16 +17,14 @@
 	<sql id="Field">
 		ID,
 		MODLE_PROTOTYPE_NAME,
-		MODLE_PROTOTYPE_DESCRIBE,
-		OPERATE_TIME
+		MODLE_PROTOTYPE_DESCRIBE
 	</sql>
 
 	<!-- 字段值 -->
 	<sql id="FieldValue">
 		#{id},
 		#{modlePrototypeName},
-		#{modlePrototypeDescribe},
-		#{operateTime}
+		#{modlePrototypeDescribe}
 	</sql>
 
 	<!-- 主键查询-->
@@ -53,7 +50,7 @@
 	<!-- 修改-->
 	<update id="updateModlePrototype" parameterType="ModlePrototype">
 		UPDATE <include refid="tableName"></include>
-		SET MODLE_PROTOTYPE_NAME=#{modlePrototypeName},MODLE_PROTOTYPE_DESCRIBE=#{modlePrototypeDescribe},OPERATE_TIME=#{operateTime}
+		SET MODLE_PROTOTYPE_NAME=#{modlePrototypeName},MODLE_PROTOTYPE_DESCRIBE=#{modlePrototypeDescribe}
 		WHERE ID=#{id}
 	</update>
 

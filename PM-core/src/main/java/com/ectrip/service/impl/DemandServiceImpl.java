@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -74,10 +75,10 @@ public class DemandServiceImpl implements DemandService {
         demandVO.setDemandStatus("1");
         demandVO.setActualEndTime(sdf.format(new Date()));
         demandDAO.updateDemandState(demandVO);//修改需求状态
-        modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
+        //modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
 
         //升级版本
-        List<ProjectModle> list = modleDAO.findModleList(id);//需求关联模块列表
+        List<ProjectModle> list = new ArrayList<>();//modleDAO.findModleList(id);//需求关联模块列表
 
         Version version ;
         for (ProjectModle modle:list) {
@@ -106,16 +107,16 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
                 modleDemandDAO.saveModle(modleDemand);
-                modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
+                //modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
             }
         }else{
             demandDAO.updateDemand(demand);
             modleDemandDAO.deleteModle(demand.getId());
 
-            List<ProjectModle> modleList = modleDAO.findModleList(demand.getId());
+            List<ProjectModle> modleList = new ArrayList<>();//modleDAO.findModleList(demand.getId());
             if (!CollectionUtils.isEmpty(modleList)){
                 for (ProjectModle modle:modleList) {
-                    modleDAO.updateModleDev(modle.getId());
+                    //modleDAO.updateModleDev(modle.getId());
                 }
             }
 
@@ -125,7 +126,7 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
                 modleDemandDAO.saveModle(modleDemand);
-                modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
+                //modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
             }
         }
     }
@@ -137,7 +138,7 @@ public class DemandServiceImpl implements DemandService {
 
     @Override
     public void deleteDemand(Integer id){
-        modleDAO.updateModleState(id);
+        //modleDAO.updateModleState(id);
         modleDemandDAO.deleteModle(id);
         demandDAO.deleteDemand(id);
     }

@@ -5,6 +5,7 @@
     <resultMap type="Project" id="baseResultMap">
         <id column="ID" property="id"/>
         <result column="PROJECT_NAME" property="projectName"/>
+        <result column="REGION" property="region"/>
         <result column="PROJECT_LEADER" property="projectLeader"/>
         <result column="PHONE" property="phone"/>
         <result column="QQ" property="qq"/>
@@ -22,6 +23,7 @@
     <sql id="Field">
 		ID,
 		PROJECT_NAME,
+		REGION,
 		PROJECT_LEADER,
 		PHONE,
 		QQ,
@@ -34,6 +36,7 @@
     <sql id="FieldValue">
 		#{id},
 		#{projectName},
+		#{region},
 		#{projectLeader},
 		#{phone},
 		#{qq},
@@ -59,6 +62,7 @@
     <update id="updateProject">
         update <include refid="tableName"></include>
         set PROJECT_NAME = #{projectName},
+        REGION = #{region},
         PROJECT_LEADER = #{projectLeader},
         PHONE = #{phone},
         QQ = #{qq},
@@ -72,6 +76,7 @@
         SELECT
         ID,
         PROJECT_NAME,
+        REGION,
         PROJECT_LEADER,
         PHONE,
         QQ,

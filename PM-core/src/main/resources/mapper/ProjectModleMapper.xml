@@ -5,9 +5,8 @@
     <resultMap type="ProjectModle" id="projectModleResultMap">
         <id column="ID" property="id"/>
         <result column="PROJECT_ID" property="projectId"/>
-        <result column="MODLE_NAME" property="modleName"/>
-        <result column="MODLE_DESCRIBE" property="modleDescribe"/>
-        <result column="MODLE_STATE" property="modleState"/>
+        <result column="MODLE_ID" property="modleId"/>
+        <result column="VERSION" property="version"/>
     </resultMap>
 
     <resultMap type="ProjectModleVO" id="projectModleVOResultMap">
@@ -29,18 +28,16 @@
     <sql id="Field">
 		ID,
 		PROJECT_ID,
-		MODLE_NAME,
-		MODLE_DESCRIBE,
-		MODLE_STATE
+		MODLE_ID,
+		VERSION
 	</sql>
 
     <!-- 字段值 -->
     <sql id="FieldValue">
 		#{id},
 		#{projectId},
-		#{modleName},
-		#{modleDescribe},
-		#{modleState}
+		#{modleId},
+		#{version}
 	</sql>
 
     <delete id="deleteModle" parameterType="java.lang.Integer">
@@ -63,21 +60,15 @@
         and MODLE_STATE = '1'
     </select>
 
-    <!-- 修改指定需求关联模块未完成状态为已完成 -->
+    <!-- 修改指定需求关联模块未完成状态为已完成
     <update id="updateModleState" parameterType="java.lang.Integer">
         UPDATE <include refid="tableName"></include>
         SET MODLE_STATE='1'
         WHERE MODLE_STATE='0' AND ID IN(SELECT MODLE_ID FROM MODLE_DEMAND WHERE DEMAND_ID=#{demandId})
-    </update>
+    </update> -->
 
-    <!-- 条件查询-->
+    <!-- 条件查询
     <select id="queryModleList" resultMap="projectModleResultMap">
-        <!--SELECT ID,PROJECT_ID,MODLE_NAME,MODLE_DESCRIBE,-->
-        <!--(CASE WHEN MODLE_STATE='0' THEN '开发中'-->
-        <!--ELSE '已完成'-->
-        <!--END) as MODLE_STATE-->
-        <!--FROM <include refid="tableName"></include>-->
-        <!--WHERE PROJECT_ID=#{projectId}-->
         SELECT M.ID as ID,M.PROJECT_ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,M.MODLE_NAME as
         MODLE_NAME,M.MODLE_DESCRIBE as MODLE_DESCRIBE,
         (CASE WHEN M.MODLE_STATE='0' THEN '开发中'
@@ -87,17 +78,17 @@
         FROM MODLE M,PROJECT P
         WHERE M.PROJECT_ID = P.ID
         AND M.PROJECT_ID=#{projectId}
-    </select>
+    </select>-->
 
-    <!-- 根据需求ID查询关联模块列表 -->
+    <!-- 根据需求ID查询关联模块列表
     <select id="findModleList" resultMap="projectModleResultMap">
 		SELECT M.ID AS ID,M.PROJECT_ID AS PROJECT_ID,M.MODLE_NAME AS MODLE_NAME,M.MODLE_DESCRIBE AS MODLE_DESCRIBE,
 		M.MODLE_STATE AS MODLE_STATE
 		FROM MODLE M,MODLE_DEMAND MD
 		WHERE M.ID=MD.MODLE_ID AND MD.DEMAND_ID=#{demandId}
-	</select>
+	</select> -->
 
-    <!-- 条件查询-->
+    <!-- 条件查询
     <select id="queryModle" resultMap="projectModleVOResultMap">
         SELECT M.ID as ID,M.PROJECT_ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,M.MODLE_NAME as
         MODLE_NAME,M.MODLE_DESCRIBE as MODLE_DESCRIBE,
@@ -114,13 +105,13 @@
         <if test="modleState!=null and modleState!=''">
             AND M.MODLE_STATE=#{modleState}
         </if>
-    </select>
+    </select>-->
 
     <!-- 修改-->
     <update id="updateModle" parameterType="ProjectModle">
         UPDATE
         <include refid="tableName"></include>
-        SET PROJECT_ID=#{projectId},MODLE_NAME=#{modleName},MODLE_DESCRIBE=#{modleDescribe},MODLE_STATE=#{modleState}
+        SET PROJECT_ID=#{projectId},MODLE_ID=#{modleId},VERSION=#{version}
         WHERE ID=#{id}
     </update>
 
@@ -137,10 +128,10 @@
 		INSERT INTO MODLE_DEMAND(ID,MODLE_ID,DEMAND_ID) VALUES(#{id},#{modleId},#{demandId})
 	</insert>
 
-    <update id="updateModleDev">
+    <!--<update id="updateModleDev">
         UPDATE <include refid="tableName"></include>
         SET MODLE_STATE = '0'
         WHERE ID=#{id}
-    </update>
+    </update>-->
 
 </mapper>

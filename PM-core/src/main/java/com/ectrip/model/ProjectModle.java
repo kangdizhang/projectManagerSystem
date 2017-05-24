@@ -31,7 +31,7 @@ public class ProjectModle {
         return modleId;
     }
 
-    public void setModleName(Integer modleId) {
+    public void setModleId(Integer modleId) {
         this.modleId = modleId;
     }
 

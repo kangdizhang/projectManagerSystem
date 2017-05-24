@@ -50,7 +50,6 @@ public class ModlePrototypeServiceImpl implements ModlePrototypeService {
         ModlePrototype modlePrototype = new ModlePrototype();
         modlePrototype.setModlePrototypeName(modlePrototypeName);
         modlePrototype.setModlePrototypeDescribe(modlePrototypeDescribe);
-        modlePrototype.setOperateTime(sdf.format(new Date()));
         if(id == null){
             modlePrototypeDAO.saveModlePrototype(modlePrototype);
         }else{

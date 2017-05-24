@@ -15,14 +15,14 @@ public interface ProjectModleDAO {
      * 修改指定需求关联模块未完成状态为已完成
      * @param demandId
      */
-    void updateModleState(Integer demandId);
+    //void updateModleState(Integer demandId);
 
     /**
      * 根据需求ID查询关联模块列表
      * @param demandId
      * @return list
      */
-    List<ProjectModle> findModleList(Integer demandId);
+    //List<ProjectModle> findModleList(Integer demandId);
 
     /**
      * 根据ID删除指定项目模块
@@ -49,7 +49,7 @@ public interface ProjectModleDAO {
      * @param projectId
      * @return list
      */
-    List<ProjectModle> queryModleList(Integer projectId);
+    //List<ProjectModle> queryModleList(Integer projectId);
 
     /**
      * 条件查询
@@ -58,10 +58,10 @@ public interface ProjectModleDAO {
      * @param modleState
      * @return list
      */
-    List<ProjectModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
-                                    @Param("modleName") String modleName, @Param("modleState") String modleState);
+    //List<ProjectModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
+                                    //@Param("modleName") String modleName, @Param("modleState") String modleState);
 
-    List<ProjectModle> queryModleListByProjectId(@Param("projectId") Integer projectId);
+    //List<ProjectModle> queryModleListByProjectId(@Param("projectId") Integer projectId);
 
-    void updateModleDev(@Param("id")Integer id);
+    //void updateModleDev(@Param("id")Integer id);
 }

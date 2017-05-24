@@ -58,9 +58,7 @@ public class ProjectServiceImpl implements ProjectService {
                     ModlePrototype modlePrototype = modlePrototypeDAO.findModlePrototype(Integer.parseInt(a[i]));
                     ProjectModle modle = new ProjectModle();
                     modle.setProjectId(project.getId());
-                    modle.setModleName(modlePrototype.getModlePrototypeName());
-                    modle.setModleDescribe(modlePrototype.getModlePrototypeDescribe());
-                    modle.setModleState("0");
+                    modle.setModleId(modlePrototype.getId());
                     modleDAO.saveModle(modle);
                 }
             }

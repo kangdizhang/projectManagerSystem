@@ -6,12 +6,14 @@
         <id column="ID" property="id"/>
         <result column="PROJECT_ID" property="projectId"/>
         <result column="SERVER_IP" property="serverIp"/>
+        <result column="OPT_SYSTEM" property="optSystem"/>
         <result column="DB_SERVER_IP" property="dbServerIp"/>
         <result column="DB_USER" property="dbUser"/>
         <result column="DB_PWD" property="dbPwd"/>
         <result column="DB_PORT" property="dbPort"/>
         <result column="HOST_NAME" property="hostName"/>
         <result column="SSH" property="ssh"/>
+        <result column="NOTE" property="note"/>
     </resultMap>
 
     <resultMap type="ProjectInfoVO" id="projectInfoVOResultMap">
@@ -19,12 +21,14 @@
         <result column="PROJECT_ID" property="projectId"/>
         <result column="PROJECT_NAME" property="projectName"/>
         <result column="SERVER_IP" property="serverIp"/>
+        <result column="OPT_SYSTEM" property="optSystem"/>
         <result column="DB_SERVER_IP" property="dbServerIp"/>
         <result column="DB_USER" property="dbUser"/>
         <result column="DB_PWD" property="dbPwd"/>
         <result column="DB_PORT" property="dbPort"/>
         <result column="HOST_NAME" property="hostName"/>
         <result column="SSH" property="ssh"/>
+        <result column="NOTE" property="note"/>
     </resultMap>
 
     <!--表名 -->
@@ -37,12 +41,14 @@
 		ID,
 		PROJECT_ID,
 		SERVER_IP,
+		OPT_SYSTEM,
 		DB_SERVER_IP,
 		DB_USER,
 		DB_PWD,
 		DB_PORT,
 		HOST_NAME,
-		SSH
+		SSH,
+		NOTE
 	</sql>
 
     <!-- 字段值 -->
@@ -50,12 +56,14 @@
 		#{id},
 		#{projectId},
 		#{serverIp},
+		#{optSystem},
 		#{dbServerIp},
 		#{dbUser},
 		#{dbPwd},
 		#{dbPort},
 		#{hostName},
-		#{ssh}
+		#{ssh},
+		#{note}
 	</sql>
 
     <!-- 主键查询-->
@@ -78,12 +86,14 @@
         P.PROJECT_NAME,
         PI.PROJECT_ID,
         PI.SERVER_IP,
+        PI.OPT_SYSTEM,
         PI.DB_SERVER_IP,
         PI.DB_USER,
         PI.DB_PWD,
         PI.DB_PORT,
         PI.HOST_NAME,
-        PI.SSH
+        PI.SSH,
+        PI.NOTE
         FROM PROJECT P,PROJECT_INFO PI
         where PI.PROJECT_ID = P.ID
         <if test="projectName!=null and projectName!=''">
@@ -96,7 +106,8 @@
         UPDATE
         <include refid="tableName"></include>
         SET
-        SERVER_IP=#{serverIp},DB_SERVER_IP=#{dbServerIp},DB_USER=#{dbUser},DB_PWD=#{dbPwd},DB_PORT=#{dbPort},HOST_NAME=#{hostName},SSH=#{ssh}
+        SERVER_IP=#{serverIp},OPT_SYSTEM=#{optSystem},DB_SERVER_IP=#{dbServerIp},DB_USER=#{dbUser},DB_PWD=#{dbPwd},
+        DB_PORT=#{dbPort},HOST_NAME=#{hostName},SSH=#{ssh},NOTE=#{note}
         WHERE ID=#{id}
     </update>
 

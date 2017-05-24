@@ -8,12 +8,21 @@ public class Project {
 
     private Integer id;//自增主键
     private String projectName;//项目名称
+    private String region;//项目所在地
     private String projectLeader;//项目负责人
     private String phone;//负责人电话
     private String qq;//负责人QQ
     private String email;//负责人邮箱
     private String operateTime;//操作时间
     private String projectStatus;//项目状态 0(开发中)/1(升级中)/2(已完成)
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
     public String getProjectStatus() {
         return projectStatus;

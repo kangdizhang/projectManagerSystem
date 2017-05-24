@@ -42,7 +42,7 @@
 
 
 	<!-- 修改-->
-	<update id="updateModle" parameterType="Modle">
+	<update id="updateModle" parameterType="ProjectModle">
 		UPDATE <include refid="tableName"></include>
 		SET PROJECT_ID=#{projectId},MODLE_NAME=#{modleName},MODLE_DESCRIBE=#{modleDescribe},MODLE_STATE=#{modleState}
 		WHERE ID=#{id}

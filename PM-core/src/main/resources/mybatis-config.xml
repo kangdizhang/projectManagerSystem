@@ -13,9 +13,6 @@
     </settings>
 	<!--设置别名-->
 	<typeAliases>
-		<typeAlias type="com.ectrip.model.OptEnvironment" alias="OptEnvironment"/>
-		<typeAlias type="com.ectrip.vo.OptRecordAndEnvVO" alias="OptRecordAndEnvVO"/>
-		<typeAlias type="com.ectrip.model.OptRecord" alias="OptRecord"/>
 		<typeAlias type="com.ectrip.model.ProjectModle" alias="ProjectModle"/>
 		<typeAlias type="com.ectrip.model.ModlePrototype" alias="ModlePrototype"/>
 		<typeAlias type="com.ectrip.model.ProjectInfo" alias="ProjectInfo"/>
@@ -25,7 +22,7 @@
 		<typeAlias type="com.ectrip.vo.DemandVO" alias="DemandVO"/>
 		<typeAlias type="com.ectrip.model.ModleDemand" alias="ModleDemand"/>
 		<typeAlias type="com.ectrip.model.Project" alias="Project"/>
-		<typeAlias type="com.ectrip.vo.ProjectInfoVO" alias="Projec0.InfoVO"/>
+		<typeAlias type="com.ectrip.vo.ProjectInfoVO" alias="ProjectInfoVO"/>
 		<typeAlias type="com.ectrip.vo.ProjectModleVO" alias="ProjectModleVO"/>
 		<typeAlias type="com.ectrip.vo.VersionVO" alias="VersionVO"/>
 	</typeAliases>

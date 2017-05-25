@@ -68,6 +68,7 @@
         <%--<input type="text" name="projectLeader" id="projectLeader"class="abc input-default" placeholder="这里输入项目负责人">&nbsp;&nbsp;&nbsp;&nbsp;--%>
 
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
+        <button type="button" onclick="window.location.href='${bathPath}/projectInfo/addProjectInfo'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -114,12 +115,15 @@
                 {field: 'id', title:'编号',align:'center'},
                 {field: 'projectName', title: '项目名称',align:'center'},
                 {field: 'serverIp', title: '服务器IP',align:'center'},
+                {field: 'optSystem', title: '服务器系统',align:'center'},
                 {field: 'dbServerIp', title: '数据库IP',align:'center'},
                 {field: 'dbUser', title: '数据库用户名',align:'center'},
                 {field: 'dbPwd', title: '数据库密码',align:'center'},
                 {field: 'dbPort', title: '数据库端口',align:'center'},
                 {field: 'hostName', title: '域名',align:'center'},
-                {field: 'ssh', title: 'ssh信息', align: 'center'}
+                {field: 'ssh', title: 'ssh信息', align: 'center'},
+                {field: 'note', title: '备注', align: 'center'},
+                {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
     });
@@ -135,6 +139,15 @@
 
     function reloadTable() {
         $table.bootstrapTable('refresh');
+    }
+
+    function operateFormatter(value, row, index) {
+        return [
+            '<a href="${bathPath}/projectInfo/editProjectInfo?id='+row.id+
+            '" data-toggle="tooltip" title="Edit">修改</a> ',
+            '<a href="${bathPath}/projectInfo/deleteProjectInfo?id='+row.id+
+            '"data-toggle="tooltip" title="Del">删除</a> '
+        ].join('');
     }
 
 </script>

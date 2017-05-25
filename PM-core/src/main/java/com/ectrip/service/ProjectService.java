@@ -1,8 +1,6 @@
 package com.ectrip.service;
 
 import com.ectrip.model.Project;
-import com.ectrip.model.ProjectInfo;
-import com.ectrip.vo.OptRecordAndEnvVO;
 import com.ectrip.vo.ProjectInfoVO;
 import com.github.pagehelper.PageInfo;
 
@@ -18,7 +16,7 @@ public interface ProjectService {
     void saveProject(String[] a,Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String projectStatus);
     void saveProjectInfo(Integer id,Integer projectId, String serverIp, String dbServerIp, String dbUserId, String dbPwd, Integer dbPort, String hostName,String SSH);
     Project queryProject(Integer projectId);
-    ProjectInfo queryProjectInfo(Integer projectId);
+    ProjectInfoVO queryProjectInfo(Integer id);
     /**
      * 按条件查询操作记录和环境
      *

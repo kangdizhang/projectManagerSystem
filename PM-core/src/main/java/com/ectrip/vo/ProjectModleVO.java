@@ -8,10 +8,10 @@ public class ProjectModleVO {
     private Integer id;//自增主键
     private Integer projectId;//项目表主键
     private String projectName;//项目名称
+    private Integer modleId;//模块ID
     private String modleName;//模块名称
     private String modleDescribe;//模块描述
     private String version;//当前版本版本号
-    private String modleState;//模块状态，0：开发中，1：已完成
 
     public Integer getId() {
         return id;
@@ -61,12 +61,12 @@ public class ProjectModleVO {
         this.version = version;
     }
 
-    public String getModleState() {
-        return modleState;
+    public Integer getModleId() {
+        return modleId;
     }
 
-    public void setModleState(String modleState) {
-        this.modleState = modleState;
+    public void setModleId(Integer modleId) {
+        this.modleId = modleId;
     }
 
     public ProjectModleVO() {

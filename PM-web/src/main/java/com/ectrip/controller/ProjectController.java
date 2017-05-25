@@ -36,6 +36,13 @@ public class ProjectController extends BaseController {
     @Autowired
     private ModlePrototypeService modlePrototypeService;
 
+    @RequestMapping(value = "/projectList",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView projectList(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("project/projectList");
+        return modelAndView;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     public Object list(Integer offset,Integer limit,String projectStatus,String projectName,String projectLeader) {

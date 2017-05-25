@@ -17,5 +17,5 @@ public interface ProjectInfoDAO {
 
     void updateProjectInfo(ProjectInfo projectInfo);
 
-    ProjectInfo findProjectInfoByProjectId(@Param("projectId") Integer projectId);
+    ProjectInfoVO findProjectInfoByProjectId(@Param("id") Integer id);
 }

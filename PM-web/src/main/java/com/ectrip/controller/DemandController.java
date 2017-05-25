@@ -39,6 +39,13 @@ public class DemandController extends BaseController {
     @Autowired
     private ModleService modleService;
 
+    @RequestMapping(value = "/demandList",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView projectList(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("demand/demandList");
+        return modelAndView;
+    }
+
     @RequestMapping(value="/completeDemand",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView completeDemand(Integer id,Integer projectId){
         ModelAndView modelAndView = new ModelAndView();
@@ -50,11 +57,12 @@ public class DemandController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public Object demandList(Integer offset,Integer limit,Integer projectId,String demandName,String demandStatus){
+    public Object demandList(Integer offset,Integer limit,String projectName,String demandName,String demandStatus){
         int pageNo = 1;
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
+        Integer projectId = 1;
         PageInfo<DemandVO> pageInfo = demandService.queryDemand(pageNo,limit,projectId,demandName,demandStatus);
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("rows",pageInfo.getList());

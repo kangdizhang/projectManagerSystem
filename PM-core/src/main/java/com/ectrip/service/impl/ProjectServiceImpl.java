@@ -93,8 +93,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectInfo queryProjectInfo(Integer projectId) {
-        return projectInfoDAO.findProjectInfoByProjectId(projectId);
+    public ProjectInfoVO queryProjectInfo(Integer id) {
+        return projectInfoDAO.findProjectInfoByProjectId(id);
     }
 
     @Override

@@ -50,10 +50,17 @@
 </head>
 <body>
 
-<input type="hidden" name="projectId" id="projectId" value="${param.projectId}">
+
 
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
+        <!-- 项目名称 -->
+        <input type="text" name="projectName" id="projectName"class="abc input-default" placeholder="这里输入项目名称">
+
+        <%--需求名称：--%>
+        <input type="text" name="demandName" id="demandName"class="abc input-default" placeholder="这里输入需求名称">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
         <%--需求状态：--%>
         <label for="demandState">需求状态：</label>
         <select name="demandState" id="demandState" class="form-control">
@@ -61,10 +68,6 @@
             <option value="0">开发中</option>
             <option value="1">已完成</option>
         </select>&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <%--需求名称：--%>
-        <input type="text" name="demandName" id="modleName"class="abc input-default" placeholder="这里输入需求名称">
-        &nbsp;&nbsp;&nbsp;&nbsp;
 
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -82,7 +85,7 @@
         // bootstrap table初始化
         $table.bootstrapTable({
             //method:"get",
-            //url: '${basePath}/optManage/findOptRecordList',
+            //url: '/optManage/findOptRecordList',
             url:'${basePath}/demand/list',
             queryParams:oTableInit.queryParams,
             striped: true,
@@ -128,24 +131,23 @@
             ]
         });
     });
+
     oTableInit.queryParams = function (params) {
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            projectId:${param.projectId},
-            demandName: $("#modleName").val(),
-            demandStatus:$("#modleState").val()
+            projectName:("#projectName").val(),
+            demandName:$("#demandName").val(),
+            demandStatus:$("#demandState").val()
         };
         return temp;
-    };
-
-
+    }
 
     function reloadTable() {
         $table.bootstrapTable('refresh');
     }
 
-   function completeFormatter(value, row, index) {
+    function completeFormatter(value, row, index) {
         return [
             '<a href="${bathPath}/demand/completeDemand?id='+row.id+
             '&projectId=${param.projectId}' +

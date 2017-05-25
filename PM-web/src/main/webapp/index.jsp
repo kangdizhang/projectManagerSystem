@@ -52,10 +52,10 @@
     BUI.use('common/main',function(){
         var config = [{id:'manage',menu:[{text:'系统管理',
                                         items:[
-                                            {id:'monitor',text:'项目列表管理  ',href:'${basePath}/projectList'},
-                                            {id:'monitor1',text:'配置信息管理  ',href:'${basePath}/projectInfoList'},
-                                            {id:'monitor2',text:'模块原型管理  ',href:'${basePath}/modlePrototypeList'},
-                                            {id:'monitor3',text:'需求列表管理  ',href:'${basePath}/demandList'}
+                                            {id:'monitor',text:'项目列表管理  ',href:'${basePath}/project/projectList'},
+                                            {id:'monitor1',text:'配置信息管理  ',href:'${basePath}/projectInfo/projectInfoList'},
+                                            {id:'monitor2',text:'模块原型管理  ',href:'${basePath}/modlePrototype/modlePrototypeList'},
+                                            {id:'monitor3',text:'需求列表管理  ',href:'${basePath}/demand/demandList'}
                                             /*,{id:'sql-monitor',text:'sql监控  ',href:'druid/index.html'}*/
                                         ]
         }]}];

@@ -19,7 +19,6 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-
   <filter>
     <filter-name>DruidWebStatFilter</filter-name>
     <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
@@ -33,7 +32,6 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-
   <servlet>
     <servlet-name>DruidStatView</servlet-name>
     <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
@@ -42,107 +40,6 @@
     <servlet-name>DruidStatView</servlet-name>
     <url-pattern>/druid/*</url-pattern>
   </servlet-mapping>
-
-  <!-- 配置web-inf下页面跳转访问 -->
-  <!--<servlet>-->
-    <!--<servlet-name>addDemand</servlet-name>-->
-    <!--<jsp-file>/WEB-INF/view/demand/addDemand.jsp</jsp-file>-->
-  <!--</servlet>-->
-  <!--<servlet-mapping>-->
-    <!--<servlet-name>addDemand</servlet-name>-->
-    <!--<url-pattern>/addDemand</url-pattern>-->
-  <!--</servlet-mapping>-->
-
-  <servlet>
-    <servlet-name>demandList</servlet-name>
-    <jsp-file>/WEB-INF/view/demand/demandList.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>demandList</servlet-name>
-    <url-pattern>/demandList</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>editModle</servlet-name>
-    <jsp-file>/WEB-INF/view/modle/editModle.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>editModle</servlet-name>
-    <url-pattern>/editModle</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>modleList</servlet-name>
-    <jsp-file>/WEB-INF/view/modle/modleList.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>modleList</servlet-name>
-    <url-pattern>/modleList</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>editModlePrototype</servlet-name>
-    <jsp-file>/WEB-INF/view/modle/editModlePrototype.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>editModlePrototype</servlet-name>
-    <url-pattern>/editModlePrototype</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>modlePrototypeList</servlet-name>
-    <jsp-file>/WEB-INF/view/modle/modlePrototypeList.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>modlePrototypeList</servlet-name>
-    <url-pattern>/modlePrototypeList</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>projectInfoList</servlet-name>
-    <jsp-file>/WEB-INF/view/projectInfo/projectInfoList.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>projectInfoList</servlet-name>
-    <url-pattern>/projectInfoList</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>editProjectInfo</servlet-name>
-    <jsp-file>/WEB-INF/view/projectInfo/editProjectInfo.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>editProjectInfo</servlet-name>
-    <url-pattern>/editProjectInfo</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>projectList</servlet-name>
-    <jsp-file>/WEB-INF/view/project/projectList.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>projectList</servlet-name>
-    <url-pattern>/projectList</url-pattern>
-  </servlet-mapping>
-
-  <!--<servlet>
-    <servlet-name>editProject</servlet-name>
-    <jsp-file>/WEB-INF/view/project/addProject.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>editProject</servlet-name>
-    <url-pattern>/editProject</url-pattern>
-  </servlet-mapping>-->
-
-  <servlet>
-    <servlet-name>addProjectInfo</servlet-name>
-    <jsp-file>/WEB-INF/view/projectInfo/editProjectInfo.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>addProjectInfo</servlet-name>
-    <url-pattern>/addProjectInfo</url-pattern>
-  </servlet-mapping>
-
 
   <!--配置spring启动文件-->
   <context-param>
@@ -170,12 +67,10 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
-
 <!--  <filter>
     <filter-name>startFilter</filter-name>
     <filter-class>com.ectrip.filter.startFilter</filter-class>
   </filter>-->
-
 
   <error-page>
     <error-code>404</error-code>

@@ -73,10 +73,21 @@
         WHERE ID=#{id}
     </select>
 
-    <select id="findProjectInfoByProjectId" resultMap="projectInfoResultMap">
-        SELECT <include refid="Field"></include> FROM
-        <include refid="tableName"></include>
-        WHERE PROJECT_ID=#{projectId}
+    <select id="findProjectInfoByProjectId" resultMap="projectInfoVOResultMap">
+        PI.ID,
+        P.PROJECT_NAME,
+        PI.PROJECT_ID,
+        PI.SERVER_IP,
+        PI.OPT_SYSTEM,
+        PI.DB_SERVER_IP,
+        PI.DB_USER,
+        PI.DB_PWD,
+        PI.DB_PORT,
+        PI.HOST_NAME,
+        PI.SSH,
+        PI.NOTE
+        FROM PROJECT P,PROJECT_INFO PI
+        WHERE PI.PROJECT_ID = P.ID AND ID=#{id}
     </select>
 
     <!-- 条件查询-->

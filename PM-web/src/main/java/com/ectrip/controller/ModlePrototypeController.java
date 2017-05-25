@@ -27,6 +27,13 @@ public class ModlePrototypeController extends BaseController {
     @Autowired
     private ModlePrototypeService modlePrototypeService;
 
+    @RequestMapping(value = "/modlePrototypeList",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView projectList(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("modle/modlePrototypeList");
+        return modelAndView;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/list", method = {RequestMethod.GET,RequestMethod.POST})
     public Object list(Integer offset, Integer limit, String modlePrototypeName) {

@@ -10,12 +10,14 @@ public class ProjectInfoVO {
     private String projectName;
     private Integer projectId;//项目表主键
     private String serverIp;//服务器IP
+    private String optSystem;//服务器操作系统
     private String dbServerIp;//数据库服务器IP
     private String dbUser;//数据库用户名
     private String dbPwd;//数据库密码
     private Integer dbPort;//数据库端口号
     private String hostName;//域名
     private String ssh;//包括：服务器用户名、密码、端口号、连接方式、防火墙等
+    private String note;//备注
 
     public Integer getId() {
         return id;
@@ -23,6 +25,22 @@ public class ProjectInfoVO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getOptSystem() {
+        return optSystem;
+    }
+
+    public void setOptSystem(String optSystem) {
+        this.optSystem = optSystem;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Integer getProjectId() {

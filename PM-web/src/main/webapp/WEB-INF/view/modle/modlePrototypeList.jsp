@@ -106,7 +106,7 @@
                 {field: 'id', title:'编号',align:'center'},
                 {field: 'modlePrototypeName', title: '模块名称',align:'center'},
                 {field: 'modlePrototypeDescribe', title: '模块描述',align:'center'},
-                {field: 'operateTime', title: '最后操作时间',align:'center'},
+                {field: 'versionList', title: '版本列表',align:'center',formatter: 'versionList', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -120,10 +120,14 @@
         return temp;
     };
 
-
-
     function reloadTable() {
         $table.bootstrapTable('refresh');
+    }
+
+    function versionList(value, row, index) {
+        return [
+            '<a href="${bathPath}/versionList?id='+row.id+'" data-toggle="tooltip" title="view">查看</a> '
+        ].join('');
     }
 
     function operateFormatter(value, row, index) {

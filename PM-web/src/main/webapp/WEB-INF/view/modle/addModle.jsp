@@ -77,7 +77,11 @@
                     <td>
                         <c:forEach items="${list}" var="modlePrototype">
                             <label class='checkbox inline'><input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}</label>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            版本号：<select name="version">
+                            <c:forEach var="versionVO" items="${list.versionVOList}">
+                                <option value="${versionVO.id}">${versionVO.version}</option>
+                            </c:forEach>
+                            </select>
                         </c:forEach>
                     </td>
                 </tr>
@@ -86,7 +90,7 @@
                         <tr>
                             <td width="10%" class="tableleft">提示信息</td>
                             <td>
-                                <p style="color: crimson">${msg}</p>
+                                <p style="color: crimson">${mesg}</p>
                             </td>
                         </tr>
                     </c:when>

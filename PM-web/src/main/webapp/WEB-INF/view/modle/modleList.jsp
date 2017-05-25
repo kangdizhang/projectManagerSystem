@@ -54,18 +54,9 @@
 
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
-        <%--模块状态：--%>
-        <label for="modleState">模块状态：</label>
-        <select name="modleState" id="modleState" class="form-control">
-            <option value="">所有</option>
-            <option value="0">开发中</option>
-            <option value="1">已完成</option>
-        </select>&nbsp;&nbsp;&nbsp;&nbsp;
-
         <%--模块名称：--%>
-        <input type="text" name="modleName" id="modleName"class="abc input-default" placeholder="这里输入模块名称">
+        <input type="text" name="projecModleName" id="projecModleName"class="abc input-default" placeholder="这里输入模块名称">
         &nbsp;&nbsp;&nbsp;&nbsp;
-
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -115,10 +106,10 @@
             columns: [
                 {field: 'id', title:'编号',align:'center'},
                 {field: 'projectName', title: '项目名称',align:'center'},
-                {field: 'modleName', title: '模块名称',align:'center'},
-                {field: 'version', title: '使用版本',align:'center'},
-                {field: 'verisonList', title: '历史版本', align: 'center', formatter: 'versionList', clickToSelect: false},
+                {field: 'projecModleName', title: '模块名称',align:'center'},
                 {field: 'modleDescribe', title: '模块描述',align:'center'},
+                {field: 'version', title: '使用版本',align:'center'},
+                {field: 'verisonId', title: '父版本', align: 'center', formatter: 'versionList', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -128,8 +119,7 @@
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
             projectId:${param.projectId},
-            modleName: $("#modleName").val(),
-            modleState:$("#modleState").val()
+            projecModleName: $("#projecModleName").val()
         };
         return temp;
     };

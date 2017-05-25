@@ -58,10 +58,6 @@
             <td width="10%" class="tableleft">模块原型名称</td>
             <td><input type="text" name="modlePrototypeName" value="${param.modlePrototypeName}"/></td>
         </tr>
-        <tr>
-            <td width="10%" class="tableleft">模块原型描述</td>
-            <td><input type="text" name="modlePrototypeDescribe" value="${param.modlePrototypeDescribe}"/></td>
-        </tr>
         <c:choose>
             <c:when test="${msg!=null}">
                 <tr>

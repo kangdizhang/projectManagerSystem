@@ -125,6 +125,7 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand = new ModleDemand();
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
+
                 modleDemandDAO.saveModle(modleDemand);
                 //modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
             }

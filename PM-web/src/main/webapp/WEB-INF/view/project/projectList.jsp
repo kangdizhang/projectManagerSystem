@@ -125,9 +125,9 @@
                 {field: 'operateTime', title: '最后操作时间',align:'center'},
                 {field: 'projectStatus', title: '项目状态',align:'center'},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false},
-                {field: 'projectInfo', title: '基础信息', align: 'center', formatter: 'projectInfoFormatter', events: 'projectInfoEvents', clickToSelect: false},
-                {field: 'modleList', title: '模块列表', align: 'center', formatter: 'modleListFormatter', events: 'modleListEvents', clickToSelect: false},
-                {field: 'demandList', title: '需求列表', align: 'center', formatter: 'demandListFormatter', events: 'demandListEvents', clickToSelect: false}
+                //{field: 'projectInfo', title: '配置信息', align: 'center', formatter: 'projectInfoFormatter', events: 'projectInfoEvents', clickToSelect: false},
+                {field: 'projectModleList', title: '模块列表', align: 'center', formatter: 'modleListFormatter', events: 'modleListEvents', clickToSelect: false},
+                //{field: 'demandList', title: '需求列表', align: 'center', formatter: 'demandListFormatter', events: 'demandListEvents', clickToSelect: false}
             ]
         });
     });
@@ -170,11 +170,11 @@
         ].join('');
     }
 
-    function projectInfoFormatter(value, row, index) {
+    /*function projectInfoFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/projectInfo/viewProjectInfo?id='+row.id+'&projectName='+row.projectName+'" data-toggle="tooltip" title="View">查看</a>'
+            '<a href="/projectInfo/viewProjectInfo?id='+row.id+'&projectName='+row.projectName+'" data-toggle="tooltip" title="View">查看</a>'
         ].join('');
-    }
+    }*/
 
     function modleListFormatter(value, row, index) {
         return [
@@ -182,11 +182,11 @@
         ].join('');
     }
 
-    function demandListFormatter(value, row, index) {
+    /*function demandListFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/demandList?projectId='+row.id+'" data-toggle="tooltip" title="View">查看</a>　'
+            '<a href="/demandList?projectId='+row.id+'" data-toggle="tooltip" title="View">查看</a>　'
         ].join('');
-    }
+    }*/
 
 </script>
 

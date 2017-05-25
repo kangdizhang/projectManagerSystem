@@ -55,8 +55,9 @@
             <c:choose>
                 <c:when test="${project.id != null}">
                     <td>
-                        <c:forEach items="${list}" var="modle">
-                            <p>${modle.modleName}</p>
+                        <c:forEach items="${list}" var="projectModleVO">
+                            <span>${projectModleVO.modleName}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            版本号：${projectModleVO.version}
                         </c:forEach>
                     </td>
                 </c:when>
@@ -66,6 +67,11 @@
                             <label class='checkbox inline'>
                                 <input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
                             </label>
+                            版本号：<select name="version">
+                                <c:forEach var="versionVO" items="${list.versionVOList}">
+                                    <option value="${versionVO.id}">${versionVO.version}</option>
+                                </c:forEach>
+                            </select>
                         </c:forEach>
                     </td>
                 </c:otherwise>

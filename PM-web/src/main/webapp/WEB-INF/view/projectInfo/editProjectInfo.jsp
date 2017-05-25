@@ -49,13 +49,14 @@
         <tr>
             <td width="10%" class="tableleft">所属项目</td>
             <c:choose>
-                <c:when test="${projectInfoVO==null}">
+                <c:when test="${projectInfoVO!=null}">
+                    <input type="hidden" name="id" value="${projectInfoVO.id}">
                     <input type="hidden" name="projectId" value="${projectInfoVO.projectId}">
                     <td width="35%">${projectInfoVO.projectName}</td>
                 </c:when>
                 <c:otherwise>
                     <td width="35%">
-                        <select name="projectName">
+                        <select name="projectId">
                             <option value="0">请选择项目</option>
                             <c:forEach var="project" items="list">
                                 <option value="${project.id}">${project.projectName}</option>

@@ -74,53 +74,23 @@ public class ProjectInfoController extends BaseController {
         return result;
     }
 
+    @RequestMapping(value = "/delProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView delProjectInfo(Integer id){
+        ModelAndView modelAndView = new ModelAndView();
+        projectService.delProjectInfo(id);
+        modelAndView.setViewName("projectInfo/projectInfoList");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/saveProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveProject(Integer id,Integer projectId,String serverIp, String dbServerIp, String dbUser, String dbPwd, Integer dbPort, String hostName,String ssh){
+    public ModelAndView saveProjectInfo(ProjectInfo projectInfo){
         ModelAndView mav = getModelAndView();
-        Project project = projectService.queryProject(projectId);
-        mav.addObject("project",project);
-        if(StringUtils.isEmpty(serverIp)){
-            mav.addObject("msg","服务器IP不能为空");
-            mav.setViewName("projectInfo/editProjectInfo");
-            return mav;
-        }
-        if(StringUtils.isEmpty(dbServerIp)){
-            mav.addObject("msg","数据库IP不能为空");
-            mav.setViewName("projectInfo/editProjectInfo");
-            return mav;
-        }
-        if(StringUtils.isEmpty(dbUser)){
-            mav.addObject("msg","数据库用户名不能为空");
-            mav.setViewName("projectInfo/editProjectInfo");
-            return mav;
-        }
-        if(StringUtils.isEmpty(dbPwd)){
-            mav.addObject("msg","数据库密码不能为空");
-            mav.setViewName("projectInfo/editProjectInfo");
-            return mav;
-        }
-        if(StringUtils.isEmpty(dbPort)){
-            mav.addObject("msg","数据库端口号不能为空");
-            mav.setViewName("projectInfo/editProjectInfo");
-            return mav;
-        }
-        if(StringUtils.isEmpty(hostName)){
-            mav.addObject("msg","域名不能为空");
-            mav.setViewName("projectInfo/editProjectInfo");
-            return mav;
-        }
-        if(StringUtils.isEmpty(ssh)){
-            mav.addObject("msg","ssh信息不能为空");
-            mav.setViewName("projectInfo/editProjectInfo");
-            return mav;
-        }
-        try{
-        projectService.saveProjectInfo(id,projectId,serverIp, dbServerIp, dbUser, dbPwd, dbPort, hostName,ssh);
-            mav.setViewName("projectInfo/projectInfoList");
-        }catch (Exception e){
-            e.printStackTrace();
+        if (projectInfo.getProjectId() == 0) {
+            mav.addObject("msg","请选择项目！");
             mav.setViewName("projectInfo/editProjectInfo");
         }
+        projectService.saveProjectInfo(projectInfo);
+        mav.setViewName("projectInfo/projectInfoList");
         return mav;
     }
 }

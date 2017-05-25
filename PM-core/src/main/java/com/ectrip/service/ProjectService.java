@@ -1,6 +1,7 @@
 package com.ectrip.service;
 
 import com.ectrip.model.Project;
+import com.ectrip.model.ProjectInfo;
 import com.ectrip.vo.ProjectInfoVO;
 import com.github.pagehelper.PageInfo;
 
@@ -13,8 +14,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ProjectService {
 
+    /**
+     * 根据ID删除项目配置信息
+     * @param id
+     */
+    public void delProjectInfo(Integer id);
+
     void saveProject(String[] a,Integer id,String projectName, String projectLeader, String phone, String QQ, String email, String projectStatus);
-    void saveProjectInfo(Integer id,Integer projectId, String serverIp, String dbServerIp, String dbUserId, String dbPwd, Integer dbPort, String hostName,String SSH);
+    void saveProjectInfo(ProjectInfo projectInfo);
     Project queryProject(Integer projectId);
     ProjectInfoVO queryProjectInfo(Integer id);
     /**

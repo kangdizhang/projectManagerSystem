@@ -11,6 +11,12 @@ import java.util.List;
  */
 public interface ProjectInfoDAO {
 
+    /**
+     * 根据ID删除项目配置信息
+     * @param id
+     */
+    void delProjectInfo(Integer id);
+
     List<ProjectInfoVO> findProjectInfoListPage(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectName") String projectName);
 
     void saveProjectInfo(ProjectInfo projectInfo);

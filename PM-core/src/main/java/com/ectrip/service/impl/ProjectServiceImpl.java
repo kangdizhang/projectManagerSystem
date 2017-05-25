@@ -37,6 +37,13 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ModlePrototypeDAO modlePrototypeDAO;
 
+    /**
+     * 根据ID删除项目配置信息
+     * @param id
+     */
+    public void delProjectInfo(Integer id){
+        projectInfoDAO.delProjectInfo(id);
+    }
 
     @Override
     @Transactional
@@ -69,21 +76,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void saveProjectInfo(Integer id, Integer projectId, String serverIp, String dbServerIp, String dbUserId, String dbPwd, Integer dbPort, String hostName, String SSH) {
-        ProjectInfo projectInfo = new ProjectInfo();
-        projectInfo.setProjectId(projectId);
-        projectInfo.setServerIp(serverIp);
-        projectInfo.setDbServerIp(dbServerIp);
-        projectInfo.setDbUser(dbUserId);
-        projectInfo.setDbPwd(dbPwd);
-        projectInfo.setDbPort(dbPort);
-        projectInfo.setHostName(hostName);
-        projectInfo.setSsh(SSH);
-        if(id==null){
-            projectInfoDAO.saveProjectInfo(projectInfo);
-        }else{
-            projectInfo.setId(id);
+    public void saveProjectInfo(ProjectInfo projectInfo) {
+        if (projectInfo.getId() != null){
             projectInfoDAO.updateProjectInfo(projectInfo);
+        } else {
+            projectInfoDAO.saveProjectInfo(projectInfo);
         }
     }
 

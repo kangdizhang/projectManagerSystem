@@ -13,7 +13,11 @@
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/style.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-table.min.css"/>
+    <link href="http://hovertree.com/ziyuan/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://hovertree.com/texiao/bootstrap/4/css/city-picker.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${basePath}/Js/jquery.js"></script>
+    <script src="http://hovertree.com/texiao/bootstrap/4/js/city-picker.data.js"></script>
+    <script src="http://hovertree.com/texiao/bootstrap/4/js/city-picker.js"></script>
     <script type="text/javascript" src="${basePath}/Js/bootstrap.js"></script>
     <script type="text/javascript" src="${basePath}/Js/ckform.js"></script>
     <script type="text/javascript" src="${basePath}/Js/bootstrap-table.min.js"></script>
@@ -80,15 +84,23 @@
         <tr>
             <td width="10%" class="tableleft">项目所在地</td>
             <td width="35%">
-                <select style="width: 100px;height: auto">
+                <div style="position: relative;">
+                    <input name="region" id="city-picker3" class="form-control" readonly type="text" value="请选择省市区" data-toggle="city-picker">
+                </div
+                <%--<div id="citySelect">
+                    <select class="prov" id="province"></select>
+                    <select class="city" disabled="disabled" id="city"></select>
+                    <select class="dist" disabled="disabled" id="county"></select>
+                </div>--%>
+                <%--<select name="province" style="width: 100px;height: auto">
                     <option></option>
                 </select>省&nbsp;&nbsp;
-                <select style="width: 100px;height: auto">
+                <select name="" style="width: 100px;height: auto">
                     <option></option>
                 </select>市&nbsp;&nbsp;
                 <select style="width: 100px;height: auto">
                     <option></option>
-                </select>区
+                </select>区--%>
             </td>
             <td width="10%" class="tableleft">项目负责人</td>
             <td><input type="text" name="projectLeader" value="${project.projectLeader}"/><span style="color: #a9302a">*</span></td>
@@ -113,7 +125,7 @@
         <tr>
             <td width="10%" class="tableleft">服务器IP</td>
             <td width="35%"><input type="text" name="serverIp" value="${param.serverIp}"/></td>
-            <td width="10%">服务器系统</td>
+            <td width="10%" class="tableleft">服务器系统</td>
             <td><input type="text" name="serverSystem" value="${param.serverSystem}"/></td>
         </tr>
         <tr>
@@ -135,7 +147,7 @@
             <td width="35%"><input type="text" name="ssh" value="${param.ssh}"/></td>
         </tr>
         <tr>
-            <td width="10%">备注</td>
+            <td width="10%" class="tableleft">备注</td>
             <td width="35%"><textarea name="note" style="width: auto;height: auto">${param.note}</textarea></td>
             <td width="10%"></td>
             <td></td>

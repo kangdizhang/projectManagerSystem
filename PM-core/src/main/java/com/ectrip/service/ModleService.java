@@ -13,6 +13,13 @@ import java.util.List;
 public interface ModleService {
 
     /**
+     * 主键查询项目模块
+     * @param id
+     * @return
+     */
+    ProjectModleVO findProjectModleVO(Integer id);
+
+    /**
      * 根据需求ID查询关联模块列表
      * @param demandId
      * @return list

@@ -47,6 +47,15 @@ public class ModleServiceImpl implements ModleService {
     }
 
     /**
+     * 主键查询项目模块
+     * @param id
+     * @return
+     */
+    public ProjectModleVO findProjectModleVO(Integer id){
+        return modleDAO.findProjectModleVO(id);
+    }
+
+    /**
      * 根据ID删除指定项目模块
      * @param id
      */

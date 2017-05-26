@@ -54,7 +54,7 @@
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
         <!-- 选择项目 -->
-        <select name="projectName">
+        <select id="projectName" name="projectName">
             <option name="projectId" value="">请选择项目</option>
             <c:forEach items="${list}" var="Project">
                 <c:choose>
@@ -74,7 +74,7 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${param.projectId}'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${project.id}'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>

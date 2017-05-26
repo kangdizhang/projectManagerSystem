@@ -46,6 +46,13 @@ public interface ProjectModleDAO {
     int updateModle(ProjectModle modle);
 
     /**
+     * 主键查询项目模块
+     * @param id
+     * @return
+     */
+    ProjectModleVO findProjectModleVO(@Param("id") Integer id);
+
+    /**
      * 查找指定项目的模块列表
      * @param projectId
      * @return list

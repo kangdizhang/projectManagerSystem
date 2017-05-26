@@ -53,39 +53,52 @@
 <body>
 <form action="/modle/updateModle" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="hidden" name="id" value="${projectModleVO.id}">
+        <input type="hidden" name="id" value="${id}">
         <input type="hidden" name="projectId" value="${projectModleVO.projectId}">
+        <input type="hidden" name="modleId" value="${projectModleVO.modleId}">
         <tr>
-            <td width="10%" class="tableleft">项目模块名称</td>
+            <td width="10%" class="tableleft">模块所属项目</td>
+            <td width="35%"><span name="projectName">${projectModleVO.projectName}</span></td>
+            <td width="10%" class="tableleft">模块名称</td>
             <td>
-                ${projectModleVO.modleName}"&nbsp;&nbsp;&nbsp;&nbsp;
-                版本号：<select name="version">
+                <input name="modleName" type="text" value="${projectModleVO.modleName}" style="width: 150px">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                版本号：<select name="version" style="width:100px">
                     <c:forEach var="versionVO" items="${versionVOList}">
-                        <option value="${versionVO.id}">${versionVO.version}</option>
+                        <c:choose>
+                            <c:when test="${projectModleVO.version==versionVO.version}">
+                                <option value="${versionVO.id}" selected="selected">${versionVO.version}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${versionVO.id}">${versionVO.version}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
             </td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">项目模块描述</td>
-            <td><input type="text" name="modleDescribe" value="${projectModleVO.modleDescribe}"/></td>
-        </tr>
-        <c:choose>
-            <c:when test="${msg!=null}">
-                <tr>
+            <td width="35%"><textarea name="modleDescribe">${projectModleVO.modleDescribe}</textarea></td>
+            <c:choose>
+                <c:when test="${msg!=null}">
                     <td class="tableleft">提示信息</td>
                     <td>
                         <p style="color: crimson">${msg}</p>
                     </td>
-                </tr>
-            </c:when>
-        </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <td class="tableleft"></td>
+                    <td></td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
         <tr>
             <td class="tableleft"></td>
-            <td>
+            <td colspan="3">
                 <button type="submit" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;
-                <a class="btn btn-success" href="${bathPath}/modleList?projectId=${param.projectId}">返回列表</a>
+                <a class="btn btn-success" href="${bathPath}/modle/modleList?projectId=${projectModleVO.projectId}">返回列表</a>
             </td>
         </tr>
     </table>

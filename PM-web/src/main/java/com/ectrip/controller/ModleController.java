@@ -4,6 +4,7 @@ import com.ectrip.common.base.BaseController;
 import com.ectrip.model.Project;
 import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
+import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.ProjectService;
 import com.ectrip.vo.ProjectModleVO;
@@ -30,6 +31,9 @@ public class ModleController extends BaseController {
     private ModleService modleService;
 
     @Autowired
+    private ModlePrototypeService modlePrototypeService;
+
+    @Autowired
     private ProjectService projectService;
 
     @ResponseBody
@@ -46,11 +50,22 @@ public class ModleController extends BaseController {
         return result;
     }
 
+    @RequestMapping(value = "/editModle",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView editModle(Integer id){
+        ModelAndView modelAndView = new ModelAndView();
+        ProjectModleVO projectModleVO = modleService.findProjectModleVO(id);
+        modelAndView.addObject("projectModleVO",projectModleVO);
+        modelAndView.setViewName("modle/editModle");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/modleList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView modleList(Integer projectId){
         ModelAndView modelAndView = new ModelAndView();
         List<Project> list = projectService.findProjectListPage(null,null,null,null,null).getList();
+        Project project = projectService.queryProject(projectId);
         modelAndView.addObject("list",list);
+        modelAndView.addObject("project",project);
         modelAndView.setViewName("modle/modleList");
         return modelAndView;
     }
@@ -63,6 +78,11 @@ public class ModleController extends BaseController {
             for (int i = 0; i < a.length; i++){
                 modleService.saveModle(projectId,Integer.parseInt(a[i]));
             }
+            List<Project> list = projectService.findProjectListPage(null,null,null,null,null).getList();
+            Project project = projectService.queryProject(projectId);
+            mav.addObject("list",list);
+            mav.addObject("project",project);
+            mav.setViewName("modle/modleList");
             mav.setViewName("modle/modleList");
             return mav;
         } else {
@@ -89,18 +109,35 @@ public class ModleController extends BaseController {
     public ModelAndView deleteModle(Integer id,Integer projectId){
         ModelAndView mav = new ModelAndView();
         modleService.deleteModle(id);
-        Map<String,Integer> map = new HashMap<String, Integer>();
-        map.put("projectId",projectId);
-        mav.addObject("param",map) ;
+        List<Project> list = projectService.findProjectListPage(null,null,null,null,null).getList();
+        Project project = projectService.queryProject(projectId);
+        mav.addObject("list",list);
+        mav.addObject("project",project);
         mav.setViewName("modle/modleList");
         return mav;
     }
 
     @RequestMapping(value = "/updateModle",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView updateModle(ProjectModle modle){
+    public ModelAndView updateModle(ProjectModleVO projectModleVO){
         ModelAndView mav = new ModelAndView();
-        modleService.updateModle(modle);
-        mav.addObject("param",modle);
+
+        ModlePrototype modlePrototype = new ModlePrototype();
+        modlePrototype.setId(projectModleVO.getModleId());
+        modlePrototype.setModlePrototypeName(projectModleVO.getModleName());
+        modlePrototype.setModlePrototypeDescribe(projectModleVO.getModleDescribe());
+        modlePrototypeService.saveModlePrototype(modlePrototype);
+
+        ProjectModle projectModle = new ProjectModle();
+        projectModle.setId(projectModleVO.getId());
+        projectModle.setProjectId(projectModleVO.getProjectId());
+        projectModle.setModleId(projectModleVO.getModleId());
+        projectModle.setVersion(projectModleVO.getVersion());
+        modleService.updateModle(projectModle);
+
+        List<Project> list = projectService.findProjectListPage(null,null,null,null,null).getList();
+        Project project = projectService.queryProject(projectModleVO.getProjectId());
+        mav.addObject("list",list);
+        mav.addObject("project",project);
         mav.setViewName("modle/modleList");
         return mav;
     }

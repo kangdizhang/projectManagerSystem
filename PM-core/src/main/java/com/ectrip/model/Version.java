@@ -8,15 +8,23 @@ public class Version {
 
     private Integer id;//自增主键
     private String version;//申请的版本号
+    private String versionDesc;//描述
     private Integer modleId;//模块主键，关联模块
     private String upUserId;//升级人
     private String upTime;//升级时间
     private Integer versionId;//升级前的版本ID
     private Integer demandId;//升级对应的需求ID
-    private String versionState;//版本状态，0：停用，1：启用
 
     public Integer getId() {
         return id;
+    }
+
+    public String getVersionDesc() {
+        return versionDesc;
+    }
+
+    public void setVersionDesc(String versionDesc) {
+        this.versionDesc = versionDesc;
     }
 
     public void setId(Integer id) {
@@ -69,14 +77,6 @@ public class Version {
 
     public void setDemandId(Integer demandId) {
         this.demandId = demandId;
-    }
-
-    public String getVersionState() {
-        return versionState;
-    }
-
-    public void setVersionState(String versionState) {
-        this.versionState = versionState;
     }
 
     public Version() {

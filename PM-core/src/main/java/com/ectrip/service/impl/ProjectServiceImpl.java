@@ -1,14 +1,9 @@
 package com.ectrip.service.impl;
 
-import com.ectrip.dao.ProjectModleDAO;
-import com.ectrip.dao.ModlePrototypeDAO;
-import com.ectrip.dao.ProjectDao;
-import com.ectrip.dao.ProjectInfoDAO;
-import com.ectrip.model.ProjectModle;
-import com.ectrip.model.ModlePrototype;
-import com.ectrip.model.Project;
-import com.ectrip.model.ProjectInfo;
+import com.ectrip.dao.*;
+import com.ectrip.model.*;
 import com.ectrip.service.ProjectService;
+import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectInfoVO;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -45,42 +40,47 @@ public class ProjectServiceImpl implements ProjectService {
         projectInfoDAO.delProjectInfo(id);
     }
 
+    @Autowired
+    private ProjectModleDAO projectModleDAO;
+
+    @Autowired
+    private VersionDAO versionDAO;
     @Override
     @Transactional
-    public void saveProject(String[] a,Integer id,String projectName, String projectLeader, String phone, String QQ, String email,  String projectStatus) {
-        Project project = new Project();
+    public void saveProject(Project project,ProjectInfo projectInfo,String[] modleIds,String[] versions) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        project.setProjectName(projectName);
-        project.setProjectLeader(projectLeader);
-        project.setPhone(phone);
-        project.setQq(QQ);
-        project.setEmail(email);
-        project.setProjectStatus(projectStatus);
         project.setOperateTime(sdf.format(new Date()));
         logger.info("保存数据:{}",project.toString());
-        if(id==null){
-            projectDao.save(project);
-            if (a != null && a.length > 0){
-                for (int i = 0; i < a.length; i++){
-                    ModlePrototype modlePrototype = modlePrototypeDAO.findModlePrototype(Integer.parseInt(a[i]));
+        if(project.getId()==null){
+            projectDao.saveProject(project);
+            if (modleIds != null && modleIds.length > 0){
+                for (int i = 0; i < modleIds.length; i++){
+                    Version version = versionDAO.findVersion(Integer.parseInt(versions[i]));
+                    ModleVersionVO modlePrototype = modlePrototypeDAO.findModlePrototype(Integer.parseInt(modleIds[i]));
                     ProjectModle modle = new ProjectModle();
                     modle.setProjectId(project.getId());
                     modle.setModleId(modlePrototype.getId());
-                    modleDAO.saveModle(modle);
+                    projectModleDAO.saveModle(modle);
+                    ProjectModle projectModle = new ProjectModle();
+                    projectModle.setProjectId(project.getId());
+                    projectModle.setModleId(Integer.parseInt(modleIds[i]));
+                    projectModle.setVersion(version.getVersion());
+                    projectModleDAO.saveModle(projectModle);
                 }
             }
+            projectInfo.setProjectId(project.getId());
+            projectInfoDAO.saveProjectInfo(projectInfo);
         }else{
-            project.setId(id);
             projectDao.updateProject(project);
         }
     }
 
     @Override
     public void saveProjectInfo(ProjectInfo projectInfo) {
-        if (projectInfo.getId() != null){
-            projectInfoDAO.updateProjectInfo(projectInfo);
-        } else {
+        if(projectInfo.getId()==null){
             projectInfoDAO.saveProjectInfo(projectInfo);
+        }else {
+            projectInfoDAO.updateProjectInfo(projectInfo);
         }
     }
 

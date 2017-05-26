@@ -2,12 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ectrip.dao.ModlePrototypeDAO">
 
-	<resultMap type="ModlePrototype" id="modlePrototypeResultMap">
+	<resultMap type="ModleVersionVO" id="modlePrototypeResultMap">
 		<id column="ID" property="id"/>
 		<result column="MODLE_PROTOTYPE_NAME" property="modlePrototypeName"/>
 		<result column="MODLE_PROTOTYPE_DESCRIBE" property="modlePrototypeDescribe"/>
+		<collection  property="versionVOList" ofType="VersionVO" column="id" select="getVersionVOList"></collection>
 	</resultMap>
 
+	<resultMap id="versionVO" type="VersionVO">
+		<id column="ID" property="id"></id>
+		<result column="VERSION" property="version"/>
+	</resultMap>
 	<!--表名 -->
 	<sql id="tableName">
 		MODLE_PROTOTYPE
@@ -31,6 +36,11 @@
 	<select id="findModlePrototype" resultMap="modlePrototypeResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
 		WHERE ID=#{id}
+	</select>
+	<select id="getVersionVOList" parameterType="java.lang.Integer" resultMap="versionVO">
+		SELECT ID AS id,VERSION AS version
+		FROM VERSION
+		WHERE MODLE_ID=#{id}
 	</select>
 
 	<!-- 列表查询-->

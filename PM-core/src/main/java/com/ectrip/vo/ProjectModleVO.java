@@ -1,5 +1,7 @@
 package com.ectrip.vo;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/5/19 0019.
  */
@@ -12,6 +14,15 @@ public class ProjectModleVO {
     private String modleName;//模块名称
     private String modleDescribe;//模块描述
     private String version;//当前版本版本号
+    private List<VersionVO> versionVOList;
+
+    public List<VersionVO> getVersionVOList() {
+        return versionVOList;
+    }
+
+    public void setVersionVOList(List<VersionVO> versionVOList) {
+        this.versionVOList = versionVOList;
+    }
 
     public Integer getId() {
         return id;

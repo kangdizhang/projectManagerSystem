@@ -72,7 +72,7 @@
                                 <input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
                             </label>
                             版本号：<select name="version">
-                                <c:forEach var="versionVO" items="${list.versionVOList}">
+                                <c:forEach var="versionVO" items="${modlePrototype.versionVOList}">
                                     <option value="${versionVO.id}">${versionVO.version}</option>
                                 </c:forEach>
                             </select>

@@ -5,17 +5,18 @@
 	<resultMap type="Version" id="versionResultMap">
 		<id column="ID" property="id"/>
 		<result column="VERSION" property="version"/>
+		<result column="VERSION_DESC" property="versionDesc"/>
 		<result column="MODLE_ID" property="modleId"/>
 		<result column="UP_USERID" property="upUserId"/>
 		<result column="UP_TIME" property="upTime"/>
 		<result column="VERSION_ID" property="versionId"/>
 		<result column="DEMAND_ID" property="demandId"/>
-		<result column="VERSION_STATE" property="versionState"/>
 	</resultMap>
 
 	<resultMap type="VersionVO" id="versionVOResultMap">
 		<id column="ID" property="id"/>
 		<result column="VERSION" property="version"/>
+		<result column="VERSIONDESC" property="versionDesc"/>
 		<result column="MODLE_ID" property="modleId"/>
 		<result column="MODLE_NAME" property="modleName"/>
 		<result column="UP_USERID" property="upUserId"/>
@@ -24,7 +25,6 @@
 		<result column="VERSION_NUM" property="versionNum"/>
 		<result column="DEMAND_ID" property="demandId"/>
 		<result column="DEMAND_NAME" property="demandName"/>
-		<result column="VERSION_STATE" property="versionState"/>
 	</resultMap>
 
 	<!--表名 -->
@@ -36,30 +36,28 @@
 	<sql id="Field">
 		ID,
 		VERSION,
+		VERSION_DESC,
 		MODLE_ID,
 		UP_USERID,
 		UP_TIME,
-		VERSION_ID,
-		DEMAND_ID,
-		VERSION_STATE
+		VERSION_ID
 	</sql>
 
 	<!-- 字段值 -->
 	<sql id="FieldValue">
 		#{id},
 		#{version},
+		#{versionDesc},
 		#{modleId},
 		#{upUserId},
 		#{upTime},
-		#{versionId},
-		#{demandId},
-		#{versionState}
+		#{versionId}
 	</sql>
 
 	<!-- 主键查询-->
 	<select id="findVersion" resultMap="versionResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE WHERE MODLE_ID=#{modleId} AND VERSION_STATE='1'
+		where id=#{id}
 	</select>
 
 	<!-- 条件查询-->
@@ -72,9 +70,6 @@
 		WHERE v.DEMAND_ID=d.ID
 		<if test="modleId!=null and modleId!=''">
 			AND v.MODLE_ID=#{modleId}
-		</if>
-		<if test="versionState!=null and versionState!=''">
-			AND v.VERSION_STATE=#{versionState}
 		</if>
 	</select>
 

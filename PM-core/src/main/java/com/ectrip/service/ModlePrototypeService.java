@@ -1,6 +1,7 @@
 package com.ectrip.service;
 
 import com.ectrip.model.ModlePrototype;
+import com.ectrip.vo.ModleVersionVO;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -14,9 +15,9 @@ public interface ModlePrototypeService {
 
     PageInfo<ModlePrototype> findModlePrototypeListPage(Integer pageNo, Integer pageSize, String modlePrototypeName);
 
-    List<ModlePrototype> queryModlePrototype();
+    List<ModleVersionVO> queryModlePrototype();
 
     void saveModlePrototype(Integer id, String modlePrototypeName, String modlePrototypeDescribe);
 
-    ModlePrototype findModlePrototype(Integer id);
+    ModleVersionVO findModlePrototype(Integer id);
 }

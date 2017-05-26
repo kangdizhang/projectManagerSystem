@@ -2,9 +2,12 @@ package com.ectrip.service.impl;
 
 import com.ectrip.dao.ProjectModleDAO;
 import com.ectrip.dao.ModlePrototypeDAO;
+import com.ectrip.dao.VersionDAO;
 import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
+import com.ectrip.model.Version;
 import com.ectrip.service.ModleService;
+import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -12,7 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,6 +33,9 @@ public class ModleServiceImpl implements ModleService {
 
     @Autowired
     private ModlePrototypeDAO modlePrototypeDAO;
+
+    @Autowired
+    private VersionDAO versionDAO;
 
     /**
      * 根据需求ID查询关联模块列表
@@ -53,7 +61,7 @@ public class ModleServiceImpl implements ModleService {
      * @return int
      */
     public int saveModle(Integer projectId,Integer modlePrototypeId){
-        ModlePrototype modlePrototype = modlePrototypeDAO.findModlePrototype(modlePrototypeId);
+        ModleVersionVO modlePrototype = modlePrototypeDAO.findModlePrototype(modlePrototypeId);
         ProjectModle modle = new ProjectModle();
         modle.setModleId(modlePrototype.getId());
         modle.setProjectId(projectId);
@@ -93,21 +101,21 @@ public class ModleServiceImpl implements ModleService {
 
         List<ProjectModle> modleList = new ArrayList<ProjectModle>(); //modleDAO.queryModleList(projectId);
 
-        List<ModlePrototype> modlePrototypeList = modlePrototypeDAO.queryModlePrototype();
-        Iterator<ModlePrototype> modlePrototypeIterator = modlePrototypeList.iterator();
+//        List<ModlePrototype> modlePrototypeList = modlePrototypeDAO.queryModlePrototype();
+//        Iterator<ModlePrototype> modlePrototypeIterator = modlePrototypeList.iterator();
 
-        if(modleList != null && !modleList.isEmpty()){
-            while (modlePrototypeIterator.hasNext()){
-                ModlePrototype modlePrototype = modlePrototypeIterator.next();
-                for (ProjectModle modle:modleList) {
-                    if (modle.getId()==modlePrototype.getId()){
-                        modlePrototypeIterator.remove();
-                    }
-                }
-            }
-        }
+//        if(modleList != null && !modleList.isEmpty()){
+//            while (modlePrototypeIterator.hasNext()){
+//                ModlePrototype modlePrototype = modlePrototypeIterator.next();
+//                for (ProjectModle modle:modleList) {
+//                    if (modle.getId()==modlePrototype.getId()){
+//                        modlePrototypeIterator.remove();
+//                    }
+//                }
+//            }
+//        }
 
-        return modlePrototypeList;
+        return null;
     }
 
     @Override

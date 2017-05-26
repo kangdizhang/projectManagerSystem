@@ -15,7 +15,7 @@ public class VersionVO {
     private String versionNum;//升级前的版本号
     private Integer demandId;//升级对应的需求ID
     private String demandName;//升级对应的需求名
-    private String versionState;//版本状态，0：停用，1：启用
+    private String versionDesc;//描述
 
     public VersionVO() {
     }
@@ -100,11 +100,11 @@ public class VersionVO {
         this.demandName = demandName;
     }
 
-    public String getVersionState() {
-        return versionState;
+    public String getVersionDesc() {
+        return versionDesc;
     }
 
-    public void setVersionState(String versionState) {
-        this.versionState = versionState;
+    public void setVersionDesc(String versionDesc) {
+        this.versionDesc = versionDesc;
     }
 }

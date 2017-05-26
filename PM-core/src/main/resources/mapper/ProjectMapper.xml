@@ -5,11 +5,11 @@
     <resultMap type="Project" id="baseResultMap">
         <id column="ID" property="id"/>
         <result column="PROJECT_NAME" property="projectName"/>
-        <result column="REGION" property="region"/>
         <result column="PROJECT_LEADER" property="projectLeader"/>
         <result column="PHONE" property="phone"/>
         <result column="QQ" property="qq"/>
         <result column="EMAIL" property="email"/>
+        <result column="REGION" property="region"/>
         <result column="OPERATE_TIME" property="operateTime"/>
         <result column="PROJECT_STATUS" property="projectStatus"/>
     </resultMap>
@@ -23,11 +23,11 @@
     <sql id="Field">
 		ID,
 		PROJECT_NAME,
-		REGION,
 		PROJECT_LEADER,
 		PHONE,
 		QQ,
 		EMAIL,
+		REGION,
 		OPERATE_TIME,
 		PROJECT_STATUS
 	</sql>
@@ -36,11 +36,11 @@
     <sql id="FieldValue">
 		#{id},
 		#{projectName},
-		#{region},
 		#{projectLeader},
 		#{phone},
 		#{qq},
 		#{email},
+		#{region},
 		#{operateTime},
 		#{projectStatus}
 	</sql>
@@ -51,7 +51,7 @@
     </select>
 
     <!-- 新增-->
-    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveProject" useGeneratedKeys="true" keyProperty="id">
         insert into <include refid="tableName"></include>(
         <include refid="Field"></include>
         ) values (
@@ -62,11 +62,11 @@
     <update id="updateProject">
         update <include refid="tableName"></include>
         set PROJECT_NAME = #{projectName},
-        REGION = #{region},
         PROJECT_LEADER = #{projectLeader},
         PHONE = #{phone},
         QQ = #{qq},
         EMAIL = #{email},
+        REGION = #{region},
         OPERATE_TIME = #{operateTime},
         PROJECT_STATUS = #{projectStatus}
         where ID = #{id}

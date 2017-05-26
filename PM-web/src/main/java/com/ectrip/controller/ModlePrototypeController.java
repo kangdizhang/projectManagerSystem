@@ -3,6 +3,7 @@ package com.ectrip.controller;
 import com.ectrip.common.base.BaseController;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.service.ModlePrototypeService;
+import com.ectrip.vo.ModleVersionVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,10 +50,10 @@ public class ModlePrototypeController extends BaseController {
     }
 
     @RequestMapping(value = "/saveProjectInfo", method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveProject(Integer id, String modlePrototypeName, String modlePrototypeDescribe) {
+    public ModelAndView saveModle(Integer id, String modlePrototypeName, String modlePrototypeDescribe) {
         ModelAndView mav = getModelAndView();
         if (id != null) {
-            ModlePrototype modlePrototype = modlePrototypeService.findModlePrototype(id);
+            ModleVersionVO modlePrototype = modlePrototypeService.findModlePrototype(id);
             mav.addObject("param", modlePrototype);
         }
         if (StringUtils.isEmpty(modlePrototypeName)) {

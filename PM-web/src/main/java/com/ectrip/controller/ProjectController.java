@@ -3,9 +3,11 @@ package com.ectrip.controller;
 import com.ectrip.common.base.BaseController;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Project;
+import com.ectrip.model.ProjectInfo;
 import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.ProjectService;
+import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,33 +60,43 @@ public class ProjectController extends BaseController {
     }
 
     @RequestMapping(value = "/saveProject",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveProject(Integer id, String projectName,String projectLeader, String phone, String qq, String email, String projectStatus){
+    public ModelAndView saveProject(Project project, ProjectInfo projectInfo){
         ModelAndView mav = getModelAndView();
-        if(StringUtils.isEmpty(projectName)){
+        if(StringUtils.isEmpty(project.getProjectName())){
             mav.addObject("msg","项目名称不能为空");
             mav.setViewName("project/addProject");
             return mav;
         }
-        if(StringUtils.isEmpty(projectLeader)){
+        String[] modleIds = getRequest().getParameterValues("mpid");
+        String[] version = getRequest().getParameterValues("version");
+        if(modleIds == null || modleIds.length == 0){
+            mav.addObject("msg","请选择系统模块");
+            mav.setViewName("project/addProject");
+            return mav;
+        }
+        if(StringUtils.isEmpty(project.getProjectLeader())){
             mav.addObject("msg","项目负责人不能为空");
             mav.setViewName("project/addProject");
             return mav;
         }
-        if(StringUtils.isEmpty(phone)){
+        if(StringUtils.isEmpty(project.getPhone())){
             mav.addObject("msg","负责人电话不能为空");
             mav.setViewName("project/addProject");
             return mav;
         }
-        if(StringUtils.isEmpty(email)){
+        if(StringUtils.isEmpty(project.getEmail())){
+            mav.addObject("msg","负责人邮箱不能为空");
+            mav.setViewName("project/addProject");
+            return mav;
+        }
+        if(StringUtils.isEmpty(project.getEmail())){
             mav.addObject("msg","负责人邮箱不能为空");
             mav.setViewName("project/addProject");
             return mav;
         }
 
-        String[] a = getRequest().getParameterValues("mpid");
-
         try{
-            projectService.saveProject(a,id,projectName, projectLeader, phone, qq, email, projectStatus);
+            projectService.saveProject(project,projectInfo,modleIds,version);
             mav.setViewName("project/projectList");
         }catch (Exception e){
             e.printStackTrace();
@@ -101,9 +113,10 @@ public class ProjectController extends BaseController {
             List<ProjectModleVO> list = modleService.queryModleList(null,null,id,null,null).getList();
             mav.addObject("list", list);
         }else {
-            List<ModlePrototype> list = modlePrototypeService.queryModlePrototype();
+            List<ModleVersionVO> list = modlePrototypeService.queryModlePrototype();
             mav.addObject("list", list);
         }
+
         Project project = projectService.queryProject(id);
         mav.addObject("project",project);
 

@@ -31,66 +31,102 @@ public class ProjectInfoController extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping(value = "/projectInfoList",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView projectInfoList(){
+    @RequestMapping(value = "/projectInfoList", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView projectInfoList() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("projectInfo/projectInfoList");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/editProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView editProjectInfo(Integer id){
+    @RequestMapping(value = "/editProjectInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView editProjectInfo(Integer id) {
         ModelAndView mav = getModelAndView();
         ProjectInfoVO projectInfoVO = projectService.queryProjectInfo(id);
-        mav.addObject("projectInfoVO",projectInfoVO);
+        mav.addObject("projectInfoVO", projectInfoVO);
         mav.setViewName("projectInfo/editProjectInfo");
         return mav;
     }
 
-    @RequestMapping(value = "/addProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView addProjectInfo(){
+    @RequestMapping(value = "/addProjectInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView addProjectInfo() {
         ModelAndView mav = getModelAndView();
-        List<Project> list = projectService.findProjectListPage(null,null,null,null,null).getList();
+        List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         if (CollectionUtils.isEmpty(list)) {
             mav.setViewName("projectInfo/errorPage");
             return mav;
         }
-        mav.addObject("list",list);
+        mav.addObject("list", list);
         mav.setViewName("projectInfo/editProjectInfo");
         return mav;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public Object list(Integer offset,Integer limit,String projectName) {
+    @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
+    public Object list(Integer offset, Integer limit, String projectName) {
         int pageNo = 1;
-        if(offset != null) {
-            pageNo = (offset/limit+1);
+        if (offset != null) {
+            pageNo = (offset / limit + 1);
         }
-        PageInfo<ProjectInfoVO> pageInfo = projectService.findProjectInfoListPage(pageNo,limit,projectName);
-        Map<String,Object> result = new HashMap<String,Object>();
-        result.put("rows",pageInfo.getList());
-        result.put("total",pageInfo.getTotal());
+        PageInfo<ProjectInfoVO> pageInfo = projectService.findProjectInfoListPage(pageNo, limit, projectName);
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("rows", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
         return result;
     }
 
-    @RequestMapping(value = "/delProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView delProjectInfo(Integer id){
-        ModelAndView modelAndView = new ModelAndView();
-        projectService.delProjectInfo(id);
-        modelAndView.setViewName("projectInfo/projectInfoList");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/saveProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveProjectInfo(ProjectInfo projectInfo){
+    @RequestMapping(value = "/saveProjectInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView saveProjectInfo(ProjectInfo projectInfo) {
         ModelAndView mav = getModelAndView();
-        if (projectInfo.getProjectId() == 0) {
-            mav.addObject("msg","请选择项目！");
+        Project project = projectService.queryProject(projectInfo.getProjectId());
+        mav.addObject("project", project);
+        if (StringUtils.isEmpty(projectInfo.getServerIp())) {
+            mav.addObject("msg", "服务器IP不能为空");
             mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
         }
-        projectService.saveProjectInfo(projectInfo);
-        mav.setViewName("projectInfo/projectInfoList");
-        return mav;
+        if (projectInfo.getProjectId() == 0) {
+            mav.addObject("msg", "请选择项目！");
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
+        if (StringUtils.isEmpty(projectInfo.getDbServerIp())) {
+            mav.addObject("msg", "数据库IP不能为空");
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
+        if (StringUtils.isEmpty(projectInfo.getDbUser())) {
+            mav.addObject("msg", "数据库用户名不能为空");
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
+        if (StringUtils.isEmpty(projectInfo.getDbPwd())) {
+            mav.addObject("msg", "数据库密码不能为空");
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
+        if (StringUtils.isEmpty(projectInfo.getDbPort())) {
+            mav.addObject("msg", "数据库端口号不能为空");
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
+        if (StringUtils.isEmpty(projectInfo.getHostName())) {
+            mav.addObject("msg", "域名不能为空");
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
+        if (StringUtils.isEmpty(projectInfo.getSsh())) {
+            mav.addObject("msg", "ssh信息不能为空");
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
+        try {
+            projectService.saveProjectInfo(projectInfo);
+            mav.setViewName("projectInfo/projectInfoList");
+            return mav;
+        } catch (Exception e) {
+            e.printStackTrace();
+            mav.setViewName("projectInfo/editProjectInfo");
+            return mav;
+        }
     }
 }

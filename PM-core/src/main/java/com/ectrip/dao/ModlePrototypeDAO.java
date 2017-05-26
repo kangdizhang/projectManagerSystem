@@ -1,6 +1,7 @@
 package com.ectrip.dao;
 
 import com.ectrip.model.ModlePrototype;
+import com.ectrip.vo.ModleVersionVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface ModlePrototypeDAO {
 
-    List<ModlePrototype> queryModlePrototype();
+    List<ModleVersionVO> queryModlePrototype();
 
     List<ModlePrototype> findModlePrototypeListPage(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("modlePrototypeName") String modlePrototypeName);
 
@@ -18,5 +19,5 @@ public interface ModlePrototypeDAO {
 
     void updateModlePrototype(ModlePrototype modlePrototype);
 
-    ModlePrototype findModlePrototype(@Param("id") Integer id);
+    ModleVersionVO findModlePrototype(@Param("id") Integer id);
 }

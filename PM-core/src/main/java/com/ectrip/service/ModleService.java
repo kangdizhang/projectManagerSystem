@@ -62,7 +62,7 @@ public interface ModleService {
      * @param projectId
      * @return list
      */
-    public List<ModlePrototype> findModlePrototypeList(Integer projectId);
+    public List<ModleVersionVO> findModlePrototypeList(Integer projectId);
 
     List<ProjectModle> queryModleListByProjectId(Integer projectId);
 }

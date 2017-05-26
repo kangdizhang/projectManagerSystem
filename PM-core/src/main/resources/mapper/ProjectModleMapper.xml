@@ -69,18 +69,12 @@
         WHERE MODLE_STATE='0' AND ID IN(SELECT MODLE_ID FROM MODLE_DEMAND WHERE DEMAND_ID=#{demandId})
     </update> -->
 
-    <!-- 条件查询
+    <!-- 条件查询-->
     <select id="queryModleList" resultMap="projectModleResultMap">
-        SELECT M.ID as ID,M.PROJECT_ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,M.MODLE_NAME as
-        MODLE_NAME,M.MODLE_DESCRIBE as MODLE_DESCRIBE,
-        (CASE WHEN M.MODLE_STATE='0' THEN '开发中'
-        ELSE '已完成'
-        END) as MODLE_STATE,
-        (SELECT V.version FROM VERSION V WHERE V.modle_id = M.id AND V.VERSION_STATE = '1') AS VERSION
-        FROM MODLE M,PROJECT P
-        WHERE M.PROJECT_ID = P.ID
-        AND M.PROJECT_ID=#{projectId}
-    </select>-->
+        SELECT PM.ID as ID,PM.PROJECT_ID as PROJECT_ID,PM.MODLE_ID AS MODLE_ID,PM.VERSION AS VERSION
+        FROM PROJECT_MODLE PM
+        WHERE PM.PROJECT_ID=#{projectId}
+    </select>
 
     <!-- 根据需求ID查询关联模块列表
     <select id="findModleList" resultMap="projectModleResultMap">

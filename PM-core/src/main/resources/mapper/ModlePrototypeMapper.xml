@@ -9,7 +9,12 @@
 		<collection  property="versionList" ofType="ModleVersionVO" column="id" select="getVersionVOList"></collection>
 	</resultMap>
 
-	<resultMap id="versionVO" type="Version">
+    <resultMap id="versionVO" type="Version">
+        <id column="ID" property="id"></id>
+        <result column="VERSION" property="version"/>
+    </resultMap>
+
+	<resultMap id="versionVO" type="VersionVO">
 		<id column="ID" property="id"></id>
 		<result column="VERSION" property="version"/>
 	</resultMap>

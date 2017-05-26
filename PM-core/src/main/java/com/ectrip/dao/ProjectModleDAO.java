@@ -57,7 +57,7 @@ public interface ProjectModleDAO {
      * @param projectId
      * @return list
      */
-    //List<ProjectModle> queryModleList(Integer projectId);
+    List<ProjectModle> queryModleList(Integer projectId);
 
     /**
      * 条件查询

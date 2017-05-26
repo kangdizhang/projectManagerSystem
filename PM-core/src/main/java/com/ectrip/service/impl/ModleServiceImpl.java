@@ -104,25 +104,24 @@ public class ModleServiceImpl implements ModleService {
      * @param projectId
      * @return list
      */
-    public List<ModlePrototype> findModlePrototypeList(Integer projectId){
+    public List<ModleVersionVO> findModlePrototypeList(Integer projectId){
 
-        List<ProjectModle> modleList = new ArrayList<ProjectModle>(); //modleDAO.queryModleList(projectId);
+        List<ProjectModle> modleList = modleDAO.queryModleList(projectId);
 
-//        List<ModlePrototype> modlePrototypeList = modlePrototypeDAO.queryModlePrototype();
-//        Iterator<ModlePrototype> modlePrototypeIterator = modlePrototypeList.iterator();
+        List<ModleVersionVO> modlePrototypeList = modlePrototypeDAO.queryModlePrototype();
+        Iterator<ModleVersionVO> modlePrototypeIterator = modlePrototypeList.iterator();
 
-//        if(modleList != null && !modleList.isEmpty()){
-//            while (modlePrototypeIterator.hasNext()){
-//                ModlePrototype modlePrototype = modlePrototypeIterator.next();
-//                for (ProjectModle modle:modleList) {
-//                    if (modle.getId()==modlePrototype.getId()){
-//                        modlePrototypeIterator.remove();
-//                    }
-//                }
-//            }
-//        }
-
-        return null;
+        if(modleList != null && !modleList.isEmpty()){
+            while (modlePrototypeIterator.hasNext()){
+                ModleVersionVO modleVersionVO= modlePrototypeIterator.next();
+                for (ProjectModle modle:modleList) {
+                    if (modle.getModleId()==modleVersionVO.getId()){
+                        modlePrototypeIterator.remove();
+                    }
+                }
+            }
+        }
+        return modlePrototypeList;
     }
 
     @Override

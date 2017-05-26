@@ -7,6 +7,7 @@ import com.ectrip.model.ModlePrototype;
 import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.ProjectService;
+import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,9 +97,10 @@ public class ModleController extends BaseController {
     public ModelAndView addModle(Integer projectId){
         ModelAndView mav = getModelAndView();
         mav.setViewName("modle/addModle");
-        List<ModlePrototype> modlePrototypeList = modleService.findModlePrototypeList(projectId);
+        List<ModleVersionVO> modlePrototypeList = modleService.findModlePrototypeList(projectId);
         if (modlePrototypeList != null && !modlePrototypeList.isEmpty()){
             mav.addObject("list",modlePrototypeList);
+            mav.addObject("projectId",projectId);
             return mav;
         }
         mav.addObject("msg","模块原型已全部添加至项目模块中。如还想添加，请先添加模块到模块原型中！！！");

@@ -52,7 +52,7 @@
 </head>
 <body>
 <form action="/modle/saveModle" method="post" name="form">
-    <input type="hidden" name="projectId" value="${param.projectId}">
+    <input type="hidden" name="projectId" value="${projectId}">
     <table class="table table-bordered table-hover definewidth m10">
         <c:choose>
             <c:when test="${msg!=null}">
@@ -67,7 +67,7 @@
                     <td>
                         <a class="btn btn-success" href="${bathPath}/editModlePrototype">添加模块原型</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-success" href="${bathPath}/modleList?projectId=${param.projectId}">返回列表</a>
+                        <a class="btn btn-success" href="${bathPath}/modle/modleList?projectId=${projectId}">返回列表</a>
                     </td>
                 </tr>
             </c:when>
@@ -100,7 +100,7 @@
                     <td>
                         <button type="submit" class="btn btn-primary">保存</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-success" href="${bathPath}/modleList?projectId=${param.projectId}">返回列表</a>
+                        <a class="btn btn-success" href="${bathPath}/modle/modleList?projectId=${projectId}">返回列表</a>
                     </td>
                 </tr>
             </c:otherwise>

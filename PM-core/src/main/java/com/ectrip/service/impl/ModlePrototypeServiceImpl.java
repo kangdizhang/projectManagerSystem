@@ -50,6 +50,12 @@ public class ModlePrototypeServiceImpl implements ModlePrototypeService {
         return list;
     }
 
+    public List<ModleVersionVO> queryModlePrototypeById(Integer id){
+        List<ModleVersionVO> list = modlePrototypeDAO.queryModlePrototypeById(id);
+        logger.info("查询数据:{}",list.toString());
+        return list;
+    }
+
     @Override
     @Transactional
     public void saveModlePrototype(ModlePrototype modlePrototype) {

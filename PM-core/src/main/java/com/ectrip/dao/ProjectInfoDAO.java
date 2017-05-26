@@ -17,6 +17,8 @@ public interface ProjectInfoDAO {
      */
     void delProjectInfo(Integer id);
 
+    void delProjectInfoByProjectId(@Param("projectId") Integer projectId);
+
     List<ProjectInfoVO> findProjectInfoListPage(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectName") String projectName);
 
     void saveProjectInfo(ProjectInfo projectInfo);

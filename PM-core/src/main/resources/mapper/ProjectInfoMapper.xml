@@ -137,4 +137,9 @@
         )
     </insert>
 
+    <!-- 根据PROJECT_ID删除项目配置信息 -->
+    <delete id="delProjectInfoByProjectId">
+        DELETE FROM PROJECT_INFO WHERE PROJECT_ID=#{projectId}
+    </delete>
+
 </mapper>

@@ -12,7 +12,7 @@ import com.github.pagehelper.PageInfo;
  */
 public interface ProjectService {
 
-    void saveProject(Project project,ProjectInfo projectInfo,String[] modleIds,String[] version);
+    void saveProject(Project project,ProjectInfo projectInfo,String[] modleIds,String[] version,String[] mpid);
 
     /**
      * 根据ID删除项目配置信息

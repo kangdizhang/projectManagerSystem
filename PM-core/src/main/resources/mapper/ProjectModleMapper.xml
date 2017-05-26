@@ -23,7 +23,7 @@
 
     <!--表名 -->
     <sql id="tableName">
-		MODLE
+		PROJECT_MODLE
 	</sql>
 
     <!-- 字段 -->

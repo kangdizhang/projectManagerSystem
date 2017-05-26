@@ -6,10 +6,10 @@
 		<id column="ID" property="id"/>
 		<result column="MODLE_PROTOTYPE_NAME" property="modlePrototypeName"/>
 		<result column="MODLE_PROTOTYPE_DESCRIBE" property="modlePrototypeDescribe"/>
-		<collection  property="versionVOList" ofType="VersionVO" column="id" select="getVersionVOList"></collection>
+		<collection  property="versionList" ofType="ModleVersionVO" column="id" select="getVersionVOList"></collection>
 	</resultMap>
 
-	<resultMap id="versionVO" type="VersionVO">
+	<resultMap id="versionVO" type="Version">
 		<id column="ID" property="id"></id>
 		<result column="VERSION" property="version"/>
 	</resultMap>
@@ -37,6 +37,7 @@
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
 		WHERE ID=#{id}
 	</select>
+
 	<select id="getVersionVOList" parameterType="java.lang.Integer" resultMap="versionVO">
 		SELECT ID AS id,VERSION AS version
 		FROM VERSION
@@ -46,6 +47,13 @@
 	<!-- 列表查询-->
 	<select id="queryModlePrototype" resultMap="modlePrototypeResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+	</select>
+
+	<!-- 列表查询-->
+	<select id="queryModlePrototypeById" resultMap="modlePrototypeResultMap">
+		select M.MODLE_PROTOTYPE_NAME,M.ID AS ID
+		from project_modle P,modle_prototype M
+		WHERE P.modle_id = M.id and P.PROJECT_ID = #{id}
 	</select>
 
 	<!-- 条件查询-->

@@ -1,5 +1,7 @@
 package com.ectrip.vo;
 
+import com.ectrip.model.Version;
+
 import java.util.List;
 
 /**
@@ -11,7 +13,15 @@ public class ModleVersionVO {
 
     private String modlePrototypeName;//模块原型名称
     private String modlePrototypeDescribe;
-    private List<VersionVO> versionVOList;
+    private List<Version> versionList;
+
+    public List<Version> getVersionList() {
+        return versionList;
+    }
+
+    public void setVersionList(List<Version> versionList) {
+        this.versionList = versionList;
+    }
 
     public Integer getId() {
         return id;
@@ -35,13 +45,5 @@ public class ModleVersionVO {
 
     public void setModlePrototypeName(String modlePrototypeName) {
         this.modlePrototypeName = modlePrototypeName;
-    }
-
-    public List<VersionVO> getVersionVOList() {
-        return versionVOList;
-    }
-
-    public void setVersionVOList(List<VersionVO> versionVOList) {
-        this.versionVOList = versionVOList;
     }
 }

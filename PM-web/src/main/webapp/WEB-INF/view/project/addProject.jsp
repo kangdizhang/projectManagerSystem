@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/style.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-table.min.css"/>
-    <link href="http://hovertree.com/ziyuan/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="http://hovertree.com/texiao/bootstrap/4/css/city-picker.css" rel="stylesheet" type="text/css" />
+    <link href="http://hovertree.com/ziyuan/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://hovertree.com/texiao/bootstrap/4/css/city-picker.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="${basePath}/Js/jquery.js"></script>
     <script src="http://hovertree.com/texiao/bootstrap/4/js/city-picker.data.js"></script>
     <script src="http://hovertree.com/texiao/bootstrap/4/js/city-picker.js"></script>
@@ -54,27 +54,29 @@
         <input type="hidden" name="id" value="${project.id}">
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
-            <td width="35%"><input type="text" name="projectName" value="${project.projectName}"/><span style="color: #a9302a">*</span></td>
+            <td width="35%"><input type="text" name="projectName" value="${project.projectName}"/><span
+                    style="color: #a9302a">*</span></td>
             <td width="10%" class="tableleft">项目模块</td>
             <c:choose>
                 <c:when test="${project.id != null}">
                     <td>
                         <c:forEach items="${list}" var="projectModleVO">
-                            <span>${projectModleVO.modleName}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                            版本号：${projectModleVO.version}<br>
+                            <span>${projectModleVO.modlePrototypeName}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            版本号：${projectModleVO.versionList[0].version}
+                            <br>
                         </c:forEach>
                     </td>
                 </c:when>
                 <c:otherwise>
                     <td>
-                        <c:forEach items="${list}" var="modlePrototype" varStatus="i">
-                            <input type='checkbox' name='mpid' value='${i.index}' />${i.index}
-                            <input type="hidden" name="mpid" value="${modlePrototype.id}">${modlePrototype.modlePrototypeName}
-
+                        <c:forEach items="${list}" var="modleVersionVO" varStatus="i">
+                            <input type='checkbox' name='mpid' value='${i.index}'/>
+                            <input type="hidden" name="modleId"
+                                   value="${modleVersionVO.id}">${modleVersionVO.modlePrototypeName}
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <select name="version" style="width: 100px">
                                 <option value="">请选择版本</option>
-                                <c:forEach var="versionVO" items="${modlePrototype.versionVOList}">
+                                <c:forEach items="${modleVersionVO.versionList}" var="versionVO">
                                     <option value="${versionVO.id}">${versionVO.version}</option>
                                 </c:forEach>
                             </select><br>
@@ -88,11 +90,13 @@
             <td width="35%">
                 <div style="position: relative;">
                     <c:choose>
-                        <c:when test="${project==null}">
-                            <input name="region" id="city-picker3" class="form-control" readonly type="text" value="请选择省市区" data-toggle="city-picker">
+                        <c:when test="${project.region!=null and  project.region!=''}">
+                            <input name="region" id="city-picker3" class="form-control" readonly type="text"
+                                   value="${project.region}" data-toggle="city-picker"><br>
                         </c:when>
                         <c:otherwise>
-                            <input name="region" id="city-picker3" class="form-control" readonly type="text" value="${project.region}" data-toggle="city-picker">
+                            <input name="region" id="city-picker3" class="form-control" readonly type="text"
+                                   value="请选择省市区" data-toggle="city-picker"><br>
                         </c:otherwise>
                     </c:choose>
                 </div
@@ -112,17 +116,20 @@
                 </select>区--%>
             </td>
             <td width="10%" class="tableleft">项目负责人</td>
-            <td><input type="text" name="projectLeader" value="${project.projectLeader}"/><span style="color: #a9302a">*</span></td>
+            <td><input type="text" name="projectLeader" value="${project.projectLeader}"/><span
+                    style="color: #a9302a">*</span></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">负责人电话</td>
-            <td width="35%"><input type="text" name="phone" value="${project.phone}"/><span style="color: #a9302a">*</span></td>
+            <td width="35%"><input type="text" name="phone" value="${project.phone}"/><span
+                    style="color: #a9302a">*</span></td>
             <td width="10%" class="tableleft">负责人QQ</td>
             <td><input type="text" name="qq" value="${project.qq}"/></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">负责人邮箱</td>
-            <td width="35%"><input type="text" name="email" value="${project.email}"/><span style="color: #a9302a">*</span></td>
+            <td width="35%"><input type="text" name="email" value="${project.email}"/><span
+                    style="color: #a9302a">*</span></td>
             <td width="10%" class="tableleft">项目状态</td>
             <td>
                 <input type="radio" name="projectStatus" value="0"/> 开发中&nbsp;&nbsp;&nbsp;&nbsp;
@@ -130,37 +137,62 @@
                 <input type="radio" name="projectStatus" value="2"/> 已完成&nbsp;&nbsp;&nbsp;&nbsp;
             </td>
         </tr>
-        <tr></tr>
-        <tr>
-            <td width="10%" class="tableleft">服务器IP</td>
-            <td width="35%"><input type="text" name="serverIp" value="${param.serverIp}"/></td>
-            <td width="10%" class="tableleft">服务器系统</td>
-            <td><input type="text" name="serverSystem" value="${param.serverSystem}"/></td>
-        </tr>
-        <tr>
-            <td width="10%" class="tableleft">域名</td>
-            <td width="35%"><input type="text" name="hostName" value="${param.hostName}"/></td>
-            <td width="10%" class="tableleft">数据库IP</td>
-            <td><input type="text" name="dbServerIp" value="${param.dbServerIp}"/></td>
-        </tr>
-        <tr>
-            <td width="10%" class="tableleft">数据库用户名</td>
-            <td width="35%"><input type="text" name="dbUser" value="${param.dbUser}"/></td>
-            <td width="10%" class="tableleft">数据库密码</td>
-            <td><input type="text" name="dbPwd" value="${param.dbPwd}"/></td>
-        </tr>
-        <tr>
-            <td width="10%" class="tableleft">数据库端口号</td>
-            <td width="35%"><input type="text" name="dbPort" value="${param.dbPort}"/></td>
-            <td width="10%" class="tableleft">ssh信息</td>
-            <td width="35%"><input type="text" name="ssh" value="${param.ssh}"/></td>
-        </tr>
-        <tr>
-            <td width="10%" class="tableleft">备注</td>
-            <td width="35%"><textarea name="note" style="width: auto;height: auto">${param.note}</textarea></td>
-            <td width="10%"></td>
-            <td></td>
-        </tr>
+        <c:choose>
+            <c:when test="${project.id==null}">
+                <tr>
+                    <td width="10%" class="tableleft">服务器IP</td>
+                    <td width="35%"><input type="text" name="serverIp" value="${param.serverIp}"/></td>
+                    <td width="10%" class="tableleft">服务器系统</td>
+                    <td><input type="text" name="OptSystem" value="${param.OptSystem}"/></td>
+                </tr>
+                <tr>
+                    <td width="10%" class="tableleft">域名</td>
+                    <td width="35%"><input type="text" name="hostName" value="${param.hostName}"/></td>
+                    <td width="10%" class="tableleft">数据库IP</td>
+                    <td><input type="text" name="dbServerIp" value="${param.dbServerIp}"/></td>
+                </tr>
+                <tr>
+                    <td width="10%" class="tableleft">数据库用户名</td>
+                    <td width="35%"><input type="text" name="dbUser" value="${param.dbUser}"/></td>
+                    <td width="10%" class="tableleft">数据库密码</td>
+                    <td><input type="text" name="dbPwd" value="${param.dbPwd}"/></td>
+                </tr>
+                <tr>
+                    <td width="10%" class="tableleft">数据库端口号</td>
+                    <td width="35%"><input type="text" name="dbPort" value="${param.dbPort}"/></td>
+                    <td width="10%" class="tableleft">ssh信息</td>
+                    <td width="35%"><input type="text" name="ssh" value="${param.ssh}"/></td>
+                </tr>
+                <tr>
+                    <td width="10%" class="tableleft">备注</td>
+                    <td width="35%"><textarea name="note" style="width: auto;height: auto">${param.note}</textarea></td>
+                    <td width="10%" class="tableleft"></td>
+                    <td width="35%"></td>
+
+                </tr>
+            </c:when>
+        </c:choose>
+        <c:choose>
+            <c:when test="${msg!=null}">
+                <tr>
+                    <td width="10%" class="tableleft">提示信息</td>
+                    <td>
+                        <p style="color: crimson">${msg}</p>
+                    </td>
+                    <td width="10%" class="tableleft"></td>
+                    <td width="35%"></td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td width="10%" class="tableleft">提示信息</td>
+                    <td width="35%"></td>
+                    </td>
+                    <td width="10%" class="tableleft"></td>
+                    <td width="35%"></td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
         <tr>
             <td width="10%" class="tableleft">操作</td>
             <td width="35%">
@@ -168,18 +200,6 @@
                 &nbsp;&nbsp;
                 <a class="btn btn-success" href="${bathPath}/project/projectList">返回列表</a>
             </td>
-            <c:choose>
-                <c:when test="${msg!=null}">
-                    <td width="10%" class="tableleft">提示信息</td>
-                    <td>
-                        <p style="color: crimson">${msg}</p>
-                    </td>
-                </c:when>
-                <c:otherwise>
-                    <td width="10%"></td>
-                    <td></td>
-                </c:otherwise>
-            </c:choose>
         </tr>
     </table>
 </form>

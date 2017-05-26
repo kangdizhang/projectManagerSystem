@@ -34,9 +34,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 根据ID删除项目配置信息
+     *
      * @param id
      */
-    public void delProjectInfo(Integer id){
+    public void delProjectInfo(Integer id) {
         projectInfoDAO.delProjectInfo(id);
     }
 
@@ -45,41 +46,42 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private VersionDAO versionDAO;
+
     @Override
     @Transactional
-    public void saveProject(Project project,ProjectInfo projectInfo,String[] modleIds,String[] versions) {
+    public void saveProject(Project project, ProjectInfo projectInfo, String[] modleIds, String[] versions, String[] mpid) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         project.setOperateTime(sdf.format(new Date()));
-        logger.info("保存数据:{}",project.toString());
-        if(project.getId()==null){
+        logger.info("保存数据:{}", project.toString());
+        if (project.getId() == null) {
             projectDao.saveProject(project);
-            if (modleIds != null && modleIds.length > 0){
-                for (int i = 0; i < modleIds.length; i++){
-                    Version version = versionDAO.findVersion(Integer.parseInt(versions[i]));
-                    ModleVersionVO modlePrototype = modlePrototypeDAO.findModlePrototype(Integer.parseInt(modleIds[i]));
-                    ProjectModle modle = new ProjectModle();
-                    modle.setProjectId(project.getId());
-                    modle.setModleId(modlePrototype.getId());
-                    projectModleDAO.saveModle(modle);
+            Integer j;
+            Version version;
+                for (int i = 0; i < mpid.length; i++) {
+                    j = Integer.valueOf(mpid[i]);
+                    version = versionDAO.findVersion(Integer.parseInt(versions[j]));
                     ProjectModle projectModle = new ProjectModle();
                     projectModle.setProjectId(project.getId());
-                    projectModle.setModleId(Integer.parseInt(modleIds[i]));
+                    projectModle.setModleId(Integer.parseInt(modleIds[j]));
                     projectModle.setVersion(version.getVersion());
                     projectModleDAO.saveModle(projectModle);
                 }
+            if (projectInfo != null) {
+                projectInfo.setId(null);
+                projectInfo.setProjectId(project.getId());
+                projectInfoDAO.saveProjectInfo(projectInfo);
             }
-            projectInfo.setProjectId(project.getId());
-            projectInfoDAO.saveProjectInfo(projectInfo);
-        }else{
+        } else {
             projectDao.updateProject(project);
         }
     }
 
     @Override
+    @Transactional
     public void saveProjectInfo(ProjectInfo projectInfo) {
-        if(projectInfo.getId()==null){
+        if (projectInfo.getId() == null) {
             projectInfoDAO.saveProjectInfo(projectInfo);
-        }else {
+        } else {
             projectInfoDAO.updateProjectInfo(projectInfo);
         }
     }
@@ -96,21 +98,24 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public PageInfo<Project> findProjectListPage(Integer pageNo, Integer pageSize, String projectStatus, String projectName, String projectLeader) {
-        List<Project> list = projectDao.findProjectListPage(pageNo,pageSize,projectStatus,projectName,projectLeader);
-        logger.info("查询数据:{}",list.toString());
+        List<Project> list = projectDao.findProjectListPage(pageNo, pageSize, projectStatus, projectName, projectLeader);
+        logger.info("查询数据:{}", list.toString());
         return new PageInfo<>(list);
     }
 
     @Override
     public PageInfo<ProjectInfoVO> findProjectInfoListPage(Integer pageNo, Integer pageSize, String projectName) {
-        List<ProjectInfoVO> list = projectInfoDAO.findProjectInfoListPage(pageNo,pageSize,projectName);
-        logger.info("查询数据:{}",list.toString());
+        List<ProjectInfoVO> list = projectInfoDAO.findProjectInfoListPage(pageNo, pageSize, projectName);
+        logger.info("查询数据:{}", list.toString());
         return new PageInfo<>(list);
     }
 
+    @Transactional
     @Override
     public void deleteProject(Integer id) {
+        Project project = projectDao.findProject(id);
         projectDao.deleteProject(id);
+        projectInfoDAO.delProjectInfo(project.getId());
     }
 
 

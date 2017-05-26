@@ -7,6 +7,7 @@ import com.ectrip.vo.VersionVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class VersionServiceImpl implements VersionService {
      * 新增版本
      * @param version
      */
+    @Transactional
     public void saveVersion(Version version){
         versionDAO.saveVersion(version);
     }
@@ -30,6 +32,7 @@ public class VersionServiceImpl implements VersionService {
      * 更新版本
      * @param modleId
      */
+    @Transactional
     public void updateVersion(Integer modleId){
         versionDAO.updateVersion(modleId);
     }

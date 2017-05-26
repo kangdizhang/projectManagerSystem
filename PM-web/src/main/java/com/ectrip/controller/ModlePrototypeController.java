@@ -28,6 +28,15 @@ public class ModlePrototypeController extends BaseController {
     @Autowired
     private ModlePrototypeService modlePrototypeService;
 
+    @RequestMapping(value = "/editModlePrototype",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView editModlePrototype(Integer id){
+        ModelAndView modelAndView = new ModelAndView();
+        ModleVersionVO ModleVersionVO = modlePrototypeService.findModlePrototype(id);
+        modelAndView.addObject("modlePrototype",ModleVersionVO);
+        modelAndView.setViewName("modle/editModlePrototype");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/modlePrototypeList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView projectList(){
         ModelAndView modelAndView = new ModelAndView();
@@ -50,29 +59,21 @@ public class ModlePrototypeController extends BaseController {
     }
 
     @RequestMapping(value = "/saveProjectInfo", method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveModle(Integer id, String modlePrototypeName, String modlePrototypeDescribe) {
+    public ModelAndView saveProject(ModlePrototype modlePrototype) {
         ModelAndView mav = getModelAndView();
-        if (id != null) {
-            ModleVersionVO modlePrototype = modlePrototypeService.findModlePrototype(id);
-            mav.addObject("param", modlePrototype);
-        }
-        if (StringUtils.isEmpty(modlePrototypeName)) {
+        mav.addObject("modlePrototype", modlePrototype);
+        if (StringUtils.isEmpty(modlePrototype.getModlePrototypeName())) {
             mav.addObject("msg", "模块原型名称不能为空");
             mav.setViewName("modle/editModlePrototype");
             return mav;
         }
-        if (StringUtils.isEmpty(modlePrototypeDescribe)) {
+        if (StringUtils.isEmpty(modlePrototype.getModlePrototypeDescribe())) {
             mav.addObject("msg", "模块原型描述不能为空");
             mav.setViewName("modle/editModlePrototype");
             return mav;
         }
-        try {
-            modlePrototypeService.saveModlePrototype(id, modlePrototypeName, modlePrototypeDescribe);
-            mav.setViewName("modle/modlePrototypeList");
-        } catch (Exception e) {
-            e.printStackTrace();
-            mav.setViewName("modle/modlePrototypeList");
-        }
+        modlePrototypeService.saveModlePrototype(modlePrototype);
+        mav.setViewName("modle/modlePrototypeList");
         return mav;
     }
 }

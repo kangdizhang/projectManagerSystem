@@ -79,7 +79,7 @@ public class DemandController extends BaseController {
         modelAndView.addObject("list", list);
 
         //项目模块列表
-        List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null, "1").getList();
+        List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null).getList();
 
         //去重
         Iterator<ProjectModleVO> modleVOIterator = modleVOList.iterator();
@@ -148,7 +148,7 @@ public class DemandController extends BaseController {
         mav.addObject("errorMsg",errorMsg);
         List<ProjectModle> list = modleService.findModleList(demandId);
         mav.addObject("list", list);
-        List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null, null).getList();
+        List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null).getList();
         mav.addObject("ModleVOList", modleVOList);
         DemandVO demandVO = demandService.findDemand(demandId);
         mav.addObject("demand", demand);

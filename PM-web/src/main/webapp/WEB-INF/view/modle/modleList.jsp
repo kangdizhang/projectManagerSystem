@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -54,6 +55,21 @@
 
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
+        <!-- 选择项目 -->
+        <select name="projectName">
+            <option name="projectId" value="">请选择项目</option>
+            <c:forEach items="list" var="Project">
+                <c:choose>
+                    <c:when test="${project.id == Project.id}">
+                        <option name="projectId" selected="selected" value="${Project.id}">${Project.projectName}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option name="projectId" value="${Project.id}">${Project.projectName}</option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </select>
+
         <%--模块名称：--%>
         <input type="text" name="projecModleName" id="projecModleName"class="abc input-default" placeholder="这里输入模块名称">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,8 +124,9 @@
                 {field: 'projectName', title: '项目名称',align:'center'},
                 {field: 'projecModleName', title: '模块名称',align:'center'},
                 {field: 'modleDescribe', title: '模块描述',align:'center'},
-                {field: 'version', title: '使用版本',align:'center'},
-                {field: 'verisonId', title: '父版本', align: 'center', formatter: 'versionList', clickToSelect: false},
+                {field: 'version', title: '版本号',align:'center'},
+                {field: 'versionDesc', title: '版本描述',align:'center'},
+                {field: 'verisonId', title: '父版本', align: 'center'},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -118,8 +135,8 @@
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            projectId:${param.projectId},
-            projecModleName: $("#projecModleName").val()
+            projectId: $("#projectName option:selected").val(),
+            projecModleName: $("#projectModleName").val()
         };
         return temp;
     };

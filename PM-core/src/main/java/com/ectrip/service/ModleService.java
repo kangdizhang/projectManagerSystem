@@ -45,11 +45,10 @@ public interface ModleService {
      * @param pageNo
      * @param pageSize
      * @param projectId
-     * @param modleName
-     * @param modleState
+     * @param projectModleName
      * @return pageInfo
      */
-    public PageInfo<ProjectModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName, String modleState);
+    public PageInfo<ProjectModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String projectModleName);
 
     /**
      * 获取未选中的模块原型列表

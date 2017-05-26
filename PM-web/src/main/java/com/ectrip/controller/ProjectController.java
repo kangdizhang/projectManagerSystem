@@ -110,7 +110,7 @@ public class ProjectController extends BaseController {
     public Object modlePrototypeList(Integer id) {
         ModelAndView mav = getModelAndView();
         if (id != null){
-            List<ProjectModleVO> list = modleService.queryModleList(null,null,id,null,null).getList();
+            List<ProjectModleVO> list = modleService.queryModleList(null,null,id,null).getList();
             mav.addObject("list", list);
         }else {
             List<ModleVersionVO> list = modlePrototypeService.queryModlePrototype();

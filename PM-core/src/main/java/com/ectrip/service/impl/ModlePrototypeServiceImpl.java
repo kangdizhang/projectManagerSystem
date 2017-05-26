@@ -52,12 +52,9 @@ public class ModlePrototypeServiceImpl implements ModlePrototypeService {
 
     @Override
     @Transactional
-    public void saveModlePrototype(Integer id, String modlePrototypeName, String modlePrototypeDescribe) {
+    public void saveModlePrototype(ModlePrototype modlePrototype) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        ModlePrototype modlePrototype = new ModlePrototype();
-        modlePrototype.setModlePrototypeName(modlePrototypeName);
-        modlePrototype.setModlePrototypeDescribe(modlePrototypeDescribe);
-        if(id == null){
+        if(modlePrototype.getId() == null){
             modlePrototypeDAO.saveModlePrototype(modlePrototype);
             Version version = new Version();
             version.setUpUserId("testUser");
@@ -67,7 +64,6 @@ public class ModlePrototypeServiceImpl implements ModlePrototypeService {
             version.setModleId(modlePrototype.getId());
             versionDAO.saveVersion(version);
         }else{
-            modlePrototype.setId(id);
             modlePrototypeDAO.updateModlePrototype(modlePrototype);
         }
     }

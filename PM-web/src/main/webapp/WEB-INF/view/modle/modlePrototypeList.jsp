@@ -59,7 +59,7 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/editModlePrototype'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="window.location.href='${bathPath}/modlePrototype/editModlePrototype'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -126,15 +126,14 @@
 
     function versionList(value, row, index) {
         return [
-            '<a href="${bathPath}/versionList?id='+row.id+'" data-toggle="tooltip" title="view">查看</a> '
+            '<a href="${bathPath}/version/list?modleId='+row.id+'" data-toggle="tooltip" title="view">查看</a> '
         ].join('');
     }
 
     function operateFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/editModlePrototype?id='+row.id+
-            '&modlePrototypeName='+row.modlePrototypeName +
-            '&modlePrototypeDescribe='+row.modlePrototypeDescribe+'" data-toggle="tooltip" title="Edit">修改</a> '
+            '<a href="${bathPath}/modlePrototype/editModlePrototype?id='+row.id+
+            '" data-toggle="tooltip" title="Edit">修改</a> '
         ].join('');
     }
 

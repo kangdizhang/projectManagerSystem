@@ -17,7 +17,7 @@ public interface ModlePrototypeService {
 
     List<ModleVersionVO> queryModlePrototype();
 
-    void saveModlePrototype(Integer id, String modlePrototypeName, String modlePrototypeDescribe);
+    void saveModlePrototype(ModlePrototype modlePrototype);
 
     ModleVersionVO findModlePrototype(Integer id);
 }

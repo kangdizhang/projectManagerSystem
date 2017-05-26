@@ -29,13 +29,13 @@ public class ModleController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public Object modleList(Integer offset,Integer limit,Integer projectId,String modleName,String modleState){
+    public Object modleList(Integer offset,Integer limit,Integer projectId,String projectModleName){
         int pageNo = 1;
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
         try {
-            PageInfo<ProjectModleVO> pageInfo = modleService.queryModleList(pageNo,limit,projectId,modleName,modleState);
+            PageInfo<ProjectModleVO> pageInfo = modleService.queryModleList(pageNo,limit,projectId,projectModleName);
             Map<String,Object> result = new HashMap<String,Object>();
             result.put("rows",pageInfo.getList());
             result.put("total",pageInfo.getTotal());

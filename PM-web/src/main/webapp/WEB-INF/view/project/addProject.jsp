@@ -67,8 +67,10 @@
                 </c:when>
                 <c:otherwise>
                     <td>
-                        <c:forEach items="${list}" var="modlePrototype">
-                            <input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
+                        <c:forEach items="${list}" var="modlePrototype" varStatus="i">
+                            <input type='checkbox' name='mpid' value='${i.index}' />${i.index}
+                            <input type="hidden" name="mpid" value="${modlePrototype.id}">${modlePrototype.modlePrototypeName}
+
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <select name="version" style="width: 100px">
                                 <option value="">请选择版本</option>

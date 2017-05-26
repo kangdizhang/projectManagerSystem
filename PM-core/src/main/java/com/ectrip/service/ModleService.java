@@ -2,6 +2,7 @@ package com.ectrip.service;
 
 import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
+import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 
@@ -61,7 +62,7 @@ public interface ModleService {
      * @param projectId
      * @return list
      */
-    public List<ModlePrototype> findModlePrototypeList(Integer projectId);
+    public List<ModleVersionVO> findModlePrototypeList(Integer projectId);
 
     List<ProjectModle> queryModleListByProjectId(Integer projectId);
 }

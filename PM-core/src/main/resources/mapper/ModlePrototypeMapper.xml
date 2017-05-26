@@ -9,6 +9,12 @@
 		<collection  property="versionVOList" ofType="VersionVO" column="id" select="getVersionVOList"></collection>
 	</resultMap>
 
+	<resultMap type="ModlePrototype" id="mpResultMap">
+		<id column="ID" property="id"/>
+		<result column="MODLE_PROTOTYPE_NAME" property="modlePrototypeName"/>
+		<result column="MODLE_PROTOTYPE_DESCRIBE" property="modlePrototypeDescribe"/>
+	</resultMap>
+
 	<resultMap id="versionVO" type="VersionVO">
 		<id column="ID" property="id"></id>
 		<result column="VERSION" property="version"/>
@@ -49,7 +55,7 @@
 	</select>
 
 	<!-- 条件查询-->
-	<select id="findModlePrototypeListPage" resultMap="modlePrototypeResultMap">
+	<select id="findModlePrototypeListPage" resultMap="mpResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
 		WHERE 1=1
 		<if test="modlePrototypeName!=null and modlePrototypeName!=''">

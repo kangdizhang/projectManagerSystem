@@ -58,7 +58,7 @@
                     <td width="35%">
                         <select name="projectId">
                             <option value="0">请选择项目</option>
-                            <c:forEach var="project" items="list">
+                            <c:forEach items="${list}" var="project">
                                 <option value="${project.id}">${project.projectName}</option>
                             </c:forEach>
                         </select>
@@ -66,29 +66,39 @@
                 </c:otherwise>
             </c:choose>
             <td class="tableleft" width="10%">服务器系统</td>
-            <td><input type="text" name="optSystem" value="${projectVO.optSystem}"></td>
+            <td><input type="text" name="optSystem" value="${projectInfoVO.optSystem}"></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">服务器IP</td>
-            <td width="35%"><input type="text" name="serverIp" value="${projectVO.serverIp}"/></td>
+            <td width="35%"><input type="text" name="serverIp" value="${projectInfoVO.serverIp}"/></td>
             <td width="10%" class="tableleft">域名</td>
-            <td><input type="text" name="hostName" value="${projectVO.hostName}"/></td>
+            <td><input type="text" name="hostName" value="${projectInfoVO.hostName}"/></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">数据库IP</td>
-            <td width="35%"><input type="text" name="dbServerIp" value="${projectVO.dbServerIp}"/></td>
+            <td width="35%"><input type="text" name="dbServerIp" value="${projectInfoVO.dbServerIp}"/></td>
             <td width="10%" class="tableleft">数据库用户名</td>
-            <td><input type="text" name="dbUser" value="${projectVO.dbUser}"/></td>
+            <td><input type="text" name="dbUser" value="${projectInfoVO.dbUser}"/></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">数据库密码</td>
-            <td width="35%"><input type="text" name="dbPwd" value="${projectVO.dbPwd}"/></td>
+            <td width="35%"><input type="text" name="dbPwd" value="${projectInfoVO.dbPwd}"/></td>
             <td width="10%" class="tableleft">数据库端口号</td>
-            <td><input type="text" name="dbPort" value="${projectVO.dbPort}"/></td>
+            <td><input type="text" name="dbPort" value="${projectInfoVO.dbPort}"/></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">ssh信息</td>
-            <td width="35%"><input type="text" name="ssh" value="${projectVO.ssh}"/></td>
+            <td width="35%"><input type="text" name="ssh" value="${projectInfoVO.ssh}"/></td>
+            <td width="10%" class="tableleft">备注说明</td>
+            <td><textarea name="note">${projectInfoVO.note}</textarea> </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">操作</td>
+            <td width="35%">
+                <button type="submit" class="btn btn-primary">保存</button>
+                &nbsp;&nbsp;
+                <a class="btn btn-success" href="${bathPath}/projectInfo/projectInfoList">返回列表</a>
+            </td>
             <c:choose>
                 <c:when test="${msg!=null}">
                     <td width="10%" class="tableleft">提示信息</td>
@@ -101,16 +111,6 @@
                     <td></td>
                 </c:otherwise>
             </c:choose>
-        </tr>
-        <tr>
-            <td width="10%" class="tableleft">操作</td>
-            <td width="35%">
-                <button type="submit" class="btn btn-primary">保存</button>
-                &nbsp;&nbsp;
-                <a class="btn btn-success" href="${bathPath}/projectInfo/projectInfoList">返回列表</a>
-            </td>
-            <td width="10%"></td>
-            <td></td>
         </tr>
     </table>
 </form>

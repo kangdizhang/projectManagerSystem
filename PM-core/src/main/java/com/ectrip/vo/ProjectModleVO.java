@@ -14,15 +14,8 @@ public class ProjectModleVO {
     private String modleName;//模块名称
     private String modleDescribe;//模块描述
     private String version;//当前版本版本号
-    private List<VersionVO> versionVOList;
-
-    public List<VersionVO> getVersionVOList() {
-        return versionVOList;
-    }
-
-    public void setVersionVOList(List<VersionVO> versionVOList) {
-        this.versionVOList = versionVOList;
-    }
+    private String versionDesc;//当前版本描述
+    private String versionNum;//父版本号
 
     public Integer getId() {
         return id;
@@ -78,6 +71,22 @@ public class ProjectModleVO {
 
     public void setModleId(Integer modleId) {
         this.modleId = modleId;
+    }
+
+    public String getVersionDesc() {
+        return versionDesc;
+    }
+
+    public void setVersionDesc(String versionDesc) {
+        this.versionDesc = versionDesc;
+    }
+
+    public String getVersionNum() {
+        return versionNum;
+    }
+
+    public void setVersionNum(String versionNum) {
+        this.versionNum = versionNum;
     }
 
     public ProjectModleVO() {

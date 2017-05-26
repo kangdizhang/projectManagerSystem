@@ -13,10 +13,12 @@
         <id column="ID" property="id"/>
         <result column="PROJECT_ID" property="projectId"/>
         <result column="PROJECT_NAME" property="projectName"/>
+        <result column="MODLE_ID" property="modleId"/>
         <result column="MODLE_NAME" property="modleName"/>
         <result column="MODLE_DESCRIBE" property="modleDescribe"/>
-        <result column="MODLE_STATE" property="modleState"/>
         <result column="VERSION" property="version"/>
+        <result column="VERSION_NUM" property="versionNum"/>
+        <result column="VERSION_DESC" property="versionDesc"/>
     </resultMap>
 
     <!--表名 -->
@@ -88,24 +90,20 @@
 		WHERE M.ID=MD.MODLE_ID AND MD.DEMAND_ID=#{demandId}
 	</select> -->
 
-    <!-- 条件查询
+    <!-- 条件查询 -->
     <select id="queryModle" resultMap="projectModleVOResultMap">
-        SELECT M.ID as ID,M.PROJECT_ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,M.MODLE_NAME as
-        MODLE_NAME,M.MODLE_DESCRIBE as MODLE_DESCRIBE,
-        (CASE WHEN M.MODLE_STATE='0' THEN '开发中'
-        ELSE '已完成'
-        END) as MODLE_STATE,
-        (SELECT V.version FROM VERSION V WHERE V.modle_id = M.id AND V.VERSION_STATE = '1') AS VERSION
-        FROM MODLE M,PROJECT P
-        WHERE M.PROJECT_ID = P.ID
-        AND M.PROJECT_ID=#{projectId}
+        SELECT PM.ID as ID,P.ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,MP.ID AS MODLE_ID,
+        MP.MODLE_PROTOTYPE_NAME as MODLE_NAME,MP.MODLE_PROTOTYPE_DESCRIBE as MODLE_DESCRIBE,PM.VERSION AS VERSION,
+        V.VERSION_DESC AS VERSION_DESC,V2.VERSION AS VERSION_NUM
+        FROM PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V,VERSION V2
+        WHERE PM.PROJECT_ID = P.ID AND PM.MODLE_ID = MP.ID AND PM.VERSION=V.VERSION AND PM.MODLE_ID=V.MODLE_ID AND V.VERSION_ID=V2.ID
+        <if test="projectId!=null and projectId!=''">
+            AND PM.PROJECT_ID = #{projectId}
+        </if>
         <if test="modleName!=null and modleName!=''">
-            AND M.MODLE_NAME LIKE CONCAT('%', #{modleName}, '%')
+            AND MP.MODLE_NAME LIKE CONCAT('%', #{modleName}, '%')
         </if>
-        <if test="modleState!=null and modleState!=''">
-            AND M.MODLE_STATE=#{modleState}
-        </if>
-    </select>-->
+    </select>
 
     <!-- 修改-->
     <update id="updateModle" parameterType="ProjectModle">

@@ -87,7 +87,14 @@
             <td width="10%" class="tableleft">项目所在地</td>
             <td width="35%">
                 <div style="position: relative;">
-                    <input name="region" id="city-picker3" class="form-control" readonly type="text" value="请选择省市区" data-toggle="city-picker">
+                    <c:choose>
+                        <c:when test="${project==null}">
+                            <input name="region" id="city-picker3" class="form-control" readonly type="text" value="请选择省市区" data-toggle="city-picker">
+                        </c:when>
+                        <c:otherwise>
+                            <input name="region" id="city-picker3" class="form-control" readonly type="text" value="${project.region}" data-toggle="city-picker">
+                        </c:otherwise>
+                    </c:choose>
                 </div
                 <%--<div id="citySelect">
                     <select class="prov" id="province"></select>

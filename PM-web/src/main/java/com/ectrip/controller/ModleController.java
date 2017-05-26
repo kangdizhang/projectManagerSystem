@@ -1,9 +1,11 @@
 package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
+import com.ectrip.model.Project;
 import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.service.ModleService;
+import com.ectrip.service.ProjectService;
 import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +29,30 @@ public class ModleController extends BaseController {
     @Autowired
     private ModleService modleService;
 
+    @Autowired
+    private ProjectService projectService;
+
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public Object modleList(Integer offset,Integer limit,Integer projectId,String projectModleName){
+    public Object modleList(Integer offset,Integer limit,Integer projectId,String modleName){
         int pageNo = 1;
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
-        try {
-            PageInfo<ProjectModleVO> pageInfo = modleService.queryModleList(pageNo,limit,projectId,projectModleName);
-            Map<String,Object> result = new HashMap<String,Object>();
-            result.put("rows",pageInfo.getList());
-            result.put("total",pageInfo.getTotal());
-            return result;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
+        PageInfo<ProjectModleVO> pageInfo = modleService.queryModleList(pageNo,limit,projectId,modleName);
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("rows",pageInfo.getList());
+        result.put("total",pageInfo.getTotal());
+        return result;
+    }
+
+    @RequestMapping(value = "/modleList",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView modleList(Integer projectId){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Project> list = projectService.findProjectListPage(null,null,null,null,null).getList();
+        modelAndView.addObject("list",list);
+        modelAndView.setViewName("modle/modleList");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/saveModle",method = {RequestMethod.GET,RequestMethod.POST})

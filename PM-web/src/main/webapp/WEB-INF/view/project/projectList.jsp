@@ -118,6 +118,7 @@
             columns: [
                 {field: 'id', title:'编号',align:'center'},
                 {field: 'projectName', title: '项目名称',align:'center'},
+                {field: 'region', title: '项目所在地',align:'center'},
                 {field: 'projectLeader', title: '项目负责人',align:'center'},
                 {field: 'phone', title: '负责人电话',align:'center'},
                 {field: 'qq', title: '负责人QQ',align:'center'},
@@ -178,7 +179,7 @@
 
     function modleListFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/modleList?projectId='+row.id+'" data-toggle="tooltip" title="View">查看</a>　'
+            '<a href="${bathPath}/modle/modleList?projectId='+row.id+'" data-toggle="tooltip" title="View">查看</a>　'
         ].join('');
     }
 

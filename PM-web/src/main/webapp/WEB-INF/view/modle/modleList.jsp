@@ -51,14 +51,12 @@
 </head>
 <body>
 
-<input type="hidden" name="projectId" id="projectId" value="${param.projectId}">
-
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
         <!-- 选择项目 -->
         <select name="projectName">
             <option name="projectId" value="">请选择项目</option>
-            <c:forEach items="list" var="Project">
+            <c:forEach items="${list}" var="Project">
                 <c:choose>
                     <c:when test="${project.id == Project.id}">
                         <option name="projectId" selected="selected" value="${Project.id}">${Project.projectName}</option>
@@ -122,11 +120,11 @@
             columns: [
                 {field: 'id', title:'编号',align:'center'},
                 {field: 'projectName', title: '项目名称',align:'center'},
-                {field: 'projecModleName', title: '模块名称',align:'center'},
+                {field: 'modleName', title: '模块名称',align:'center'},
                 {field: 'modleDescribe', title: '模块描述',align:'center'},
                 {field: 'version', title: '版本号',align:'center'},
                 {field: 'versionDesc', title: '版本描述',align:'center'},
-                {field: 'verisonId', title: '父版本', align: 'center'},
+                {field: 'verisonNum', title: '父版本号', align: 'center'},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -136,22 +134,13 @@
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
             projectId: $("#projectName option:selected").val(),
-            projecModleName: $("#projectModleName").val()
+            modleName:$("#projecModleName").val()
         };
         return temp;
     };
 
-
-
     function reloadTable() {
         $table.bootstrapTable('refresh');
-    }
-
-    function versionList(value,row,index) {
-        return [
-            '<a href="${bathPath}/version/verisonList?modleId=' +row.id +
-            '" data-toggle="tooltip" title="View">查看</a>'
-        ].join('');
     }
 
     function operateFormatter(value, row, index) {

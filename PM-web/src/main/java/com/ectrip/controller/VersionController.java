@@ -44,7 +44,7 @@ public class VersionController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/viewVerisonList",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/verisonList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView viewVerisonList(Integer modleId,Integer projectId){
         ModelAndView modelAndView = new ModelAndView();
         List<ProjectModleVO> list = modleService.queryModleList(null,null,projectId,null).getList();

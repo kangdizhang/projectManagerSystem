@@ -149,21 +149,17 @@
 
     function versionList(value,row,index) {
         return [
-            '<a href="${bathPath}/version/viewVerisonList?modleId=' +row.id +
-            '&projectId=${param.projectId}' +
+            '<a href="${bathPath}/version/verisonList?modleId=' +row.id +
             '" data-toggle="tooltip" title="View">查看</a>'
         ].join('');
     }
 
     function operateFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/editModle?id='+row.id+
-            '&modleName='+row.modleName +
-            '&projectId=${param.projectId}' +
-            '&modleState='+row.modleState +
-            '&modleDescribe='+row.modleDescribe+'" data-toggle="tooltip" title="Edit">修改</a> ',
+            '<a href="${bathPath}/modle/editModle?id='+row.id+
+            '" data-toggle="tooltip" title="Edit">修改</a> ',
             '<a href="${bathPath}/modle/deleteModle?id='+row.id+
-            '&projectId=${param.projectId}' +
+            '&projectName=' + row.projectName +
             '"data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }

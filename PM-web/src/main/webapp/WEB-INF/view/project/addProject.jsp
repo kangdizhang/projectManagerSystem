@@ -61,21 +61,21 @@
                     <td>
                         <c:forEach items="${list}" var="projectModleVO">
                             <span>${projectModleVO.modleName}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                            版本号：${projectModleVO.version}
+                            版本号：${projectModleVO.version}<br>
                         </c:forEach>
                     </td>
                 </c:when>
                 <c:otherwise>
                     <td>
                         <c:forEach items="${list}" var="modlePrototype">
-                            <label class='checkbox inline'>
-                                <input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
-                            </label>
-                            版本号：<select name="version">
+                            <input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="version" style="width: 100px">
+                                <option value="">请选择版本</option>
                                 <c:forEach var="versionVO" items="${modlePrototype.versionVOList}">
                                     <option value="${versionVO.id}">${versionVO.version}</option>
                                 </c:forEach>
-                            </select>
+                            </select><br>
                         </c:forEach>
                     </td>
                 </c:otherwise>
@@ -157,7 +157,7 @@
             <td width="35%">
                 <button type="submit" onclick="submitForm()" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;
-                <a class="btn btn-success" href="${bathPath}/projectList">返回列表</a>
+                <a class="btn btn-success" href="${bathPath}/project/projectList">返回列表</a>
             </td>
             <c:choose>
                 <c:when test="${msg!=null}">

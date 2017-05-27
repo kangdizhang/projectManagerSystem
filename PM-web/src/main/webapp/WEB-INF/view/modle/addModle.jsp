@@ -82,9 +82,9 @@
                             </label>
                             版本号：<select name="version">
                             <c:forEach items="${modlePrototype.versionList}" var="versionVO">
-                                <option value="${versionVO.id}">${versionVO.version}</option><br>
+                                <option value="${versionVO.id}">${versionVO.version}</option>
                             </c:forEach>
-                            </select>
+                            </select><br>
                         </c:forEach>
 
                     </td>

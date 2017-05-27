@@ -77,14 +77,13 @@
                     <td>
                         <c:forEach items="${list}" var="modlePrototype" varStatus="i">
                             <input type='checkbox' name='mpid' value='${i.index}'/>
-                            <label class='checkbox inline'>
-                                <input type='hidden' name='modleId' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
-                            </label>
-                            版本号：<select name="version">
+                            <input type='hidden' name='modleId' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            版本号：<select name="version" style="width: 100px">
                             <c:forEach items="${modlePrototype.versionList}" var="versionVO">
                                 <option value="${versionVO.id}">${versionVO.version}</option>
                             </c:forEach>
-                            </select><br>
+                            </select><br/>
                         </c:forEach>
 
                     </td>

@@ -31,15 +31,15 @@ public class VersionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public Object list(Integer offset,Integer limit,Integer modleId,String versionState){
+    public Object list(Integer offset,Integer limit,Integer modleId){
         int pageNo = 1;
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
-//        PageInfo<VersionVO> pageInfo = versionService.queryVersion(offset,limit,modleId,versionState);
+        PageInfo<VersionVO> pageInfo = versionService.queryVersion(offset,limit,modleId);
         Map<String,Object> result = new HashMap<String,Object>();
-//        result.put("rows",pageInfo.getList());
-//        result.put("total",pageInfo.getTotal());
+        result.put("rows",pageInfo.getList());
+        result.put("total",pageInfo.getTotal());
         return result;
     }
 

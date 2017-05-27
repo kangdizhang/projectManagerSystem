@@ -132,9 +132,9 @@
 
     function operateFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/modlePrototype/editModlePrototype?id='+row.id+
+            '<a href="${bathPath}/modlePrototype/editModlePrototype?id=' + row.id+
             '" data-toggle="tooltip" title="Edit">修改</a> ',
-            '<a href="${bathPath}/modlePrototype/delModlePrototype?id='+row.id+
+            '<a href="${bathPath}/modlePrototype/delModlePrototype?id=' + row.id +
             '" data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }

@@ -55,7 +55,7 @@
     <div class="form-group">
         <!-- 选择项目 -->
         <select id="projectName" name="projectName">
-            <option name="projectId" value="">请选择项目</option>
+            <option  name="projectId" value="${projectId}">请选择项目</option>
             <c:forEach items="${list}" var="Project">
                 <c:choose>
                     <c:when test="${project.id == Project.id}">
@@ -74,7 +74,7 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${project.id}'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${projectId}'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -147,7 +147,7 @@
         return [
             '<a href="${bathPath}/modle/editModle?id='+row.id+
             '" data-toggle="tooltip" title="Edit">修改</a> ',
-            '<a href="${bathPath}/modle/deleteModle?id='+row.id+
+            '<a href="${bathPath}/modle/deleteModle?id='+row.id+ '&projectId='+row.projectId+
             '&projectName=' + row.projectName +
             '"data-toggle="tooltip" title="Del">删除</a> '
         ].join('');

@@ -54,6 +54,7 @@ public class ModleController extends BaseController {
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("rows", pageInfo.getList());
         result.put("total", pageInfo.getTotal());
+        result.put("projectId",projectId);
         return result;
     }
 
@@ -65,7 +66,6 @@ public class ModleController extends BaseController {
         modelAndView.addObject("projectModleVO", projectModleVO);
         modelAndView.addObject("versionVOList", list);
         modelAndView.setViewName("modle/editModle");
-
         return modelAndView;
     }
 
@@ -73,9 +73,8 @@ public class ModleController extends BaseController {
     public ModelAndView modleList(Integer projectId) {
         ModelAndView modelAndView = new ModelAndView();
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
-        Project project = projectService.queryProject(projectId);
         modelAndView.addObject("list", list);
-        modelAndView.addObject("project", project);
+        modelAndView.addObject("projectId",projectId);
         modelAndView.setViewName("modle/modleList");
         return modelAndView;
     }
@@ -91,9 +90,7 @@ public class ModleController extends BaseController {
         if (modlePrototypeList != null && !modlePrototypeList.isEmpty()) {
             mav.addObject("list", modlePrototypeList);
             mav.addObject("projectId", projectId);
-//            return mav;
         }
-
         if (mpid == null || mpid.length == 0) {
             mav.addObject("msg", "请选择系统模块");
             return mav;
@@ -106,7 +103,6 @@ public class ModleController extends BaseController {
                 return mav;
             }
         }
-
         projectService.saveModle(projectId, modleIds, version, mpid);
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         Project project = projectService.queryProject(projectId);
@@ -136,9 +132,8 @@ public class ModleController extends BaseController {
         ModelAndView mav = new ModelAndView();
         modleService.deleteModle(id);
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
-        Project project = projectService.queryProject(projectId);
         mav.addObject("list", list);
-        mav.addObject("project", project);
+        mav.addObject("projectId", projectId);
         mav.setViewName("modle/modleList");
         return mav;
     }

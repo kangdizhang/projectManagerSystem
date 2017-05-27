@@ -1,8 +1,11 @@
 package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
+import com.ectrip.model.ModlePrototype;
+import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.VersionService;
+import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
 import com.ectrip.vo.VersionVO;
 import com.github.pagehelper.PageInfo;
@@ -27,29 +30,32 @@ public class VersionController extends BaseController {
     private VersionService versionService;
 
     @Autowired
-    private ModleService modleService;
+    private ModlePrototypeService modlePrototypeService;
 
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public Object list(Integer offset,Integer limit,Integer modleId,String versionState){
+    public Object list(Integer offset,Integer limit,Integer modleId){
         int pageNo = 1;
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
-//        PageInfo<VersionVO> pageInfo = versionService.queryVersion(offset,limit,modleId,versionState);
+        PageInfo<VersionVO> pageInfo = versionService.queryVersion(offset,limit,modleId);
         Map<String,Object> result = new HashMap<String,Object>();
-//        result.put("rows",pageInfo.getList());
-//        result.put("total",pageInfo.getTotal());
+        result.put("rows",pageInfo.getList());
+        result.put("total",pageInfo.getTotal());
         return result;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/verisonList",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView viewVerisonList(Integer modleId,Integer projectId){
+    @RequestMapping(value = "/versionList",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView viewVerisonList(Integer modleId){
         ModelAndView modelAndView = new ModelAndView();
-        List<ProjectModleVO> list = modleService.queryModleList(null,null,projectId,null).getList();
+
+        ModleVersionVO modleVersionVO = modlePrototypeService.findModlePrototype(modleId);
+        modelAndView.addObject("modlePrototype",modleVersionVO);
+
+        List<ModleVersionVO> list = modlePrototypeService.queryModlePrototype();
         modelAndView.addObject("list",list);
-        modelAndView.addObject("ModleId",modleId);
         modelAndView.setViewName("version/versionList");
         return modelAndView;
     }

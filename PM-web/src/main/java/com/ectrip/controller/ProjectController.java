@@ -87,7 +87,7 @@ public class ProjectController extends BaseController {
 
         if(project.getId()==null){
             Map map = validateProjectInfo(projectInfo);
-            if(map.get("flag")==false){
+            if((Boolean)map.get("flag")==false){
                 projectInfo = null;
             }else{
                 if(!StringUtils.isEmpty(map.get("errInfo"))){

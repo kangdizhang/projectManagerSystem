@@ -159,7 +159,7 @@
                 </tr>
                 <tr>
                     <td width="10%" class="tableleft">数据库端口号</td>
-                    <td width="35%"><input type="text" name="dbPort" value="${param.dbPort}"/></td>
+                    <td><input type="text" name="dbPort" value="${param.dbPort}"/></td>
                     <td width="10%" class="tableleft">ssh信息</td>
                     <td width="35%"><input type="text" name="ssh" value="${param.ssh}"/></td>
                 </tr>
@@ -167,31 +167,9 @@
                     <td width="10%" class="tableleft">备注</td>
                     <td width="35%"><textarea name="note" style="width: auto;height: auto">${param.note}</textarea></td>
                     <td width="10%" class="tableleft"></td>
-                    <td width="35%"></td>
-
+                    <td></td>
                 </tr>
             </c:when>
-        </c:choose>
-        <c:choose>
-            <c:when test="${msg!=null}">
-                <tr>
-                    <td width="10%" class="tableleft">提示信息</td>
-                    <td>
-                        <p style="color: crimson">${msg}</p>
-                    </td>
-                    <td width="10%" class="tableleft"></td>
-                    <td width="35%"></td>
-                </tr>
-            </c:when>
-            <c:otherwise>
-                <tr>
-                    <td width="10%" class="tableleft">提示信息</td>
-                    <td width="35%"></td>
-                    </td>
-                    <td width="10%" class="tableleft"></td>
-                    <td width="35%"></td>
-                </tr>
-            </c:otherwise>
         </c:choose>
         <tr>
             <td width="10%" class="tableleft">操作</td>
@@ -200,6 +178,12 @@
                 &nbsp;&nbsp;
                 <a class="btn btn-success" href="${bathPath}/project/projectList">返回列表</a>
             </td>
+            <c:choose>
+                <c:when test="${msg!=null}">
+                    <td width="10%" class="tableleft">提示信息</td>
+                    <td><span style="color: #9d261d">${msg}</span></td>
+                </c:when>
+            </c:choose>
         </tr>
     </table>
 </form>

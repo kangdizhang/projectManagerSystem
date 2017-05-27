@@ -54,8 +54,9 @@
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
         <!-- 选择项目 -->
+        <input type="text" id="projectId" name="projectId" value="${projectId}">
         <select id="projectName" name="projectName">
-            <option  name="projectId" value="${projectId}">请选择项目</option>
+            <option  name="projectId" value="">请选择项目</option>
             <c:forEach items="${list}" var="Project">
                 <c:choose>
                     <c:when test="${project.id == Project.id}">
@@ -74,7 +75,8 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${projectId}'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="addModle()" class="btn btn-primary">新增</button>
+        <%--<button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${projectId}'" class="btn btn-primary">新增</button>--%>
     </div>
 </form>
 <table id="table"></table>
@@ -129,13 +131,18 @@
             ]
         });
     });
-    oTableInit.queryParams = function (params) {
+    oTableInit.queryParams = function (params){
+
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
             projectId: $("#projectName option:selected").val(),
             modleName:$("#projecModleName").val()
         };
+//        var id = $("#projectName option:selected").val();
+//        if(id != null && id != ''){
+          $("#projectId").val($("#projectName option:selected").val());
+//        }
         return temp;
     };
 
@@ -153,4 +160,8 @@
         ].join('');
     }
 
+    function addModle() {
+        var projectId = $('#projectId').val();
+        window.location.href='${bathPath}/modle/addModle?projectId='+projectId;
+    }
 </script>

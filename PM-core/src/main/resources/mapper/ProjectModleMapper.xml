@@ -106,7 +106,7 @@
         AND PM.modle_id = MP.id
         AND V.modle_id = MP.ID
         <if test="projectId!=null and projectId!=''">
-            AND PM.PROJECT_ID = #{projectId}
+            AND P.ID = #{projectId}
         </if>
         <if test="modleName!=null and modleName!=''">
             AND MP.modlePrototypeName LIKE CONCAT('%', #{modleName}, '%')

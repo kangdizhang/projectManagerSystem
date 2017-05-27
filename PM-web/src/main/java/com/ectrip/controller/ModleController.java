@@ -73,8 +73,10 @@ public class ModleController extends BaseController {
     public ModelAndView modleList(Integer projectId) {
         ModelAndView modelAndView = new ModelAndView();
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
+        Project project = projectService.queryProject(projectId);
         modelAndView.addObject("list", list);
         modelAndView.addObject("projectId",projectId);
+        modelAndView.addObject("project",project);
         modelAndView.setViewName("modle/modleList");
         return modelAndView;
     }
@@ -117,6 +119,8 @@ public class ModleController extends BaseController {
     public ModelAndView addModle(Integer projectId) {
         ModelAndView mav = getModelAndView();
         mav.setViewName("modle/addModle");
+        Project project = projectService.queryProject(projectId);
+        mav.addObject("project",project);
         List<ModleVersionVO> modlePrototypeList = modleService.findModlePrototypeList(projectId);
         if (modlePrototypeList != null && !modlePrototypeList.isEmpty()) {
             mav.addObject("list", modlePrototypeList);

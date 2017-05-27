@@ -63,6 +63,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="tableleft">
+                        项目名称
+                    </td>
+                    <td>
+                        ${project.projectName}
+                    </td>
+                </tr>
+                <tr>
                     <td class="tableleft"></td>
                     <td>
                         <a class="btn btn-success" href="${bathPath}/editModlePrototype">添加模块原型</a>
@@ -72,6 +80,14 @@
                 </tr>
             </c:when>
             <c:otherwise>
+                <tr>
+                <td class="tableleft">
+                    项目名称
+                </td>
+                <td>
+                        ${project.projectName}
+                </td>
+            </tr>
                 <tr>
                     <td width="10%" class="tableleft">模块选择</td>
                     <td>

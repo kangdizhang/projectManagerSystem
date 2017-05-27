@@ -13,11 +13,6 @@
         <id column="ID" property="id"></id>
         <result column="VERSION" property="version"/>
     </resultMap>
-
-	<resultMap id="versionVO" type="VersionVO">
-		<id column="ID" property="id"></id>
-		<result column="VERSION" property="version"/>
-	</resultMap>
 	<!--表名 -->
 	<sql id="tableName">
 		MODLE_PROTOTYPE

@@ -65,6 +65,7 @@ public class ModlePrototypeServiceImpl implements ModlePrototypeService {
             Version version = new Version();
             version.setUpUserId("testUser");
             version.setVersion("v1.0");
+            version.setDemandId(1);
             version.setVersionDesc("初始化");
             version.setUpTime(sdf.format(new Date()));
             version.setModleId(modlePrototype.getId());

@@ -126,7 +126,7 @@
 
     function versionList(value, row, index) {
         return [
-            '<a href="${bathPath}/version/list?modleId='+row.id+'" data-toggle="tooltip" title="view">查看</a> '
+            '<a href="${bathPath}/version/versionList?modleId='+row.id+'" data-toggle="tooltip" title="view">查看</a> '
         ].join('');
     }
 

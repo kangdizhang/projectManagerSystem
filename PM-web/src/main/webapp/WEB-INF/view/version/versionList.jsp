@@ -58,23 +58,15 @@
         <select name="modleId" id="modleId" class="form-control">
             <c:forEach var="modleVO" items="${list}">
                 <c:choose>
-                    <c:when test="${modleVO.id!=ModleId}">
-                        <option value="${modleVO.id}">${modleVO.modleName}</option>
+                    <c:when test="${modleVO.id!=modlePrototype.id}">
+                        <option value="${modleVO.id}">${modleVO.modlePrototypeName}</option>
                     </c:when>
                     <c:otherwise>
-                        <option selected="selected" value="${modleVO.id}">${modleVO.modleName}</option>
+                        <option selected="selected" value="${modleVO.id}">${modleVO.modlePrototypeName}</option>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </select>&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <%--版本状态：--%>
-            <label for="versionState">版本状态：</label>
-            <select name="versionState" id="versionState" class="form-control">
-                <option value="">所有</option>
-                <option value="0" selected="selected">已停用</option>
-                <option value="1">启用中</option>
-            </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
     </div>
@@ -134,8 +126,7 @@
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            modleId: $("#modleId").val(),
-            versionState:$("#versionState").val()
+            modleId: $("#modleId option:selected").val()
         };
         return temp;
     };

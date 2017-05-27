@@ -40,7 +40,8 @@
 		MODLE_ID,
 		UP_USERID,
 		UP_TIME,
-		VERSION_ID
+		VERSION_ID,
+		DEMAND_ID
 	</sql>
 
 	<!-- 字段值 -->
@@ -51,7 +52,8 @@
 		#{modleId},
 		#{upUserId},
 		#{upTime},
-		#{versionId}
+		#{versionId},
+		#{demandId}
 	</sql>
 
 	<!-- 主键查询-->

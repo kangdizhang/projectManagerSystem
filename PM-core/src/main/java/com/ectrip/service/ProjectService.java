@@ -18,11 +18,16 @@ public interface ProjectService {
      * 根据ID删除项目配置信息
      * @param id
      */
-    public void delProjectInfo(Integer id);
+    void delProjectInfo(Integer id);
 
     void saveProjectInfo(ProjectInfo projectInfo);
+
+    void saveModle(Integer projectId, String[] modleIds, String[] versions, String[] mpid);
+
     Project queryProject(Integer projectId);
+
     ProjectInfoVO queryProjectInfo(Integer id);
+
     /**
      * 按条件查询操作记录和环境
      *

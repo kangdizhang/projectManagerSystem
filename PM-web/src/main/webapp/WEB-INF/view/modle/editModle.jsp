@@ -53,7 +53,7 @@
 <body>
 <form action="/modle/updateModle" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="hidden" name="id" value="${id}">
+        <input type="hidden" name="id" value="${projectModleVO.id}">
         <input type="hidden" name="projectId" value="${projectModleVO.projectId}">
         <input type="hidden" name="modleId" value="${projectModleVO.modleId}">
         <tr>

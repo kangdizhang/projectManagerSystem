@@ -93,7 +93,7 @@
         PI.SSH AS SSH,
         PI.NOTE AS NOTE
         FROM PROJECT P,PROJECT_INFO PI
-        WHERE PI.PROJECT_ID = P.ID AND ID=#{id}
+        WHERE PI.PROJECT_ID = P.ID AND PI.ID=#{id}
     </select>
 
     <!-- 条件查询-->
@@ -139,7 +139,7 @@
 
     <!-- 根据PROJECT_ID删除项目配置信息 -->
     <delete id="delProjectInfoByProjectId">
-        DELETE FROM PROJECT_INFO WHERE PROJECT_ID=#{projectId}
+        DELETE FROM PROJECT_INFO WHERE ID =#{id}
     </delete>
 
 </mapper>

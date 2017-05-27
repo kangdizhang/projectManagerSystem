@@ -36,10 +36,10 @@ public class VersionController extends BaseController {
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
-        PageInfo<VersionVO> pageInfo = versionService.queryVersion(offset,limit,modleId,versionState);
+//        PageInfo<VersionVO> pageInfo = versionService.queryVersion(offset,limit,modleId,versionState);
         Map<String,Object> result = new HashMap<String,Object>();
-        result.put("rows",pageInfo.getList());
-        result.put("total",pageInfo.getTotal());
+//        result.put("rows",pageInfo.getList());
+//        result.put("total",pageInfo.getTotal());
         return result;
     }
 

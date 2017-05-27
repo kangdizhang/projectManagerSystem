@@ -32,8 +32,7 @@ public interface VersionService {
      * @param pageNo
      * @param pageSize
      * @param modleId
-     * @param versionState
      * @return list
      */
-    PageInfo<VersionVO> queryVersion(Integer pageNo, Integer pageSize, Integer modleId, String versionState);
+    PageInfo<VersionVO> queryVersion(Integer pageNo, Integer pageSize, Integer modleId);
 }

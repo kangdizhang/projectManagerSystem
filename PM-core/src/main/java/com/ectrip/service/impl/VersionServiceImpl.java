@@ -51,11 +51,10 @@ public class VersionServiceImpl implements VersionService {
      * @param pageNo
      * @param pageSize
      * @param modleId
-     * @param versionState
      * @return list
      */
-    public PageInfo<VersionVO> queryVersion(Integer pageNo, Integer pageSize, Integer modleId, String versionState){
-        List<VersionVO> list = versionDAO.queryVersion(pageNo,pageSize,modleId,versionState);
+    public PageInfo<VersionVO> queryVersion(Integer pageNo, Integer pageSize, Integer modleId){
+        List<VersionVO> list = versionDAO.queryVersion(pageNo,pageSize,modleId);
         return new PageInfo<VersionVO>(list);
     }
 }

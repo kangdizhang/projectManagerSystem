@@ -129,4 +129,12 @@ public class ProjectInfoController extends BaseController {
             return mav;
         }
     }
+
+    @RequestMapping(value = "/deleteProjectInfo",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView deleteModle(Integer id){
+        ModelAndView mav = new ModelAndView();
+        projectService.delProjectInfo(id);
+        mav.setViewName("projectInfo/projectInfoList");
+        return mav;
+    }
 }

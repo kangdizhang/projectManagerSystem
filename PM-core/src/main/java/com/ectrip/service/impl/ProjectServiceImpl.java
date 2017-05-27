@@ -76,6 +76,21 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
+
+    @Transactional
+    public void saveModle(Integer projectId, String[] modleIds, String[] versions, String[] mpid){
+        Integer j;
+        Version version;
+        for (int i = 0; i < mpid.length; i++) {
+            j = Integer.valueOf(mpid[i]);
+            version = versionDAO.findVersion(Integer.parseInt(versions[j]));
+            ProjectModle projectModle = new ProjectModle();
+            projectModle.setProjectId(projectId);
+            projectModle.setModleId(Integer.parseInt(modleIds[j]));
+            projectModle.setVersion(version.getVersion());
+            projectModleDAO.saveModle(projectModle);
+        }
+    }
     @Override
     @Transactional
     public void saveProjectInfo(ProjectInfo projectInfo) {

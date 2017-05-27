@@ -75,14 +75,18 @@
                 <tr>
                     <td width="10%" class="tableleft">模块选择</td>
                     <td>
-                        <c:forEach items="${list}" var="modlePrototype">
-                            <label class='checkbox inline'><input type='checkbox' name='mpid' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}</label>
+                        <c:forEach items="${list}" var="modlePrototype" varStatus="i">
+                            <input type='checkbox' name='mpid' value='${i.index}'/>
+                            <label class='checkbox inline'>
+                                <input type='hidden' name='modleId' value='${modlePrototype.id}' />${modlePrototype.modlePrototypeName}
+                            </label>
                             版本号：<select name="version">
-                            <c:forEach var="versionVO" items="${list.versionVOList}">
-                                <option value="${versionVO.id}">${versionVO.version}</option>
+                            <c:forEach items="${modlePrototype.versionList}" var="versionVO">
+                                <option value="${versionVO.id}">${versionVO.version}</option><br>
                             </c:forEach>
                             </select>
                         </c:forEach>
+
                     </td>
                 </tr>
                 <c:choose>

@@ -54,8 +54,21 @@
 
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
-        <!-- 项目名称 -->
-        <input type="text" name="projectName" id="projectName"class="abc input-default" placeholder="这里输入项目名称">
+        <!-- 项目名称
+        <input type="text" name="projectName" id="projectName"class="abc input-default" placeholder="这里输入项目名称"> -->
+        <select id="projectName" name="projectName">
+            <option name="projectId" value="">请选择项目</option>
+            <c:forEach items="${list}" var="Project">
+                <c:choose>
+                    <c:when test="${project.id == Project.id}">
+                        <option name="projectId" selected="selected" value="${Project.id}">${Project.projectName}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option name="projectId" value="${Project.id}">${Project.projectName}</option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </select>
 
         <%--需求名称：--%>
         <input type="text" name="demandName" id="demandName"class="abc input-default" placeholder="这里输入需求名称">
@@ -72,7 +85,7 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/demand/addDemand?projectId=${param.projectId}'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="window.location.href='${bathPath}/demand/addDemand?projectId=${project.id}'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -150,7 +163,7 @@
     function completeFormatter(value, row, index) {
         return [
             '<a href="${bathPath}/demand/completeDemand?id='+row.id+
-            '&projectId=${param.projectId}' +
+            '&projectId=${project.id}' +
             '" data-toggle="tooltip" title="Complete">完成</a> '
         ].join('');
     }

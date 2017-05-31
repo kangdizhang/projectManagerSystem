@@ -126,6 +126,7 @@
                 {field: 'version', title: '版本号',align:'center'},
                 {field: 'versionDesc', title: '版本描述',align:'center'},
                 {field: 'verisonNum', title: '父版本号', align: 'center'},
+                {field: 'versionList', title: '模块列表', align: 'center', formatter: 'versionListFormatter', events: 'versionListEvents', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -157,6 +158,13 @@
             '" onclick="return issure();" data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }
+    function versionListFormatter(value, row, index) {
+        return [
+            '<a href="${bathPath}/version/versionList?modleId='+row.modleId+'" data-toggle="tooltip" title="View">查看</a>　'
+        ].join('');
+    }
+
+
     function issure(){
         if(confirm("您确认删除该数据吗？")){
             return true;

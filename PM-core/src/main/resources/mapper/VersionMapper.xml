@@ -73,13 +73,6 @@
 		WHERE v.MODLE_ID=#{modleId}
 	</select>
 
-	<!-- 修改 -->
-	<update id="updateVersion">
-		UPDATE <include refid="tableName"></include>
-		SET VERSION_STATE='0'
-		WHERE MODLE_ID=#{modleId} AND VERSION_STATE='1'
-	</update>
-
 	<!-- 新增-->
 	<insert id="saveVersion" useGeneratedKeys="true" keyProperty="id">
 		insert into <include refid="tableName"></include>(

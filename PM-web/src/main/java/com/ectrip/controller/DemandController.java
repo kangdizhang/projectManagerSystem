@@ -43,7 +43,7 @@ public class DemandController extends BaseController {
     @RequestMapping(value = "/demandList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView projectList(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("demand/demandList");
+        modelAndView.setViewName("view/demand/demandList");
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         modelAndView.addObject("list", list);
         return modelAndView;
@@ -54,7 +54,7 @@ public class DemandController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         demandService.updateDemand(id);
         modelAndView.addObject("projectId",projectId);
-        modelAndView.setViewName("demand/demandList");
+        modelAndView.setViewName("view/demand/demandList");
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         modelAndView.addObject("list", list);
         return modelAndView;
@@ -106,7 +106,7 @@ public class DemandController extends BaseController {
         modelAndView.addObject("projectId",projectId);
         modelAndView.addObject("projectName",project.getProjectName());
         modelAndView.addObject("demandId",demandId);
-        modelAndView.setViewName("demand/editDemand");
+        modelAndView.setViewName("view/demand/editDemand");
         return modelAndView;
     }
 
@@ -115,14 +115,14 @@ public class DemandController extends BaseController {
         ModelAndView mav = getModelAndView();
         if (projectId == null) {
             mav.addObject("msg","请选择项目！");
-            mav.setViewName("demand/demandList");
+            mav.setViewName("view/demand/demandList");
         }
         List<ProjectModleVO> list = modleService.queryModleListByProjectId(projectId);
         mav.addObject("ModleVOList",list);
         mav.addObject("projectId",projectId);
+        mav.setViewName("view/demand/editDemand");
         List<Project> projectList = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("projectList", projectList);
-        mav.setViewName("demand/editDemand");
         return mav;
     }
 
@@ -156,7 +156,7 @@ public class DemandController extends BaseController {
         List<Project> projectList = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("list", projectList);
         mav.addObject("projectId",pid);
-        mav.setViewName("demand/demandList");
+        mav.setViewName("view/demand/demandList");
         return mav;
     }
 
@@ -169,7 +169,7 @@ public class DemandController extends BaseController {
         DemandVO demandVO = demandService.findDemand(demandId);
         mav.addObject("demand", demand);
         mav.addObject("projectId",projectId);
-        mav.setViewName("demand/editDemand");
+        mav.setViewName("view/demand/editDemand");
         return mav;
     }
 
@@ -180,7 +180,7 @@ public class DemandController extends BaseController {
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("list", list);
         mav.addObject("projectId",projectId);
-        mav.setViewName("demand/demandList");
+        mav.setViewName("view/demand/demandList");
         return mav;
     }
 }

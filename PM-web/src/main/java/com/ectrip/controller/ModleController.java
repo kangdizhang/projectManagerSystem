@@ -66,7 +66,7 @@ public class ModleController extends BaseController {
         List<VersionVO> list = versionService.queryVersion(null, null, projectModleVO.getModleId()).getList();
         modelAndView.addObject("projectModleVO", projectModleVO);
         modelAndView.addObject("versionVOList", list);
-        modelAndView.setViewName("modle/editModle");
+        modelAndView.setViewName("view/modle/editModle");
         return modelAndView;
     }
 
@@ -78,14 +78,13 @@ public class ModleController extends BaseController {
         modelAndView.addObject("list", list);
         modelAndView.addObject("projectId",projectId);
         modelAndView.addObject("project",project);
-        modelAndView.setViewName("modle/modleList");
+        modelAndView.setViewName("view/modle/modleList");
         return modelAndView;
     }
 
     @RequestMapping(value = "/saveModle", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView saveModle(Integer projectId) {
         ModelAndView mav = getModelAndView();
-        mav.setViewName("modle/addModle");
         Project project = projectService.queryProject(projectId);
         String[] mpid = getRequest().getParameterValues("mpid");
         String[] modleIds = getRequest().getParameterValues("modleId");
@@ -98,6 +97,7 @@ public class ModleController extends BaseController {
         if (mpid == null || mpid.length == 0) {
             mav.addObject("mesg", "请选择系统模块");
             mav.addObject("project",project);
+            mav.setViewName("view/modle/addModle");
             return mav;
         }
         Integer j;
@@ -106,6 +106,7 @@ public class ModleController extends BaseController {
             if (StringUtils.isEmpty(version[j])) {
                 mav.addObject("mesg", "选中模块请选择版本号");
                 mav.addObject("project",project);
+                mav.setViewName("view/modle/addModle");
                 return mav;
             }
         }
@@ -113,7 +114,7 @@ public class ModleController extends BaseController {
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("list", list);
         mav.addObject("project", project);
-        mav.setViewName("modle/modleList");
+        mav.setViewName("view/modle/modleList");
         return mav;
     }
 
@@ -121,7 +122,7 @@ public class ModleController extends BaseController {
     @RequestMapping(value = "/addModle", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addModle(Integer projectId) {
         ModelAndView mav = getModelAndView();
-        mav.setViewName("modle/addModle");
+        mav.setViewName("view/modle/addModle");
         Project project = projectService.queryProject(projectId);
         mav.addObject("project",project);
         List<ModleVersionVO> modlePrototypeList = modleService.findModlePrototypeList(projectId);
@@ -141,7 +142,7 @@ public class ModleController extends BaseController {
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("list", list);
         mav.addObject("projectId", projectId);
-        mav.setViewName("modle/modleList");
+        mav.setViewName("view/modle/modleList");
         return mav;
     }
 
@@ -166,7 +167,7 @@ public class ModleController extends BaseController {
 //        Project project = projectService.queryProject(projectModleVO.getProjectId());
         mav.addObject("list", list);
         mav.addObject("projectId", projectModleVO.getProjectId());
-        mav.setViewName("modle/modleList");
+        mav.setViewName("view/modle/modleList");
         return mav;
     }
 

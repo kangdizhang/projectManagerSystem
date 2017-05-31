@@ -91,7 +91,10 @@
 		D.EXCEPT_END_TIME AS EXCEPT_END_TIME,D.ACTUAL_END_TIME AS ACTUAL_END_TIME,D.COMPLETE_USERID AS COMPLETE_USERID,
 		(CASE D.DEMAND_STATUS WHEN 0 THEN '开发中' ELSE '已完成' END ) as DEMAND_STATUS
 		FROM DEMAND D,PROJECT P
-		WHERE D.PROJECT_ID=P.ID AND D.PROJECT_ID=#{projectId}
+		WHERE D.PROJECT_ID=P.ID
+		<if test="projectId!=null and projectId!=''">
+			AND D.PROJECT_ID=#{projectId}
+		</if>
 		<if test="demandName!=null and demandName!=''">
 			AND D.DEMAND_NAME=#{demandName}
 		</if>

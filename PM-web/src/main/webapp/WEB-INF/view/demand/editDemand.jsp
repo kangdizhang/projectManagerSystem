@@ -59,6 +59,23 @@
     <input type="hidden" name="demandStatus" value="${demand.demandStatus}">
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
+            <td>关联模块选择</td>
+            <td>
+                <c:choose>
+                    <c:when test="${projectId!=null}">${projectName}</c:when>
+                    <c:otherwise>
+
+                        <select id="pid" name="pid">
+                            <option name="projectId" value="">请选择项目</option>
+                            <c:forEach items="${projectList}" var="Project">
+                                <option name="projectId" value="${Project.id}">${Project.projectName}</option>
+                            </c:forEach>
+                        </select>
+                    </c:otherwise>
+                </c:choose>
+            </td>
+        </tr>
+        <tr>
             <td class="tableleft">关联模块选择</td>
             <td>
                 <c:choose>

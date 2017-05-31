@@ -43,6 +43,8 @@ public class ProjectInfoController extends BaseController {
         ModelAndView mav = getModelAndView();
         ProjectInfoVO projectInfoVO = projectService.queryProjectInfo(id);
         mav.addObject("projectInfoVO", projectInfoVO);
+        Project project = projectService.queryProject(projectInfoVO.getProjectId());
+        mav.addObject("project",project);
         mav.setViewName("projectInfo/editProjectInfo");
         return mav;
     }
@@ -77,8 +79,11 @@ public class ProjectInfoController extends BaseController {
     @RequestMapping(value = "/saveProjectInfo", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView saveProjectInfo(ProjectInfo projectInfo) {
         ModelAndView mav = getModelAndView();
+        mav.addObject("projectInfoVO",projectInfo);
         Project project = projectService.queryProject(projectInfo.getProjectId());
         mav.addObject("project", project);
+        List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
+        mav.addObject("list", list);
         if (StringUtils.isEmpty(projectInfo.getServerIp())) {
             mav.addObject("msg", "服务器IP不能为空");
             mav.setViewName("projectInfo/editProjectInfo");

@@ -49,17 +49,24 @@
         <tr>
             <td width="10%" class="tableleft">所属项目</td>
             <c:choose>
-                <c:when test="${projectInfoVO!=null}">
+                <c:when test="${projectInfoVO.id!=null}">
                     <input type="hidden" name="id" value="${projectInfoVO.id}">
                     <input type="hidden" name="projectId" value="${projectInfoVO.projectId}">
-                    <td width="35%">${projectInfoVO.projectName}</td>
+                    <td width="35%">${project.projectName}</td>
                 </c:when>
                 <c:otherwise>
                     <td width="35%">
                         <select name="projectId">
                             <option value="0">请选择项目</option>
                             <c:forEach items="${list}" var="project">
-                                <option value="${project.id}">${project.projectName}</option>
+                                <c:choose>
+                                    <c:when test="${projectInfoVO.projectId != project.id}">
+                                        <option value="${project.id}">${project.projectName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option selected="selected" value="${project.id}">${project.projectName}</option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </select>
                     </td>
@@ -99,23 +106,17 @@
                 &nbsp;&nbsp;
                 <a class="btn btn-success" href="${bathPath}/projectInfo/projectInfoList">返回列表</a>
             </td>
-            <c:choose>
-                <c:when test="${msg!=null}">
-                    <td width="10%" class="tableleft">提示信息</td>
-                    <td>
-                        <p style="color: crimson">${msg}</p>
-                    </td>
-                </c:when>
-                <c:otherwise>
-                    <td width="10%"></td>
-                    <td></td>
-                </c:otherwise>
-            </c:choose>
+            <td width="10%"></td>
+            <td></td>
         </tr>
     </table>
 </form>
 </body>
 <script>
-
+    $(function () {
+        if (${msg != null}) {
+            alert("${msg}");
+        }
+    })
 </script>
 </html>

@@ -85,7 +85,7 @@
                     项目名称
                 </td>
                 <td>
-                        ${project.projectName}
+                    <p name="projectName">${project.projectName}</p>
                 </td>
             </tr>
                 <tr>
@@ -104,16 +104,6 @@
 
                     </td>
                 </tr>
-                <c:choose>
-                    <c:when test="${mesg!=null}">
-                        <tr>
-                            <td width="10%" class="tableleft">提示信息</td>
-                            <td>
-                                <p style="color: crimson">${mesg}</p>
-                            </td>
-                        </tr>
-                    </c:when>
-                </c:choose>
                 <tr>
                     <td class="tableleft"></td>
                     <td>
@@ -127,4 +117,11 @@
     </table>
 </form>
 </body>
+<script>
+    $(function () {
+        if (${mesg != null}) {
+            alert("${mesg}");
+        }
+    })
+</script>
 </html>

@@ -178,12 +178,6 @@
                 &nbsp;&nbsp;
                 <a class="btn btn-success" href="${bathPath}/project/projectList">返回列表</a>
             </td>
-            <c:choose>
-                <c:when test="${msg!=null}">
-                    <td width="10%" class="tableleft">提示信息</td>
-                    <td><span style="color: #9d261d">${msg}</span></td>
-                </c:when>
-            </c:choose>
         </tr>
     </table>
 </form>
@@ -201,20 +195,12 @@
             $("input[name='projectStatus'][value='0']").attr("checked", true);
         }
     })
-
-    //    function submitForm() {
-    //        $.ajax({
-    //            type: 'GET',
-    //            url: '/project/saveProject',
-    //            data: $('form').serialize(),
-    //            dataType: 'json',
-    //            success: function (data) {
-    //                alert('1');
-    //            },
-    //            error:function (data) {
-    //                alert('2');
-    //            }
-    //        });
-    //    }
+</script>
+<script>
+    $(function () {
+        if (${msg != null}) {
+            alert("${msg}");
+        }
+    })
 </script>
 </html>

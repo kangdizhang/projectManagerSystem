@@ -85,6 +85,7 @@ public class ModleController extends BaseController {
     public ModelAndView saveModle(Integer projectId) {
         ModelAndView mav = getModelAndView();
         mav.setViewName("modle/addModle");
+        Project project = projectService.queryProject(projectId);
         String[] mpid = getRequest().getParameterValues("mpid");
         String[] modleIds = getRequest().getParameterValues("modleId");
         String[] version = getRequest().getParameterValues("version");
@@ -94,20 +95,21 @@ public class ModleController extends BaseController {
             mav.addObject("projectId", projectId);
         }
         if (mpid == null || mpid.length == 0) {
-            mav.addObject("msg", "请选择系统模块");
+            mav.addObject("mesg", "请选择系统模块");
+            mav.addObject("project",project);
             return mav;
         }
         Integer j;
         for (int i = 0; i < mpid.length; i++) {
             j = Integer.valueOf(mpid[i]);
             if (StringUtils.isEmpty(version[j])) {
-                mav.addObject("msg", "选中模块请选择版本号");
+                mav.addObject("mesg", "选中模块请选择版本号");
+                mav.addObject("project",project);
                 return mav;
             }
         }
         projectService.saveModle(projectId, modleIds, version, mpid);
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
-        Project project = projectService.queryProject(projectId);
         mav.addObject("list", list);
         mav.addObject("project", project);
         mav.setViewName("modle/modleList");

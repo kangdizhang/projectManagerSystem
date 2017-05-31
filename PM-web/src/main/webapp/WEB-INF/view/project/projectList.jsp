@@ -143,7 +143,12 @@
         return temp;
     };
 
-
+    function issure(){
+        if(confirm("您确认删除该数据吗？")){
+            return true;
+        }
+        return false;
+    }
 
     function reloadTable() {
         $table.bootstrapTable('refresh');
@@ -167,7 +172,7 @@
 //            '&email='+row.email+
 //            '&projectStatus='+projectStatus+'' +
             '" data-toggle="tooltip" title="Edit">修改</a> ',
-            '<a href="${bathPath}/project/deleteProject?id='+row.id+'"data-toggle="tooltip" title="Del">删除</a> '
+            '<a href="${bathPath}/project/deleteProject?id='+row.id+'" onclick="return issure();" data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }
 

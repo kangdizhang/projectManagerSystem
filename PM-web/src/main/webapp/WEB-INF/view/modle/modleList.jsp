@@ -54,12 +54,11 @@
 <form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
         <!-- 选择项目 -->
-        <input type="text" id="projectId" name="projectId" value="${projectId}">
         <select id="projectName" name="projectName">
             <option  name="projectId" value="">请选择项目</option>
             <c:forEach items="${list}" var="Project">
                 <c:choose>
-                    <c:when test="${project.id == Project.id}">
+                    <c:when test="${projectId == Project.id}">
                         <option name="projectId" selected="selected" value="${Project.id}">${Project.projectName}</option>
                     </c:when>
                     <c:otherwise>
@@ -141,7 +140,6 @@
         };
 //        var id = $("#projectName option:selected").val();
 //        if(id != null && id != ''){
-          $("#projectId").val($("#projectName option:selected").val());
 //        }
         return temp;
     };
@@ -156,12 +154,18 @@
             '" data-toggle="tooltip" title="Edit">修改</a> ',
             '<a href="${bathPath}/modle/deleteModle?id='+row.id+ '&projectId='+row.projectId+
             '&projectName=' + row.projectName +
-            '"data-toggle="tooltip" title="Del">删除</a> '
+            '" onclick="return issure();" data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
+    }
+    function issure(){
+        if(confirm("您确认删除该数据吗？")){
+            return true;
+        }
+        return false;
     }
 
     function addModle() {
-        var projectId = $('#projectId').val();
+        var projectId = $("#projectName option:selected").val();
         window.location.href='${bathPath}/modle/addModle?projectId='+projectId;
     }
 </script>

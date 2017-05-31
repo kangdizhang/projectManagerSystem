@@ -162,7 +162,7 @@ public class ModleController extends BaseController {
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         Project project = projectService.queryProject(projectModleVO.getProjectId());
         mav.addObject("list", list);
-        mav.addObject("project", project);
+        mav.addObject("projectId", projectModleVO.getProjectId());
         mav.setViewName("modle/modleList");
         return mav;
     }

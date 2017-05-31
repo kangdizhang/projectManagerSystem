@@ -125,8 +125,7 @@ public class ModleServiceImpl implements ModleService {
     }
 
     @Override
-    public List<ProjectModle> queryModleListByProjectId(Integer projectId) {
-        return new ArrayList<ProjectModle>();
-        //modleDAO.queryModleListByProjectId(projectId);
+    public List<ProjectModleVO> queryModleListByProjectId(Integer projectId) {
+        return modleDAO.queryModle(null,null,projectId,null);
     }
 }

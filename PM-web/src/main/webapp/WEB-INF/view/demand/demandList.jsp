@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -60,7 +61,7 @@
             <option name="projectId" value="">请选择项目</option>
             <c:forEach items="${list}" var="Project">
                 <c:choose>
-                    <c:when test="${project.id == Project.id}">
+                    <c:when test="${projectId == Project.id}">
                         <option name="projectId" selected="selected" value="${Project.id}">${Project.projectName}</option>
                     </c:when>
                     <c:otherwise>
@@ -85,7 +86,7 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/demand/addDemand?projectId=${project.id}'" class="btn btn-primary">新增</button>
+        <button type="button" onclick="window.location.href='${bathPath}/demand/addDemand'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -149,7 +150,7 @@
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            projectName:("#projectName").val(),
+            projectId:$("#projectName option:selected").val(),
             demandName:$("#demandName").val(),
             demandStatus:$("#demandState").val()
         };
@@ -178,4 +179,9 @@
         ].join('');
     }
 
+    $(function () {
+        if (${msg != null}) {
+            alert("${msg}");
+        }
+    })
 </script>

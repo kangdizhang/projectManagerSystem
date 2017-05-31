@@ -1,6 +1,7 @@
 package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
+import com.ectrip.model.Project;
 import com.ectrip.model.ProjectModle;
 import com.ectrip.service.DemandService;
 import com.ectrip.service.ModleService;
@@ -43,6 +44,8 @@ public class DemandController extends BaseController {
     public ModelAndView projectList(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("demand/demandList");
+        List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
+        modelAndView.addObject("list", list);
         return modelAndView;
     }
 
@@ -52,17 +55,18 @@ public class DemandController extends BaseController {
         demandService.updateDemand(id);
         modelAndView.addObject("projectId",projectId);
         modelAndView.setViewName("demand/demandList");
+        List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
+        modelAndView.addObject("list", list);
         return modelAndView;
     }
 
     @ResponseBody
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
-    public Object demandList(Integer offset,Integer limit,String projectName,String demandName,String demandStatus){
+    public Object demandList(Integer offset,Integer limit,Integer projectId,String demandName,String demandStatus){
         int pageNo = 1;
         if(offset != null) {
             pageNo = (offset/limit+1);
         }
-        Integer projectId = 1;
         PageInfo<DemandVO> pageInfo = demandService.queryDemand(pageNo,limit,projectId,demandName,demandStatus);
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("rows",pageInfo.getList());
@@ -104,10 +108,14 @@ public class DemandController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addDemand",method = {RequestMethod.GET})
+    @RequestMapping(value = "/addDemand",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView addDemand(Integer projectId){
-        List<ProjectModle> list = modleService.queryModleListByProjectId(projectId);
         ModelAndView mav = getModelAndView();
+        if (projectId == null) {
+            mav.addObject("msg","请选择项目！");
+            mav.setViewName("demand/demandList");
+        }
+        List<ProjectModleVO> list = modleService.queryModleListByProjectId(projectId);
         mav.addObject("ModleVOList",list);
         mav.addObject("projectId",projectId);
         mav.setViewName("demand/editDemand");
@@ -139,6 +147,8 @@ public class DemandController extends BaseController {
         }catch (Exception e){
             e.printStackTrace();
         }
+        List<Project> projectList = projectService.findProjectListPage(null, null, null, null, null).getList();
+        mav.addObject("list", projectList);
         mav.addObject("projectId",projectId);
         mav.setViewName("demand/demandList");
         return mav;
@@ -161,6 +171,8 @@ public class DemandController extends BaseController {
     public ModelAndView deleteDemand(Integer id,Integer projectId){
         ModelAndView mav = getModelAndView();
         demandService.deleteDemand(id);
+        List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
+        mav.addObject("list", list);
         mav.addObject("projectId",projectId);
         mav.setViewName("demand/demandList");
         return mav;

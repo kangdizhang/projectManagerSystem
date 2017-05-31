@@ -64,5 +64,5 @@ public interface ModleService {
      */
     public List<ModleVersionVO> findModlePrototypeList(Integer projectId);
 
-    List<ProjectModle> queryModleListByProjectId(Integer projectId);
+    List<ProjectModleVO> queryModleListByProjectId(Integer projectId);
 }

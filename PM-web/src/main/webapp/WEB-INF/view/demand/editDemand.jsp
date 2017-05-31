@@ -64,17 +64,17 @@
                 <c:choose>
                     <c:when test="${list!=null}">
                         <c:forEach items="${ModleVOList}" var="modleVO">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.id}' />${modleVO.modleName}</label>
+                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.modleId}' />${modleVO.modleName}</label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                         <c:forEach items="${list}" var="modle">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modle.id}' checked="checked" />${modle.modleName}</label>
+                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modle.modleId}' checked="checked" />${modle.modleName}</label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <c:forEach items="${ModleVOList}" var="modleVO">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.id}' />${modleVO.modleName}</label>
+                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.modleId}' />${modleVO.modleName}</label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                     </c:otherwise>
@@ -149,12 +149,6 @@
                 </td>
             </tr>
         </c:if>
-        <c:if test="${errorMsg!=null}">
-            <tr>
-                <td width="10%" class="tableleft">错误信息</td>
-                <td><span style="color: red">${errorMsg}</span></td>
-            </tr>
-        </c:if>
         <tr>
             <td class="tableleft"></td>
             <td>
@@ -166,4 +160,11 @@
     </table>
 </form>
 </body>
+<script>
+    $(function () {
+        if (${errorMsg != null}) {
+            alert("${errorMsg}");
+        }
+    })
+</script>
 </html>

@@ -60,17 +60,15 @@
             <td width="10%" class="tableleft">模块所属项目</td>
             <td width="35%"><span name="projectName">${projectModleVO.projectName}</span></td>
             <td width="10%" class="tableleft">模块名称</td>
-            <td>
-                <input name="modleName" type="text" value="${projectModleVO.modleName}" style="width: 150px">
-                &nbsp;&nbsp;&nbsp;&nbsp;
+            <td>${projectModleVO.modleName}&nbsp;&nbsp;&nbsp;&nbsp;
                 版本号：<select name="version" style="width:100px">
                     <c:forEach var="versionVO" items="${versionVOList}">
                         <c:choose>
                             <c:when test="${projectModleVO.version==versionVO.version}">
-                                <option value="${versionVO.id}" selected="selected">${versionVO.version}</option>
+                                <option value="${versionVO.version}" selected="selected">${versionVO.version}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${versionVO.id}">${versionVO.version}</option>
+                                <option value="${versionVO.version}">${versionVO.version}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -79,7 +77,7 @@
         </tr>
         <tr>
             <td width="10%" class="tableleft">项目模块描述</td>
-            <td width="35%"><textarea name="modleDescribe">${projectModleVO.modleDescribe}</textarea></td>
+            <td width="35%">${projectModleVO.modleDescribe}</td>
             <c:choose>
                 <c:when test="${msg!=null}">
                     <td class="tableleft">提示信息</td>

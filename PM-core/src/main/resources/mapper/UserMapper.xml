@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ectrip.dao.VersionDAO">
+
+	<resultMap type="User" id="BaseResultMap">
+		<id column="ID" property="id"/>
+		<result column="NAME" property="name"/>
+		<result column="PWD" property="pwd"/>
+		<result column="USER_TYPE" property="userType"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="LAST_LOGIN_TIME" property="lastLoginTime"/>
+	</resultMap>
+	<!--表名 -->
+	<sql id="tableName">
+		USER
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		ID,
+		NAME,
+		PWD,
+		USER_TYPE,
+		CREATE_TIME,
+		LAST_LOGIN_TIME
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id},
+		#{name},
+		#{pwd},
+		#{userType},
+		#{createTime},
+		#{lastLoginTime}
+	</sql>
+
+	<!-- 修改 -->
+	<update id="updateLastLoginTime">
+		UPDATE <include refid="tableName"></include>
+		SET NAME = #{name},
+		PWD = #{pwd},
+		USER_TYPE = #{userType}
+		WHERE NAME = #{name}
+	</update>
+
+	<!-- 修改 -->
+	<update id="updateUser">
+		UPDATE <include refid="tableName"></include>
+		SET LAST_LOGIN_TIME = #{lastLoginTime}
+		WHERE ID = #{id}
+	</update>
+
+	<select id="queryUser" resultMap="BaseResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+		WHERE NAME = #{name} AND PWD = #{pwd}
+	</select>
+
+	<select id="queryUserByPageList" resultMap="BaseResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+		WHERE NAME LIKE CONCAT('%', #{name}, '%')
+	</select>
+
+	<!-- 保存 -->
+	<insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
+		insert into <include refid="tableName"></include>(
+			<include refid="Field"></include>
+		) values (
+			<include refid="FieldValue"></include>
+		)
+	</insert>
+
+</mapper>

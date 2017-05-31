@@ -4,6 +4,7 @@ import com.ectrip.common.base.BaseController;
 import com.ectrip.model.Project;
 import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
+import com.ectrip.model.Version;
 import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.service.ProjectService;
@@ -147,12 +148,12 @@ public class ModleController extends BaseController {
     @RequestMapping(value = "/updateModle", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateModle(ProjectModleVO projectModleVO) {
         ModelAndView mav = new ModelAndView();
-
-        ModlePrototype modlePrototype = new ModlePrototype();
-        modlePrototype.setId(projectModleVO.getModleId());
-        modlePrototype.setModlePrototypeName(projectModleVO.getModleName());
-        modlePrototype.setModlePrototypeDescribe(projectModleVO.getModleDescribe());
-        modlePrototypeService.saveModlePrototype(modlePrototype);
+//        ModlePrototype modlePrototype = new ModlePrototype();
+//        modlePrototype.setId(projectModleVO.getModleId());
+//        modlePrototype.setModlePrototypeName(projectModleVO.getModleName());
+//        modlePrototype.setModlePrototypeDescribe(projectModleVO.getModleDescribe());
+//        modlePrototypeService.saveModlePrototype(modlePrototype);
+//        Version version = versionService.findVersion(projectModleVO.getId());
 
         ProjectModle projectModle = new ProjectModle();
         projectModle.setId(projectModleVO.getId());
@@ -162,7 +163,7 @@ public class ModleController extends BaseController {
         modleService.updateModle(projectModle);
 
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
-        Project project = projectService.queryProject(projectModleVO.getProjectId());
+//        Project project = projectService.queryProject(projectModleVO.getProjectId());
         mav.addObject("list", list);
         mav.addObject("projectId", projectModleVO.getProjectId());
         mav.setViewName("modle/modleList");

@@ -59,7 +59,6 @@
         SELECT <include refid="Field"></include> FROM
         <include refid="tableName"></include>
         WHERE PROJECT_ID = #{projectId}
-        and MODLE_STATE = '1'
     </select>
 
     <!-- 修改指定需求关联模块未完成状态为已完成
@@ -127,7 +126,7 @@
     <update id="updateModle" parameterType="ProjectModle">
         UPDATE
         <include refid="tableName"></include>
-        SET PROJECT_ID=#{projectId},MODLE_ID=#{modleId},VERSION=#{version}
+        SET VERSION=#{version}
         WHERE ID=#{id}
     </update>
 

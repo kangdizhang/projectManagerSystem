@@ -140,7 +140,7 @@
                 {field: 'actualEndTime', title: '实际完成时间',align:'center'},
                 {field: 'completeUserId', title: '完成人',align:'center'},
                 {field: 'demandStatus', title: '需求状态',align:'center'},
-                {field: 'complete', title: '完成', align: 'center', formatter: 'completeFormatter', clickToSelect: false},
+                {field: 'complete', title: '进度', align: 'center', formatter: 'completeFormatter', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -162,6 +162,9 @@
     }
 
     function completeFormatter(value, row, index) {
+        if(row.demandStatus == '已完成'){
+            return ['完成'].join('');
+        }
         return [
             '<a href="${bathPath}/demand/completeDemand?id='+row.id+
             '&projectId=${project.id}' +

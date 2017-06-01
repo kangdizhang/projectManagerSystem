@@ -76,8 +76,7 @@
 	<!-- 修改 -->
 	<update id="updateVersion">
 		UPDATE <include refid="tableName"></include>
-		SET VERSION_STATE='0'
-		WHERE MODLE_ID=#{modleId} AND VERSION_STATE='1'
+		WHERE MODLE_ID=#{modleId}
 	</update>
 
 	<!-- 新增-->

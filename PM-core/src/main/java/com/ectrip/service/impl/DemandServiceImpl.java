@@ -78,21 +78,26 @@ public class DemandServiceImpl implements DemandService {
         //modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
 
         //升级版本
-        List<ProjectModle> list = new ArrayList<>();//modleDAO.findModleList(id);//需求关联模块列表
+        List<ProjectModle> list = modleDAO.queryModleList(demandVO.getProjectId());//需求关联模块列表
 
         Version version ;
         for (ProjectModle modle:list) {
-            versionDAO.updateVersion(modle.getId());
+//            versionDAO.updateVersion(modle.getId());
+            modle.setVersion(demandVO.getVersion());
+            modleDAO.updateModle(modle);
             version = new Version();
             version.setModleId(modle.getId());
 //            version.setDemandId(id);
             version.setUpTime(sdf.format(new Date()));
             version.setUpUserId("test");
+            version.setVersionDesc("升级到"+demandVO.getVersion());
+            version.setUpTime(sdf.format(new Date()));
             version.setVersion(demandVO.getVersion());
             versionDAO.saveVersion(version);
         }
     }
 
+    @Transactional
     public void saveDemand(String[] modleId, Demand demand){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         demand.setPutUserId("test");

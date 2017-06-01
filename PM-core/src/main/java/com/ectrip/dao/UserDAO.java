@@ -24,11 +24,18 @@ public interface UserDAO {
 
     /**
      * 查询验证用户
-     * @param name
+     * @param userName
      * @param pwd
      * @return
      */
     User queryUser(@Param("userName")String userName, @Param("pwd")String pwd);
+
+    /**
+     * 主键查询用户
+     * @param id
+     * @return
+     */
+    User findUserById(@Param("id") Integer id);
 
     /**
      * 分页查询用户

@@ -3,6 +3,9 @@ package com.ectrip.service.impl;
 import com.ectrip.dao.UserDAO;
 import com.ectrip.model.User;
 import com.ectrip.service.UserService;
+import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserDAO userDAO;
@@ -51,14 +56,35 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 查询用户
+     * @param userName
+     * @param pwd
+     * @return
+     */
+    public User findUser(String userName,String pwd) {
+        return userDAO.queryUser(userName,pwd);
+    }
+
+    /**
+     * 主键查询用户
+     * @param id
+     * @return
+     */
+    public User findUserById(Integer id){
+        return userDAO.findUserById(id);
+    }
+
+    /**
      * 分页查询用户
      * @param pageNo
      * @param pageSize
      * @param userName
      * @return list
      */
-    public List<User> queryUserByPageList(Integer pageNo, Integer pageSize, String userName, String userType){
-        return userDAO.queryUserByPageList(pageNo,pageSize,userName,userType);
+    public PageInfo<User> queryUserByPageList(Integer pageNo, Integer pageSize, String userName, String userType){
+        List<User> list = userDAO.queryUserByPageList(pageNo,pageSize,userName,userType);
+        logger.info("查询数据:{}", list.toString());
+        return new PageInfo<User>(list);
     }
 
 }

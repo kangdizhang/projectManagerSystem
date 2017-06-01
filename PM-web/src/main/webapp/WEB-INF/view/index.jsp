@@ -23,7 +23,7 @@
         <!--<img src="/chinapost/Public/assets/img/top.png">-->
     </div>
     <div class="dl-log">
-        欢迎您，<span class="dl-log-user">${request.getAttribute("userName")}</span>
+        欢迎您，<span class="dl-log-user">${userName}</span>
         <a href="${basePath}/chinapost/index.php?m=Public&a=logout" title="退出系统" class="dl-log-quit">[退出]</a>
     </div>
 </div>
@@ -31,6 +31,7 @@
 
 <%--主菜单--%>
 <div class="content">
+
     <div class="dl-main-nav">
         <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
         <ul id="J_Nav"  class="nav-list ks-clear">
@@ -55,7 +56,9 @@
                                             {id:'monitor',text:'项目列表管理  ',href:'${basePath}/project/projectList'},
                                             {id:'monitor1',text:'配置信息管理  ',href:'${basePath}/projectInfo/projectInfoList'},
                                             {id:'monitor2',text:'模块原型管理  ',href:'${basePath}/modlePrototype/modlePrototypeList'},
-                                            {id:'monitor3',text:'需求列表管理  ',href:'${basePath}/demand/demandList'}
+                                            {id:'monitor3',text:'需求列表管理  ',href:'${basePath}/demand/demandList'},
+                                            {id:'monitor4',text:'运维人员列表  ',href:'${basePath}/operation/operationList'},
+                                            {id:'monitor5',text:'用户管理  ',href:'${basePath}/user/userList'}
                                             /*,{id:'sql-monitor',text:'sql监控  ',href:'druid/index.html'}*/
                                         ]
         }]}];

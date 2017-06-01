@@ -44,10 +44,19 @@
 		WHERE ID = #{id}
 	</update>
 
-	<!-- 验证方法 -->
+	<!-- 查询验证方法 -->
 	<select id="queryUser" resultMap="BaseResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE USER_NAME = #{userName} AND PWD = #{pwd}
+		WHERE USER_NAME = #{userName}
+		<if test="pwd != null and pwd != ''">
+			AND PWD = #{pwd}
+		</if>
+	</select>
+
+	<!-- 主键查询用户 -->
+	<select id="findUserById" resultMap="BaseResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+		WHERE ID = #{id}
 	</select>
 
 	<!-- 分页方法 -->

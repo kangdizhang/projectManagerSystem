@@ -7,9 +7,9 @@ package com.ectrip.model;
 public class User {
 
     private Integer id;//
-    private String name;//
+    private String userName;//
     private String pwd;//
-    private Integer userType;//
+    private String userType;//
     private String createTime;//
     private String lastLoginTime;//
 
@@ -21,12 +21,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPwd() {
@@ -37,11 +37,11 @@ public class User {
         this.pwd = pwd;
     }
 
-    public Integer getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(Integer userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 

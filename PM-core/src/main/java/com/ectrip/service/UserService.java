@@ -1,6 +1,7 @@
 package com.ectrip.service;
 
 import com.ectrip.model.User;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -29,11 +30,26 @@ public interface UserService {
     boolean valUser(String userName,String pwd);
 
     /**
+     * 查询用户
+     * @param userName
+     * @param pwd
+     * @return
+     */
+    User findUser(String userName,String pwd);
+
+    /**
+     * 主键查询用户
+     * @param id
+     * @return
+     */
+    User findUserById(Integer id);
+
+    /**
      * 分页查询用户
      * @param pageNo
      * @param pageSize
      * @param userName
      * @return list
      */
-    List<User> queryUserByPageList(Integer pageNo,Integer pageSize,String userName,String userType);
+    PageInfo<User> queryUserByPageList(Integer pageNo, Integer pageSize, String userName, String userType);
 }

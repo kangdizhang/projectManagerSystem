@@ -3,7 +3,7 @@
 <mapper namespace="com.ectrip.dao.UserDAO">
 	<resultMap type="User" id="BaseResultMap">
 		<id column="ID" property="id"/>
-		<result column="NAME" property="name"/>
+		<result column="USER_NAME" property="userName"/>
 		<result column="PWD" property="pwd"/>
 		<result column="USER_TYPE" property="userType"/>
 		<result column="CREATE_TIME" property="createTime"/>
@@ -17,7 +17,7 @@
 	<!-- 字段 -->
 	<sql id="Field">
 		ID,
-		NAME,
+		USER_NAME,
 		PWD,
 		USER_TYPE,
 		CREATE_TIME,
@@ -27,7 +27,7 @@
 	<!-- 字段值 -->
 	<sql id="FieldValue">
 		#{id},
-		#{name},
+		#{userName},
 		#{pwd},
 		#{userType},
 		#{createTime},
@@ -35,29 +35,31 @@
 	</sql>
 
 	<!-- 修改 -->
-	<update id="updateLastLoginTime">
-		UPDATE <include refid="tableName"></include>
-		SET NAME = #{name},
-		PWD = #{pwd},
-		USER_TYPE = #{userType}
-		WHERE NAME = #{name}
-	</update>
-
-	<!-- 修改 -->
 	<update id="updateUser">
 		UPDATE <include refid="tableName"></include>
-		SET LAST_LOGIN_TIME = #{lastLoginTime}
+		SET USER_NAME = #{userName},
+		PWD = #{pwd},
+		USER_TYPE = #{userType},
+		LAST_LOGIN_TIME=#{lastLoginTime}
 		WHERE ID = #{id}
 	</update>
 
+	<!-- 验证方法 -->
 	<select id="queryUser" resultMap="BaseResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE NAME = #{name} AND PWD = #{pwd}
+		WHERE USER_NAME = #{userName} AND PWD = #{pwd}
 	</select>
 
+	<!-- 分页方法 -->
 	<select id="queryUserByPageList" resultMap="BaseResultMap">
 		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
-		WHERE NAME LIKE CONCAT('%', #{name}, '%')
+		WHERE 1=1
+		<if test="userName!=null and userName!=''">
+			AND USER_NAME LIKE CONCAT('%', #{userName}, '%')
+		</if>
+		<if test="userType!=null and userType!=''">
+			AND USER_TYPE = #{userType}
+		</if>
 	</select>
 
 	<!-- 保存 -->

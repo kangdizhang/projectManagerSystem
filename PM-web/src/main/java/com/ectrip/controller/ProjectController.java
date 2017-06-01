@@ -41,7 +41,7 @@ public class ProjectController extends BaseController {
     @RequestMapping(value = "/projectList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView projectList(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("project/projectList");
+        modelAndView.setViewName("WEB-INF/view/project/projectList");
         return modelAndView;
     }
 
@@ -72,7 +72,7 @@ public class ProjectController extends BaseController {
             mav.addObject("list", list);
         }
 
-        mav.setViewName("project/addProject");
+        mav.setViewName("WEB-INF/view/project/addProject");
         if(StringUtils.isEmpty(project.getProjectName())){
             mav.addObject("msg","项目名称不能为空");
             return mav;
@@ -99,10 +99,10 @@ public class ProjectController extends BaseController {
 
         try{
             projectService.saveProject(project,projectInfo,modleIds,version,mpid);
-            mav.setViewName("project/projectList");
+            mav.setViewName("WEB-INF/view/project/projectList");
         }catch (Exception e){
             e.printStackTrace();
-            mav.setViewName("project/addProject");
+            mav.setViewName("WEB-INF/view/project/addProject");
         }
         return mav;
     }
@@ -120,7 +120,7 @@ public class ProjectController extends BaseController {
                 j = Integer.valueOf(mpid[i]);
                 if(StringUtils.isEmpty(version[j])){
                     mav.addObject("msg","选中模块请选择版本号");
-                    mav.setViewName("project/addProject");
+                    mav.setViewName("WEB-INF/view/project/addProject");
                     flag=true;
                 }
             }
@@ -253,7 +253,7 @@ public class ProjectController extends BaseController {
         }
         Project project = projectService.queryProject(id);
         mav.addObject("project",project);
-        mav.setViewName("project/addProject");
+        mav.setViewName("WEB-INF/view/project/addProject");
         return mav;
     }
 
@@ -261,7 +261,7 @@ public class ProjectController extends BaseController {
     public ModelAndView deleteModle(Integer id){
         ModelAndView mav = new ModelAndView();
         projectService.deleteProject(id);
-        mav.setViewName("project/projectList");
+        mav.setViewName("WEB-INF/view/project/projectList");
         return mav;
     }
 }

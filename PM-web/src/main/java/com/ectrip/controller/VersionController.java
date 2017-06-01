@@ -56,7 +56,7 @@ public class VersionController extends BaseController {
 
         List<ModleVersionVO> list = modlePrototypeService.queryModlePrototype();
         modelAndView.addObject("list",list);
-        modelAndView.setViewName("version/versionList");
+        modelAndView.setViewName("WEB-INF/view/version/versionList");
         return modelAndView;
     }
 }

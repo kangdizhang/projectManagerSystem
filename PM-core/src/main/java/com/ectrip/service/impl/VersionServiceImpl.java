@@ -34,7 +34,7 @@ public class VersionServiceImpl implements VersionService {
      */
     @Transactional
     public void updateVersion(Integer modleId){
-        versionDAO.updateVersion(modleId);
+        //versionDAO.updateVersion(modleId);
     }
 
     /**

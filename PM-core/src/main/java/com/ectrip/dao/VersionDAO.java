@@ -18,12 +18,6 @@ public interface VersionDAO {
     void saveVersion(Version version);
 
     /**
-     * 更新版本
-     * @param modleId
-     */
-    void updateVersion(@Param("modleId") Integer modleId);
-
-    /**
      * 主键查询版本
      * @param id
      * @return version

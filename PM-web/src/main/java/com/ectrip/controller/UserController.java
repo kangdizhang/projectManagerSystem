@@ -32,7 +32,7 @@ public class UserController extends BaseController {
             return  mav;
         }
         if (userService.valUser(userName,pwd)){
-            mav.setViewName("view/index");
+            mav.setViewName("WEB-INF/view/index");
             return mav;
         }
         mav.addObject("msg","用户名密码错误，请重新输入！");

@@ -34,7 +34,7 @@ public class ProjectInfoController extends BaseController {
     @RequestMapping(value = "/projectInfoList", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView projectInfoList() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("view/projectInfo/projectInfoList");
+        modelAndView.setViewName("WEB-INF/view/projectInfo/projectInfoList");
         return modelAndView;
     }
 
@@ -45,7 +45,7 @@ public class ProjectInfoController extends BaseController {
         mav.addObject("projectInfoVO", projectInfoVO);
         Project project = projectService.queryProject(projectInfoVO.getProjectId());
         mav.addObject("project",project);
-        mav.setViewName("view/projectInfo/editProjectInfo");
+        mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
         return mav;
     }
 
@@ -54,11 +54,11 @@ public class ProjectInfoController extends BaseController {
         ModelAndView mav = getModelAndView();
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
         if (CollectionUtils.isEmpty(list)) {
-            mav.setViewName("view/projectInfo/errorPage");
+            mav.setViewName("WEB-INF/view/projectInfo/errorPage");
             return mav;
         }
         mav.addObject("list", list);
-        mav.setViewName("view/projectInfo/editProjectInfo");
+        mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
         return mav;
     }
 
@@ -86,51 +86,51 @@ public class ProjectInfoController extends BaseController {
         mav.addObject("list", list);
         if (StringUtils.isEmpty(projectInfo.getServerIp())) {
             mav.addObject("msg", "服务器IP不能为空");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         if (projectInfo.getProjectId() == 0) {
             mav.addObject("msg", "请选择项目！");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         if (StringUtils.isEmpty(projectInfo.getDbServerIp())) {
             mav.addObject("msg", "数据库IP不能为空");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         if (StringUtils.isEmpty(projectInfo.getDbUser())) {
             mav.addObject("msg", "数据库用户名不能为空");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         if (StringUtils.isEmpty(projectInfo.getDbPwd())) {
             mav.addObject("msg", "数据库密码不能为空");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         if (StringUtils.isEmpty(projectInfo.getDbPort())) {
             mav.addObject("msg", "数据库端口号不能为空");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         if (StringUtils.isEmpty(projectInfo.getHostName())) {
             mav.addObject("msg", "域名不能为空");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         if (StringUtils.isEmpty(projectInfo.getSsh())) {
             mav.addObject("msg", "ssh信息不能为空");
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
         try {
             projectService.saveProjectInfo(projectInfo);
-            mav.setViewName("view/projectInfo/projectInfoList");
+            mav.setViewName("WEB-INF/view/projectInfo/projectInfoList");
             return mav;
         } catch (Exception e) {
             e.printStackTrace();
-            mav.setViewName("view/projectInfo/editProjectInfo");
+            mav.setViewName("WEB-INF/view/projectInfo/editProjectInfo");
             return mav;
         }
     }
@@ -139,7 +139,7 @@ public class ProjectInfoController extends BaseController {
     public ModelAndView deleteModle(Integer id){
         ModelAndView mav = new ModelAndView();
         projectService.delProjectInfo(id);
-        mav.setViewName("view/projectInfo/projectInfoList");
+        mav.setViewName("WEB-INF/view/projectInfo/projectInfoList");
         return mav;
     }
 }

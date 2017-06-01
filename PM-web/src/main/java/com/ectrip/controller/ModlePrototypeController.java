@@ -33,14 +33,14 @@ public class ModlePrototypeController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         ModleVersionVO ModleVersionVO = modlePrototypeService.findModlePrototype(id);
         modelAndView.addObject("modlePrototype",ModleVersionVO);
-        modelAndView.setViewName("view/modle/editModlePrototype");
+        modelAndView.setViewName("WEB-INF/view/modle/editModlePrototype");
         return modelAndView;
     }
 
     @RequestMapping(value = "/modlePrototypeList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView projectList(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("view/modle/modlePrototypeList");
+        modelAndView.setViewName("WEB-INF/view/modle/modlePrototypeList");
         return modelAndView;
     }
 
@@ -64,16 +64,16 @@ public class ModlePrototypeController extends BaseController {
         mav.addObject("modlePrototype", modlePrototype);
         if (StringUtils.isEmpty(modlePrototype.getModlePrototypeName())) {
             mav.addObject("msg", "模块原型名称不能为空");
-            mav.setViewName("view/modle/editModlePrototype");
+            mav.setViewName("WEB-INF/view/modle/editModlePrototype");
             return mav;
         }
         if (StringUtils.isEmpty(modlePrototype.getModlePrototypeDescribe())) {
             mav.addObject("msg", "模块原型描述不能为空");
-            mav.setViewName("view/modle/editModlePrototype");
+            mav.setViewName("WEB-INF/view/modle/editModlePrototype");
             return mav;
         }
         modlePrototypeService.saveModlePrototype(modlePrototype);
-        mav.setViewName("view/modle/modlePrototypeList");
+        mav.setViewName("WEB-INF/view/modle/modlePrototypeList");
         return mav;
     }
 }

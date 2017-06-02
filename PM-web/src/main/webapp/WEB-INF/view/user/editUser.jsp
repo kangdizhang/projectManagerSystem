@@ -49,7 +49,7 @@
         <<input type="hidden" name="id" value="${user0.id}">
         <tr>
             <td width="10%" class="tableleft">用户名</td>
-            <td width="35%"><input type="text" name="userName" value="${user0.userName}" /></td>
+            <td width="35%"><input type="text" name="userName" value="${user0.userName}" /><span style="color: RED">*</span></td>
             <td width="10%" class="tableleft">用户类型</td>
             <td>
                 <select style="width: 200px" name="userType" id="userType">
@@ -63,9 +63,9 @@
         </tr>
         <tr>
             <td width="10%" class="tableleft">密码</td>
-            <td width="35%"><input type="password" name="pwd" value="${user0.pwd}"/></td>
+            <td width="35%"><input type="password" name="pwd" value="${user0.pwd}"/><span style="color: RED">*</span></td>
             <td width="10%" class="tableleft">确认密码</td>
-            <td><input type="password" name="pwds" value="${user0.pwd}"/></td>
+            <td><input type="password" name="pwds" value="${user0.pwd}"/><span style="color: RED">*</span></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">操作</td>

@@ -56,11 +56,11 @@
         <input type="hidden" name="id" value="${modlePrototype.id}">
         <tr>
             <td width="10%" class="tableleft">模块原型名称</td>
-            <td><input type="text" name="modlePrototypeName" value="${modlePrototype.modlePrototypeName}"/></td>
+            <td><input type="text" name="modlePrototypeName" value="${modlePrototype.modlePrototypeName}"/><span style="color: RED">*</span></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">模块原型描述</td>
-            <td><textarea name="modlePrototypeDescribe">${modlePrototype.modlePrototypeDescribe}</textarea> </td>
+            <td><textarea name="modlePrototypeDescribe">${modlePrototype.modlePrototypeDescribe}</textarea><span style="color: RED">*</span> </td>
         </tr>
         <c:choose>
             <c:when test="${msg!=null}">

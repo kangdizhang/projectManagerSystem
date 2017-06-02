@@ -49,7 +49,7 @@
         <<input type="hidden" name="id" value="${optStaff.id}">
         <tr>
             <td width="10%" class="tableleft">运维人员名</td>
-            <td width="35%"><input type="text" name="optStaffName" value="${optStaff.optStaffName}" /></td>
+            <td width="35%"><input type="text" name="optStaffName" value="${optStaff.optStaffName}" /><span style="color: RED">*</span></td>
             <td width="10%" class="tableleft">运维项目</td>
             <td>
                 <select style="width: 200px" name="projectId" id="projectId">
@@ -62,13 +62,13 @@
         </tr>
         <tr>
             <td width="10%" class="tableleft">手机号</td>
-            <td width="35%"><input type="text" name="tel" value="${optStaff.tel}"/></td>
+            <td width="35%"><input type="text" name="tel" value="${optStaff.tel}"/><span style="color: RED">*</span></td>
             <td width="10%" class="tableleft">QQ</td>
             <td><input type="text" name="qq" value="${optStaff.qq}"/></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">邮箱</td>
-            <td width="35%"><input type="text" name="email" value="${optStaff.email}"></td>
+            <td width="35%"><input type="text" name="email" value="${optStaff.email}"><span style="color: RED">*</span></td>
             <td width="10%" class="tableleft">操作</td>
             <td width="35%">
                 <button type="submit" class="btn btn-primary">保存</button>

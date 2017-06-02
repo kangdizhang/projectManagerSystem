@@ -69,7 +69,7 @@
     </update> -->
 
     <!-- 条件查询-->
-    <select id="queryModleList" resultMap="projectModleResultMap">
+    <select id="queryModleList" resultMap="projectModleVOResultMap">
         SELECT PM.ID as ID,PM.PROJECT_ID as PROJECT_ID,PM.MODLE_ID AS MODLE_ID,PM.VERSION AS VERSION
         FROM PROJECT_MODLE PM
         WHERE PM.PROJECT_ID=#{projectId}
@@ -82,13 +82,23 @@
         AND   MODLE_ID = #{modleId}
     </select>
 
-    <!-- 根据需求ID查询关联模块列表
-    <select id="findModleList" resultMap="projectModleResultMap">
-		SELECT M.ID AS ID,M.PROJECT_ID AS PROJECT_ID,M.MODLE_NAME AS MODLE_NAME,M.MODLE_DESCRIBE AS MODLE_DESCRIBE,
-		M.MODLE_STATE AS MODLE_STATE
-		FROM MODLE M,MODLE_DEMAND MD
-		WHERE M.ID=MD.MODLE_ID AND MD.DEMAND_ID=#{demandId}
-	</select> -->
+    <!-- 根据需求ID查询关联模块列表 -->
+    <select id="findModleList" resultMap="projectModleVOResultMap">
+		SELECT PM.ID AS ID,
+        P.ID AS PROJECT_ID,
+        P.PROJECT_NAME AS PROJECT_NAME,
+        MP.ID AS MODLE_ID,
+        MP.MODLE_PROTOTYPE_NAME AS MODLE_NAME,
+        MP.MODLE_PROTOTYPE_DESCRIBE AS MODLE_DESCRIBE,
+        PM.VERSION AS VERSION
+		from project_modle pm,demand d,project p,modle_prototype mp,modle_demand md
+		where d.PROJECT_ID = pm.project_id
+		and pm.project_id = p.id
+		and mp.id = pm.modle_id
+		and md.MODLE_ID = mp.id
+		and md.DEMAND_ID = d.id
+		and d.id = #{demandId}
+	</select>
 
     <!-- 条件查询 -->
     <select id="queryModle" resultMap="projectModleVOResultMap">

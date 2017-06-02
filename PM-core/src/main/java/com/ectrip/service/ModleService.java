@@ -25,7 +25,7 @@ public interface ModleService {
      * @param demandId
      * @return list
      */
-    List<ProjectModle> findModleList(Integer demandId);
+    List<ProjectModleVO> findModleList(Integer demandId);
 
     /**
      * 根据ID删除指定项目模块

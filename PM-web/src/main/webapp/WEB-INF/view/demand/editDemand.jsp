@@ -83,7 +83,7 @@
                     <c:otherwise>
                         <c:forEach items="${ModleVOList}" var="modleVO">
                             <label class='checkbox inline'>
-                                <input type='checkbox' name='mdid' value='${modleVO.modleId}'/>${modleVO.modleName}
+                                <input type='checkbox' name='mdid' value='${modleVO.id}'/>${modleVO.modlePrototypeName}
                             </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>

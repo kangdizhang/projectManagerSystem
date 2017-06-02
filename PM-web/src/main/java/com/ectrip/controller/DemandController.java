@@ -1,13 +1,16 @@
 package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
+import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Project;
 import com.ectrip.model.ProjectModle;
 import com.ectrip.service.DemandService;
+import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
 import com.ectrip.model.Demand;
 import com.ectrip.service.ProjectService;
 import com.ectrip.vo.DemandVO;
+import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,9 @@ public class DemandController extends BaseController {
 
     @Autowired
     private ModleService modleService;
+
+    @Autowired
+    private ModlePrototypeService modlePrototypeService;
 
     @RequestMapping(value = "/demandList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView projectList(){
@@ -81,7 +87,7 @@ public class DemandController extends BaseController {
         DemandVO demandVO = demandService.findDemand(demandId);
         Integer projectId = demandVO.getProjectId();
         //需求关联模块列表
-        List<ProjectModle> list = modleService.findModleList(demandId);
+        List<ProjectModleVO> list = modleService.findModleList(demandId);
         modelAndView.addObject("list", list);
 
         //项目模块列表
@@ -92,7 +98,7 @@ public class DemandController extends BaseController {
         if(list != null && !list.isEmpty()){
             while (modleVOIterator.hasNext()){
                 ProjectModleVO modleVO = modleVOIterator.next();
-                for (ProjectModle modle:list) {
+                for (ProjectModleVO modle:list) {
                     if (modle.getModleId()==modleVO.getModleId()){
                         modleVOIterator.remove();
                     }
@@ -120,7 +126,7 @@ public class DemandController extends BaseController {
             mav.addObject("list", list);
             return mav;
         }
-        List<ProjectModleVO> list = modleService.queryModleListByProjectId(projectName);
+        List<ModlePrototype> list = modlePrototypeService.findModlePrototypeListPage(null,null,null).getList();
         mav.addObject("ModleVOList",list);
         mav.addObject("projectId",projectName);
         mav.setViewName("WEB-INF/view/demand/editDemand");
@@ -161,7 +167,7 @@ public class DemandController extends BaseController {
 
     public ModelAndView errorInfo(Integer projectId,Integer demandId,String errorMsg,ModelAndView mav,Demand demand){
         mav.addObject("errorMsg",errorMsg);
-        List<ProjectModle> list = modleService.findModleList(demandId);
+        List<ProjectModleVO> list = modleService.findModleList(demandId);
         mav.addObject("list", list);
         List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null).getList();
         mav.addObject("ModleVOList", modleVOList);

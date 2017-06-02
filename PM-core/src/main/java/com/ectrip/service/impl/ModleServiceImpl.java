@@ -1,8 +1,10 @@
 package com.ectrip.service.impl;
 
+import com.ectrip.dao.ModleDemandDAO;
 import com.ectrip.dao.ProjectModleDAO;
 import com.ectrip.dao.ModlePrototypeDAO;
 import com.ectrip.dao.VersionDAO;
+import com.ectrip.model.ModleDemand;
 import com.ectrip.model.ProjectModle;
 import com.ectrip.model.ModlePrototype;
 import com.ectrip.model.Version;
@@ -37,13 +39,19 @@ public class ModleServiceImpl implements ModleService {
     @Autowired
     private VersionDAO versionDAO;
 
+    @Autowired
+    private ModleDemandDAO modleDemandDAO;
+
+    @Autowired
+    private ProjectModleDAO projectModleDAO;
+
     /**
      * 根据需求ID查询关联模块列表
      * @param demandId
      * @return list
      */
-    public List<ProjectModle> findModleList(Integer demandId){
-        return new ArrayList<ProjectModle>();//modleDAO.findModleList(demandId);
+    public List<ProjectModleVO> findModleList(Integer demandId){
+        return projectModleDAO.findModleList(demandId);
     }
 
     /**

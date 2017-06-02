@@ -99,8 +99,13 @@ public class DemandServiceImpl implements DemandService {
 
     @Transactional
     public void saveDemand(String[] modleId, Demand demand){
-;        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         demand.setPutUserId("test");
+        if("开发中".equals(demand.getDemandStatus())){
+            demand.setDemandStatus("0");
+        }else{
+            demand.setDemandStatus("1");
+        }
         if(demand.getId()==null){
             demand.setPutTime(sdf.format(new Date()));
             demand.setDemandStatus("0");
@@ -113,6 +118,7 @@ public class DemandServiceImpl implements DemandService {
                 modleDemandDAO.saveModle(modleDemand);
             }
         }else{
+
             demandDAO.updateDemand(demand);
             modleDemandDAO.deleteModle(demand.getId());
             ModleDemand modleDemand;

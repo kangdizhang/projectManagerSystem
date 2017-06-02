@@ -114,7 +114,7 @@
 
     <!-- 主键查询 -->
     <select id="findProjectModleVO" resultMap="projectModleVOResultMap">
-        PM.ID AS ID,
+        SELECT PM.ID AS ID,
         P.ID AS PROJECT_ID,
         P.PROJECT_NAME AS PROJECT_NAME,
         MP.ID AS MODLE_ID,
@@ -130,8 +130,7 @@
 
     <!-- 修改-->
     <update id="updateModle" parameterType="ProjectModle">
-        UPDATE
-        <include refid="tableName"></include>
+        UPDATE <include refid="tableName"></include>
         SET VERSION=#{version}
         WHERE ID=#{id}
     </update>

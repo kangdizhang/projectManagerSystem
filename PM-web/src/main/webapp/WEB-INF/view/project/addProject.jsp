@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-<form action="/project/saveProject" method="get" name="form">
+<form action="/project/saveProject" method="post" name="form">
     <table class="table table-bordered table-hover definewidth m10">
         <input type="hidden" id="projectStatus" value="${project.projectStatus}">
         <input type="hidden" name="id" value="${project.id}">

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ectrip.dao.OptStaffDAO">
+	<resultMap type="OptStaff" id="BaseResultMap">
+		<id column="ID" property="id"/>
+		<result column="PROJECT_ID" property="projectId"/>
+		<result column="OPT_STAFF_NAME" property="optStaffName"/>
+		<result column="TEL" property="tel"/>
+		<result column="QQ" property="qq"/>
+		<result column="EMAIL" property="email"/>
+	</resultMap>
+
+	<resultMap type="OptStaffVO" id="OptStaffVOResultMap">
+		<id column="ID" property="id"/>
+		<result column="PROJECT_ID" property="projectId"/>
+		<result column="PROJECT_NAME" property="projectName"/>
+		<result column="OPT_STAFF_NAME" property="optStaffName"/>
+		<result column="TEL" property="tel"/>
+		<result column="QQ" property="qq"/>
+		<result column="EMAIL" property="email"/>
+	</resultMap>
+
+	<!--表名 -->
+	<sql id="tableName">
+		OPT_STAFF
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		ID,
+		PROJECT_ID,
+		OPT_STAFF_NAME,
+		TEL,
+		QQ,
+		EMAIL
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id},
+		#{projectId},
+		#{optStaffName},
+		#{tel},
+		#{qq},
+		#{email}
+	</sql>
+
+	<!-- 主键删除 -->
+	<delete id="delOptStaffById">
+		DELETE FROM <include refid="tableName"></include>
+		WHERE ID=#{id}
+	</delete>
+
+	<!-- 修改 -->
+	<update id="updateOptStaff">
+		UPDATE <include refid="tableName"></include>
+		SET OPT_STAFF_NAME = #{optStaffName},
+		TEL = #{tel},
+		QQ = #{qq},EMAIL=#{email}
+		WHERE ID = #{id}
+	</update>
+
+	<!-- 主键查询用户 -->
+	<select id="findOptStaffById" resultMap="BaseResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+		WHERE ID = #{id}
+	</select>
+
+	<!-- 分页方法 -->
+	<select id="queryOptStaffByPageList" resultMap="OptStaffVOResultMap">
+		SELECT OS.ID AS ID,PROJECT_ID,OPT_STAFF_NAME,TEL,OS.QQ AS QQ,OS.EMAIL AS EMAIL,PROJECT_NAME
+		FROM OPT_STAFF OS,PROJECT P
+		WHERE OS.PROJECT_ID=P.ID
+		<if test="projectId!=null and projectId!=''">
+			AND OS.PROJECT_ID=#{projectId}
+		</if>
+		<if test="optStaffName!=null and optStaffName!=''">
+			AND OS.OPT_STAFF_NAME LIKE CONCAT('%', #{optStaffName}, '%')
+		</if>
+	</select>
+
+	<!-- 保存 -->
+	<insert id="saveOptStaff" useGeneratedKeys="true" keyProperty="id">
+		insert into <include refid="tableName"></include>(
+			<include refid="Field"></include>
+		) values (
+			<include refid="FieldValue"></include>
+		)
+	</insert>
+
+</mapper>

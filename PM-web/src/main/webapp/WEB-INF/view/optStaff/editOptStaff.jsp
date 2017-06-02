@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2017/5/12 0012
-  Time: 下午 3:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -14,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>模块原型</title>
+    <title>项目配置信息</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css"/>
@@ -51,36 +44,53 @@
     </style>
 </head>
 <body>
-<form action="/modlePrototype/saveProjectInfo" method="post" name="form">
+<form action="/optStaff/saveOptStaff" method="post" name="form">
     <table class="table table-bordered table-hover definewidth m10">
-        <input type="hidden" name="id" value="${modlePrototype.id}">
+        <<input type="hidden" name="id" value="${optStaff.id}">
         <tr>
-            <td width="10%" class="tableleft">模块原型名称</td>
-            <td><input type="text" name="modlePrototypeName" value="${modlePrototype.modlePrototypeName}"/></td>
-        </tr>
-        <tr>
-            <td width="10%" class="tableleft">模块原型描述</td>
-            <td><textarea name="modlePrototypeDescribe">${modlePrototype.modlePrototypeDescribe}</textarea> </td>
-        </tr>
-        <c:choose>
-            <c:when test="${msg!=null}">
-                <tr>
-                    <td class="tableleft">提示信息</td>
-                    <td>
-                        <p style="color: crimson">${msg}</p>
-                    </td>
-                </tr>
-            </c:when>
-        </c:choose>
-        <tr>
-            <td class="tableleft"></td>
+            <td width="10%" class="tableleft">运维人员名</td>
+            <td width="35%"><input type="text" name="optStaffName" value="${optStaff.optStaffName}" /></td>
+            <td width="10%" class="tableleft">运维项目</td>
             <td>
+                <select style="width: 200px" name="projectId" id="projectId">
+                    <option value="">请选择运维项目</option>
+                    <c:forEach var="project" items="${list}">
+                        <option value="${project.id}">${project.projectName}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">手机号</td>
+            <td width="35%"><input type="text" name="tel" value="${optStaff.tel}"/></td>
+            <td width="10%" class="tableleft">QQ</td>
+            <td><input type="text" name="qq" value="${optStaff.qq}"/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">邮箱</td>
+            <td width="35%"><input type="text" name="email" value="${optStaff.email}"></td>
+            <td width="10%" class="tableleft">操作</td>
+            <td width="35%">
                 <button type="submit" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;
-                <a class="btn btn-success" href="${bathPath}/modlePrototype/modlePrototypeList">返回列表</a>
+                <a class="btn btn-success" href="${bathPath}/optStaff/optStaffList">返回列表</a>
             </td>
         </tr>
     </table>
 </form>
 </body>
+<script>
+    $(function () {
+        if (${msg != null}) {
+            alert("${msg}");
+        }
+    })
+</script>
+<script type="text/javascript">
+    $(function(){
+        if (${optStaff.projectId != null}) {
+            $("#projectId").val("${optStaff.projectId}")
+        }
+    })
+</script>
 </html>

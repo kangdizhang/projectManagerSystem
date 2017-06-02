@@ -27,6 +27,8 @@
 		<typeAlias type="com.ectrip.vo.ModleVersionVO" alias="ModleVersionVO"/>
 		<typeAlias type="com.ectrip.vo.VersionVO" alias="VersionVO"/>
 		<typeAlias type="com.ectrip.model.User" alias="User"/>
+		<typeAlias type="com.ectrip.model.OptStaff" alias="OptStaff"/>
+		<typeAlias type="com.ectrip.vo.OptStaffVO" alias="OptStaffVO"/>
 	</typeAliases>
 	<!--分页插件和数据库方言-->
 	<plugins>

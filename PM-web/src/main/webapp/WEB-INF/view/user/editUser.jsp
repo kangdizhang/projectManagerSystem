@@ -44,7 +44,7 @@
     </style>
 </head>
 <body>
-<form action="/user/saveUser" method="get" name="form">
+<form action="/user/saveUser" method="post" name="form">
     <table class="table table-bordered table-hover definewidth m10">
         <<input type="hidden" name="id" value="${user0.id}">
         <tr>

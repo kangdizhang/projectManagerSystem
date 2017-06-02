@@ -73,7 +73,7 @@
                 <tr>
                     <td class="tableleft"></td>
                     <td>
-                        <a class="btn btn-success" href="${bathPath}/editModlePrototype">添加模块原型</a>
+                        <a class="btn btn-success" href="${bathPath}/modlePrototype/editModlePrototype">添加模块原型</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="btn btn-success" href="${bathPath}/modle/modleList?projectId=${projectId}">返回列表</a>
                     </td>

@@ -44,7 +44,7 @@
     </style>
 </head>
 <body>
-<form action="/projectInfo/saveProjectInfo" method="get" name="form">
+<form action="/projectInfo/saveProjectInfo" method="post" name="form">
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
             <td width="10%" class="tableleft">所属项目</td>

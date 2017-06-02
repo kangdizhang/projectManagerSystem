@@ -57,7 +57,7 @@
                                             {id:'monitor1',text:'配置信息管理  ',href:'${basePath}/projectInfo/projectInfoList'},
                                             {id:'monitor2',text:'模块原型管理  ',href:'${basePath}/modlePrototype/modlePrototypeList'},
                                             {id:'monitor3',text:'需求列表管理  ',href:'${basePath}/demand/demandList'},
-                                            {id:'monitor4',text:'运维人员列表  ',href:'${basePath}/operation/operationList'},
+                                            {id:'monitor4',text:'运维人员列表  ',href:'${basePath}/optStaff/optStaffList'},
                                             {id:'monitor5',text:'用户管理  ',href:'${basePath}/user/userList'}
                                             /*,{id:'sql-monitor',text:'sql监控  ',href:'druid/index.html'}*/
                                         ]

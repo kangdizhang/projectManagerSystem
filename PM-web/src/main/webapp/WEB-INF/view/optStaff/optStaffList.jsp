@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2017/5/15 0015
-  Time: 下午 2:43
+  Date: 2017/5/12 0012
+  Time: 上午 9:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>项目模块列表</title>
+    <title>运维人员信息列表</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="${basePath}/Css/bootstrap-responsive.css" />
@@ -50,32 +50,26 @@
     </style>
 </head>
 <body>
-
-<form class="form-inline definewidth m20" action="" method="post">
+<form class="form-inline definewidth m20" action="" method="get">
     <div class="form-group">
-        <!-- 选择项目 -->
-        <select id="projectName" name="projectName">
-            <option  name="projectId" value="">请选择项目</option>
-            <c:forEach items="${list}" var="Project">
-                <c:choose>
-                    <c:when test="${projectId == Project.id}">
-                        <option name="projectId" selected="selected" value="${Project.id}">${Project.projectName}</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option name="projectId" value="${Project.id}">${Project.projectName}</option>
-                    </c:otherwise>
-                </c:choose>
+
+        <%--运维人员名：--%>
+        <input type="text" name="optStaffName" id="optStaffName"class="abc input-default" placeholder="这里输入运维人员名">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <label for="projectId">运维项目：</label>
+        <select name="projectId" id="projectId" class="form-control">
+            <option value="">所有</option>
+            <c:forEach var="project" items="${list}" >
+                <option value="${project.id}">${project.projectName}</option>
             </c:forEach>
-        </select>
+        </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <%--模块名称：--%>
-        <input type="text" name="projecModleName" id="projecModleName"class="abc input-default" placeholder="这里输入模块名称">
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        <%--项目负责人：--%>
+        <%--<input type="text" name="projectLeader" id="projectLeader"class="abc input-default" placeholder="这里输入项目负责人">&nbsp;&nbsp;&nbsp;&nbsp;--%>
+
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-
-        <button type="button" onclick="addModle()" class="btn btn-primary">新增</button>
-        <%--<button type="button" onclick="window.location.href='${bathPath}/modle/addModle?projectId=${projectId}'" class="btn btn-primary">新增</button>--%>
+        <button type="button" onclick="window.location.href='${bathPath}/optStaff/addOptStaff'" class="btn btn-primary">新增</button>
     </div>
 </form>
 <table id="table"></table>
@@ -87,9 +81,7 @@
     oTableInit.Init = $(function() {
         // bootstrap table初始化
         $table.bootstrapTable({
-            //method:"get",
-            //url: '${basePath}/optManage/findOptRecordList',
-            url:'${basePath}/modle/list',
+            url:'${basePath}/optStaff/list',
             queryParams:oTableInit.queryParams,
             striped: true,
             search: false,
@@ -120,28 +112,23 @@
             toolbar: '#toolbar',
             columns: [
                 {field: 'id', title:'编号',align:'center'},
-                {field: 'projectName', title: '项目名称',align:'center'},
-                {field: 'modleName', title: '模块名称',align:'center'},
-                {field: 'modleDescribe', title: '模块描述',align:'center'},
-                {field: 'version', title: '版本号',align:'center'},
-                {field: 'versionDesc', title: '版本描述',align:'center'},
-                {field: 'versionNum', title: '父版本号', align: 'center'},
-                {field: 'versionList', title: '版本列表', align: 'center', formatter: 'versionListFormatter', events: 'versionListEvents', clickToSelect: false},
+                {field: 'projectName', title: '运维项目',align:'center'},
+                {field: 'optStaffName', title: '运维人名字',align:'center'},
+                {field: 'tel', title: '手机号',align:'center'},
+                {field: 'qq', title: 'QQ',align:'center'},
+                {field: 'email', title: '邮箱',align:'center'},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
     });
-    oTableInit.queryParams = function (params){
 
+    oTableInit.queryParams = function (params) {
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
             offset: params.offset,  //页码
-            projectId: $("#projectName option:selected").val(),
-            modleName:$("#projecModleName").val()
+            projectId: $("#projectId option:selected").val(),
+            optStaffName: $("#optStaffName").val()
         };
-//        var id = $("#projectName option:selected").val();
-//        if(id != null && id != ''){
-//        }
         return temp;
     };
 
@@ -151,29 +138,17 @@
 
     function operateFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/modle/editModle?id='+row.id+
+            '<a href="${bathPath}/optStaff/editOptStaff?id='+row.id+
             '" data-toggle="tooltip" title="Edit">修改</a> ',
-            '<a href="${bathPath}/modle/deleteModle?id='+row.id+ '&projectId='+row.projectId+
-            '&projectName=' + row.projectName +
+            '<a href="${bathPath}/optStaff/delOptStaff?id='+row.id+
             '" onclick="return issure();" data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }
-    function versionListFormatter(value, row, index) {
-        return [
-            '<a href="${bathPath}/version/versionList?modleId='+row.modleId+'" data-toggle="tooltip" title="View">查看</a>　'
-        ].join('');
-    }
-
 
     function issure(){
-        if(confirm("您确认删除该数据吗？")){
+        if(confirm("您确认删除该用户吗？")){
             return true;
         }
         return false;
-    }
-
-    function addModle() {
-        var projectId = $("#projectName option:selected").val();
-        window.location.href='${bathPath}/modle/addModle?projectId='+projectId;
     }
 </script>

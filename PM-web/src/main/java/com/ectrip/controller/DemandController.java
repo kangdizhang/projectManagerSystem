@@ -90,7 +90,7 @@ public class DemandController extends BaseController {
             while (modleVOIterator.hasNext()){
                 ProjectModleVO modleVO = modleVOIterator.next();
                 for (ProjectModle modle:list) {
-                    if (modle.getId()==modleVO.getId()){
+                    if (modle.getModleId()==modleVO.getModleId()){
                         modleVOIterator.remove();
                     }
                 }

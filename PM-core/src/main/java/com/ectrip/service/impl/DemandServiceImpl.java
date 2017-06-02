@@ -93,6 +93,7 @@ public class DemandServiceImpl implements DemandService {
             version.setVersionDesc("升级到"+demandVO.getVersion());
             version.setUpTime(sdf.format(new Date()));
             version.setVersion(demandVO.getVersion());
+            version.setDemandId(demandVO.getId());
             versionDAO.saveVersion(version);
         }
     }

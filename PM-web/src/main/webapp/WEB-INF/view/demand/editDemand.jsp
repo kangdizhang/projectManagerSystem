@@ -171,7 +171,7 @@
             <td>
                 <button type="submit" class="btn btn-primary">保存</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-success" href="${bathPath}/demandList?projectId=${param.projectId}">返回列表</a>
+                <a class="btn btn-success" href="${bathPath}/demand/demandList?projectId=${param.projectId}">返回列表</a>
             </td>
         </tr>
     </table>

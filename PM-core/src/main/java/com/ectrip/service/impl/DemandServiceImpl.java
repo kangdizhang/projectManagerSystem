@@ -64,7 +64,7 @@ public class DemandServiceImpl implements DemandService {
     }
 
     /**
-     * 修改需求状态
+     * 修改需求
      * @param id
      */
     @Transactional
@@ -75,32 +75,31 @@ public class DemandServiceImpl implements DemandService {
         demandVO.setDemandStatus("1");
         demandVO.setActualEndTime(sdf.format(new Date()));
         demandDAO.updateDemandState(demandVO);//修改需求状态
-        //modleDAO.updateModleState(id);//修改需求关联模块未完成状态为已完成
 
-        //升级版本
-        List<ProjectModle> list = modleDAO.queryModleList(demandVO.getProjectId());//需求关联模块列表
-
-        Version version ;
-        for (ProjectModle modle:list) {
-//            versionDAO.updateVersion(modle.getId());
-            modle.setVersion(demandVO.getVersion());
-            modleDAO.updateModle(modle);
-            version = new Version();
-            version.setModleId(modle.getId());
-//            version.setDemandId(id);
-            version.setUpTime(sdf.format(new Date()));
-            version.setUpUserId("test");
-            version.setVersionDesc("升级到"+demandVO.getVersion());
-            version.setUpTime(sdf.format(new Date()));
-            version.setVersion(demandVO.getVersion());
-            version.setDemandId(demandVO.getId());
-            versionDAO.saveVersion(version);
+        List<ModleDemand> modleDemands = modleDemandDAO.queryModleList(demandVO.getId());
+        if(!CollectionUtils.isEmpty(modleDemands)){
+            ProjectModle projectModle;
+            Version version;
+            for(ModleDemand modleDemand:modleDemands){
+                projectModle = modleDAO.queryProjectModle(demandVO.getProjectId(),modleDemand.getModleId());
+                projectModle.setVersion(demandVO.getVersion());
+                modleDAO.updateModle(projectModle);
+                version = new Version();
+                version.setModleId(modleDemand.getModleId());
+                version.setUpTime(sdf.format(new Date()));
+                version.setUpUserId("test");
+                version.setVersionDesc(demandVO.getDemandDescribe());
+                version.setUpTime(sdf.format(new Date()));
+                version.setVersion(demandVO.getVersion());
+                version.setDemandId(demandVO.getId());
+                versionDAO.saveVersion(version);
+            }
         }
     }
 
     @Transactional
     public void saveDemand(String[] modleId, Demand demand){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+;        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         demand.setPutUserId("test");
         if(demand.getId()==null){
             demand.setPutTime(sdf.format(new Date()));
@@ -112,28 +111,25 @@ public class DemandServiceImpl implements DemandService {
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
                 modleDemandDAO.saveModle(modleDemand);
-                //modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
             }
         }else{
             demandDAO.updateDemand(demand);
             modleDemandDAO.deleteModle(demand.getId());
-
-            List<ProjectModle> modleList = new ArrayList<>();//modleDAO.findModleList(demand.getId());
-            if (!CollectionUtils.isEmpty(modleList)){
-                for (ProjectModle modle:modleList) {
-                    //modleDAO.updateModleDev(modle.getId());
-                }
-            }
-
             ModleDemand modleDemand;
             for (int i = 0; i < modleId.length; i++) {
                 modleDemand = new ModleDemand();
                 modleDemand.setDemandId(demand.getId());
                 modleDemand.setModleId(Integer.valueOf(modleId[i]));
-
                 modleDemandDAO.saveModle(modleDemand);
-                //modleDAO.updateModleDev(Integer.valueOf(modleId[i]));
             }
+
+//            List<ProjectModle> modleList = modleDAO.queryModleList(demand.getProjectId());//需求关联模块列表
+//            if (!CollectionUtils.isEmpty(modleList)){
+//                for (ProjectModle modle:modleList) {
+//                    modle.setVersion(demand.getVersion());
+//                    modleDAO.updateModle(modle);
+//                }
+//            }
         }
     }
 

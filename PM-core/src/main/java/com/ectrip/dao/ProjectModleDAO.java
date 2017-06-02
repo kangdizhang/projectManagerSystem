@@ -52,6 +52,8 @@ public interface ProjectModleDAO {
      */
     ProjectModleVO findProjectModleVO(@Param("id") Integer id);
 
+    ProjectModle queryProjectModle(@Param("projectId")Integer projectId,@Param("modleId")Integer modleId);
+
     /**
      * 查找指定项目的模块列表
      * @param projectId

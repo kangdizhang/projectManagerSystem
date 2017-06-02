@@ -40,7 +40,6 @@
 		WHERE DEMAND_ID=#{demandId}
 	</select>
 
-
 	<!-- 修改-->
 	<update id="updateModle" parameterType="ProjectModle">
 		UPDATE <include refid="tableName"></include>

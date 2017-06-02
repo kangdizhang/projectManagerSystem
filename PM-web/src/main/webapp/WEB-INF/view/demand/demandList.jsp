@@ -53,7 +53,7 @@
 
 
 
-<form class="form-inline definewidth m20" action="" method="get">
+<form class="form-inline definewidth m20" action="${bathPath}/demand/addDemand" method="get">
     <div class="form-group">
         <!-- 项目名称
         <input type="text" name="projectName" id="projectName"class="abc input-default" placeholder="这里输入项目名称"> -->
@@ -86,7 +86,8 @@
         <button type="button" onclick="reloadTable()" class="btn btn-primary">查询</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <button type="button" onclick="window.location.href='${bathPath}/demand/addDemand'" class="btn btn-primary">新增</button>
+        <input type="submit" value="新增" class="btn btn-primary">
+        <%--<button type="button" onclick="window.location.href='${bathPath}/demand/addDemand'" class="btn btn-primary">新增</button>--%>
     </div>
 </form>
 <table id="table"></table>

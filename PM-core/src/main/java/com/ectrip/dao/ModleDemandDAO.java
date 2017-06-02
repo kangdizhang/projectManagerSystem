@@ -15,7 +15,7 @@ public interface ModleDemandDAO {
      * @param demandId
      * @return
      */
-    List<ModleDemand> queryModleList(Integer demandId);
+    List<ModleDemand> queryModleList(@Param("demandId") Integer demandId);
 
     void deleteModle(@Param("demandId") Integer demandId);
 

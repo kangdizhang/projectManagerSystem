@@ -77,6 +77,9 @@ public class DemandController extends BaseController {
     @RequestMapping(value = "/editDemand",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView modleList(Integer projectId,Integer demandId) {
         ModelAndView modelAndView = new ModelAndView();
+
+        DemandVO demandVO = demandService.findDemand(demandId);
+        projectId = demandVO.getProjectId();
         //需求关联模块列表
         List<ProjectModle> list = modleService.findModleList(demandId);
         modelAndView.addObject("list", list);
@@ -98,9 +101,6 @@ public class DemandController extends BaseController {
         }
 
         modelAndView.addObject("ModleVOList", modleVOList);
-
-        DemandVO demandVO = demandService.findDemand(demandId);
-        projectId = demandVO.getProjectId();
         Project project = projectService.queryProject(projectId);
         modelAndView.addObject("demand", demandVO);
         modelAndView.addObject("projectId",projectId);
@@ -111,23 +111,26 @@ public class DemandController extends BaseController {
     }
 
     @RequestMapping(value = "/addDemand",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView addDemand(Integer projectId){
+    public ModelAndView addDemand(Integer projectName){
         ModelAndView mav = getModelAndView();
-        if (projectId == null) {
+        if (projectName == null) {
             mav.addObject("msg","请选择项目！");
             mav.setViewName("WEB-INF/view/demand/demandList");
+            List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
+            mav.addObject("list", list);
+            return mav;
         }
-        List<ProjectModleVO> list = modleService.queryModleListByProjectId(projectId);
+        List<ProjectModleVO> list = modleService.queryModleListByProjectId(projectName);
         mav.addObject("ModleVOList",list);
-        mav.addObject("projectId",projectId);
+        mav.addObject("projectId",projectName);
         mav.setViewName("WEB-INF/view/demand/editDemand");
-        List<Project> projectList = projectService.findProjectListPage(null, null, null, null, null).getList();
-        mav.addObject("projectList", projectList);
+        Project project = projectService.queryProject(projectName);
+        mav.addObject("projectName",project.getProjectName());
         return mav;
     }
 
     @RequestMapping(value = "/saveDemand",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView saveDemand(Demand demand,Integer pid,Integer demandId){
+    public ModelAndView saveDemand(Demand demand,Integer pid,Integer projectId, Integer demandId){
         String[] modleId = getRequest().getParameterValues("mdid");
         ModelAndView mav = getModelAndView();
 
@@ -148,7 +151,11 @@ public class DemandController extends BaseController {
             return errorInfo(pid,demandId,"版本号重复",mav,demand);
         }
         try {
+            if(pid!=null){
             demand.setProjectId(pid);
+        }else{
+            demand.setProjectId(pid);
+        }
             demandService.saveDemand(modleId,demand);
         }catch (Exception e){
             e.printStackTrace();
@@ -166,7 +173,7 @@ public class DemandController extends BaseController {
         mav.addObject("list", list);
         List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null).getList();
         mav.addObject("ModleVOList", modleVOList);
-        DemandVO demandVO = demandService.findDemand(demandId);
+//        DemandVO demandVO = demandService.findDemand(demandId);
         mav.addObject("demand", demand);
         mav.addObject("projectId",projectId);
         mav.setViewName("WEB-INF/view/demand/editDemand");

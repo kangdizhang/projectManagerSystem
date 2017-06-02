@@ -75,6 +75,13 @@
         WHERE PM.PROJECT_ID=#{projectId}
     </select>
 
+    <select id="queryProjectModle" resultMap="projectModleResultMap">
+        SELECT <include refid="Field"></include>
+        FROM <include refid="tableName"></include>
+        WHERE PROJECT_ID = #{projectId}
+        AND   MODLE_ID = #{modleId}
+    </select>
+
     <!-- 根据需求ID查询关联模块列表
     <select id="findModleList" resultMap="projectModleResultMap">
 		SELECT M.ID AS ID,M.PROJECT_ID AS PROJECT_ID,M.MODLE_NAME AS MODLE_NAME,M.MODLE_DESCRIBE AS MODLE_DESCRIBE,
@@ -147,11 +154,5 @@
     <insert id="saveModleDemand" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO MODLE_DEMAND(ID,MODLE_ID,DEMAND_ID) VALUES(#{id},#{modleId},#{demandId})
 	</insert>
-
-    <!--<update id="updateModleDev">
-        UPDATE <include refid="tableName"></include>
-        SET MODLE_STATE = '0'
-        WHERE ID=#{id}
-    </update>-->
 
 </mapper>

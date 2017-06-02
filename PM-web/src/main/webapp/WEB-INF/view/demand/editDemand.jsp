@@ -48,31 +48,19 @@
 </head>
 <body>
 <form action="/demand/saveDemand" method="post" name="form">
-        <c:if test="${projectId==null}">
-            <input type="hidden" name="projectId" value="${param.projectId}">
-        </c:if>
-        <c:if test="${projectId!=null}">
-            <input type="hidden" name="projectId" value="${projectId}">
-            <input type="hidden" name="demandId" value="${demandId}">
-        </c:if>
+    <c:if test="${projectId==null}">
+        <input type="text" name="projectId" value="${param.projectId}">
+    </c:if>
+    <c:if test="${projectId!=null}">
+        <input type="text" name="projectId" value="${projectId}">
+        <input type="text" name="demandId" value="${demandId}">
+    </c:if>
     <input type="hidden" name="id" value="${demand.id}">
     <input type="hidden" name="demandStatus" value="${demand.demandStatus}">
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
-            <td>关联模块选择</td>
-            <td>
-                <c:choose>
-                    <c:when test="${projectId!=null}">${projectName}</c:when>
-                    <c:otherwise>
-
-                        <select id="pid" name="pid">
-                            <option name="projectId" value="">请选择项目</option>
-                            <c:forEach items="${projectList}" var="Project">
-                                <option name="projectId" value="${Project.id}">${Project.projectName}</option>
-                            </c:forEach>
-                        </select>
-                    </c:otherwise>
-                </c:choose>
+            <td>项目名称</td>
+            <td>${projectName}
             </td>
         </tr>
         <tr>
@@ -81,17 +69,22 @@
                 <c:choose>
                     <c:when test="${list!=null}">
                         <c:forEach items="${ModleVOList}" var="modleVO">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.modleId}' />${modleVO.modleName}</label>
+                            <label class='checkbox inline'><input type='checkbox' name='mdid'
+                                                                  value='${modleVO.modleId}'/>${modleVO.modleName}
+                            </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                         <c:forEach items="${list}" var="modle">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modle.modleId}' checked="checked" />${modle.modleName}</label>
+                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modle.modleId}'
+                                                                  checked="checked"/>${modle.modleName}</label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <c:forEach items="${ModleVOList}" var="modleVO">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modleVO.modleId}' />${modleVO.modleName}</label>
+                            <label class='checkbox inline'><input type='checkbox' name='mdid'
+                                                                  value='${modleVO.modleId}'/>${modleVO.modleName}
+                            </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                     </c:otherwise>
@@ -103,7 +96,7 @@
             <c:choose>
                 <c:when test="${demand.version!=null}">
                     <td>
-                        ${demand.version}
+                            ${demand.version}
                         <input type="hidden" name="version" value="${demand.version}">
                     </td>
                 </c:when>
@@ -133,7 +126,7 @@
             <tr>
                 <td width="10%" class="tableleft">提出时间</td>
                 <td>
-                    ${demand.putTime}
+                        ${demand.putTime}
                     <input type="hidden" name="putTime" value="${demand.putTime}">
                 </td>
             </tr>
@@ -141,20 +134,22 @@
         <tr>
             <td width="10%" class="tableleft">需求描述</td>
             <td>
-                <input type="text" name="demandDescribe" value="${demand.demandDescribe}"><span style="color: RED">*</span>
+                <input type="text" name="demandDescribe" value="${demand.demandDescribe}"><span
+                    style="color: RED">*</span>
             </td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">预期完成时间</td>
             <td>
-                <input type="text" name="exceptEndTime" value="${demand.exceptEndTime}"><span style="color: RED">*</span>
+                <input type="text" name="exceptEndTime" value="${demand.exceptEndTime}"><span
+                    style="color: RED">*</span>
             </td>
         </tr>
         <c:if test="${demand.actualEndTime!=null}">
             <tr>
                 <td width="10%" class="tableleft">实际完成时间</td>
                 <td>
-                   ${demand.actualEndTime}
+                        ${demand.actualEndTime}
                 </td>
             </tr>
         </c:if>
@@ -162,7 +157,7 @@
             <tr>
                 <td width="10%" class="tableleft">完成人</td>
                 <td>
-                   ${demand.completeUserId}
+                        ${demand.completeUserId}
                 </td>
             </tr>
         </c:if>

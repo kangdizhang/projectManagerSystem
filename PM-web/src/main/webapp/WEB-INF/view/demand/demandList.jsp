@@ -175,11 +175,8 @@
 
     function operateFormatter(value, row, index) {
         return [
-            '<a href="${bathPath}/demand/editDemand?demandId='+row.id+
-            '&projectId=${param.projectId}' +'" data-toggle="tooltip" title="Edit">修改</a> ',
-            '<a href="${bathPath}/demand/deleteDemand?id='+row.id+
-            '&projectId=${param.projectId}' +
-            '"data-toggle="tooltip" title="Del">删除</a> '
+            '<a href="${bathPath}/demand/editDemand?demandId='+row.id +'" data-toggle="tooltip" title="Edit">修改</a> ',
+            '<a href="${bathPath}/demand/deleteDemand?id='+row.id+'"data-toggle="tooltip" title="Del">删除</a> '
         ].join('');
     }
 

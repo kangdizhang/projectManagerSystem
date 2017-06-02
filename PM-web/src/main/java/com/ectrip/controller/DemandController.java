@@ -75,11 +75,11 @@ public class DemandController extends BaseController {
     }
 
     @RequestMapping(value = "/editDemand",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView modleList(Integer projectId,Integer demandId) {
+    public ModelAndView modleList(Integer demandId) {
         ModelAndView modelAndView = new ModelAndView();
 
         DemandVO demandVO = demandService.findDemand(demandId);
-        projectId = demandVO.getProjectId();
+        Integer projectId = demandVO.getProjectId();
         //需求关联模块列表
         List<ProjectModle> list = modleService.findModleList(demandId);
         modelAndView.addObject("list", list);
@@ -150,19 +150,11 @@ public class DemandController extends BaseController {
         if(!CollectionUtils.isEmpty(list)){
             return errorInfo(pid,demandId,"版本号重复",mav,demand);
         }
-        try {
-            if(pid!=null){
-            demand.setProjectId(pid);
-        }else{
-            demand.setProjectId(pid);
-        }
-            demandService.saveDemand(modleId,demand);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+        demandService.saveDemand(modleId,demand);
+
         List<Project> projectList = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("list", projectList);
-        mav.addObject("projectId",pid);
         mav.setViewName("WEB-INF/view/demand/demandList");
         return mav;
     }

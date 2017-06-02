@@ -62,8 +62,7 @@
                     <td>
                         <c:forEach items="${list}" var="projectModleVO">
                             <span>${projectModleVO.modlePrototypeName}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                            版本号：${projectModleVO.versionList[0].version}
-                            <br>
+                            版本号：${projectModleVO.versionList[0].version}<br>
                         </c:forEach>
                     </td>
                 </c:when>

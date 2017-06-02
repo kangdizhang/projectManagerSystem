@@ -49,11 +49,11 @@
 <body>
 <form action="/demand/saveDemand" method="post" name="form">
     <c:if test="${projectId==null}">
-        <input type="text" name="projectId" value="${param.projectId}">
+        <input type="hidden" name="projectId" value="${param.projectId}">
     </c:if>
     <c:if test="${projectId!=null}">
-        <input type="text" name="projectId" value="${projectId}">
-        <input type="text" name="demandId" value="${demandId}">
+        <input type="hidden" name="projectId" value="${projectId}">
+        <input type="hidden" name="demandId" value="${demandId}">
     </c:if>
     <input type="hidden" name="id" value="${demand.id}">
     <input type="hidden" name="demandStatus" value="${demand.demandStatus}">
@@ -69,21 +69,21 @@
                 <c:choose>
                     <c:when test="${list!=null}">
                         <c:forEach items="${ModleVOList}" var="modleVO">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid'
-                                                                  value='${modleVO.modleId}'/>${modleVO.modleName}
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='mdid' value='${modleVO.modleId}'/>${modleVO.modleName}
                             </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                         <c:forEach items="${list}" var="modle">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid' value='${modle.modleId}'
-                                                                  checked="checked"/>${modle.modleName}</label>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='mdid' value='${modle.modleId}' checked="checked"/>${modle.modleName}</label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <c:forEach items="${ModleVOList}" var="modleVO">
-                            <label class='checkbox inline'><input type='checkbox' name='mdid'
-                                                                  value='${modleVO.modleId}'/>${modleVO.modleName}
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='mdid' value='${modleVO.modleId}'/>${modleVO.modleName}
                             </label>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </c:forEach>

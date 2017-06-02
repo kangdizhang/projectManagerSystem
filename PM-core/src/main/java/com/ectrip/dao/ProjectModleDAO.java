@@ -69,6 +69,8 @@ public interface ProjectModleDAO {
      */
     List<ProjectModleVO> queryModle(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
                                     @Param("modleName") String modleName);
+    List<ProjectModleVO> queryModlePrototype(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("projectId") Integer projectId,
+                                    @Param("modleName") String modleName);
 
     //List<ProjectModle> queryModleListByProjectId(@Param("projectId") Integer projectId);
 

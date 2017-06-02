@@ -102,11 +102,30 @@
 
     <!-- 条件查询 -->
     <select id="queryModle" resultMap="projectModleVOResultMap">
---         SELECT PM.ID as ID,P.ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,MP.ID AS MODLE_ID,
---         MP.MODLE_PROTOTYPE_NAME as MODLE_NAME,MP.MODLE_PROTOTYPE_DESCRIBE as MODLE_DESCRIBE,PM.VERSION AS VERSION,
---         V.VERSION_DESC AS VERSION_DESC,V2.VERSION AS VERSION_NUM
---         FROM PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V,VERSION V2
---         WHERE PM.PROJECT_ID = P.ID AND PM.MODLE_ID = MP.ID AND PM.VERSION=V.VERSION AND PM.MODLE_ID=V.MODLE_ID AND V.VERSION_ID=V2.ID
+            SELECT
+            PM.ID AS ID,
+            P.ID AS PROJECT_ID,
+            P.PROJECT_NAME AS PROJECT_NAME,
+            MP.ID AS MODLE_ID,
+            MP.MODLE_PROTOTYPE_NAME AS MODLE_NAME,
+            MP.MODLE_PROTOTYPE_DESCRIBE AS MODLE_DESCRIBE,
+            PM.VERSION AS VERSION,
+            V.VERSION_DESC AS VERSION_DESC,
+            ( SELECT v1.VERSION FROM VERSION v1 WHERE V.MODLE_ID = PM.MODLE_ID AND V.VERSION_ID = v1.ID ) AS VERSION_NUM
+            FROM  PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V
+            WHERE PM.PROJECT_ID = P.ID
+            AND PM.MODLE_ID = MP.ID
+            AND V.MODLE_ID = MP.ID
+            <if test="projectId!=null and projectId!=''">
+                AND P.ID = #{projectId}
+            </if>
+            <if test="modleName!=null and modleName!=''">
+                AND MP.MODLE_PROTOTYPE_NAME LIKE CONCAT('%', #{modleName}, '%')
+            </if>
+    </select>
+
+    <!-- 条件查询 -->
+    <select id="queryModlePrototype" resultMap="projectModleVOResultMap">
         SELECT
         PM.ID AS ID,
         P.ID AS PROJECT_ID,
@@ -114,13 +133,10 @@
         MP.ID AS MODLE_ID,
         MP.MODLE_PROTOTYPE_NAME AS MODLE_NAME,
         MP.MODLE_PROTOTYPE_DESCRIBE AS MODLE_DESCRIBE,
-        PM.VERSION AS VERSION,
-        V.VERSION_DESC AS VERSION_DESC,
-        ( SELECT v1.VERSION FROM VERSION v1 WHERE V.MODLE_ID = PM.MODLE_ID AND V.VERSION_ID = v1.ID ) AS VERSION_NUM
-        FROM  PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V
+        PM.VERSION AS VERSION
+        FROM  PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP
         WHERE PM.PROJECT_ID = P.ID
         AND PM.MODLE_ID = MP.ID
-        AND V.MODLE_ID = MP.ID
         <if test="projectId!=null and projectId!=''">
             AND P.ID = #{projectId}
         </if>

@@ -102,7 +102,7 @@ public class ModleServiceImpl implements ModleService {
      * @param modleName
      */
     public PageInfo<ProjectModleVO> queryModleList(Integer pageNo, Integer pageSize, Integer projectId, String modleName){
-        List<ProjectModleVO> list = modleDAO.queryModle(pageNo,pageSize,projectId,modleName);
+        List<ProjectModleVO> list = modleDAO.queryModlePrototype(pageNo,pageSize,projectId,modleName);
         logger.info("查询数据:{}",list.toString());
         return new PageInfo<>(list);
     }

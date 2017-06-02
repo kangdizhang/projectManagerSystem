@@ -55,7 +55,7 @@
         <tr>
             <td width="10%" class="tableleft">项目名称</td>
             <td width="35%"><input type="text" name="projectName" value="${project.projectName}"/><span
-                    style="color: #a9302a">*</span></td>
+                    style="color: RED">*</span></td>
             <td width="10%" class="tableleft">项目模块</td>
             <c:choose>
                 <c:when test="${project.id != null}">
@@ -117,19 +117,19 @@
             </td>
             <td width="10%" class="tableleft">项目负责人</td>
             <td><input type="text" name="projectLeader" value="${project.projectLeader}"/><span
-                    style="color: #a9302a">*</span></td>
+                    style="color: RED">*</span></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">负责人电话</td>
             <td width="35%"><input type="text" name="phone" value="${project.phone}"/><span
-                    style="color: #a9302a">*</span></td>
+                    style="color: RED">*</span></td>
             <td width="10%" class="tableleft">负责人QQ</td>
             <td><input type="text" name="qq" value="${project.qq}"/></td>
         </tr>
         <tr>
             <td width="10%" class="tableleft">负责人邮箱</td>
             <td width="35%"><input type="text" name="email" value="${project.email}"/><span
-                    style="color: #a9302a">*</span></td>
+                    style="color: RED">*</span></td>
             <td width="10%" class="tableleft">项目状态</td>
             <td>
                 <input type="radio" name="projectStatus" value="0"/> 开发中&nbsp;&nbsp;&nbsp;&nbsp;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -61,6 +62,7 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
     public Object pageList(Integer offset,Integer limit,String userName,String userType){
         int pageNo = 1;
         if (offset != null) {
@@ -85,6 +87,14 @@ public class UserController extends BaseController {
     public ModelAndView addUser(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("WEB-INF/view/user/editUser");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/delUser",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView delUser(Integer id){
+        ModelAndView modelAndView = new ModelAndView();
+        userService.delUserById(id);
+        modelAndView.setViewName("WEB-INF/view/user/userList");
         return modelAndView;
     }
 

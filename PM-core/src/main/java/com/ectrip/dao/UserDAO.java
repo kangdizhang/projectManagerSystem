@@ -11,6 +11,12 @@ import java.util.List;
 public interface UserDAO {
 
     /**
+     * 主键删除
+     * @param id
+     */
+    void delUserById(@Param("id") Integer id);
+
+    /**
      * 新增用户
      * @param user
      */

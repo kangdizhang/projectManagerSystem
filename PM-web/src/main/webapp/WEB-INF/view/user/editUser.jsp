@@ -46,6 +46,7 @@
 <body>
 <form action="/user/saveUser" method="get" name="form">
     <table class="table table-bordered table-hover definewidth m10">
+        <<input type="hidden" name="id" value="${user0.id}">
         <tr>
             <td width="10%" class="tableleft">用户名</td>
             <td width="35%"><input type="text" name="userName" value="${user0.userName}" /></td>

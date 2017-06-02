@@ -34,13 +34,21 @@
 		#{lastLoginTime}
 	</sql>
 
+	<!-- 主键删除 -->
+	<delete id="delUserById">
+		DELETE FROM <include refid="tableName"></include>
+		WHERE ID=#{id}
+	</delete>
+
 	<!-- 修改 -->
 	<update id="updateUser">
 		UPDATE <include refid="tableName"></include>
 		SET USER_NAME = #{userName},
 		PWD = #{pwd},
-		USER_TYPE = #{userType},
-		LAST_LOGIN_TIME=#{lastLoginTime}
+		USER_TYPE = #{userType}
+		<if test="lastLoginTime!=null and lastLoginTime!=''">
+			,LAST_LOGIN_TIME=#{lastLoginTime}
+		</if>
 		WHERE ID = #{id}
 	</update>
 

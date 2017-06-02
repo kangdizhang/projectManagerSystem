@@ -91,7 +91,7 @@
 --         FROM PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V,VERSION V2
 --         WHERE PM.PROJECT_ID = P.ID AND PM.MODLE_ID = MP.ID AND PM.VERSION=V.VERSION AND PM.MODLE_ID=V.MODLE_ID AND V.VERSION_ID=V2.ID
         SELECT
-        PM.id AS ID,
+        PM.ID AS ID,
         P.ID AS PROJECT_ID,
         P.PROJECT_NAME AS PROJECT_NAME,
         MP.ID AS MODLE_ID,
@@ -99,25 +99,31 @@
         MP.MODLE_PROTOTYPE_DESCRIBE AS MODLE_DESCRIBE,
         PM.VERSION AS VERSION,
         V.VERSION_DESC AS VERSION_DESC,
-        ( SELECT v1.version FROM version v1 WHERE v.modle_id = pm.modle_id AND v.version_id = v1.id ) AS VERSION_NUM
+        ( SELECT v1.VERSION FROM VERSION v1 WHERE V.MODLE_ID = PM.MODLE_ID AND V.VERSION_ID = v1.ID ) AS VERSION_NUM
         FROM  PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V
-        WHERE PM.project_id = P.ID
-        AND PM.modle_id = MP.id
-        AND V.modle_id = MP.ID
+        WHERE PM.PROJECT_ID = P.ID
+        AND PM.MODLE_ID = MP.ID
+        AND V.MODLE_ID = MP.ID
         <if test="projectId!=null and projectId!=''">
             AND P.ID = #{projectId}
         </if>
         <if test="modleName!=null and modleName!=''">
-            AND MP.modlePrototypeName LIKE CONCAT('%', #{modleName}, '%')
+            AND MP.MODLE_PROTOTYPE_NAME LIKE CONCAT('%', #{modleName}, '%')
         </if>
     </select>
 
     <!-- 主键查询 -->
     <select id="findProjectModleVO" resultMap="projectModleVOResultMap">
-        SELECT PM.ID as ID,P.ID as PROJECT_ID,P.PROJECT_NAME as PROJECT_NAME,MP.ID AS MODLE_ID,
-        MP.MODLE_PROTOTYPE_NAME as MODLE_NAME,MP.MODLE_PROTOTYPE_DESCRIBE as MODLE_DESCRIBE,PM.VERSION AS VERSION,
-        V.VERSION_DESC AS VERSION_DESC,( SELECT v1.version FROM version v1 WHERE v.modle_id = pm.modle_id AND v.version_id = v1.id ) AS VERSION_NUM
-        FROM PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V
+        PM.ID AS ID,
+        P.ID AS PROJECT_ID,
+        P.PROJECT_NAME AS PROJECT_NAME,
+        MP.ID AS MODLE_ID,
+        MP.MODLE_PROTOTYPE_NAME AS MODLE_NAME,
+        MP.MODLE_PROTOTYPE_DESCRIBE AS MODLE_DESCRIBE,
+        PM.VERSION AS VERSION,
+        V.VERSION_DESC AS VERSION_DESC,
+        ( SELECT v1.VERSION FROM VERSION v1 WHERE V.MODLE_ID = PM.MODLE_ID AND V.VERSION_ID = v1.ID ) AS VERSION_NUM
+        FROM  PROJECT_MODLE PM,PROJECT P,MODLE_PROTOTYPE MP,VERSION V
         WHERE PM.PROJECT_ID = P.ID AND PM.MODLE_ID = MP.ID AND PM.VERSION=V.VERSION AND PM.MODLE_ID=V.MODLE_ID
         AND PM.ID=#{id}
     </select>

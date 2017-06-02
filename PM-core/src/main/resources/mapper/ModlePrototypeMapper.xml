@@ -52,8 +52,8 @@
 	<!-- 列表查询-->
 	<select id="queryModlePrototypeById" resultMap="modlePrototypeResultMap">
 		select M.MODLE_PROTOTYPE_NAME,M.ID AS ID
-		from project_modle P,modle_prototype M
-		WHERE P.modle_id = M.id and P.PROJECT_ID = #{id}
+		from PROJECT_MODLE P,MODLE_PROTOTYPE M
+		WHERE P.MODLE_ID = M.id and P.PROJECT_ID = #{id}
 	</select>
 
 	<!-- 条件查询-->

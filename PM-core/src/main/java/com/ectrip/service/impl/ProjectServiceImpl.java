@@ -27,10 +27,6 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao projectDao;
     @Autowired
     private ProjectInfoDAO projectInfoDAO;
-    @Autowired
-    private ProjectModleDAO modleDAO;
-    @Autowired
-    private ModlePrototypeDAO modlePrototypeDAO;
 
     /**
      * 根据ID删除项目配置信息

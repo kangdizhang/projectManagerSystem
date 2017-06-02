@@ -25,6 +25,14 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     /**
+     * 主键删除
+     * @param id
+     */
+    public void delUserById(Integer id){
+        userDAO.delUserById(id);
+    }
+
+    /**
      * 新增用户
      * @param user
      */

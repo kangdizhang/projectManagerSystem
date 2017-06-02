@@ -125,7 +125,7 @@
                 {field: 'modleDescribe', title: '模块描述',align:'center'},
                 {field: 'version', title: '版本号',align:'center'},
                 {field: 'versionDesc', title: '版本描述',align:'center'},
-                {field: 'verisonNum', title: '父版本号', align: 'center'},
+                {field: 'versionNum', title: '父版本号', align: 'center'},
                 {field: 'versionList', title: '版本列表', align: 'center', formatter: 'versionListFormatter', events: 'versionListEvents', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]

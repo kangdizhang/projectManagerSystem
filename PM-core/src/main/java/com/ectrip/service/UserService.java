@@ -3,12 +3,17 @@ package com.ectrip.service;
 import com.ectrip.model.User;
 import com.github.pagehelper.PageInfo;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2017/5/31 0031.
  */
 public interface UserService {
+
+    /**
+     * 主键删除
+     * @param id
+     */
+    void delUserById(Integer id);
+
     /**
      * 新增用户
      * @param user

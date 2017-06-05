@@ -33,4 +33,6 @@ public interface VersionDAO {
      */
     List<VersionVO> queryVersion(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,
                                  @Param("modleId") Integer modleId);
+
+    Version findVersionUp(@Param("version") String version,@Param("modleId") Integer modleId);
 }

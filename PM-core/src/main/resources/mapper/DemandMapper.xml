@@ -130,7 +130,7 @@
 	</insert>
 
 	<select id="queryDemandByVeision" resultMap="demandResultMap">
-		select * from <include refid="tableName"></include> where VERSION = #{version} and PROJECT_ID = #{projectId} and ID != #{id}
+		select * from <include refid="tableName"></include> where VERSION = #{version}
 	</select>
 
 	<delete id="deleteDemand">

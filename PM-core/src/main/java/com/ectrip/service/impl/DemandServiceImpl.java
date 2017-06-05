@@ -80,10 +80,13 @@ public class DemandServiceImpl implements DemandService {
         if(!CollectionUtils.isEmpty(modleDemands)){
             ProjectModle projectModle;
             Version version;
+            Version versionUp;
             for(ModleDemand modleDemand:modleDemands){
                 projectModle = modleDAO.queryProjectModle(demandVO.getProjectId(),modleDemand.getModleId());
+                versionUp = versionDAO.findVersionUp(projectModle.getVersion(),modleDemand.getModleId());
                 projectModle.setVersion(demandVO.getVersion());
                 modleDAO.updateModle(projectModle);
+
                 version = new Version();
                 version.setModleId(modleDemand.getModleId());
                 version.setUpTime(sdf.format(new Date()));
@@ -92,6 +95,7 @@ public class DemandServiceImpl implements DemandService {
                 version.setUpTime(sdf.format(new Date()));
                 version.setVersion(demandVO.getVersion());
                 version.setDemandId(demandVO.getId());
+                version.setVersionId(versionUp.getId());
                 versionDAO.saveVersion(version);
             }
         }

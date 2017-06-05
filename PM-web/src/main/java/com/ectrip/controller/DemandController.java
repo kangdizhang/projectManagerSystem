@@ -183,9 +183,9 @@ public class DemandController extends BaseController {
         if(StringUtils.isEmpty(demand.getExceptEndTime())){
             return errorInfo(pid,demandId,"预期完成时间不能为空",mav,demand);
         }
-        List list = demandService.queryDemandByVeision(demand.getVersion(),pid,demand.getId());
+        List list = demandService.queryDemandByVeision(demand.getVersion(),projectId,demand.getId());
         if(!CollectionUtils.isEmpty(list)){
-            return errorInfo(pid,demandId,"版本号重复",mav,demand);
+            return errorInfo(projectId,demandId,"版本号重复",mav,demand);
         }
 
         demandService.saveDemand(modleId,demand,user.getUserName());
@@ -193,19 +193,6 @@ public class DemandController extends BaseController {
         List<Project> projectList = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("list", projectList);
         mav.setViewName("WEB-INF/view/demand/demandList");
-        return mav;
-    }
-
-    public ModelAndView errorInfo(Integer projectId,Integer demandId,String errorMsg,ModelAndView mav,Demand demand){
-        mav.addObject("errorMsg",errorMsg);
-        List<ProjectModleVO> list = modleService.findModleList(demandId);
-        mav.addObject("list", list);
-        List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null).getList();
-        mav.addObject("ModleVOList", modleVOList);
-//        DemandVO demandVO = demandService.findDemand(demandId);
-        mav.addObject("demand", demand);
-        mav.addObject("projectId",projectId);
-        mav.setViewName("WEB-INF/view/demand/editDemand");
         return mav;
     }
 
@@ -217,6 +204,22 @@ public class DemandController extends BaseController {
         mav.addObject("list", list);
         mav.addObject("projectId",projectId);
         mav.setViewName("WEB-INF/view/demand/demandList");
+        return mav;
+    }
+
+    public ModelAndView errorInfo(Integer projectId,Integer demandId,String errorMsg,ModelAndView mav,Demand demand){
+        mav.addObject("errorMsg",errorMsg);
+        List<ProjectModleVO> list = modleService.findModleList(demandId);
+        mav.addObject("list", list);
+        List<ProjectModleVO> modleVOList = modleService.queryModleList(null, null, projectId, null).getList();
+        Project project = projectService.queryProject(projectId);
+        demand.setVersion(null);
+        mav.addObject("ModleVOList", modleVOList);
+//        DemandVO demandVO = demandService.findDemand(demandId);
+        mav.addObject("demand", demand);
+        mav.addObject("projectId",projectId);
+        mav.addObject("projectName",project.getProjectName());
+        mav.setViewName("WEB-INF/view/demand/editDemand");
         return mav;
     }
 }

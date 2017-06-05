@@ -88,4 +88,10 @@
 		)
 	</insert>
 
+	<select id="findVersionUp" resultMap="versionResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+		WHERE VERSION = #{version}
+		AND MODLE_ID = #{modleId}
+	</select>
+
 </mapper>

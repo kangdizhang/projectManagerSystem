@@ -15,6 +15,8 @@ public interface ModlePrototypeDAO {
 
     List<ModleVersionVO> queryModlePrototypeById(@Param("id") Integer id);
 
+    List<ModlePrototype> queryModlePrototypeByProjectId(@Param("id") Integer id);
+
     List<ModlePrototype> findModlePrototypeListPage(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("modlePrototypeName") String modlePrototypeName);
 
     void saveModlePrototype(ModlePrototype modlePrototype);

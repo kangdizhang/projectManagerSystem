@@ -9,6 +9,11 @@
 		<collection  property="versionList" ofType="ModleVersionVO" column="id" select="getVersionVOList"></collection>
 	</resultMap>
 
+	<resultMap type="ModlePrototype" id="modlePrototypeBaseResultMap">
+		<id column="ID" property="id"/>
+		<result column="MODLE_PROTOTYPE_NAME" property="modlePrototypeName"/>
+	</resultMap>
+
     <resultMap id="versionVO" type="Version">
         <id column="ID" property="id"></id>
         <result column="VERSION" property="version"/>
@@ -55,6 +60,13 @@
 		from PROJECT_MODLE P,MODLE_PROTOTYPE M
 		WHERE P.MODLE_ID = M.id and P.PROJECT_ID = #{id}
 	</select>
+
+	<select id="queryModlePrototypeByProjectId" resultMap="modlePrototypeBaseResultMap">
+		select M.MODLE_PROTOTYPE_NAME,M.ID AS ID
+		from PROJECT_MODLE P,MODLE_PROTOTYPE M
+		WHERE P.MODLE_ID = M.id and P.PROJECT_ID = #{id}
+	</select>
+
 
 	<!-- 条件查询-->
 	<select id="findModlePrototypeListPage" resultMap="modlePrototypeResultMap">

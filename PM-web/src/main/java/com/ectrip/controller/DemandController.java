@@ -124,7 +124,7 @@ public class DemandController extends BaseController {
             mav.addObject("list", list);
             return mav;
         }
-        List<ModlePrototype> list = modlePrototypeService.findModlePrototypeListPage(null,null,null).getList();
+        List<ModlePrototype> list = modlePrototypeService.queryModlePrototypeByProjectId(projectName);
         mav.addObject("ModleVOList",list);
         mav.addObject("projectId",projectName);
         mav.setViewName("WEB-INF/view/demand/editDemand");

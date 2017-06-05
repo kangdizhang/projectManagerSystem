@@ -75,6 +75,10 @@ public class ModlePrototypeServiceImpl implements ModlePrototypeService {
         }
     }
 
+    public List<ModlePrototype> queryModlePrototypeByProjectId(Integer id){
+        return modlePrototypeDAO.queryModlePrototypeByProjectId(id);
+    }
+
     @Override
     public ModleVersionVO findModlePrototype(Integer id) {
         return modlePrototypeDAO.findModlePrototype(id);

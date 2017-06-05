@@ -1,13 +1,10 @@
 package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
-import com.ectrip.model.ModlePrototype;
-import com.ectrip.model.Project;
-import com.ectrip.model.ProjectModle;
+import com.ectrip.model.*;
 import com.ectrip.service.DemandService;
 import com.ectrip.service.ModlePrototypeService;
 import com.ectrip.service.ModleService;
-import com.ectrip.model.Demand;
 import com.ectrip.service.ProjectService;
 import com.ectrip.vo.DemandVO;
 import com.ectrip.vo.ModleVersionVO;
@@ -58,7 +55,8 @@ public class DemandController extends BaseController {
     @RequestMapping(value="/completeDemand",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView completeDemand(Integer id,Integer projectId){
         ModelAndView modelAndView = new ModelAndView();
-        demandService.updateDemand(id);
+        User user = (User) getRequest().getSession().getAttribute("user");
+        demandService.updateDemand(id, user.getUserName());
         modelAndView.addObject("projectId",projectId);
         modelAndView.setViewName("WEB-INF/view/demand/demandList");
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();
@@ -139,7 +137,7 @@ public class DemandController extends BaseController {
     public ModelAndView saveDemand(Demand demand,Integer pid,Integer projectId, Integer demandId){
         String[] modleId = getRequest().getParameterValues("mdid");
         ModelAndView mav = getModelAndView();
-
+        User user = (User) getRequest().getSession().getAttribute("user");
         if(modleId == null || modleId.length ==0){
             return errorInfo(pid,demandId,"请选择系统模块",mav,demand);
         }
@@ -157,7 +155,7 @@ public class DemandController extends BaseController {
             return errorInfo(pid,demandId,"版本号重复",mav,demand);
         }
 
-        demandService.saveDemand(modleId,demand);
+        demandService.saveDemand(modleId,demand,user.getUserName());
 
         List<Project> projectList = projectService.findProjectListPage(null, null, null, null, null).getList();
         mav.addObject("list", projectList);

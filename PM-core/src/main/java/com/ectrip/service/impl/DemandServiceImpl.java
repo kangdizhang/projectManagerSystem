@@ -68,10 +68,10 @@ public class DemandServiceImpl implements DemandService {
      * @param id
      */
     @Transactional
-    public void updateDemand(Integer id){
+    public void updateDemand(Integer id, String userName){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         DemandVO demandVO = demandDAO.findDemand(id);//主键查询需求
-        demandVO.setCompleteUserId("test");
+        demandVO.setCompleteUserId(userName);
         demandVO.setDemandStatus("1");
         demandVO.setActualEndTime(sdf.format(new Date()));
         demandDAO.updateDemandState(demandVO);//修改需求状态
@@ -87,7 +87,7 @@ public class DemandServiceImpl implements DemandService {
                 version = new Version();
                 version.setModleId(modleDemand.getModleId());
                 version.setUpTime(sdf.format(new Date()));
-                version.setUpUserId("test");
+                version.setUpUserId(userName);
                 version.setVersionDesc(demandVO.getDemandDescribe());
                 version.setUpTime(sdf.format(new Date()));
                 version.setVersion(demandVO.getVersion());
@@ -98,9 +98,9 @@ public class DemandServiceImpl implements DemandService {
     }
 
     @Transactional
-    public void saveDemand(String[] modleId, Demand demand){
+    public void saveDemand(String[] modleId, Demand demand,String userName){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        demand.setPutUserId("test");
+        demand.setPutUserId(userName);
         if("开发中".equals(demand.getDemandStatus())){
             demand.setDemandStatus("0");
         }else{
@@ -108,7 +108,6 @@ public class DemandServiceImpl implements DemandService {
         }
         if(demand.getId()==null){
             demand.setPutTime(sdf.format(new Date()));
-            demand.setDemandStatus("0");
             demandDAO.saveDemand(demand);
             ModleDemand modleDemand;
             for (int i = 0; i < modleId.length; i++) {

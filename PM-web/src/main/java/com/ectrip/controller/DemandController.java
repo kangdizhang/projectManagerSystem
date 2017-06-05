@@ -72,12 +72,13 @@ public class DemandController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         User user = (User) getRequest().getSession().getAttribute("user");
         demandService.updateDemand(id, user.getUserName(),versionDesc);
-
+        Project project = projectService.queryProject(projectId);
         //文件保存
         logger.info("上传的SQL文件名为："+sqlfile.getOriginalFilename());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dtime = df.format(new Date());
-        String path = "/SQLFile/"+dtime.substring(0, 4)+"/"+dtime.substring(5, 7)+"/"+dtime.substring(8, 10);
+        String path = "/SQLFile/"+project.getProjectName();
+//        String path = "/SQLFile/"+dtime.substring(0, 4)+"/"+dtime.substring(5, 7)+"/"+dtime.substring(8, 10);
         String realPath=request.getSession().getServletContext().getRealPath(path);
         //判断目录是否存在（创建目录）
         if(!new File(realPath).exists()){

@@ -91,13 +91,13 @@
         MP.MODLE_PROTOTYPE_NAME AS MODLE_NAME,
         MP.MODLE_PROTOTYPE_DESCRIBE AS MODLE_DESCRIBE,
         PM.VERSION AS VERSION
-		from project_modle pm,demand d,project p,modle_prototype mp,modle_demand md
-		where d.PROJECT_ID = pm.project_id
-		and pm.project_id = p.id
-		and mp.id = pm.modle_id
-		and md.MODLE_ID = mp.id
-		and md.DEMAND_ID = d.id
-		and d.id = #{demandId}
+		from PROJECT_MODLE PM,DEMAND D,PROJECT P,MODLE_PROTOTYPE MP,MODLE_DEMAND MD
+		where D.PROJECT_ID = PM.PROJECT_ID
+		and PM.PROJECT_ID = P.ID
+		and MP.ID = PM.MODLE_ID
+		and MD.MODLE_ID = MP.ID
+		and MD.DEMAND_ID = D.ID
+		and D.ID = #{demandId}
 	</select>
 
     <!-- 条件查询 -->

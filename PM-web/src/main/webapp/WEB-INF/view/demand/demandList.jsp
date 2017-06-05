@@ -167,7 +167,7 @@
             return ['完成'].join('');
         }
         return [
-            '<a href="${bathPath}/demand/completeDemand?id='+row.id+
+            '<a href="${bathPath}/demand/demandComplete?id='+row.id+
             '&projectId=${project.id}' +
             '" data-toggle="tooltip" title="Complete">完成</a> '
         ].join('');

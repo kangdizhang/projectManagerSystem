@@ -10,19 +10,24 @@ import com.ectrip.vo.DemandVO;
 import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Administrator on 2017/5/19 0019.
@@ -30,6 +35,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/demand")
 public class DemandController extends BaseController {
+    private Logger logger = LoggerFactory.getLogger(DemandController.class);
 
     @Autowired
     private DemandService demandService;
@@ -52,11 +58,38 @@ public class DemandController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/demandComplete",method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView demandComplete(Integer id,Integer projectId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("id",id);
+        modelAndView.addObject("projectId",projectId);
+        modelAndView.setViewName("WEB-INF/view/demand/completeDemand");
+        return modelAndView;
+    }
+
     @RequestMapping(value="/completeDemand",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView completeDemand(Integer id,Integer projectId){
+    public ModelAndView completeDemand(@RequestParam("sqlfile") CommonsMultipartFile sqlfile, Integer id, Integer projectId, HttpServletRequest request, String versionDesc){
         ModelAndView modelAndView = new ModelAndView();
         User user = (User) getRequest().getSession().getAttribute("user");
-        demandService.updateDemand(id, user.getUserName());
+        demandService.updateDemand(id, user.getUserName(),versionDesc);
+
+        //文件保存
+        logger.info("上传的SQL文件名为："+sqlfile.getOriginalFilename());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dtime = df.format(new Date());
+        String path = "/SQLFile/"+dtime.substring(0, 4)+"/"+dtime.substring(5, 7)+"/"+dtime.substring(8, 10);
+        String realPath=request.getSession().getServletContext().getRealPath(path);
+        //判断目录是否存在（创建目录）
+        if(!new File(realPath).exists()){
+            new File(realPath).mkdirs();
+        }
+        File file = new File(realPath,sqlfile.getOriginalFilename());
+        try {
+            sqlfile.transferTo(file);
+        } catch ( IOException e) {
+            logger.info("文件保存异常");
+        }
+
         modelAndView.addObject("projectId",projectId);
         modelAndView.setViewName("WEB-INF/view/demand/demandList");
         List<Project> list = projectService.findProjectListPage(null, null, null, null, null).getList();

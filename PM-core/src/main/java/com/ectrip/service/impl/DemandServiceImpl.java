@@ -68,7 +68,7 @@ public class DemandServiceImpl implements DemandService {
      * @param id
      */
     @Transactional
-    public void updateDemand(Integer id, String userName){
+    public void updateDemand(Integer id, String userName, String versionDesc){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         DemandVO demandVO = demandDAO.findDemand(id);//主键查询需求
         demandVO.setCompleteUserId(userName);

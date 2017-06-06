@@ -37,12 +37,6 @@ public class ModleServiceImpl implements ModleService {
     private ModlePrototypeDAO modlePrototypeDAO;
 
     @Autowired
-    private VersionDAO versionDAO;
-
-    @Autowired
-    private ModleDemandDAO modleDemandDAO;
-
-    @Autowired
     private ProjectModleDAO projectModleDAO;
 
     /**

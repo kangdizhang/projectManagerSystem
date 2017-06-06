@@ -69,7 +69,7 @@
     </update> -->
 
     <!-- 条件查询-->
-    <select id="queryModleList" resultMap="projectModleVOResultMap">
+    <select id="queryModleList" resultMap="projectModleResultMap">
         SELECT PM.ID as ID,PM.PROJECT_ID as PROJECT_ID,PM.MODLE_ID AS MODLE_ID,PM.VERSION AS VERSION
         FROM PROJECT_MODLE PM
         WHERE PM.PROJECT_ID=#{projectId}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class UserController extends BaseController {
     private UserService userService;
 
     @RequestMapping(value = "/login",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView login(String userName,String pwd){
+    public ModelAndView login(String userName, String pwd, HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         if(StringUtils.isEmpty(userName)){
             mav.addObject("msg","请输入用户名");
@@ -43,8 +44,8 @@ public class UserController extends BaseController {
             User user = userService.findUser(userName,pwd);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             user.setLastLoginTime(sdf.format(new Date()));
-            getSession().setAttribute("userName",userName);
-            getSession().setAttribute("user",user);
+            request.getSession().setAttribute("userName",userName);
+            request.getSession().setAttribute("user",user);
             userService.updateUser(user);
             mav.setViewName("WEB-INF/view/index");
             return mav;

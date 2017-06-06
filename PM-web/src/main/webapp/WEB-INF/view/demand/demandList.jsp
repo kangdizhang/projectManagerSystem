@@ -174,6 +174,9 @@
     }
 
     function operateFormatter(value, row, index) {
+        if(row.demandStatus == '已完成'){
+            return ['--'].join('');
+        }
         return [
             '<a href="${bathPath}/demand/editDemand?demandId='+row.id +'" data-toggle="tooltip" title="Edit">修改</a> ',
             '<a href="${bathPath}/demand/deleteDemand?id='+row.id+'"data-toggle="tooltip" title="Del">删除</a> '

@@ -96,7 +96,7 @@
 			AND D.PROJECT_ID=#{projectId}
 		</if>
 		<if test="demandName!=null and demandName!=''">
-			AND D.DEMAND_NAME=#{demandName}
+			AND D.DEMAND_NAME LIKE CONCAT('%', #{demandName}, '%')
 		</if>
 		<if test="demandStatus!=null and demandStatus!=''">
 			AND D.DEMAND_STATUS=#{demandStatus}

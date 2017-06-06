@@ -71,24 +71,34 @@ public class DemandController extends BaseController {
     public ModelAndView completeDemand(@RequestParam("sqlfile") CommonsMultipartFile sqlfile, Integer id, Integer projectId, HttpServletRequest request, String versionDesc){
         ModelAndView modelAndView = new ModelAndView();
         User user = (User) getRequest().getSession().getAttribute("user");
-        demandService.updateDemand(id, user.getUserName(),versionDesc);
-        Project project = projectService.queryProject(projectId);
-        //文件保存
-        logger.info("上传的SQL文件名为："+sqlfile.getOriginalFilename());
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dtime = df.format(new Date());
-        String path = "/SQLFile/"+project.getProjectName();
-//        String path = "/SQLFile/"+dtime.substring(0, 4)+"/"+dtime.substring(5, 7)+"/"+dtime.substring(8, 10);
-        String realPath=request.getSession().getServletContext().getRealPath(path);
-        //判断目录是否存在（创建目录）
-        if(!new File(realPath).exists()){
-            new File(realPath).mkdirs();
+
+        if (StringUtils.isEmpty(versionDesc)) {
+            modelAndView.addObject("sqlfile",sqlfile);
+            modelAndView.addObject("msg","备注说明不能为空！");
+            modelAndView.setViewName("WEB-INF/view/demand/completeDemand");
+            return modelAndView;
         }
-        File file = new File(realPath,sqlfile.getOriginalFilename());
-        try {
-            sqlfile.transferTo(file);
-        } catch ( IOException e) {
-            logger.info("文件保存异常");
+
+        demandService.updateDemand(id, user.getUserName(),versionDesc);
+        Project project = projectService.queryProject(demandService.findDemand(id).getProjectId());
+        //文件保存
+        if (sqlfile != null) {
+            logger.info("上传的SQL文件名为："+sqlfile.getOriginalFilename());
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String dtime = df.format(new Date());
+            String path = "/SQLFile/"+project.getProjectName();
+//        String path = "/SQLFile/"+dtime.substring(0, 4)+"/"+dtime.substring(5, 7)+"/"+dtime.substring(8, 10);
+            String realPath=request.getSession().getServletContext().getRealPath(path);
+            //判断目录是否存在（创建目录）
+            if(!new File(realPath).exists()){
+                new File(realPath).mkdirs();
+            }
+            File file = new File(realPath,sqlfile.getOriginalFilename());
+            try {
+                sqlfile.transferTo(file);
+            } catch ( IOException e) {
+                logger.info("文件保存异常");
+            }
         }
 
         modelAndView.addObject("projectId",projectId);

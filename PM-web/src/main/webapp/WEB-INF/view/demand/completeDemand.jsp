@@ -68,4 +68,11 @@
         </table>
     </form>
 </body>
+<script>
+    $(function () {
+        if (${msg != null}) {
+            alert("${msg}");
+        }
+    })
+</script>
 </html>

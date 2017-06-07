@@ -141,7 +141,7 @@
                 {field: 'actualEndTime', title: '实际完成时间',align:'center'},
                 {field: 'completeUserId', title: '完成人',align:'center'},
                 {field: 'demandStatus', title: '需求状态',align:'center'},
-                {field: 'complete', title: '进度', align: 'center', formatter: 'completeFormatter', clickToSelect: false},
+                {field: 'download', title: 'SQL脚本', align: 'center', formatter: 'downloadFormatter', clickToSelect: false},
                 {field: 'operate', title: '编辑', align: 'center', formatter: 'operateFormatter', clickToSelect: false}
             ]
         });
@@ -162,15 +162,13 @@
         $table.bootstrapTable('refresh');
     }
 
-    function completeFormatter(value, row, index) {
+    function downloadFormatter(value, row, index) {
         if(row.demandStatus == '已完成'){
-            return ['完成'].join('');
+            return [
+                '<a href="${bathPath}/demand/fileDownload?id='+row.id +'" data-toggle="tooltip" title="Download">下载</a> '
+            ].join('');
         }
-        return [
-            '<a href="${bathPath}/demand/demandComplete?id='+row.id+
-            '&projectId=${project.id}' +
-            '" data-toggle="tooltip" title="Complete">完成</a> '
-        ].join('');
+        return ['下载'].join('');
     }
 
     function operateFormatter(value, row, index) {
@@ -178,6 +176,7 @@
             return ['--'].join('');
         }
         return [
+            '<a href="${bathPath}/demand/demandComplete?id='+row.id+ '&projectId=${project.id}' + '" data-toggle="tooltip" title="Complete">完成</a> ',
             '<a href="${bathPath}/demand/editDemand?demandId='+row.id +'" data-toggle="tooltip" title="Edit">修改</a> ',
             '<a href="${bathPath}/demand/deleteDemand?id='+row.id+'"data-toggle="tooltip" title="Del">删除</a> '
         ].join('');

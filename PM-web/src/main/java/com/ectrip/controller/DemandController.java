@@ -2,10 +2,7 @@ package com.ectrip.controller;
 
 import com.ectrip.common.base.BaseController;
 import com.ectrip.model.*;
-import com.ectrip.service.DemandService;
-import com.ectrip.service.ModlePrototypeService;
-import com.ectrip.service.ModleService;
-import com.ectrip.service.ProjectService;
+import com.ectrip.service.*;
 import com.ectrip.vo.DemandVO;
 import com.ectrip.vo.ModleVersionVO;
 import com.ectrip.vo.ProjectModleVO;
@@ -24,8 +21,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -49,6 +46,9 @@ public class DemandController extends BaseController {
     @Autowired
     private ModlePrototypeService modlePrototypeService;
 
+    @Autowired
+    private FileInfoService fileInfoService;
+
     @RequestMapping(value = "/demandList",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView projectList(){
         ModelAndView modelAndView = new ModelAndView();
@@ -65,6 +65,52 @@ public class DemandController extends BaseController {
         modelAndView.addObject("projectId",projectId);
         modelAndView.setViewName("WEB-INF/view/demand/completeDemand");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/fileDownload",method = {RequestMethod.GET,RequestMethod.POST})
+    public String fileDownload(Integer id,HttpServletRequest request, HttpServletResponse response){
+        //
+        FileInfo fileInfo = fileInfoService.findFileInfoById(id);
+        if (fileInfo == null) {
+            return "WEB-INF/view/demand/errorPage";
+        }
+
+        String path = fileInfo.getFilePath();
+        File file = new File(path + "\\" + fileInfo.getSaveFileName());
+        if (!file.exists()) {
+            return "WEB-INF/view/demand/errorPage";
+        }
+
+        String fileName;
+        try {
+            fileName = new String(fileInfo.getUpFileName().getBytes(),"ISO-8859-1");
+        } catch (Exception e) {
+            logger.info("文件名异常"+e.toString());
+            return "WEB-INF/view/demand/errorPage";
+        }
+
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+
+        try {
+            InputStream inputStream = new FileInputStream(new File(path + "\\" + fileInfo.getSaveFileName()));
+            OutputStream os = response.getOutputStream();
+            byte[] b = new byte[2048];
+            int length;
+            while ((length = inputStream.read(b)) > 0) {
+                os.write(b, 0, length);
+            }
+            os.close();
+            inputStream.close();
+        } catch (FileNotFoundException e) {
+            logger.info("文件下载异常"+e.toString());
+            return "WEB-INF/view/demand/errorPage";
+        } catch (IOException e) {
+            logger.info("文件下载异常"+e.toString());
+        }
+
+        return null;
     }
 
     @RequestMapping(value="/completeDemand",method = {RequestMethod.GET,RequestMethod.POST})
@@ -84,7 +130,7 @@ public class DemandController extends BaseController {
         //文件保存
         if (sqlfile != null) {
             logger.info("上传的SQL文件名为："+sqlfile.getOriginalFilename());
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
             String dtime = df.format(new Date());
             Project project = projectService.queryProject(demandService.findDemand(id).getProjectId());
             String path = "/SQLFile/"+project.getProjectName();
@@ -94,11 +140,24 @@ public class DemandController extends BaseController {
             if(!new File(realPath).exists()){
                 new File(realPath).mkdirs();
             }
-            File file = new File(realPath,sqlfile.getOriginalFilename());
+
+            String upFileName = dtime+sqlfile.getOriginalFilename();
+
+            FileInfo fileInfo = new FileInfo();
+            fileInfo.setDemandId(id);
+            fileInfo.setFilePath(realPath);
+            fileInfo.setUpFileName(sqlfile.getOriginalFilename());
+            fileInfo.setSaveFileName(upFileName);
+
+            File file = new File(realPath,upFileName);
             try {
+                fileInfoService.saveFileInfo(fileInfo);
                 sqlfile.transferTo(file);
             } catch ( IOException e) {
-                logger.info("文件保存异常");
+                logger.info("文件保存异常"+e.toString());
+                modelAndView.addObject("msg","文件保存异常啦！请找管理员解决");
+                modelAndView.setViewName("WEB-INF/view/demand/completeDemand");
+                return modelAndView;
             }
         }
 

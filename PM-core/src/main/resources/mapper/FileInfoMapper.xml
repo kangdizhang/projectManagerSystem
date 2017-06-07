@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ectrip.dao.FileInfoDAO">
+	<resultMap type="FileInfo" id="BaseResultMap">
+		<id column="ID" property="id"/>
+		<result column="DEMAND_ID" property="demandId"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="UP_FILE_NAME" property="upFileName"/>
+		<result column="SAVE_FILE_NAME" property="saveFileName"/>
+	</resultMap>
+	<!--表名 -->
+	<sql id="tableName">
+		FILE_INFO
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		ID,
+		DEMAND_ID,
+		FILE_PATH,
+		UP_FILE_NAME,
+		SAVE_FILE_NAME
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id},
+		#{demandId},
+		#{filePath},
+		#{upFileName},
+		#{saveFileName}
+	</sql>
+
+	<!-- 主键查询文件信息 -->
+	<select id="findFileInfoById" resultMap="BaseResultMap">
+		SELECT <include refid="Field"></include> FROM <include refid="tableName"></include>
+		WHERE DEMAND_ID = #{demandId}
+	</select>
+
+	<!-- 保存文件信息 -->
+	<insert id="saveFileInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into <include refid="tableName"></include>(
+			<include refid="Field"></include>
+		) values (
+			<include refid="FieldValue"></include>
+		)
+	</insert>
+
+</mapper>

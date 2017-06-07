@@ -76,11 +76,11 @@
         }
     }
 </script>
-<%--<script>
+<script>
     $(function () {
         if (${msg != null}) {
             alert("${msg}");
         }
     })
-</script>--%>
+</script>
 </html>

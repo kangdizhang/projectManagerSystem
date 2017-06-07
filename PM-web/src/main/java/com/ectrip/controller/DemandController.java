@@ -80,12 +80,13 @@ public class DemandController extends BaseController {
         }
 
         demandService.updateDemand(id, user.getUserName(),versionDesc);
-        Project project = projectService.queryProject(demandService.findDemand(id).getProjectId());
+
         //文件保存
         if (sqlfile != null) {
             logger.info("上传的SQL文件名为："+sqlfile.getOriginalFilename());
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dtime = df.format(new Date());
+            Project project = projectService.queryProject(demandService.findDemand(id).getProjectId());
             String path = "/SQLFile/"+project.getProjectName();
 //        String path = "/SQLFile/"+dtime.substring(0, 4)+"/"+dtime.substring(5, 7)+"/"+dtime.substring(8, 10);
             String realPath=request.getSession().getServletContext().getRealPath(path);

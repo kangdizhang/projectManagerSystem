@@ -60,7 +60,7 @@
             <tr>
                 <td width="10%" class="tableleft">操作</td>
                 <td width="35%" colspan="2">
-                    <button type="submit" class="btn btn-primary" value="提交">提交</button>
+                    <button type="submit" onclick="return chkform()" class="btn btn-primary" value="提交">提交</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <a class="btn btn-success" href="${bathPath}/demand/demandList?projectId=${projectId}">返回列表</a>
                 </td>
@@ -69,10 +69,18 @@
     </form>
 </body>
 <script>
+    function chkform() {
+        if (document.getElementById("versionDesc").value == "") {
+            alert("备注说明不能为空！");
+            return false;
+        }
+    }
+</script>
+<%--<script>
     $(function () {
         if (${msg != null}) {
             alert("${msg}");
         }
     })
-</script>
+</script>--%>
 </html>

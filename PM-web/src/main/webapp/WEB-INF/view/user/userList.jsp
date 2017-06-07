@@ -63,6 +63,9 @@
             <option value="BOSS">BOSS</option>
             <option value="项目经理">项目经理</option>
             <option value="开发人员">开发人员</option>
+            <option value="开发人员">测试人员</option>
+            <option value="开发人员">销售人员</option>
+            <option value="开发人员">工程人员</option>
         </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
         <%--项目负责人：--%>

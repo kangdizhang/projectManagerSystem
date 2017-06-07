@@ -115,6 +115,7 @@
                 {field: 'id', title:'编号',align:'center'},
                 {field: 'modleName', title: '模块名称',align:'center'},
                 {field: 'version', title: '版本号',align:'center'},
+                {field: 'versionDesc', title: '版本描述',align:'center'},
                 {field: 'upUserId', title: '升级人',align:'center'},
                 {field: 'upTime', title: '升级时间', align: 'center'},
                 {field: 'versionNum', title: '父版本号',align:'center'},

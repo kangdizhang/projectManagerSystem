@@ -69,7 +69,7 @@ public class DemandController extends BaseController {
 
     @RequestMapping(value = "/fileDownload",method = {RequestMethod.GET,RequestMethod.POST})
     public String fileDownload(Integer id,HttpServletRequest request, HttpServletResponse response){
-        //
+        //文件下载
         FileInfo fileInfo = fileInfoService.findFileInfoById(id);
         if (fileInfo == null) {
             return "WEB-INF/view/demand/errorPage";

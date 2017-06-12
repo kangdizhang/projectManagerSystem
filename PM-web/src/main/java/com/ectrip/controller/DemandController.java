@@ -151,8 +151,8 @@ public class DemandController extends BaseController {
 
             File file = new File(realPath,upFileName);
             try {
-                fileInfoService.saveFileInfo(fileInfo);
                 sqlfile.transferTo(file);
+                fileInfoService.saveFileInfo(fileInfo);
             } catch ( IOException e) {
                 logger.info("文件保存异常"+e.toString());
                 modelAndView.addObject("msg","文件保存异常啦！请找管理员解决");
